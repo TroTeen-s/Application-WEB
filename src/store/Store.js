@@ -2,28 +2,49 @@ import React from "react";
 
 
 function Store() {
+    const packages = [
+        {
+            id: 1,
+            price: 2.00,
+            student_offer: false,
+            cycle: 'jour'
+        },
+        {
+            id: 2,
+            price: 20.99,
+            student_offer: true,
+            cycle: 'mois'
+        },
+        {
+            id: 3,
+            price: 27.99,
+            student_offer: false,
+            cycle: 'mois'
+        }
+    ]
     return (
-        <div className="Store">
-            <div class="container">
-                <div class="row align-items-center my-5">
-                    <div class="col-lg-7">
-                        <img
-                            class="img-fluid rounded mb-4 mb-lg-0"
-                            src="http://placehold.it/900x400"
-                            alt=""
-                        />
-                    </div>
-                    <div class="col-lg-5">
-                        <h1 class="font-weight-light">Store</h1>
-                        <p>
-                            Lorem Ipsum is simply dummy text of the printing and typesetting
-                            industry. Lorem Ipsum has been the industry's standard dummy text
-                            ever since the 1500s, when an unknown printer took a galley of
-                            type and scrambled it to make a type specimen book.
-                        </p>
-                    </div>
-                </div>
+        <div className="h-full w-full">
+            <div className="flex justify-center space-x-2 items-end">
+                <div className="text-black text-sm"><p>Nos</p></div>
+                <div className="text-orange-300 text-2xl"><p>Forfaits d'abonnement</p></div>
             </div>
+            <ul className='flex overflow-x-scroll space-x-52 justify-center mt-12 h-full w-full'>
+                {packages.map(({ id, price, student_offer, cycle }) => (
+                    <li key={id} className='bg-black text-white h-2/3 w-1/5 p-5' >
+                        <div className="flex flex-col py-4">
+                            <div>
+                                <div className="text-xl text-center font-bold">
+                                    {price + "€/" + cycle}
+                                </div>
+                                <div className='text-xs text-center'>{student_offer ? "Offre étudiante" : ""}</div>
+                            </div>
+                            <div className='bg-gray-200 text-black flex flex-row justify-end text-center w-min px-2 cursor-pointer hover:bg-gray-400 ease-in-out duration-300'>
+                                <p>Souscrire</p>
+                            </div>
+                        </div>
+                    </li>
+                ))}
+            </ul>
         </div>
     );
 }
