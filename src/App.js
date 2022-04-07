@@ -277,7 +277,7 @@ export default function App() {
                     <a
                       id="OrangePaper"
                       href="#"
-                      class=" hover:underline dark:text-blue-500"
+                      class="hover:underline dark:text-blue-500"
                     >
                       Connecte-toi
                     </a>
