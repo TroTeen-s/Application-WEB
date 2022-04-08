@@ -12,12 +12,12 @@ export default function App() {
         <nav className="relative flex flex-wrap items-center justify-between px-2 py-3 mb-3">
           <div className="container px-4 mx-auto flex flex-wrap items-center -between">
             <div className="w-full relative flex lg:w-auto lg:static lg:block lg:justify-start">
-              <NavLink className="text-xl font-bold leading-relaxed inline-block mr-1 py-2 whitespace-nowrap uppercase text-white"
+              <NavLink className="no-underline text-xl font-bold leading-relaxed inline-block mr-1 py-2 whitespace-nowrap uppercase text-white"
                 to="/store">
                 Easy
               </NavLink>
 
-              <NavLink className="text-xl font-bold leading-relaxed inline-block mr-4 py-2 whitespace-nowrap uppercase"
+              <NavLink className="no-underline text-xl font-bold leading-relaxed inline-block mr-4 py-2 whitespace-nowrap uppercase"
                 to="/store">
                 Scooter
               </NavLink>
@@ -29,7 +29,7 @@ export default function App() {
               <ul className="flex flex-col lg:flex-row list-none lg:ml-auto">
                 <li className="nav-item">
                   <a
-                    className="px-3 py-2 flex items-center text-s uppercase font-bold leading-snug text-white hover:opacity-75"
+                    className="no-underline px-3 py-2 flex items-center text-s uppercase font-bold leading-snug text-white hover:opacity-75"
                     href="#pablo"
                   >
                     <i className="fab fa-facebook-square text-s leading-lg text-white opacity-75"></i>
@@ -38,7 +38,7 @@ export default function App() {
                 </li>
                 <li className="nav-item">
                   <a
-                    className="px-3 py-2 flex items-center text-s uppercase font-bold leading-snug text-white hover:opacity-75"
+                    className="no-underline px-3 py-2 flex items-center text-s uppercase font-bold leading-snug text-white hover:opacity-75"
                     href="#pablo"
                   >
                     <i className="fab fa-twitter text-xl leading-lg text-white opacity-75"></i>
@@ -47,7 +47,7 @@ export default function App() {
                 </li>
                 <li className="nav-item" onClick={() => setShowModal(true)}>
                   <a
-                    className="px-3 py-2 flex items-center text-s uppercase font-bold leading-snug text-white hover:opacity-75"
+                    className="no-underline px-3 py-2 flex items-center text-s uppercase font-bold leading-snug text-white hover:opacity-75"
                     href="#pablo"
                   >
                     <i className="fab fa-pinterest text-xl leading-lg text-white opacity-75"></i>
@@ -72,14 +72,14 @@ export default function App() {
           <div id="Right-Phone" class="">
             <div class="">
               <a
-                className="text-7xl font-bold leading-relaxed inline-block mr-1 py-2 whitespace-nowrap uppercase text-white"
+                className="no-underline text-7xl font-bold leading-relaxed inline-block mr-1 py-2 whitespace-nowrap uppercase text-white"
                 href="#pablo"
               >
                 Easy
               </a>
               <a
                 id="OrangePaper"
-                className="text-7xl font-bold leading-relaxed inline-block mr-4 py-2 whitespace-nowrap uppercase"
+                className="no-underline text-7xl font-bold leading-relaxed inline-block mr-4 py-2 whitespace-nowrap uppercase"
                 href="#pablo"
               >
                 Scooter

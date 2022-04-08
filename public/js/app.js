@@ -5466,11 +5466,11 @@ function App() {
           children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("div", {
             className: "w-full relative flex lg:w-auto lg:static lg:block lg:justify-start",
             children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)(react_router_dom__WEBPACK_IMPORTED_MODULE_3__.NavLink, {
-              className: "text-xl font-bold leading-relaxed inline-block mr-1 py-2 whitespace-nowrap uppercase text-white",
+              className: "no-underline text-xl font-bold leading-relaxed inline-block mr-1 py-2 whitespace-nowrap uppercase text-white",
               to: "/store",
               children: "Easy"
             }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)(react_router_dom__WEBPACK_IMPORTED_MODULE_3__.NavLink, {
-              className: "text-xl font-bold leading-relaxed inline-block mr-4 py-2 whitespace-nowrap uppercase",
+              className: "no-underline text-xl font-bold leading-relaxed inline-block mr-4 py-2 whitespace-nowrap uppercase",
               to: "/store",
               children: "Scooter"
             })]
@@ -5482,7 +5482,7 @@ function App() {
               children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("li", {
                 className: "nav-item",
                 children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("a", {
-                  className: "px-3 py-2 flex items-center text-s uppercase font-bold leading-snug text-white hover:opacity-75",
+                  className: "no-underline px-3 py-2 flex items-center text-s uppercase font-bold leading-snug text-white hover:opacity-75",
                   href: "#pablo",
                   children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("i", {
                     className: "fab fa-facebook-square text-s leading-lg text-white opacity-75"
@@ -5494,7 +5494,7 @@ function App() {
               }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("li", {
                 className: "nav-item",
                 children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("a", {
-                  className: "px-3 py-2 flex items-center text-s uppercase font-bold leading-snug text-white hover:opacity-75",
+                  className: "no-underline px-3 py-2 flex items-center text-s uppercase font-bold leading-snug text-white hover:opacity-75",
                   href: "#pablo",
                   children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("i", {
                     className: "fab fa-twitter text-xl leading-lg text-white opacity-75"
@@ -5509,7 +5509,7 @@ function App() {
                   return setShowModal(true);
                 },
                 children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("a", {
-                  className: "px-3 py-2 flex items-center text-s uppercase font-bold leading-snug text-white hover:opacity-75",
+                  className: "no-underline px-3 py-2 flex items-center text-s uppercase font-bold leading-snug text-white hover:opacity-75",
                   href: "#pablo",
                   children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("i", {
                     className: "fab fa-pinterest text-xl leading-lg text-white opacity-75"
@@ -5541,12 +5541,12 @@ function App() {
           children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("div", {
             "class": "",
             children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("a", {
-              className: "text-7xl font-bold leading-relaxed inline-block mr-1 py-2 whitespace-nowrap uppercase text-white",
+              className: "no-underline text-7xl font-bold leading-relaxed inline-block mr-1 py-2 whitespace-nowrap uppercase text-white",
               href: "#pablo",
               children: "Easy"
             }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("a", {
               id: "OrangePaper",
-              className: "text-7xl font-bold leading-relaxed inline-block mr-4 py-2 whitespace-nowrap uppercase",
+              className: "no-underline text-7xl font-bold leading-relaxed inline-block mr-4 py-2 whitespace-nowrap uppercase",
               href: "#pablo",
               children: "Scooter"
             })]
@@ -5708,7 +5708,7 @@ function App() {
                 children: ["D\xE9j\xE0 un compte?", " ", /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("a", {
                   id: "OrangePaper",
                   href: "#",
-                  "class": " hover:underline dark:text-blue-500",
+                  "class": "hover:underline dark:text-blue-500",
                   children: "Connecte-toi"
                 })]
               })]
@@ -5772,7 +5772,7 @@ function Store() {
         })
       })]
     }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("ul", {
-      className: "flex overflow-x-scroll space-x-52 justify-center mt-12 h-full w-full",
+      className: "flex justify-around mt-12 h-full w-full",
       children: packages.map(function (_ref) {
         var id = _ref.id,
             price = _ref.price,
@@ -5781,7 +5781,7 @@ function Store() {
         return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("li", {
           className: "bg-black text-white h-2/3 w-1/5 p-5",
           children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsxs)("div", {
-            className: "flex flex-col py-4",
+            className: "flex flex-col py-4 h-full justify-between items-center",
             children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsxs)("div", {
               children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("div", {
                 className: "text-xl text-center font-bold",
@@ -5791,7 +5791,7 @@ function Store() {
                 children: student_offer ? "Offre étudiante" : ""
               })]
             }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("div", {
-              className: "bg-gray-200 text-black flex flex-row justify-end text-center w-min px-2 cursor-pointer hover:bg-gray-400 ease-in-out duration-300",
+              className: "bg-gray-200 text-black flex flex-row justify-end text-center w-min px-4 py-2 rounded-md cursor-pointer hover:bg-gray-300 ease-in-out duration-300",
               children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("p", {
                 children: "Souscrire"
               })
@@ -5835,6 +5835,7 @@ react_dom__WEBPACK_IMPORTED_MODULE_1__.render( /*#__PURE__*/(0,react_jsx_runtime
   children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(react_router_dom__WEBPACK_IMPORTED_MODULE_6__.BrowserRouter, {
     children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)(react_router_dom__WEBPACK_IMPORTED_MODULE_7__.Routes, {
       children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(react_router_dom__WEBPACK_IMPORTED_MODULE_7__.Route, {
+        exact: true,
         path: "/",
         element: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(_js_components_App__WEBPACK_IMPORTED_MODULE_3__["default"], {})
       }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(react_router_dom__WEBPACK_IMPORTED_MODULE_7__.Route, {
