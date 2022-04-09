@@ -31,18 +31,3 @@ function NotFound() {
 }
 
 export default NotFound;
-
-/* <div className="h-full w-full flex flex-col justify-center items-center ">
-            PUTE
-            <div className="flex space-x-2 bg-black">
-                <NavLink className="no-underline text-xl font-bold leading-relaxed inline-block mr-1 py-2 whitespace-nowrap uppercase text-white"
-                    to="/">
-                    Retour à la page d'accueil
-                </NavLink>
-
-                <NavLink className="no-underline text-xl font-bold leading-relaxed inline-block mr-1 py-2 whitespace-nowrap uppercase text-orange-300"
-                    to="/">
-                    ici
-                </NavLink>
-            </div>
-        </div> */

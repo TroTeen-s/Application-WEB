@@ -5,6 +5,7 @@ import '../css/app.css';
 import App from '../js/components/App';
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import Store from "./components/store/Store"
+import NeedHelp from "./components/needHelp/NeedHelp"
 import NotFound from "./components/notFound/NotFound"
 
 
@@ -14,6 +15,7 @@ ReactDOM.render(
       <Routes>
         <Route exact path="/" element={<App />} />
         <Route path="/store" element={<Store />} />
+        <Route path="/need_help" element={<NeedHelp />} />
         <Route path="*" element={<NotFound />} />
       </Routes>
     </Router>
