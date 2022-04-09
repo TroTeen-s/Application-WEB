@@ -11,8 +11,8 @@ function NeedHelp() {
             <Header />
             <div className="flex pt-24 justify-around flex-col w-full h-full md:flex-row">
 
-                <div>
-                    IMG
+                <div className="flex flex-col items-center space-y-2">
+                    <img className="w-3/4 " src="images/telephone-service-client.png" />
                     <div className="flex flex-col text-white text-center">
                         <p>Téléphone: 06 95 55 ** **</p>
                         <a href="mailto:troteensorganisation@gmail.com" className="no-underline text-white hover:text-white cursor-pointer">Adresse mail: troteensorganisation@gmail.com</a>
