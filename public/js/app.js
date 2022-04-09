@@ -5969,7 +5969,7 @@ function Store() {
             student_offer = _ref.student_offer,
             cycle = _ref.cycle;
         return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("li", {
-          className: "bg-black text-white h-2/3 w-1/5 p-5",
+          className: "bg-black-trot text-white h-2/3 w-1/5 p-5",
           children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsxs)("div", {
             className: "flex flex-col py-4 h-full justify-between items-center",
             children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsxs)("div", {
@@ -5981,8 +5981,9 @@ function Store() {
                 children: student_offer ? "Offre étudiante" : ""
               })]
             }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("div", {
-              className: "bg-gray-200 text-black flex flex-row justify-end text-center w-min px-4 py-2 rounded-md cursor-pointer hover:bg-gray-300 ease-in-out duration-300",
+              className: "bg-gray-200 text-black flex flex-row justify-center items-center w-full px-4 py-2 rounded-md cursor-pointer hover:bg-gray-300 ease-in-out duration-300",
               children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("p", {
+                className: "p-0 m-0",
                 children: "Souscrire"
               })
             })]

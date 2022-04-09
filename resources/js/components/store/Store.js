@@ -30,7 +30,7 @@ function Store() {
             </div>
             <ul className='flex justify-around mt-12 h-full w-full'>
                 {packages.map(({ id, price, student_offer, cycle }) => (
-                    <li key={id} className='bg-black text-white h-2/3 w-1/5 p-5' >
+                    <li key={id} className='bg-black-trot text-white h-2/3 w-1/5 p-5' >
                         <div className="flex flex-col py-4 h-full justify-between items-center">
                             <div>
                                 <div className="text-xl text-center font-bold">
@@ -38,8 +38,8 @@ function Store() {
                                 </div>
                                 <div className='text-xs text-center'>{student_offer ? "Offre étudiante" : ""}</div>
                             </div>
-                            <div className='bg-gray-200 text-black flex flex-row justify-end text-center w-min px-4 py-2 rounded-md cursor-pointer hover:bg-gray-300 ease-in-out duration-300'>
-                                <p>Souscrire</p>
+                            <div className='bg-gray-200 text-black flex flex-row justify-center items-center w-full px-4 py-2 rounded-md cursor-pointer hover:bg-gray-300 ease-in-out duration-300'>
+                                <p className="p-0 m-0">Souscrire</p>
                             </div>
                         </div>
                     </li>
