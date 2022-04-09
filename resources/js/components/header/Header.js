@@ -14,7 +14,7 @@ function Header() {
                         Easy
                     </NavLink>
 
-                    <NavLink className="no-underline text-xl font-bold leading-relaxed inline-block mr-4 py-2 whitespace-nowrap uppercase"
+                    <NavLink className="no-underline text-xl font-bold leading-relaxed inline-block mr-4 py-2 whitespace-nowrap uppercase hover:text-orange-300 text-orange-300"
                         to="/store">
                         Scooter
                     </NavLink>
