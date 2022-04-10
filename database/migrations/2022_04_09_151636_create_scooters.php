@@ -22,7 +22,8 @@ return new class extends Migration
             $table->float("mileage",6,4);
             $table->float("last_position_long", 10,9);
             $table->float("last_position_lat", 10,9);
-
+            $table->boolean("available");
+            $table->boolean("in_revision");
         });
     }
 
