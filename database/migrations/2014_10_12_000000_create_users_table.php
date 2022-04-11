@@ -2,6 +2,7 @@
 
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Schema;
 
 return new class extends Migration
@@ -22,8 +23,8 @@ return new class extends Migration
             $table->boolean('email_configured')->default(false);
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
-            $table->dateTime('registered_at');
-            $table->integer('fidelity_points', false, true);
+            $table->dateTime('registered_at')->default(DB::raw('now()'));
+            $table->integer('fidelity_points')->default(0);
             $table->rememberToken();
             $table->timestamps();
         });
