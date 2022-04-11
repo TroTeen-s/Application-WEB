@@ -2,6 +2,7 @@
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\AuthController;
 use App\Http\Controllers\UserController;
 
 /*
@@ -18,9 +19,16 @@ use App\Http\Controllers\UserController;
 // Route avec une seule action (fonction __invoke(), voir https://laravel.com/docs/9.x/controllers#single-action-controllers)
 Route::get('/usera', [UserController::class, 'firstOne'])->where('id', '[0-9]+'); // ex :localhost:8000/api/users/?id=1
 
+Route::post('/auth/register', [AuthController::class, 'register']);
+
+Route::post('/auth/login', [AuthController::class, 'login']);
+
 // Route::get('/users', UserController::class); // localhost:8000/api/users/?id=1
 
+Route::group(['middleware' => ['auth:sanctum']], function () {
+    Route::get('/me', function (Request $request) {
+        return auth()->user();
+    });
 
-Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-    return $request->user();
+    Route::post('/auth/logout', [AuthController::class, 'logout']);
 });

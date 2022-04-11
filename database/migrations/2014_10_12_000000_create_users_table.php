@@ -18,6 +18,7 @@ return new class extends Migration
             $table->id();
             $table->string('firstname');
             $table->string('lastname');
+            $table->string('username');
             $table->string('email', 254)->unique();
             $table->string('phone_number', 10);
             $table->boolean('email_configured')->default(false);

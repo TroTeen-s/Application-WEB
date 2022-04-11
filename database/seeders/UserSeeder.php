@@ -19,6 +19,7 @@ class UserSeeder extends Seeder
     {
         $loli = new User([
             'firstname' => 'Aurélien',
+            'username' => 'dite La Puteuh',
             'lastname' => 'La Loli',
             'phone_number' => Str::random(10),
             'email' => 'ohyeah@loli.com',
