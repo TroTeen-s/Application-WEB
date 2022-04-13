@@ -9,7 +9,7 @@ use App\Http\Controllers\PackageController;
 /* |-------------------------------------------------------------------------- | API Routes |-------------------------------------------------------------------------- | | Here is where you can register API routes for your application. These | routes are loaded by the RouteServiceProvider within a group which | is assigned the "api" middleware group. Enjoy building your API! | */
 
 // Route avec une seule action (fonction __invoke(), voir https://laravel.com/docs/9.x/controllers#single-action-controllers)
-Route::get('/usera', [UserController::class , 'firstOne'])->where('id', '[0-9]+'); // ex :localhost:8000/api/users/?id=1
+Route::get('/users', [UserController::class , 'firstOne'])->where('id', '[0-9]+'); // ex :localhost:8000/api/users/?id=1
 
 Route::post('/auth/register', [AuthController::class , 'register']);
 
@@ -31,4 +31,4 @@ Route::group(['middleware' => ['auth:sanctum']], function () {
 
 //PACKAGES
 
-Route::get('/packages', [PackageController::class]); // ex :localhost:8000/api/packages
+Route::get('/packages', PackageController::class); // ex :localhost:8000/api/packages

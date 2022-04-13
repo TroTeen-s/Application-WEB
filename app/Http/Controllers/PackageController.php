@@ -20,6 +20,7 @@ class PackageController extends Controller
     {
         $packages = Package::all();
 
+
         return response()->json(array('data' => $packages));
     }
 
