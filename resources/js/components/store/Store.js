@@ -26,9 +26,6 @@ function Store() {
     ]
     return (
         <div className="h-full w-full">
-            <div className="w-full bg-black-trot">
-                <Header />
-            </div>
             <div className="flex justify-center space-x-2 items-end">
                 <div className="text-black text-sm"><p>Nos</p></div>
                 <div className="text-orange-300 text-2xl"><p>Forfaits d'abonnement</p></div>

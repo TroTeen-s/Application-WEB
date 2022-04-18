@@ -8,7 +8,6 @@ function NeedHelp() {
 
     return (
         <div className="bg-black-trot h-full w-full">
-            <Header />
             <div className="flex pt-24 justify-around flex-col w-full md:flex-row">
 
                 <div className="flex flex-col items-center space-y-2">
