@@ -5460,7 +5460,7 @@ function App() {
       id: "firstSection",
       className: "",
       children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(_header_Header__WEBPACK_IMPORTED_MODULE_2__["default"], {}), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
-        "class": "mt-40 flex flex-nowrap justify-between items-center",
+        "class": "mt-20 md:mt-40 bg-black-trot md:bg-transparent flex flex-col md:flex-row flex-nowrap justify-between items-center pb-10 md:pb-0",
         onClick: function onClick() {
           return setShowModal(false);
         },
@@ -5472,27 +5472,27 @@ function App() {
             src: "images/Frame 2.png"
           })
         }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
-          id: "Right-Phone",
-          "class": "",
+          "class": "flex flex-col justify-center ",
           children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
-            "class": "",
+            "class": "w-min whitespace-nowrap px-6",
             children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("a", {
-              className: "no-underline text-7xl font-bold leading-relaxed inline-block mr-1 py-2 whitespace-nowrap uppercase text-white",
+              className: "no-underline text-4xl md:text-7xl font-bold leading-relaxed inline-block mr-1 py-2 whitespace-nowrap uppercase text-white",
               href: "#pablo",
               children: "Easy"
             }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("a", {
               id: "OrangePaper",
-              className: "no-underline text-7xl font-bold leading-relaxed inline-block mr-4 py-2 whitespace-nowrap uppercase",
+              className: "no-underline text-4xl md:text-7xl font-bold leading-relaxed inline-block mr-4 py-2 whitespace-nowrap uppercase",
               href: "#pablo",
               children: "Scooter"
             })]
           }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("div", {
             id: "Slogan",
-            "class": "text-white text-xl",
+            "class": "text-white text-lg px-6 md:px-6",
             children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("p", {
               children: "Depuis 2012, Easy Scooter est la premi\xE8re soci\xE9t\xE9 \xE0 proposer la location de trottinettes \xE9lectriques \xE0 Lyon avec des offres diversifi\xE9es, capables de r\xE9pondre \xE0 toutes sortes de demandes !"
             })
           }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("div", {
+            "class": "px-6 md:px-6",
             children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("button", {
               id: "buttonOrange",
               "class": "mt-10 font-bold py-2 px-8 rounded inline-flex items-center",
@@ -5503,7 +5503,7 @@ function App() {
           }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("div", {})]
         })]
       })]
-    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("section", {}), showModal ? /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.Fragment, {
+    }), showModal ? /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.Fragment, {
       children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("div", {
         className: "opacity-70 fixed inset-0 z-40 bg-black",
         onClick: function onClick() {
@@ -5826,7 +5826,7 @@ function NeedHelp() {
   return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
     className: "bg-black-trot h-full w-full",
     children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(_header_Header__WEBPACK_IMPORTED_MODULE_1__["default"], {}), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
-      className: "flex pt-24 justify-around flex-col w-full h-full md:flex-row",
+      className: "flex pt-24 justify-around flex-col w-full md:flex-row",
       children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
         className: "flex flex-col items-center space-y-2",
         children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("img", {
@@ -5843,9 +5843,9 @@ function NeedHelp() {
           })]
         })]
       }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
-        className: "flex flex-col items-center md:items-stretch space-y-6",
+        className: "flex flex-col items-center md:items-stretch space-y-6 bg-black-trot md:bg-transparent pb-5 pt-10 md:pt-0 md:pb-0",
         children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
-          className: "flex space-x-2 mb-14 justify-center",
+          className: "flex space-x-2 md:mb-14 mb-6  justify-center",
           children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("h1", {
             className: "text-7xl font-bold text-white",
             children: "Service"

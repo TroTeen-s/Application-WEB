@@ -10,7 +10,7 @@
 
     <script src="{{ asset('js/app.js') }}" defer></script>
 </head>
-<body>
+<body class="h-full">
     <div class="w-full h-full" id="root"></div>
 </body>
 </html>

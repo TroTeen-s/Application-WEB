@@ -9,29 +9,29 @@ export default function App() {
     <>
       <section id="firstSection" className=""  >
         <Header />
-        <div class="mt-40 flex flex-nowrap justify-between items-center" onClick={() => setShowModal(false)} >
+        <div class="mt-20 md:mt-40 bg-black-trot md:bg-transparent flex flex-col md:flex-row flex-nowrap justify-between items-center pb-10 md:pb-0" onClick={() => setShowModal(false)} >
           <div id="Left" class="">
             <img id="img" src="images/Frame 2.png"></img>
           </div>
 
-          <div id="Right-Phone" class="">
-            <div class="">
+          <div class="flex flex-col justify-center ">
+            <div class="w-min whitespace-nowrap px-6" >
               <a
-                className="no-underline text-7xl font-bold leading-relaxed inline-block mr-1 py-2 whitespace-nowrap uppercase text-white"
+                className="no-underline text-4xl md:text-7xl font-bold leading-relaxed inline-block mr-1 py-2 whitespace-nowrap uppercase text-white"
                 href="#pablo"
               >
                 Easy
               </a>
               <a
                 id="OrangePaper"
-                className="no-underline text-7xl font-bold leading-relaxed inline-block mr-4 py-2 whitespace-nowrap uppercase"
+                className="no-underline text-4xl md:text-7xl font-bold leading-relaxed inline-block mr-4 py-2 whitespace-nowrap uppercase"
                 href="#pablo"
               >
                 Scooter
               </a>
             </div>
 
-            <div id="Slogan" class="text-white text-xl">
+            <div id="Slogan" class="text-white text-lg px-6 md:px-6">
               <p>
                 Depuis 2012, Easy Scooter est la première société à proposer la
                 location de trottinettes électriques à Lyon avec des offres
@@ -39,7 +39,7 @@ export default function App() {
               </p>
             </div>
 
-            <div>
+            <div class="px-6 md:px-6">
               <button
                 id="buttonOrange"
                 class="mt-10 font-bold py-2 px-8 rounded inline-flex items-center"
@@ -56,8 +56,8 @@ export default function App() {
       </section>
 
 
+      {/* <section></section> */}
 
-      <section></section>
 
 
       {showModal ? (
