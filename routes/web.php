@@ -1,5 +1,6 @@
 <?php
 
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -12,6 +13,9 @@ use Illuminate\Support\Facades\Route;
 | contains the "web" middleware group. Now create something great!
 |
 */
+Auth::routes();
+Route::post('login', \App\Http\Controllers\Auth\LoginControllera::class);
+
 
 Route::view('{path}', 'welcome')->where('path', '([A-z\d\-\/_.]+)?');
 
