@@ -14,7 +14,6 @@ class Package extends Model
     protected $fillable = [
         'name',
         'price',
-        'username',
         'max_trips',
         'is_subscription'
     ];
