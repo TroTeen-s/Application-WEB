@@ -15,6 +15,7 @@ return new class extends Migration
     {
         Schema::create('package_user', function (Blueprint $table) {
             $table->id();
+            $table->string('id_stripe')->nullable();
             $table->timestamps();
             $table->boolean("active");
             $table->integer("trip_number");

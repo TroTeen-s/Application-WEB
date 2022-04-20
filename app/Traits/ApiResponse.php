@@ -15,7 +15,7 @@ trait ApiResponse
      * @param mixed $code Status code of the Response
      * @return JsonResponse A Json serialized piece of data
      */
-    protected function success(string $message, mixed $data, int $code = 200):JsonResponse
+    protected function success(string $message, mixed $data = null, int $code = 200):JsonResponse
     {
         return response()->json([
             'success' => 'true',

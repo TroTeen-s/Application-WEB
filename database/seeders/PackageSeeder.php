@@ -32,7 +32,7 @@ class PackageSeeder extends Seeder
         $package->save();
 
         $package = new Package([
-            'name' => 'large1',
+            'name' => 'basique',
             'price' => '19.99',
             'max_trips' => '8',
             'is_subscription' => true,
@@ -40,7 +40,7 @@ class PackageSeeder extends Seeder
         $package->save();
 
         $package = new Package([
-            'name' => 'large2',
+            'name' => 'deluxe',
             'price' => '44.99',
             'max_trips' => '25',
             'is_subscription' => true
@@ -48,7 +48,7 @@ class PackageSeeder extends Seeder
         $package->save();
 
         $package = new Package([
-            'name' => 'large3',
+            'name' => 'premium',
             'price' => '79.99',
             'max_trips' => '50',
             'is_subscription' => true
