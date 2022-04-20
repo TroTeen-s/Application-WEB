@@ -15,13 +15,11 @@ Route::post('/auth/register', [AuthController::class, 'register']);
 
 Route::post('/auth/login', [AuthController::class, 'login']);
 
-Route::get('/users', UserController::class); // localhost:8000/api/users/
+Route::get('/users', UserController::class)->middleware('auth'); // localhost:8000/api/users/
 
 
 Route::group(['middleware' => ['auth:sanctum']], function () {
-    Route::get('/me', function (Request $request) {
-        return auth()->user();
-    });
+    Route::get('/me', [UserController::class, 'me']);
 
     Route::get('/is-auth', [AuthController::class, 'isAuth']); // localhost:8000/api/users/
 

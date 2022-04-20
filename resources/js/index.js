@@ -13,6 +13,7 @@ import {Navigate} from "react-router";
 import AuthPage from "./components/auth/AuthPage";
 import SignUpForm from "./components/auth/SignUpForm";
 import SignInForm from "./components/auth/SignInForm";
+import Account from "./components/account/Account";
 
 
 ReactDOM.render(
@@ -27,7 +28,7 @@ ReactDOM.render(
                     </Route>
                     <Route path="need_help" element={<NeedHelp/>}/>
                     <Route path="store" element={<Store/>}/>
-                    <Route path="account" element={<Store/>}/>
+                    <Route path="account" element={<Account/>}/>
                     <Route path="/logina" element={<LoginPage/>}/>
                 </Route>
                 <Route path="/loginas" element={<SignInPage/>}/>

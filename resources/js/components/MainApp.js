@@ -1,18 +1,12 @@
 import Header from "./header/Header";
-import React, {createContext, useContext, useEffect, useState} from "react";
+import React from "react";
 import {Container, createTheme, ThemeProvider} from "@mui/material";
 import {Outlet} from "react-router";
-import AuthProvider, {AuthContext} from "./context/AuthContext";
-
-export const BearerContext = createContext({
-    token: '',
-    setToken: () => {
-    },
-})
+import AuthProvider from "./context/AuthContext";
 
 
 const MainApp = () => {
-    let [token, setToken] = useState()
+    /*let [token, setToken] = useState()
     useEffect(() => {
         let bearer = localStorage.getItem('apiBearerToken')
         if (bearer) {
@@ -20,8 +14,7 @@ const MainApp = () => {
             setToken(bearer)
             axios.defaults.headers.common['Authorization'] = `Bearer ${bearer}`
         }
-    }, [])
-    let {auth, setAuth} = useContext(AuthContext)
+    }, [])*/
 
     const darkTheme = createTheme({
         palette: {
@@ -31,7 +24,6 @@ const MainApp = () => {
 
     return (
         <AuthProvider>
-            <BearerContext.Provider value={token}>
                 <ThemeProvider theme={darkTheme}>
                     <div className="bg-black-trot h-full w-full">
                         <Header/>
@@ -40,7 +32,6 @@ const MainApp = () => {
                         </Container>
                     </div>
                 </ThemeProvider>
-            </BearerContext.Provider>
         </AuthProvider>
     )
 }

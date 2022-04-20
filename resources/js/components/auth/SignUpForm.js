@@ -1,15 +1,13 @@
 import Box from "@mui/material/Box";
 import TextField from "@mui/material/TextField";
-import Grid from "@mui/material/Grid";
+import Grid from '@mui/material/Grid';
 import Button from "@mui/material/Button";
 import * as React from "react";
 import Avatar from "@mui/material/Avatar";
 import Typography from "@mui/material/Typography";
-import {Checkbox, FormControlLabel} from "@mui/material";
 import Paper from "@mui/material/Paper";
 import {Link} from "react-router-dom";
 import {useContext, useState} from "react";
-import {BearerContext} from "../MainApp";
 import {AuthContext} from "../context/AuthContext";
 import {useNavigate} from "react-router";
 
@@ -18,24 +16,10 @@ function LockOutlinedIcon() {
     return null;
 }
 
-export default function SignUpForm(props) {
+export default function SignUpForm() {
     let [firstnameError, setFirstnameError] = useState({error: false, helper: ''})
-    let token = useContext(BearerContext)
-    let {auth, setAuth} = useContext(AuthContext)
+    let {auth} = useContext(AuthContext)
     let navigate = useNavigate();
-
-
-    const onClickedtt = async (event) => {
-        event.preventDefault()
-        console.log("Le bearer est " + token)
-        console.log("Le bearer est " + auth)
-        try {
-            let response = await axios.get("/api/is-auth", {headers: {Accept: 'application/json'}})
-        } catch (e) {
-            console.log(e.response.data.errors)
-        }
-    }
-
     const handleSubmit = async (event) => {
         event.preventDefault();
         let data = new FormData(event.currentTarget);

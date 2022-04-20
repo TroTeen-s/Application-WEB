@@ -10,22 +10,6 @@ function Header() {
     let {auth, setAuth} = useContext(AuthContext)
 
 
-    const checkAuth = async () => {
-        try {
-            let response = await axios.get("/api/is-auth", {headers: {Accept: 'application/json'}})
-            if (response.data.success) {
-                setAuth(true)
-            } else {
-                setAuth(false)
-            }
-        } catch (e) {
-            console.log(e.response.data.errors)
-            return false
-        }
-    }
-
-    checkAuth()
-
     let loggedOut = <>
         <li className="nav-item">
             <NavLink
@@ -49,7 +33,7 @@ function Header() {
         <li className="nav-item">
             <NavLink
                 className="no-underline px-3 py-2 flex items-center text-s uppercase font-bold leading-snug text-white hover:opacity-75"
-                to="/Acoount">
+                to="/account">
                 <i className="fab fa-facebook-square text-s leading-lg text-white opacity-75"></i>
                 <span className="ml-2">Mon Compte</span>
             </NavLink>
