@@ -7,7 +7,6 @@ use App\Traits\ApiResponse;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
-use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 
 class AuthController extends Controller
@@ -21,25 +20,28 @@ class AuthController extends Controller
 
         $attr = $request->validate([
             'username' => 'required|string|max:255',
-            'email' => 'required|string|email|unique:users,email',
-            'password' => 'required|string|min:6|confirmed'
+            'firstname' => 'required|string|max:255',
+            'lastname' => 'required|string|max:255',
+            'email' => 'required|string|email|unique:users,email|max:254',
+            'password' => 'required|string|min:6|confirmed',
+            'phone_number' => 'required|string|max:10|min:10',
         ]);
 
         $user = User::create([
-            'firstname' => 'Aurélien',
-            'lastname' => 'La Loli',
-            'phone_number' => Str::random(10),
+            'firstname' => $attr['firstname'],
+            'lastname' => $attr['lastname'],
+            'phone_number' => $attr['phone_number'],
             'username' => $attr['username'],
             'password' => bcrypt($attr['password']),
             'email' => $attr['email']
         ]);
 
-        return response()->json([
+        return $this->success("Voici votre token d'authentification", [
             'token' => $user->createToken('API Token')->plainTextToken
         ]);
     }
 
-    public function login(Request $request)
+    public function login(Request $request): JsonResponse
     {
         try {
             $attr = $request->validate([
@@ -49,7 +51,7 @@ class AuthController extends Controller
         } catch (\Throwable $th) {
             $this->fail($th->getMessage());
         }
-        
+
         $attr = $request->validate([
             'email' => 'required|string|email|',
             'password' => 'required|string|min:6'
@@ -71,5 +73,15 @@ class AuthController extends Controller
         return [
             'message' => 'Tokens Revoked'
         ];
+    }
+
+    public function isAuth(): JsonResponse
+    {
+        if (auth()->user()) {
+            // The user is logged in...
+            return $this->success("VOus êtes connecté", ['username' => auth()->user()->username]);
+        } else {
+            return $this->fail("VOus n'êtes pas connecté");
+        }
     }
 }
