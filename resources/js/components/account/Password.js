@@ -121,6 +121,22 @@ const Password = () => {
                                     id="password"
                                 />
                             </Grid>
+
+                            <Grid item xs={24} sm={12}>
+                                <TextField
+                                    fullWidth
+                                    id="email"
+                                    name="email"
+                                    value={infos.email}
+                                    InputProps={{
+                                        readOnly: true,
+                                        hidden: true
+                                    }}
+
+                                />
+                            </Grid>
+
+
                         </Grid>
                         <Button
                             type="submit"

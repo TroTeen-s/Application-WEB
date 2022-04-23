@@ -48,7 +48,8 @@ class AuthController extends Controller
                 'email' => 'required|string|email|',
                 'password' => 'required|string|min:6'
             ]);
-        } catch (\Throwable $th) {
+        }
+        catch (\Throwable $th) {
             $this->fail($th->getMessage());
         }
 
@@ -66,6 +67,72 @@ class AuthController extends Controller
         ]);
     }
 
+    public function update(Request $request): JsonResponse
+    {
+
+
+
+        $attr = $request->validate([
+            'username' => 'required|string|max:255',
+            'firstname' => 'required|string|max:255',
+            'lastname' => 'required|string|max:255',
+            'phone_number' => 'required|string|max:10|min:10',
+            'email' => 'required|string|email|max:254',
+        ]);
+
+        $user = User::where('email', $attr['email'])
+            ->update([
+            'firstname' => $attr['firstname'],
+            'lastname' => $attr['lastname'],
+            'phone_number' => $attr['phone_number'],
+            'username' => $attr['username'],
+
+
+        ]);
+
+        return $this->success("user bien mis à jour");
+    }
+
+    public function update_password(Request $request): JsonResponse
+    {
+
+        try {
+            $good_attr = $request->validate([
+                'email' => 'required|string|email|',
+                'password_confirmation' => 'required|string|min:6'
+            ]);
+        }
+        catch (\Throwable $th) {
+            $this->fail($th->getMessage());
+        }
+
+        $good_attr = $request->validate([
+            'email' => 'required|string|email|',
+            'password_confirmation' => 'required|string|min:6'
+        ]);
+
+        if (!Auth::attempt($good_attr)) {
+            return $this->fail('Mauvais mot de passe');
+        }
+
+        $attr = $request->validate([
+            'new_password' => 'required|string|min:6|confirmed',
+            'email' => 'required|string|email|max:254',
+        ]);
+
+        $user = User::where('email', $attr['email'])
+            ->update([
+            'password' => $attr['new_password'],
+
+
+
+        ]);
+
+        return $this->success("user bien mis à jour");
+    }
+
+
+
     public function logout()
     {
         auth()->user()->tokens()->delete();
@@ -80,7 +147,8 @@ class AuthController extends Controller
         if (auth()->user()) {
             // The user is logged in...
             return $this->success("VOus êtes connecté", ['username' => auth()->user()->username]);
-        } else {
+        }
+        else {
             return $this->fail("VOus n'êtes pas connecté");
         }
     }

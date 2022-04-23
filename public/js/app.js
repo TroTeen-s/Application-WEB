@@ -28124,6 +28124,20 @@ var Informations = function Informations() {
                   shrink: true
                 }
               })
+            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(_mui_material__WEBPACK_IMPORTED_MODULE_6__["default"], {
+              item: true,
+              xs: 24,
+              sm: 12,
+              children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(_mui_material_TextField__WEBPACK_IMPORTED_MODULE_9__["default"], {
+                fullWidth: true,
+                id: "email",
+                name: "email",
+                value: infos.email,
+                InputProps: {
+                  readOnly: true,
+                  hidden: true
+                }
+              })
             })]
           }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(_mui_material_Button__WEBPACK_IMPORTED_MODULE_10__["default"], {
             type: "submit",
@@ -28494,6 +28508,20 @@ var Password = function Password() {
                 label: "Mot de passe",
                 type: "password",
                 id: "password"
+              })
+            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(_mui_material__WEBPACK_IMPORTED_MODULE_6__["default"], {
+              item: true,
+              xs: 24,
+              sm: 12,
+              children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(_mui_material_TextField__WEBPACK_IMPORTED_MODULE_9__["default"], {
+                fullWidth: true,
+                id: "email",
+                name: "email",
+                value: infos.email,
+                InputProps: {
+                  readOnly: true,
+                  hidden: true
+                }
               })
             })]
           }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(_mui_material_Button__WEBPACK_IMPORTED_MODULE_10__["default"], {
