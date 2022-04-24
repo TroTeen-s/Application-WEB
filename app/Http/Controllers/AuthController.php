@@ -113,6 +113,18 @@ class AuthController extends Controller
     }
 
 
+    public function delete(Request $request): JsonResponse
+    {
+        auth()->user()->tokens()->delete();
+
+        $attr = $request->validate([
+            'email' => 'required|string|email|max:254',
+        ]);
+
+        User::where('email', $attr['email'])->delete();
+
+        return $this->success("user bien supprimer");
+    }
 
     public function logout()
     {

@@ -16,6 +16,7 @@ import SignInForm from "./components/auth/SignInForm";
 import Account from "./components/account/Account";
 import Informations from "./components/account/Informations";
 import Password from "./components/account/Password";
+import Delete from "./components/account/Delete"
 
 
 ReactDOM.render(
@@ -34,6 +35,7 @@ ReactDOM.render(
                         <Route index element={<Navigate to="/account/informations" replace />} />
                         <Route path="informations" element={<Informations />} />
                         <Route path="password" element={<Password />} />
+                        <Route path="delete" element={<Delete />} />
                     </Route>
                     <Route path="/logina" element={<LoginPage />} />
                 </Route>

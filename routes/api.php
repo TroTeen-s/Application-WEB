@@ -16,6 +16,8 @@ Route::post('/auth/update', [AuthController::class , 'update']);
 
 Route::post('/auth/update_password', [AuthController::class , 'update_password']);
 
+Route::post('/auth/delete', [AuthController::class , 'delete']);
+
 
 
 

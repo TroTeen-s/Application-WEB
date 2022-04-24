@@ -12,8 +12,6 @@ import { NavLink } from 'react-router-dom';
 const NavAccount = (selLink) => {
 
     const selected = (link) => {
-        console.log(link)
-        console.log(selLink.selLink)
         const result = selLink.selLink == link ?
             "no-underline pl-6 py-2 flex items-center text-s uppercase leading-snug text-white  w-min whitespace-nowrap" :
             "transition no-underline px-2 py-2 flex items-center text-s uppercase leading-snug text-white  hover:translate-x-6 ease-in-out  w-min whitespace-nowrap";
@@ -42,7 +40,7 @@ const NavAccount = (selLink) => {
                 </NavLink>
                 <NavLink
                     className={selected("delete")}
-                    to="/account">
+                    to="/account/delete">
                     <i className="fab fa-facebook-square text-s leading-lg text-white opacity-75"></i>
                     <span className="">Supprimer</span>
                 </NavLink>
