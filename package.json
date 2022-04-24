@@ -33,6 +33,7 @@
         "@mui/styled-engine-sc": "^5.6.1",
         "react-router": "^6.3.0",
         "react-router-dom": "^6.3.0",
+        "react-swipeable-views": "^0.14.0",
         "styled-components": "^5.3.5"
     }
 }

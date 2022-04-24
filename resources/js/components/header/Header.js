@@ -1,13 +1,13 @@
 import "../../../css/app.css";
-import React, {useContext} from "react";
+import React, { useContext } from "react";
 
-import {NavLink} from "react-router-dom";
-import {AuthContext} from "../context/AuthContext";
+import { NavLink } from "react-router-dom";
+import { AuthContext } from "../context/AuthContext";
 
 function Header() {
 
 
-    let {auth, setAuth} = useContext(AuthContext)
+    let { auth, setAuth } = useContext(AuthContext)
 
 
     let loggedOut = <>
@@ -30,6 +30,14 @@ function Header() {
     </>
 
     let loggedIn = <>
+        <li className="nav-item">
+            <NavLink
+                className="no-underline px-3 py-2 flex items-center text-s uppercase font-bold leading-snug text-white hover:opacity-75"
+                to="/admin">
+                <i className="fab fa-facebook-square text-s leading-lg text-white opacity-75"></i>
+                <span className="ml-2">Admin</span>
+            </NavLink>
+        </li>
         <li className="nav-item">
             <NavLink
                 className="no-underline px-3 py-2 flex items-center text-s uppercase font-bold leading-snug text-white hover:opacity-75"
