@@ -8,6 +8,8 @@ use Illuminate\Http\JsonResponse;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Log;
+use Symfony\Component\Console\Logger\ConsoleLogger;
 
 class AuthController extends Controller
 {
@@ -48,7 +50,8 @@ class AuthController extends Controller
                 'email' => 'required|string|email|',
                 'password' => 'required|string|min:6'
             ]);
-        } catch (\Throwable $th) {
+        }
+        catch (\Throwable $th) {
             $this->fail($th->getMessage());
         }
 
@@ -66,6 +69,65 @@ class AuthController extends Controller
         ]);
     }
 
+    public function update(Request $request): JsonResponse
+    {
+
+
+
+        $attr = $request->validate([
+            'username' => 'required|string|max:255',
+            'firstname' => 'required|string|max:255',
+            'lastname' => 'required|string|max:255',
+            'phone_number' => 'required|string|max:10|min:10',
+            'email' => 'required|string|email|max:254',
+        ]);
+
+        $user = User::where('email', $attr['email'])
+            ->update([
+            'firstname' => $attr['firstname'],
+            'lastname' => $attr['lastname'],
+            'phone_number' => $attr['phone_number'],
+            'username' => $attr['username'],
+
+
+        ]);
+
+        return $this->success("user bien mis à jour");
+    }
+
+    public function update_password(Request $request): JsonResponse
+    {
+
+        $attr = $request->validate([
+            'password' => 'required|string|min:6|confirmed',
+            'email' => 'required|string|email|max:254',
+        ]);
+
+        $user = User::where('email', $attr['email'])
+            ->update([
+            'password' => $attr['password'],
+
+
+
+        ]);
+
+        return $this->success("user bien mis à jour");
+    }
+
+
+    public function delete()
+    {
+
+        auth()->user()->tokens()->delete();
+
+        auth()->user()->delete();
+
+
+        return [
+            'message' => 'Compte supprimé'
+        ];
+    }
+
     public function logout()
     {
         auth()->user()->tokens()->delete();
@@ -80,7 +142,8 @@ class AuthController extends Controller
         if (auth()->user()) {
             // The user is logged in...
             return $this->success("VOus êtes connecté", ['username' => auth()->user()->username]);
-        } else {
+        }
+        else {
             return $this->fail("VOus n'êtes pas connecté");
         }
     }
