@@ -1,0 +1,9 @@
+@tailwind base;
+
+@tailwind components;
+
+@tailwind utilities;
+
+#firstSection{
+    background-color: 1D1D1D;
+}
