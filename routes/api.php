@@ -14,6 +14,10 @@ Route::post('/auth/register', [AuthController::class , 'register']);
 
 Route::post('/auth/update', [AuthController::class , 'update']);
 
+Route::post('/auth/update_password', [AuthController::class , 'update_password']);
+
+
+
 
 Route::post('/auth/login', [AuthController::class , 'login']);
 

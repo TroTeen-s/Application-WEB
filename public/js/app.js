@@ -28292,7 +28292,6 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 var Password = function Password() {
   var error_new_password = false;
   var error_confirm_new_password = false;
-  var error_password = false;
 
   var _useState = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)([]),
       _useState2 = _slicedToArray(_useState, 2),
@@ -28360,7 +28359,7 @@ var Password = function Password() {
               console.log(Object.fromEntries(data));
               _context2.prev = 4;
               _context2.next = 7;
-              return axios.post('/api/auth/register', coucou);
+              return axios.post('/api/auth/update_password', coucou);
 
             case 7:
               response = _context2.sent;
@@ -28494,18 +28493,6 @@ var Password = function Password() {
                 fullWidth: true,
                 name: "password_confirmation",
                 label: "Confirmation du nouveau mot de passe",
-                type: "password",
-                id: "password"
-              })
-            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(_mui_material__WEBPACK_IMPORTED_MODULE_6__["default"], {
-              item: true,
-              xs: 12,
-              children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(_mui_material_TextField__WEBPACK_IMPORTED_MODULE_9__["default"], {
-                error: error_password,
-                required: true,
-                fullWidth: true,
-                name: "password_confirmation",
-                label: "Mot de passe",
                 type: "password",
                 id: "password"
               })

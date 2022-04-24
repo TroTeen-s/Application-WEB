@@ -13,7 +13,7 @@ const Password = () => {
 
     let error_new_password = false
     let error_confirm_new_password = false
-    let error_password = false
+
 
     const [infos, setInfos] = useState([]);
     let { auth } = useContext(AuthContext)
@@ -43,7 +43,7 @@ const Password = () => {
 
         console.log(Object.fromEntries(data))
         try {
-            let response = await axios.post('/api/auth/register', coucou)
+            let response = await axios.post('/api/auth/update_password', coucou)
             if (response.data.success) {
                 localStorage.setItem('apiBearerToken', response.data.data.token)
                 axios.defaults.headers.common['Authorization'] = `Bearer ${response.data.data.token}`
@@ -110,17 +110,6 @@ const Password = () => {
                                 />
                             </Grid>
 
-                            <Grid item xs={12}>
-                                <TextField
-                                    error={error_password}
-                                    required
-                                    fullWidth
-                                    name="password_confirmation"
-                                    label="Mot de passe"
-                                    type="password"
-                                    id="password"
-                                />
-                            </Grid>
 
                             <Grid item xs={24} sm={12}>
                                 <TextField

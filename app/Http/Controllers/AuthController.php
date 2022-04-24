@@ -96,33 +96,14 @@ class AuthController extends Controller
     public function update_password(Request $request): JsonResponse
     {
 
-        try {
-            $good_attr = $request->validate([
-                'email' => 'required|string|email|',
-                'password_confirmation' => 'required|string|min:6'
-            ]);
-        }
-        catch (\Throwable $th) {
-            $this->fail($th->getMessage());
-        }
-
-        $good_attr = $request->validate([
-            'email' => 'required|string|email|',
-            'password_confirmation' => 'required|string|min:6'
-        ]);
-
-        if (!Auth::attempt($good_attr)) {
-            return $this->fail('Mauvais mot de passe');
-        }
-
         $attr = $request->validate([
-            'new_password' => 'required|string|min:6|confirmed',
+            'password' => 'required|string|min:6|confirmed',
             'email' => 'required|string|email|max:254',
         ]);
 
         $user = User::where('email', $attr['email'])
             ->update([
-            'password' => $attr['new_password'],
+            'password' => $attr['password'],
 
 
 
