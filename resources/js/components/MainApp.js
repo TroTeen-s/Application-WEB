@@ -20,10 +20,10 @@ const MainApp = () => {
         palette: {
             mode: 'dark',
             primary: {
-                light: '#1D1D1D',
-                main: '#1D1D1D',
-                dark: '#1D1D1D',
-                contrastText: '#1D1D1D',
+                light: '#FF9900',
+                main: '#FF9900',
+                dark: '#FF9900',
+                contrastText: '#FF9900',
             },
             secondary: {
                 light: '#FF9900',

@@ -6,10 +6,10 @@ import * as React from "react";
 import Avatar from "@mui/material/Avatar";
 import Typography from "@mui/material/Typography";
 import Paper from "@mui/material/Paper";
-import {Link} from "react-router-dom";
-import {useContext, useState} from "react";
-import {AuthContext} from "../context/AuthContext";
-import {useNavigate} from "react-router";
+import { Link } from "react-router-dom";
+import { useContext, useState } from "react";
+import { AuthContext } from "../context/AuthContext";
+import { useNavigate } from "react-router";
 
 
 function LockOutlinedIcon() {
@@ -17,8 +17,8 @@ function LockOutlinedIcon() {
 }
 
 export default function SignUpForm() {
-    let [firstnameError, setFirstnameError] = useState({error: false, helper: ''})
-    let {auth} = useContext(AuthContext)
+    let [firstnameError, setFirstnameError] = useState({ error: false, helper: '' })
+    let { auth } = useContext(AuthContext)
     let navigate = useNavigate();
     const handleSubmit = async (event) => {
         event.preventDefault();
@@ -27,9 +27,9 @@ export default function SignUpForm() {
 
         let firstname = data.get('firstname')
         if (firstname.trim() === '') {
-            setFirstnameError({error: true, helper: 'Champs vide'})
+            setFirstnameError({ error: true, helper: 'Champs vide' })
         } else if (firstname.trim().length < 6 || firstname.trim().length > 50) {
-            setFirstnameError({error: true, helper: 'trop court / trop long'})
+            setFirstnameError({ error: true, helper: 'trop court / trop long' })
         }
 
         console.log(Object.fromEntries(data))
@@ -55,13 +55,13 @@ export default function SignUpForm() {
                     alignItems: 'center',
                 }}
             >
-                <Avatar sx={{m: 1, bgcolor: 'secondary.main'}}>
-                    <LockOutlinedIcon/>
+                <Avatar sx={{ m: 1, bgcolor: 'secondary.main' }}>
+                    <LockOutlinedIcon />
                 </Avatar>
                 <Typography component="h1" variant="h5">
                     Inscrivez-vous
                 </Typography>
-                <Box component="form" noValidate onSubmit={handleSubmit} sx={{mt: 3}}>
+                <Box component="form" noValidate onSubmit={handleSubmit} sx={{ mt: 3 }}>
                     <Grid container spacing={2}>
                         <Grid item xs={12} sm={6}>
                             <TextField
@@ -138,8 +138,8 @@ export default function SignUpForm() {
                     <Button
                         type="submit"
                         fullWidth
-                        variant="contained"
-                        sx={{mt: 3, mb: 2}}
+                        variant="outlined"
+                        sx={{ mt: 3, mb: 2 }}
                     >
                         S'inscrire
                     </Button>

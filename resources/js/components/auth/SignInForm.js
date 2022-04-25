@@ -7,14 +7,14 @@ import Paper from "@mui/material/Paper";
 import Avatar from "@mui/material/Avatar";
 import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
 import Typography from "@mui/material/Typography";
-import {Outlet, useNavigate} from "react-router";
-import {Link} from "react-router-dom";
-import {useContext} from "react";
-import {AuthContext} from "../context/AuthContext";
+import { Outlet, useNavigate } from "react-router";
+import { Link } from "react-router-dom";
+import { useContext } from "react";
+import { AuthContext } from "../context/AuthContext";
 
 
 export default function SignInForm(props) {
-    let {auth, setAuth} = useContext(AuthContext)
+    let { auth, setAuth } = useContext(AuthContext)
     let navigate = useNavigate();
 
     const handleSubmit = async (event) => {
@@ -46,13 +46,13 @@ export default function SignInForm(props) {
                     alignItems: 'center',
                 }}
             >
-                <Avatar sx={{m: 1, bgcolor: 'secondary.main'}}>
-                    <LockOutlinedIcon/>
+                <Avatar sx={{ m: 1, bgcolor: 'secondary.main' }}>
+                    <LockOutlinedIcon />
                 </Avatar>
                 <Typography component="h1" variant="h5">
                     Connectez-vous
                 </Typography>
-                <Box component="form" noValidate onSubmit={handleSubmit} sx={{mt: 1}}>
+                <Box component="form" noValidate onSubmit={handleSubmit} sx={{ mt: 1 }}>
                     <TextField
                         margin="normal"
                         required
@@ -79,12 +79,12 @@ export default function SignInForm(props) {
                         justifyContent="center"
                         alignItems="center"
                     >
-                        <Grid item style={{flexGrow: 1}}>
+                        <Grid item style={{ flexGrow: 1 }}>
                             <Button
                                 type="submit"
                                 fullWidth={false}
-                                variant="contained"
-                                sx={{mt: 3, mb: 2}}
+                                variant="outlined"
+                                sx={{ mt: 3, mb: 2 }}
                             >
                                 Se connecter
                             </Button>

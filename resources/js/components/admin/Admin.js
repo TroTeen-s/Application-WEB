@@ -51,6 +51,8 @@ function a11yProps(index) {
 }
 
 export default function Admin() {
+
+
     const theme = useTheme();
     const [value, setValue] = React.useState(0);
 
@@ -83,6 +85,7 @@ export default function Admin() {
                     axis={theme.direction === 'rtl' ? 'x' : 'x-reverse'}
                     index={value}
                     onChangeIndex={handleChangeIndex}
+
                 >
                     <TabPanel value={value} index={0} dir={theme.direction}>
                         <Users />

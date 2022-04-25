@@ -36,9 +36,9 @@ ReactDOM.render(
                     <Route path="/gestion" element={<GestionApp />} />
 
                     <Route path="/admin" element={<Admin />}>
-                        <Route index element={<Navigate to="/admin/users" replace />} />
+                        {/* <Route index element={<Navigate to="/admin/users" replace />} />
                         <Route path="users" element={<Users />} />
-                        <Route path="trotinette" element={<Scooters />} />
+                        <Route path="trotinette" element={<Scooters />} /> */}
                     </Route>
                 </Route>
                 {/* <Route path="/loginas" element={<SignInPage/>}/> */}
