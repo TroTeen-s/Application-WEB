@@ -54,20 +54,6 @@ const Password = () => {
 
 
     useLayoutEffect(() => {
-        const checkAuth = async () => {
-            try {
-                let response = await axios.get("/api/is-auth", { headers: { Accept: 'application/json' } })
-                if (response.data.success) {
-
-                } else {
-                    navigate('/')
-                }
-            } catch (e) {
-                console.log(e.response.data.errors)
-                return navigate('/')
-            }
-        }
-        checkAuth()
         retrieveInfos()
     }, [auth])
 

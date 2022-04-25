@@ -128,11 +128,15 @@ class AuthController extends Controller
 
     public function logout()
     {
-        auth()->user()->tokens()->delete();
+        $logoutSucceed = auth()->user()->tokens()->delete();
 
-        return [
-            'message' => 'Tokens Revoked'
-        ];
+        if ($logoutSucceed) {
+            // The user is logged in...
+            return $this->success("Vous vous êtes déconnecté", [$logoutSucceed], 204);
+        }
+        else {
+            return $this->fail("Erreur dans la deconnexion",[$logoutSucceed]);
+        }
     }
 
     public function isAuth(): JsonResponse
