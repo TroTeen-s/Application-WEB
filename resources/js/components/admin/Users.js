@@ -1,22 +1,14 @@
-import React, { useContext, useLayoutEffect, useState } from 'react';
+import React, { useContext, useEffect, useLayoutEffect, useState } from 'react';
 import { AuthContext } from "../context/AuthContext";
-import Grid from "@mui/material/Grid";
-import CssBaseline from "@mui/material/CssBaseline";
-import Paper from "@mui/material/Paper";
-import Box from "@mui/material/Box";
-import Avatar from "@mui/material/Avatar";
-import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
-import Typography from "@mui/material/Typography";
-
+import { DataGrid } from '@mui/x-data-grid';
+import Button from "@mui/material/Button";
 import { Outlet } from "react-router";
 
 const Users = () => {
 
+    console.log("test")
 
     const [infos, setInfos] = useState([]);
-
-    let { auth } = useContext(AuthContext)
-
 
     const retrieveInfos = async () => {
         try {
@@ -34,17 +26,97 @@ const Users = () => {
         }
     }
 
-    retrieveInfos()
+    console.log("apres retrieve info")
 
-    console.log(infos)
+
+
+    const columns = [
+        { field: 'id', headerName: 'ID', width: 90 },
+        {
+            field: 'firstname',
+            headerName: 'First name',
+            width: 150,
+            editable: false,
+        },
+        {
+            field: 'lastname',
+            headerName: 'Last name',
+            width: 150,
+            editable: false,
+        },
+        {
+            field: 'email',
+            headerName: 'email',
+            width: 150,
+            editable: false,
+        },
+
+        {
+            field: 'userLink',
+            headerName: 'Show more',
+            width: 150,
+            editable: false,
+            renderCell: (params) => (
+                <strong>
+                    {params.value.getFullYear()}
+                    <Button
+                        variant="contained"
+                        color="primary"
+                        size="small"
+                        style={{ marginLeft: 16 }}
+                    >
+                        Open
+                    </Button>
+                </strong>
+            )
+
+        }
+
+    ];
+
+
+
+
+
+    useEffect(() => {
+        retrieveInfos()
+
+    }, [infos])
+
+
+    let i = -1;
+    let tmp = infos.slice()
+
+    // while (++i < infos.length) {
+    //     tmp[i] = infos[i];
+    // }
+
+    for (var j = 0; j < tmp.length; j++) {
+
+        tmp[j]["userLink"] = "user-" + tmp[j]["id"]
+
+    }
+
+
+    // console.log(infos)
+
+
+
+
 
 
     return (
-        <>
-            <p>Tous les users</p>
-        </>
-
+        <div style={{ height: 400, width: '100%' }}>
+            <DataGrid
+                rows={tmp}
+                columns={columns}
+                pageSize={5}
+                rowsPerPageOptions={[5]}
+                disableSelectionOnClick
+            />
+        </div>
     );
+
 };
 
 export default Users;

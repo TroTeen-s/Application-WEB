@@ -10,6 +10,7 @@ import Box from '@mui/material/Box';
 import Users from './Users';
 import Scooters from './Scooters';
 
+
 import { createTheme } from '@mui/material/styles';
 
 
@@ -25,7 +26,6 @@ function TabPanel(props) {
             hidden={value !== index}
             id={`full-width-tabpanel-${index}`}
             aria-labelledby={`full-width-tab-${index}`}
-            className="w-full "
             {...other}
         >
             {value === index && (
@@ -64,6 +64,7 @@ export default function Admin() {
         setValue(index);
     };
 
+
     return (
         <div className='w-full flex justify-center'>
             <Box sx={{ bgcolor: 'background.paper', width: 1000 }}>
@@ -78,6 +79,7 @@ export default function Admin() {
                     >
                         <Tab label="Users" {...a11yProps(0)} />
                         <Tab label="Trottinettes" {...a11yProps(1)} />
+                        <Tab label="meteo" {...a11yProps(2)} />
 
                     </Tabs>
                 </AppBar>
@@ -93,6 +95,10 @@ export default function Admin() {
                     <TabPanel value={value} index={1} dir={theme.direction}>
                         <Scooters />
                     </TabPanel>
+                    <TabPanel value={value} index={2} dir={theme.direction}>
+                        <Scooters />
+                    </TabPanel>
+
                 </SwipeableViews>
             </Box>
         </div>
