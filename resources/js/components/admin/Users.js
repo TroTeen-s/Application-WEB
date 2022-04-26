@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import { DataGrid } from '@mui/x-data-grid';
 import Button from "@mui/material/Button";
+import { LinearProgress } from '@mui/material';
+
 
 const Users = () => {
 
@@ -77,6 +79,11 @@ const Users = () => {
     return (
         <div style={{ height: 400, width: '100%' }}>
             <DataGrid
+                components={{
+                    LoadingOverlay: LinearProgress,
+                }}
+                loading
+
                 rows={infos}
                 columns={columns}
                 pageSize={5}
