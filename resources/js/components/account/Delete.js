@@ -117,7 +117,7 @@ const Delete = () => {
 
                             color='error'
                             fullWidth
-                            variant="contained"
+                            variant="outlined"
                             onClick={handleClickOpen}
                             sx={{ mt: 3, mb: 2 }}
                         >
