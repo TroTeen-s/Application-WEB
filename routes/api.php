@@ -14,7 +14,6 @@ Route::post('/auth/register', [AuthController::class , 'register']);
 
 Route::post('/auth/login', [AuthController::class , 'login']);
 
-Route::get('/users', UserController::class)->middleware('auth'); // localhost:8000/api/users/
 
 
 Route::group(['middleware' => ['auth:sanctum']], function () {
@@ -23,6 +22,8 @@ Route::group(['middleware' => ['auth:sanctum']], function () {
     Route::get('/is-auth', [AuthController::class , 'isAuth']);
 
     Route::get('/users/{id}', [UserController::class , 'firstOne'])->where('id', '[0-9]+'); // ex :localhost:8000/api/users/?id=1
+
+    Route::get('/users', UserController::class); // localhost:8000/api/users/
 
     Route::post('/auth/logout', [AuthController::class , 'logout']);
 

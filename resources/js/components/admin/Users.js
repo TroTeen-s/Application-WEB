@@ -1,10 +1,13 @@
-import React, {useEffect, useState} from 'react';
+import React, {useContext, useEffect, useState} from 'react';
 import {DataGrid} from '@mui/x-data-grid';
 import Button from "@mui/material/Button";
+import {AuthLoadingContext} from "../context/AuthContext";
 
 const Users = () => {
 
     const [infos, setInfos] = useState();
+
+    let {loaded} = useContext(AuthLoadingContext)
 
     const columns = [
         {
@@ -70,8 +73,10 @@ const Users = () => {
 
     useEffect(() => {
 
-        retrieveInfos()
-    }, [])
+        if (loaded) {
+            retrieveInfos()
+        }
+    }, [loaded])
 
 
     return (
