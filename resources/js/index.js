@@ -16,8 +16,8 @@ import SignInForm from "./components/auth/SignInForm";
 import Account from "./components/account/Account";
 import Informations from "./components/account/Informations";
 import Password from "./components/account/Password";
-import Delete from "./components/account/Delete"
-
+import Delete from "./components/account/Delete";
+import Admin from './components/admin/Admin';
 
 ReactDOM.render(
     <React.StrictMode>
@@ -37,6 +37,7 @@ ReactDOM.render(
                         <Route path="password" element={<Password />} />
                         <Route path="delete" element={<Delete />} />
                     </Route>
+                    <Route path="/admin" element={<Admin />} />
                     <Route path="/logina" element={<LoginPage />} />
                 </Route>
 

@@ -1,16 +1,16 @@
 import "../../../css/app.css";
-import React, {useContext} from "react";
+import React, { useContext } from "react";
 import LogoutIcon from '@mui/icons-material/Logout';
 import LoginIcon from '@mui/icons-material/Login';
 
 
-import {NavLink} from "react-router-dom";
-import {AuthContext} from "../context/AuthContext";
+import { NavLink } from "react-router-dom";
+import { AuthContext } from "../context/AuthContext";
 
 function Header() {
 
 
-    let {auth, setAuth} = useContext(AuthContext);
+    let { auth, setAuth } = useContext(AuthContext);
 
     let doLogout = async () => {
         try {
@@ -27,18 +27,18 @@ function Header() {
     let loggedOut = <>
         <li className="nav-item">
             <NavLink
-                className="no-underline px-3 py-2 flex items-center text-s uppercase font-bold leading-snug text-white hover:opacity-75"
+                className="no-underline px-3 py-2 flex items-center text-s uppercase font-bold leading-snug text-white duration-200 hover:text-orange-300"
                 to="/auth/login">
                 <i className="fab fa-facebook-square text-s leading-lg text-white opacity-75"></i>
-                <span className="ml-2">Connexion</span>
+                <span className="ml-2 duration-200 hover:text-orange-300">Connexion</span>
             </NavLink>
         </li>
         <li className="nav-item" onClick={() => setShowModal(true)}>
             <NavLink
-                className="no-underline px-3 py-2 flex items-center text-s uppercase font-bold leading-snug text-white hover:opacity-75"
+                className="no-underline px-3 py-2 flex items-center text-s uppercase font-bold leading-snug text-white duration-200 hover:text-orange-300"
                 to="/auth/register">
                 <i className="fab fa-facebook-square text-s leading-lg text-white opacity-75"></i>
-                <span className="ml-2">Inscription</span>
+                <span className="ml-2 duration-200 hover:text-orange-300">Inscription</span>
                 <LoginIcon className="pl-2" style={{ fontSize: 'large' }} />
 
             </NavLink>
@@ -48,20 +48,28 @@ function Header() {
     let loggedIn = <>
         <li className="nav-item">
             <NavLink
-                className="no-underline px-3 py-2 flex items-center text-s uppercase font-bold leading-snug text-white hover:opacity-75"
-                to="/account">
+                className="no-underline px-3 py-2 flex items-center text-s uppercase font-bold leading-snug text-white duration-200 hover:text-orange-300"
+                to="/admin">
                 <i className="fab fa-facebook-square text-s leading-lg text-white opacity-75"></i>
-                <span className="ml-2">Mon compte</span>
+                <span className="ml-2 duration-200 hover:text-orange-300">Admin</span>
             </NavLink>
         </li>
         <li className="nav-item">
             <NavLink
-                className="no-underline px-3 py-2 flex items-center text-s uppercase font-bold leading-snug text-white hover:opacity-75"
+                className="no-underline px-3 py-2 flex items-center text-s uppercase font-bold leading-snug text-white duration-200 hover:text-orange-300"
+                to="/account">
+                <i className="fab fa-facebook-square text-s leading-lg text-white opacity-75"></i>
+                <span className="ml-2 duration-200 hover:text-orange-300">Mon compte</span>
+            </NavLink>
+        </li>
+        <li className="nav-item">
+            <NavLink
+                className="no-underline px-3 py-2 flex items-center text-s uppercase font-bold leading-snug text-white duration-200 hover:text-orange-300"
                 to="#"
                 onClick={doLogout}>
                 <i className="fab fa-facebook-square text-s leading-lg text-white opacity-75"></i>
-                <span className="ml-2">Déconnexion</span>
-                <LogoutIcon className="pl-2" style={{ fontSize: 'large' }} />
+                <span className="ml-2 duration-200 hover:text-orange-300">Déconnexion</span>
+                <LogoutIcon className="pl-2 duration-200 hover:text-orange-300" style={{ fontSize: 'large' }} />
             </NavLink>
         </li>
     </>;
@@ -77,7 +85,7 @@ function Header() {
                     </NavLink>
 
                     <NavLink
-                        className="no-underline text-xl font-bold leading-relaxed inline-block mr-4 py-2 whitespace-nowrap uppercase hover:text-orange-300 text-orange-300"
+                        className="no-underline text-xl font-bold leading-relaxed inline-block mr-4 py-2 whitespace-nowrap uppercase duration-200 hover:text-orange-300 text-orange-300"
                         to="/">
                         Scooter
                     </NavLink>
@@ -89,20 +97,20 @@ function Header() {
                     <ul className="flex flex-col  md:flex-row mb-0  list-none md:ml-auto">
                         <li className="nav-item">
                             <NavLink
-                                className="no-underline px-3 py-2 flex items-center text-s uppercase font-bold leading-snug text-white hover:opacity-75"
+                                className="no-underline px-3 py-2 flex items-center text-s uppercase font-bold leading-snug text-white duration-200 hover:text-orange-300"
                                 to="/need_help">
                                 <i className="fab fa-facebook-square text-s leading-lg text-white opacity-75"></i>
-                                <span className="ml-2">Besoin d'aide</span>
+                                <span className="ml-2 duration-200 hover:text-orange-300">Besoin d'aide</span>
                             </NavLink>
 
                         </li>
 
                         <li className="nav-item">
                             <NavLink
-                                className="no-underline px-3 py-2 flex items-center text-s uppercase font-bold leading-snug text-white hover:opacity-75"
+                                className="no-underline px-3 py-2 flex items-center text-s uppercase font-bold leading-snug text-white duration-200 hover:text-orange-300"
                                 to="/store">
                                 <i className="fab fa-facebook-square text-s leading-lg text-white opacity-75"></i>
-                                <span className="ml-2">Nos abonnements</span>
+                                <span className="ml-2 duration-200 hover:text-orange-300">Nos abonnements</span>
                             </NavLink>
 
                         </li>
