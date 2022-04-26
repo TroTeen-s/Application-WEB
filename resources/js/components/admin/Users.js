@@ -1,5 +1,5 @@
-import React, { useEffect, useState } from 'react';
-import { DataGrid } from '@mui/x-data-grid';
+import React, {useEffect, useState} from 'react';
+import {DataGrid} from '@mui/x-data-grid';
 import Button from "@mui/material/Button";
 
 const Users = () => {
@@ -42,7 +42,7 @@ const Users = () => {
                         variant="contained"
                         color="primary"
                         size="small"
-                        style={{ marginLeft: 16 }}
+                        style={{marginLeft: 16}}
                     >
                         Open
                     </Button>
@@ -75,7 +75,7 @@ const Users = () => {
 
 
     return (
-        <div style={{ height: 400, width: '100%' }}>
+        <div style={{height: 400, width: '100%'}}>
             <DataGrid
                 rows={infos}
                 columns={columns}
