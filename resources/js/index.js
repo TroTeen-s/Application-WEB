@@ -17,6 +17,7 @@ import GestionApp from './components/gestion/Gestion'
 import Admin from './components/admin/Admin'
 import Users from './components/admin/Users'
 import Scooters from './components/admin/Scooters'
+import Main from './components/main/Master'
 
 
 ReactDOM.render(
@@ -29,6 +30,7 @@ ReactDOM.render(
                         <Route path="login" element={<SignInForm />} />
                         <Route path="register" element={<SignUpForm />} />
                     </Route>
+                    <Route path="main" element={<Main />} />
                     <Route path="need_help" element={<NeedHelp />} />
                     <Route path="store" element={<Store />} />
                     <Route path="account" element={<Account />} />

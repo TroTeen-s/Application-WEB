@@ -39,9 +39,9 @@ const MainApp = () => {
             <ThemeProvider theme={darkTheme}>
                 <div className="bg-black-trot h-full w-full">
                     <Header />
-                    <Container componen={'main'} className={' py-4 flex justify-center w-full h-full'}>
-                        <Outlet />
-                    </Container>
+                        <Container className="py-4 flex justify-center w-full">
+                            <Outlet />
+                        </Container>
                 </div>
             </ThemeProvider>
         </AuthProvider>
