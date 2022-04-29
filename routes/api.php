@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\SubscriptionController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
@@ -17,9 +18,16 @@ Route::post('/auth/login', [AuthController::class, 'login']);
 
 Route::get('/users', UserController::class)->middleware('auth'); // localhost:8000/api/users/
 
+Route::prefix('stripe')->group(function () {
+    Route::post('/checkout-completed', [SubscriptionController::class, 'checkoutWebhook']);
+});
 
 Route::group(['middleware' => ['auth:sanctum']], function () {
     Route::get('/me', [UserController::class, 'me']);
+
+    Route::post('subscribe', [SubscriptionController::class, 'subscribe']);
+
+    Route::post('checkout-sub', [SubscriptionController::class, 'createSubscriptionCheckout']);
 
     Route::get('/is-auth', [AuthController::class, 'isAuth']); // localhost:8000/api/users/
 

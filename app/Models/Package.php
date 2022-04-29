@@ -2,6 +2,7 @@
 
 namespace App\Models;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 
 
 class Package extends Model
@@ -18,4 +19,9 @@ class Package extends Model
         'max_trips',
         'is_subscription'
     ];
+
+    public function clients(): BelongsToMany
+    {
+        return $this->belongsToMany(User::class)->withPivot('active', 'trip_number', 'id_stripe', 'id_session_stripe', 'payment_status_stripe');
+    }
 }

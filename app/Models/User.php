@@ -3,10 +3,14 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
 
+/**
+ * @method static create(array $array)
+ */
 class User extends Authenticatable
 {
     use HasApiTokens, HasFactory, Notifiable, HasApiTokens;
@@ -44,4 +48,12 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    /**
+     * The roles that belong to the user.
+     */
+    public function subscriptions(): BelongsToMany
+    {
+        return $this->belongsToMany(Package::class)->withPivot('active', 'trip_number', 'id_stripe', 'id_session_stripe', 'payment_status_stripe');
+    }
 }
