@@ -5,6 +5,7 @@ import { styled } from "@mui/material/styles";
 import Box from "@mui/material/Box";
 import Paper from "@mui/material/Paper";
 import { ParallaxProvider, Parallax } from "react-scroll-parallax";
+import FirstImageLeft from './Images/LeftFirstImage.png'
 
 function First() {
     const Item = styled(Paper)(({ theme }) => ({
@@ -13,14 +14,14 @@ function First() {
         padding: theme.spacing(1),
         textAlign: "center",
         color: theme.palette.text.secondary,
-        height: 600,
-        width: 400,
+        height: 100,
+        width: 100,
     }));
 
     return (
 
- 
-            <Parallax translateY={[-20, 20]}>
+
+            <Parallax translateY={[-5, 2]}>
             <Grid
                 container
                 direction={{ xs: "column", md: "row" }}
@@ -29,7 +30,7 @@ function First() {
                 spacing={10}
             >
                 <Grid item>
-                    <Item>Image</Item>
+                <img className="Europe" src={Map}/>
                 </Grid>
 
                 <Grid item>

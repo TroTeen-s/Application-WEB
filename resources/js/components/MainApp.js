@@ -37,11 +37,12 @@ const MainApp = () => {
     return (
         <AuthProvider>
             <ThemeProvider theme={darkTheme}>
-                <div className="bg-black-trot h-full w-full">
+                <div className="bg-black-trot h-full md:px-10">
                     <Header />
-                        <Container className="py-4 flex justify-center w-full">
+                        {/* <Container className="py-4 flex justify-center w-full"> */}
                             <Outlet />
-                        </Container>
+{/*
+                        </Container> */}
                 </div>
             </ThemeProvider>
         </AuthProvider>

@@ -11,6 +11,9 @@ module.exports = {
         'orange-300': '#FF9900',
         'black-trot': '#1D1D1D'
       },
+      BackgroundImage : {
+          Europe:"url('resources/js/components/main/Images/Europe.png')",
+      }
     },
   },
   plugins: [],
