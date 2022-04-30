@@ -6,11 +6,11 @@ use App\Models\User;
 use App\Traits\ApiResponse;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Support\Facades\Log;
-use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Stripe\Exception\ApiErrorException;
 use Stripe\StripeClient;
+use Throwable;
 
 class AuthController extends Controller
 {
@@ -18,7 +18,7 @@ class AuthController extends Controller
     use ApiResponse;
 
     /**
-     * @throws \Stripe\Exception\ApiErrorException
+     * @throws ApiErrorException
      */
     public function register(Request $request): JsonResponse
     {
@@ -47,7 +47,6 @@ class AuthController extends Controller
         $stripe = new StripeClient(
             'sk_test_51Kq2nZHBffQ89MBqZrwLuVSiiStGVcppEsCg9ZX96b1YLgobtlCjAF2etfUPpyl7Pww2jITNpfl34f4hhkXk0UyB004riglWOf'
         );
-        $stripeResponse = [];
         try {
             $stripeResponse = $stripe->customers->create([
                 'description' => 'My First Test Customer (created for API docs)',
@@ -79,7 +78,7 @@ class AuthController extends Controller
                 'email' => 'required|string|email|',
                 'password' => 'required|string|min:6'
             ]);
-        } catch (\Throwable $th) {
+        } catch (Throwable $th) {
             $this->fail($th->getMessage());
         }
 
@@ -154,7 +153,7 @@ class AuthController extends Controller
         return $this->success("user bien supprimer");
     }
 
-    public function logout()
+    public function logout(): JsonResponse
     {
         $logoutSucceed = auth()->user()->tokens()->delete();
 

@@ -96,6 +96,7 @@ class SubscriptionController extends Controller
         $event = Stripe\Event::constructFrom($params);
         var_dump($params);
         error_log(ob_get_clean(), 4);
+        Log::debug($event->type);
         Log::debug($event->data->object);
 
         echo json_encode(['statyus ' => "success"]);

@@ -20,11 +20,11 @@ class UserSeeder extends Seeder
     {
         $loli = new User([
             'firstname' => 'Aurélien',
-            'username' => 'dite La Puteuh',
+            'username' => 'dite La Loli',
             'lastname' => 'La Loli',
             'phone_number' => Str::random(10),
-            'email' => 'ohyeah@loli.com',
-            'password' => Hash::make('loli'),
+            'email' => 'loli@loli.com',
+            'password' => Hash::make('loliloli'),
         ]);
         $loli->save();
     }

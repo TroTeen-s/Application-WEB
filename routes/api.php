@@ -13,13 +13,21 @@ use App\Http\Controllers\PackageController;
 
 Route::post('/auth/register', [AuthController::class, 'register']);
 
+Route::post('/auth/update', [AuthController::class , 'update']);
+
+Route::post('/auth/update_password', [AuthController::class , 'update_password']);
+
+Route::post('/auth/delete', [AuthController::class , 'delete']);
+
+
+
 
 Route::post('/auth/login', [AuthController::class, 'login']);
 
 Route::get('/users', UserController::class)->middleware('auth'); // localhost:8000/api/users/
 
 Route::prefix('stripe')->group(function () {
-    Route::post('/checkout-completed', [SubscriptionController::class, 'checkoutWebhook']);
+    Route::post('/webhook', [SubscriptionController::class, 'checkoutWebhook']);
 });
 
 Route::group(['middleware' => ['auth:sanctum']], function () {
@@ -33,7 +41,7 @@ Route::group(['middleware' => ['auth:sanctum']], function () {
 
     Route::get('/users/{id}', [UserController::class , 'firstOne'])->where('id', '[0-9]+'); // ex :localhost:8000/api/users/?id=1
 
-    Route::post('/auth/logout', [AuthController::class, 'logout']);
+    Route::post('/auth/logout', [AuthController::class , 'logout']);
 });
 
 
