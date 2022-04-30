@@ -2,3 +2,23 @@
     height:100vh;
 }
 
+.full2{
+    height:90vh
+}
+
+html{
+    background-color:#ffffff
+}
+
+
+#Europe{
+    /* padding-left:30%; */
+    /* position: relative; */
+    margin-left:50%;
+    z-index:0;
+}
+
+#TextEurope{
+    position: absolute;
+    z-index:1;
+}

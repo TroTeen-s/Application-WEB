@@ -20,7 +20,7 @@ function First() {
 
     return (
 
-            <Parallax translateY={[0, 10]}>
+            <Parallax translateY={[0, 0]}>
             <Grid
                 container
                 direction={{ xs: "column", md: "row" }}

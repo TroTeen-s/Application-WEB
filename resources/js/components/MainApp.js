@@ -3,6 +3,7 @@ import React from "react";
 import { Container, createTheme, ThemeProvider } from "@mui/material";
 import { Outlet } from "react-router";
 import AuthProvider from "./context/AuthContext";
+import "./styleMainApp.css"
 
 
 const MainApp = () => {
@@ -37,13 +38,13 @@ const MainApp = () => {
     return (
         <AuthProvider>
             <ThemeProvider theme={darkTheme}>
-                <div className="bg-black-trot h-full md:px-10">
+                <body id="scrolling-box" className="">
                     <Header />
                         {/* <Container className="py-4 flex justify-center w-full"> */}
                             <Outlet />
 {/*
                         </Container> */}
-                </div>
+                </body>
             </ThemeProvider>
         </AuthProvider>
     )
