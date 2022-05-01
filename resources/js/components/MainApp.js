@@ -1,4 +1,7 @@
 import Header from "./header/Header";
+import Footer from './footer/Footer'
+
+
 import React from "react";
 import { Container, createTheme, ThemeProvider } from "@mui/material";
 import { Outlet } from "react-router";
@@ -42,6 +45,8 @@ const MainApp = () => {
                     <Header />
                         {/* <Container className="py-4 flex justify-center w-full"> */}
                             <Outlet />
+
+                    <Footer />
 {/*
                         </Container> */}
                 </body>

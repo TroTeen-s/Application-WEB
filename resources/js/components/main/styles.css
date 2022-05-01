@@ -2,9 +2,15 @@
     height:100vh;
 }
 
-.full2{
-    height:90vh
+.full_responsive{
+    height:auto;
+    margin-bottom:20vh;
 }
+
+/* .full_map{
+    height:auto;
+    margin-bottom:10vh;
+} */
 
 html{
     background-color:#ffffff
@@ -15,10 +21,16 @@ html{
     /* padding-left:30%; */
     /* position: relative; */
     margin-left:50%;
-    z-index:0;
+    z-index:1;
 }
 
 #TextEurope{
     position: absolute;
-    z-index:1;
+    z-index:2;
+}
+
+#Draw{
+    padding-bottom:95%;
+    position: absolute;
+    z-index:0;
 }
