@@ -44,7 +44,7 @@ const Users = () => {
             renderCell: (params) => (
                 <strong>
                     <Button
-                        variant="contained"
+                        variant="outlined"
                         color="primary"
                         size="small"
                         style={{ marginLeft: 16 }}
@@ -87,13 +87,12 @@ const Users = () => {
                 components={{
                     LoadingOverlay: LinearProgress,
                 }}
-                loading
-
                 rows={infos}
                 columns={columns}
                 pageSize={5}
                 rowsPerPageOptions={[5]}
                 disableSelectionOnClick
+                loading={!infos}
             />
         </div>
     );
