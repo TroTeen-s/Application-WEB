@@ -16,7 +16,6 @@ return new class extends Migration
         Schema::create('package_user', function (Blueprint $table) {
             $table->id();
             $table->string('id_stripe')->nullable();
-            $table->string('id_session_stripe')->nullable();
             $table->string('payment_status_stripe')->nullable();
             $table->dateTime('current_period_start')->nullable();
             $table->dateTime('current_period_end')->nullable();

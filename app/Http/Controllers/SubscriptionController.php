@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Invoice;
 use App\Models\Package;
 use App\Models\PackageUser;
 use App\Models\User;
@@ -12,6 +13,7 @@ use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
 use Stripe;
+use Stripe\Event;
 use Stripe\StripeClient;
 
 class SubscriptionController extends Controller
@@ -77,12 +79,21 @@ class SubscriptionController extends Controller
 
     }
 
+    public function allSubscriptions(): JsonResponse
+    {
+        $user = auth()->user();
+
+        $subscriptions = $user->subscriptions;
+
+        return $this->success("voici vos abonnements", $subscriptions);
+    }
+
     public function checkoutWebhook(Request $request)
     {
         $params = $request->all();
         ob_start();
         var_dump($params);
-        $event = Stripe\Event::constructFrom($params);
+        $event = Event::constructFrom($params);
         var_dump($params);
         error_log(ob_get_clean(), 4);
         /*        Log::channel('stripe')->info('event type: ' . $event->type);
@@ -96,6 +107,11 @@ class SubscriptionController extends Controller
             case 'customer.subscription.updated':
                 $this->updateSubscription($event);
                 break;
+            case  'invoice.paid':
+                if ($event->data->object->subscription) {
+                    $this->createInvoice($event);
+                }
+                break;
             default:
                 break;
         }
@@ -104,7 +120,7 @@ class SubscriptionController extends Controller
 
     }
 
-    public function createSubscription(Stripe\Event $event)
+    public function createSubscription(Event $event)
     {
 
         try {
@@ -129,7 +145,7 @@ class SubscriptionController extends Controller
         }
     }
 
-    public function updateSubscription(Stripe\Event $event)
+    public function updateSubscription(Event $event)
     {
 
         try {
@@ -150,5 +166,25 @@ class SubscriptionController extends Controller
             Log::channel('errors')->info($e->getMessage());
 
         }
+    }
+
+    public function createInvoice(Event $event)
+    {
+        $invoiceReceived = $event->data->object;
+        $subscriptionID = $invoiceReceived->subscription;
+        $subscription = PackageUser::query()->firstWhere('id_stripe', $subscriptionID);
+        $subscription->payment_status_stripe = $invoiceReceived->status;
+        $subscription->save();
+
+        $invoice = new Invoice([
+            'id_subscription' => $subscriptionID,
+            'total_price' => $invoiceReceived->amount_paid / 100,
+            'date' => Carbon::now(),
+            'billing_address' => $invoiceReceived->customer_address,
+            'id_stripe' => $invoiceReceived->id
+        ]);
+        $invoice->save();
+
+
     }
 }
