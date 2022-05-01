@@ -32,10 +32,13 @@
         "@mui/material": "^5.6.1",
         "@mui/styled-engine-sc": "^5.6.1",
         "@mui/x-data-grid": "^5.10.0",
+        "google-maps-react": "^2.0.6",
+        "react-google-maps": "^9.4.5",
         "react-router": "^6.3.0",
         "react-router-dom": "^6.3.0",
         "react-scroll-parallax": "^3.1.0",
         "react-swipeable-views": "^0.14.0",
+        "recharts": "^2.1.9",
         "styled-components": "^5.3.5"
     }
 }

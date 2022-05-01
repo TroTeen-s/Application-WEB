@@ -253,7 +253,7 @@ function Main() {
                     </div>
                 </section>
 
-                <section class="mt-10 full bg-white-background">
+                <section class="mt-10 full_responsive bg-white-background">
                     <div class="w-full mx-auto bg-white px-5 py-10 pb-5 text-gray-600">
                         <div class="text-center max-w-xl mx-auto pb-10">
                             <h1 class="text-5xl md:text-6xl font-bold mb-10">

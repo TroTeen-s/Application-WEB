@@ -1,7 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import '../css/app.css';
-import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
+import { BrowserRouter as Router, Route, Routes} from "react-router-dom";
 import Store from "./components/store/Store"
 import NeedHelp from "./components/needHelp/NeedHelp"
 import NotFound from "./components/notFound/NotFound"
@@ -18,6 +18,10 @@ import Admin from './components/admin/Admin'
 import Users from './components/admin/Users'
 import Scooters from './components/admin/Scooters'
 import Main from './components/main/Master'
+
+import Trot from './components/dashboard/scoot/main';
+import InnerContent from './components/dashboard/App'
+import Following from './components/dashboard/Following'
 
 
 ReactDOM.render(
@@ -36,6 +40,14 @@ ReactDOM.render(
                     <Route path="account" element={<Account />} />
                     <Route path="/logina" element={<LoginPage />} />
                     <Route path="/gestion" element={<GestionApp />} />
+
+                    <Route path="/Dashboard" element={<InnerContent />} >
+
+                         <Route index element={<Navigate to="trot" replace />} />
+                         <Route path="trot" element={<Trot/>}/>
+                         <Route path="following" element={<Following/>}/>
+
+                    </Route>
 
                     <Route path="/admin" element={<Admin />}>
                         {/* <Route index element={<Navigate to="/admin/users" replace />} />

@@ -46,9 +46,10 @@ const MainApp = () => {
                         {/* <Container className="py-4 flex justify-center w-full"> */}
                             <Outlet />
 
-                    <Footer />
-{/*
-                        </Container> */}
+                            <Footer />
+
+{/*                       </Container> */}
+           
                 </body>
             </ThemeProvider>
         </AuthProvider>

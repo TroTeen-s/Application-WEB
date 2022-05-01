@@ -54,18 +54,18 @@ function Header() {
     </>
 
     return (
-        <header class="h-20 sm:h-20 flex items-center z-20 w-full bg-black-trot">
+        <header class="h-30 sm:h-20 pb-2 flex items-center z-20 w-full bg-black-trot">
                     <div class="container mx-auto px-6 flex items-center justify-between">
                         <div class="uppercase font-black text-6xl no-underline">
                             <NavLink
                                 className="uppercase text-white font-black text-3xl no-underline"
-                                to="/">
+                                to="/Main">
                                 Easy
                             </NavLink>
 
                             <NavLink
                                 className="uppercase text-orange-300 hover:text-white text-3xl no-underline"
-                                to="/">
+                                to="/Main">
                                 Scooter
                             </NavLink>
                         </div>

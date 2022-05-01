@@ -6,7 +6,7 @@ import { AuthContext } from "../context/AuthContext";
 
 function Header() {
     return (
-        <footer class="p-4 bg-black-trot shadow md:px-6 md:py-8 dark:bg-gray-800">
+        <footer class="p-4 bg-black-trot shadow md:px-6 md:py-8 dark:bg-gray-800 block" >
             <div class="sm:flex sm:items-center sm:justify-between">
                 <a class="flex items-center mb-4 sm:mb-0 no-underline">
                     <img />
@@ -41,7 +41,7 @@ function Header() {
             <span class="block text-sm text-white sm:text-center dark:text-gray-400">
                 © 2022{" "}
                 <a href="/" class="hover:underline ">
-                    Flowbite™
+                    EasyScooter™
                 </a>
                 . All Rights Reserved.
             </span>
