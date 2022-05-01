@@ -44,9 +44,7 @@ class AuthController extends Controller
 
         $error = '';
 
-        $stripe = new StripeClient(
-            'sk_test_51Kq2nZHBffQ89MBqZrwLuVSiiStGVcppEsCg9ZX96b1YLgobtlCjAF2etfUPpyl7Pww2jITNpfl34f4hhkXk0UyB004riglWOf'
-        );
+        $stripe = new StripeClient(getenv('STRIPE_PRIVATE'));
         try {
             $stripeResponse = $stripe->customers->create([
                 'description' => 'My First Test Customer (created for API docs)',
@@ -55,7 +53,7 @@ class AuthController extends Controller
                 'name' => $user->firstname . ' ' . $user->lastname
             ]);
 
-            if (isset($stripeResponse->id)){
+            if (isset($stripeResponse->id)) {
                 $user->id_stripe = $stripeResponse->id;
                 $user->save();
             }
@@ -74,7 +72,7 @@ class AuthController extends Controller
     public function login(Request $request): JsonResponse
     {
         try {
-            $attr = $request->validate([
+            $request->validate([
                 'email' => 'required|string|email|',
                 'password' => 'required|string|min:6'
             ]);
@@ -108,7 +106,7 @@ class AuthController extends Controller
             'email' => 'required|string|email|max:254',
         ]);
 
-        $user = User::where('email', $attr['email'])
+        User::query()->where('email', $attr['email'])
             ->update([
                 'firstname' => $attr['firstname'],
                 'lastname' => $attr['lastname'],
@@ -129,7 +127,7 @@ class AuthController extends Controller
             'email' => 'required|string|email|max:254',
         ]);
 
-        $user = User::where('email', $attr['email'])
+        User::query()->where('email', $attr['email'])
             ->update([
                 'password' => $attr['password'],
 
@@ -139,7 +137,6 @@ class AuthController extends Controller
         return $this->success("user bien mis à jour");
     }
 
-
     public function delete(Request $request): JsonResponse
     {
         auth()->user()->tokens()->delete();
@@ -148,7 +145,7 @@ class AuthController extends Controller
             'email' => 'required|string|email|max:254',
         ]);
 
-        User::where('email', $attr['email'])->delete();
+        User::query()->where('email', $attr['email'])->delete();
 
         return $this->success("user bien supprimer");
     }
