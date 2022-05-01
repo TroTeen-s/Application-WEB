@@ -4,6 +4,7 @@ import Button from "@mui/material/Button";
 import { LinearProgress } from '@mui/material';
 
 import { AuthLoadingContext } from "../context/AuthContext";
+import { Navigate } from 'react-router';
 
 const Users = () => {
 
@@ -42,21 +43,30 @@ const Users = () => {
             width: 150,
             editable: false,
             renderCell: (params) => (
+
                 <strong>
                     <Button
                         variant="outlined"
                         color="primary"
                         size="small"
                         style={{ marginLeft: 16 }}
+                        onClick={() => {
+                            showMore(params);
+                        }}
                     >
                         Open
                     </Button>
-                </strong>
+                </strong >
             )
 
         }
 
     ];
+
+    const showMore = (params) => {
+        //console.log(params.row.email)
+        document.location.replace('/user/' + params.row.email)
+    }
 
     const retrieveInfos = async () => {
         try {

@@ -18,6 +18,7 @@ import Informations from "./components/account/Informations";
 import Password from "./components/account/Password";
 import Delete from "./components/account/Delete";
 import Admin from './components/admin/Admin';
+import User from './components/admin/User'
 
 ReactDOM.render(
     <React.StrictMode>
@@ -38,6 +39,7 @@ ReactDOM.render(
                         <Route path="delete" element={<Delete />} />
                     </Route>
                     <Route path="/admin" element={<Admin />} />
+                    <Route path="/user/:email" Children={<User />} />
                     <Route path="/logina" element={<LoginPage />} />
                 </Route>
 
