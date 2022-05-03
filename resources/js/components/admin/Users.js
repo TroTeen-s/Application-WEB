@@ -65,7 +65,7 @@ const Users = () => {
 
     const showMore = (params) => {
         //console.log(params.row.email)
-        document.location.replace('/user/' + params.row.email)
+        document.location.replace('/user/' + params.row.id)
     }
 
     const retrieveInfos = async () => {

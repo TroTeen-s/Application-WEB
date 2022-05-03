@@ -2,7 +2,14 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import '../css/app.css';
 import App from '../js/components/App';
-import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
+import {
+    BrowserRouter as Router,
+    Switch,
+    Route,
+    Routes,
+    Link,
+    useParams
+} from "react-router-dom";
 import Store from "./components/store/Store"
 import NeedHelp from "./components/needHelp/NeedHelp"
 import NotFound from "./components/notFound/NotFound"
@@ -19,6 +26,8 @@ import Password from "./components/account/Password";
 import Delete from "./components/account/Delete";
 import Admin from './components/admin/Admin';
 import User from './components/admin/User'
+
+
 
 ReactDOM.render(
     <React.StrictMode>
@@ -39,7 +48,12 @@ ReactDOM.render(
                         <Route path="delete" element={<Delete />} />
                     </Route>
                     <Route path="/admin" element={<Admin />} />
-                    <Route path="/user/:email" Children={<User />} />
+
+
+                    <Route path="/user/:id" element={<User />}>
+
+                    </Route>
+
                     <Route path="/logina" element={<LoginPage />} />
                 </Route>
 
