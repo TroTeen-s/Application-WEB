@@ -41,7 +41,7 @@ const MainApp = () => {
     return (
         <AuthProvider>
             <ThemeProvider theme={darkTheme}>
-                <body id="scrolling-box" className="">
+                <div id="scrolling-box" className="">
                     <Header />
                         {/* <Container className="py-4 flex justify-center w-full"> */}
                             <Outlet />
@@ -50,7 +50,7 @@ const MainApp = () => {
 
 {/*                       </Container> */}
            
-                </body>
+                </div>
             </ThemeProvider>
         </AuthProvider>
     )

@@ -33,7 +33,7 @@ export default function App(){
     return (
 
     <ThemeProvider theme={mdTheme}>
-      <Box className="overflow-y-hidden" sx={{ display: 'flex' }}>
+      <Box className="overflow-y-hidden" sx={{ display: 'flex'}}>
     
         <Sidebar/>
         <Outlet/>
