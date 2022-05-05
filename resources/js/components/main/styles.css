@@ -1,16 +1,11 @@
 .full{
-    height:100vh;
+    height:auto;
+    margin-bottom:15%;
 }
 
 .full_responsive{
     height:auto;
-    margin-bottom:20vh;
 }
-
-/* .full_map{
-    height:auto;
-    margin-bottom:10vh;
-} */
 
 html{
     background-color:#ffffff

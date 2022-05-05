@@ -22,6 +22,7 @@ import Main from './components/main/Master'
 import Trot from './components/dashboard/scoot/main';
 import InnerContent from './components/dashboard/App'
 import Following from './components/dashboard/Following'
+import Shop from './components/shop/app'
 
 
 ReactDOM.render(
@@ -35,6 +36,7 @@ ReactDOM.render(
                         <Route path="register" element={<SignUpForm />} />
                     </Route>
                     <Route path="main" element={<Main />} />
+                    <Route path="/shop" element={<Shop/>} />
                     <Route path="need_help" element={<NeedHelp />} />
                     <Route path="store" element={<Store />} />
                     <Route path="account" element={<Account />} />
