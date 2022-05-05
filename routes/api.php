@@ -40,7 +40,10 @@ Route::group(['middleware' => ['auth:sanctum']], function () {
 
 
     ## ROUTES SCOOTERS
-    Route::get('/scooters', ScootersController::class); // localhost:8000/api/users/
+    Route::get('/scooters', ScootersController::class);
+    Route::post('/scooter/create', [ScootersController::class , 'create']);
+    Route::post('/scooter/active', [ScootersController::class , 'active']);
+
 
 
 

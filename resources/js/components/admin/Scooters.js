@@ -32,35 +32,61 @@ const Scooters = () => {
             editable: false,
         },
 
-        // {
-        //     field: 'userLink',
-        //     headerName: 'Show more',
-        //     width: 150,
-        //     editable: false,
-        //     renderCell: (params) => (
+        {
+            field: 'available',
+            headerName: 'Available',
+            width: 150,
+            editable: false,
+            renderCell: (params) => (
+                <div id={"is-active-" + params.row.id}>
+                    <p className='m-0'>
+                        {params.row.available ? "Activé" : "Désactivé"}
+                    </p>
+                </div >
+            )
 
-        //         <strong>
-        //             <Button
-        //                 variant="outlined"
-        //                 color="primary"
-        //                 size="small"
-        //                 style={{ marginLeft: 16 }}
-        //                 onClick={() => {
-        //                     showMore(params);
-        //                 }}
-        //             >
-        //                 Open
-        //             </Button>
-        //         </strong >
-        //     )
+        },
 
-        // }
+        {
+            field: 'userLink',
+            headerName: 'Show more',
+            width: 150,
+            editable: false,
+            renderCell: (params) => (
+
+                <strong>
+                    <Button
+                        variant="outlined"
+                        color="primary"
+                        size="small"
+                        style={{ marginLeft: 16 }}
+                        onClick={() => {
+                            active(params);
+                        }}
+                    >
+                        {params.row.available ? "Désactiver" : "Activer"}
+                    </Button>
+                </strong >
+            )
+
+        }
 
     ];
 
-    const showMore = (params) => {
-        //console.log(params.row.email)
-        document.location.replace('/scooters/' + params.row.id)
+    const active = async (params) => {
+        console.log(params)
+        try {
+            let response = await axios.post('/api/scooter/active/', params.row)
+            if (response.data.success) {
+                console.log("available" + response.data.data.scooter[0])
+                console.log(response.data.data.scooter[0])
+                retrieveInfos()
+
+            }
+        } catch (e) {
+            console.log(e)
+        }
+
     }
 
     const retrieveInfos = async () => {
@@ -98,6 +124,8 @@ const Scooters = () => {
                 rowsPerPageOptions={[5]}
                 disableSelectionOnClick
                 loading={!infos}
+
+
             />
         </div>
     );
