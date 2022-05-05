@@ -1,6 +1,6 @@
 .full{
-    height:auto;
-    margin-bottom:15%;
+    height:100vh;
+    /* margin-bottom:15%; */
 }
 
 .full_responsive{
@@ -9,6 +9,10 @@
 
 html{
     background-color:#ffffff
+}
+
+.full_second{
+    height:60vh;
 }
 
 

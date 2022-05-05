@@ -19,7 +19,7 @@ function Main() {
     return (
         <>
             <ParallaxProvider>
-                <section class="full_responsive bg-black-trot">
+                <section class="full bg-black-trot">
                     <div class="flex relative z-20 py-20 items-center overflow-hidden">
                         <div class="container mx-auto px-6 flex relative py-16">
                             <div class="hidden md:block sm:w-1/6 lg:w-3/6 relative">
@@ -32,9 +32,9 @@ function Main() {
                                 {/* <span class="w-20 h-2 bg-gray-800 dark:bg-white mb-12">
                             </span> */}
                                 <h1 class="font-bebas-neue uppercase text-4xl sm:text-6xl font-black flex flex-col leading-none text-white">
-                                    Easy
+                                    Deplacez vous
                                     <span class="text-5xl sm:text-7xl text-orange-300">
-                                        Scooter
+                                        Sans limite
                                     </span>
                                 </h1>
                                 <p class="text-sm sm:text-base xs:hidden text-white lg:text-white dark:text-white">
@@ -47,13 +47,13 @@ function Main() {
                                     <a
                                         href="#"
                                         id="buttonOrange"
-                                        class="no-underline uppercase py-2 px-4 rounded-lg bg-text-orange-300 border-2 border-transparent text-white text-md mr-4 hover:bg-black-trot"
+                                        class="no-underline uppercase py-2 px-12 rounded-lg bg-text-orange-300 border-2 border-transparent text-white text-md mr-4 hover:bg-black-trot"
                                     >
                                         Get started
                                     </a>
                                     <a
                                         href="#"
-                                        class="no-underline uppercase py-2 px-4 rounded-lg bg-transparent border-2 border-orange-300 text-white dark:text-white hover:bg-black-trot hover:text-white text-md"
+                                        class="no-underline uppercase py-2 px-12 rounded-lg bg-transparent border-2 border-orange-300 text-white dark:text-white hover:bg-black-trot hover:text-white text-md"
                                     >
                                         Read more
                                     </a>
@@ -63,7 +63,7 @@ function Main() {
                     </div>
                 </section>
 
-                <section class="full bg-white-background">
+                <section class="full_second bg-white-background">
                     <div>
                         <div id="Draw" className="sm:w-200 md:w-200 lg:w-200 relative object-none">
                             <img
@@ -253,7 +253,7 @@ function Main() {
                     </div>
                 </section>
 
-                <section class="mt-10 h-auto bg-white-background">
+                <section class="mt-10 full_responsive bg-white-background">
                     <div class="w-full mx-auto bg-white px-5 py-10 pb-5 text-gray-600">
                         <div class="text-center max-w-xl mx-auto pb-10">
                             <h1 class="text-5xl md:text-6xl font-bold mb-10">
