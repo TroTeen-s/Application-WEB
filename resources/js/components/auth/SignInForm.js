@@ -13,8 +13,8 @@ import { useContext } from "react";
 import { AuthContext } from "../context/AuthContext";
 
 
-export default function SignInForm(props) {
-    let { auth, setAuth } = useContext(AuthContext)
+export default function SignInForm() {
+    let { setAuth } = useContext(AuthContext)
     let navigate = useNavigate();
 
     const handleSubmit = async (event) => {

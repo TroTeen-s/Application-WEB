@@ -1,5 +1,8 @@
 import "../../../css/app.css";
 import React, { useContext } from "react";
+import LogoutIcon from '@mui/icons-material/Logout';
+import LoginIcon from '@mui/icons-material/Login';
+
 
 import { NavLink } from "react-router-dom";
 import { AuthContext } from "../context/AuthContext";
@@ -9,6 +12,16 @@ function Header() {
 
     let { auth, setAuth } = useContext(AuthContext)
 
+    let doLogout = async () => {
+        try {
+            let response = await axios.post("/api/auth/logout");
+            if (response.status === 204) {
+                setAuth(false);
+            }
+        } catch (e) {
+            console.log('logout error');
+        }
+    };
 
     let loggedOut = <>
 
@@ -25,6 +38,7 @@ function Header() {
                 to="/auth/register">
                 <i className="fab fa-facebook-square text-s leading-lg text-white opacity-75"></i>
                 <span className="ml-2">Inscription</span>
+                <LoginIcon className="pl-2" style={{ fontSize: 'large' }} />
             </NavLink>
 
     </>
@@ -46,9 +60,10 @@ function Header() {
 
             <NavLink
                 className="no-underline px-3 py-2 flex items-center text-s uppercase font-bold leading-snug text-white hover:opacity-75"
-                to="/api/auth/logout">
+                to="#">
                 <i className="fab fa-facebook-square text-s leading-lg text-white opacity-75"></i>
                 <span className="ml-2">Déconnexion</span>
+                <LogoutIcon className="pl-2 duration-200 hover:text-orange-300" style={{ fontSize: 'large' }} />
             </NavLink>
 
     </>

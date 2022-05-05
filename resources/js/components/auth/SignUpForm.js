@@ -10,39 +10,38 @@ import { Link } from "react-router-dom";
 import { useContext, useState } from "react";
 import { AuthContext } from "../context/AuthContext";
 import { useNavigate } from "react-router";
-
-
-function LockOutlinedIcon() {
-    return null;
-}
+import LockOpenIcon from '@mui/icons-material/LockOpen';
 
 export default function SignUpForm() {
-    let [firstnameError, setFirstnameError] = useState({ error: false, helper: '' })
-    let { auth } = useContext(AuthContext)
+    let [firstnameError, setFirstnameError] = useState({ error: false, helper: '' });
     let navigate = useNavigate();
+    let { setAuth } = useContext(AuthContext)
+
     const handleSubmit = async (event) => {
         event.preventDefault();
         let data = new FormData(event.currentTarget);
-        let coucou = Object.fromEntries(data)
+        let coucou = Object.fromEntries(data);
 
-        let firstname = data.get('firstname')
+        let firstname = data.get('firstname');
         if (firstname.trim() === '') {
-            setFirstnameError({ error: true, helper: 'Champs vide' })
+            setFirstnameError({ error: true, helper: 'Champs vide' });
         } else if (firstname.trim().length < 6 || firstname.trim().length > 50) {
-            setFirstnameError({ error: true, helper: 'trop court / trop long' })
+            setFirstnameError({ error: true, helper: 'trop court / trop long' });
         }
 
-        console.log(Object.fromEntries(data))
+        console.log(Object.fromEntries(data));
         try {
-            let response = await axios.post('/api/auth/register', coucou)
+            let response = await axios.post('/api/auth/register', coucou);
             if (response.data.success) {
-                navigate("/" + location.search);
-                localStorage.setItem('apiBearerToken', response.data.data.token)
-                axios.defaults.headers.common['Authorization'] = `Bearer ${response.data.data.token}`
+                localStorage.setItem('apiBearerToken', response.data.data.token);
+                axios.defaults.headers.common['Authorization'] = `Bearer ${response.data.data.token}`;
+                setAuth(true)
             }
         } catch (e) {
         }
     };
+
+
     return (
         <Grid item xs={12} sm={8} md={5} component={Paper} elevation={6} square>
             <Box
@@ -56,7 +55,7 @@ export default function SignUpForm() {
                 }}
             >
                 <Avatar sx={{ m: 1, bgcolor: 'secondary.main' }}>
-                    <LockOutlinedIcon />
+                    <LockOpenIcon />
                 </Avatar>
                 <Typography component="h1" variant="h5">
                     Inscrivez-vous
@@ -153,6 +152,6 @@ export default function SignUpForm() {
                 </Box>
             </Box>
         </Grid>
-    )
+    );
 }
 

@@ -1,27 +1,26 @@
-import React from 'react';
+import React, {useContext, useLayoutEffect} from 'react';
 import Grid from "@mui/material/Grid";
-import CssBaseline from "@mui/material/CssBaseline";
-import Paper from "@mui/material/Paper";
-import Box from "@mui/material/Box";
-import Avatar from "@mui/material/Avatar";
-import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
-import Typography from "@mui/material/Typography";
-import SignInForm from "./SignInForm";
-import {Outlet} from "react-router";
+import {Outlet, useNavigate} from "react-router";
+import {AuthContext, AuthLoadingContext} from "../context/AuthContext";
 
 const AuthPage = () => {
-    const handleSubmit = (event) => {
-        event.preventDefault();
-        const data = new FormData(event.currentTarget);
-        console.log({
-            email: data.get('email'),
-            password: data.get('password'),
-        });
-    };
+    let {auth} = useContext(AuthContext);
+    let {loaded} = useContext(AuthLoadingContext);
+    let navigate = useNavigate();
+
+    useLayoutEffect(() => {
+        console.log("loaded est " + loaded)
+        console.log("auth est " + auth)
+        if (loaded) {
+            if (auth) {
+                return navigate('/');
+            }
+        }
+    }, [auth, loaded]);
+
 
     return (
         <Grid container component="main">
-            <CssBaseline/>
             <Grid
                 item
                 xs={false}

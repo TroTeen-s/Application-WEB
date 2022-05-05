@@ -18,24 +18,59 @@ class UserController extends Controller
     public function __invoke(): JsonResponse
     {
         $users = User::all();
+        error_log("test");
 
         return response()->json(array('data' => $users));
     }
 
-    public function firstOne(Request $request): JsonResponse
+    public function firstOne(Request $request, $id): JsonResponse
     {
-        $params = $request->all();
-        $id = $params['id'];
+
         $user = User::find($id);
+
+        error_log("test");
 
         if (!$user) {
             return response()->json(array('success' => 'false', 'message' => "Aucun utilisateur trouvé"), 400);
         }
 
-        return response()->json(array('success' => 'true', 'message' => "Voici l'utilisateur", 'data' => ['user' => $user, 'params' => $params, 'id' => $id]));
+        return response()->json(array('success' => 'true', 'message' => "Voici l'utilisateur", 'data' => ['user' => $user, 'id' => $id]));
     }
 
-    public function me(Request $request){
+    public function active(Request $request, $id): JsonResponse
+    {
+
+        $user = User::where('id', $id)
+            ->update([
+            'active' => true,
+        ]);
+
+
+
+        if (!$user) {
+            return response()->json(array('success' => 'false', 'message' => "Aucun utilisateur trouvé"), 400);
+        }
+
+        return response()->json(array('success' => 'true', 'message' => "Voici l'utilisateur", 'data' => ['user' => $user, 'id' => $id]));
+    }
+
+    public function desactive(Request $request, $id): JsonResponse
+    {
+
+        $user = User::where('id', $id)
+            ->update([
+            'active' => false,
+        ]);
+
+        if (!$user) {
+            return response()->json(array('success' => 'false', 'message' => "Aucun utilisateur trouvé"), 400);
+        }
+
+        return response()->json(array('success' => 'true', 'message' => "Voici l'utilisateur", 'data' => ['user' => $user, 'id' => $id]));
+    }
+
+    public function me(Request $request)
+    {
         if (auth()->user()) {
             // The user is logged in...
             $user = auth()->user();
@@ -48,7 +83,8 @@ class UserController extends Controller
                 'fidelity_points' => $user->phone_number,
             ];
             return $this->success("VOus êtes connecté", $userInfo);
-        } else {
+        }
+        else {
             return $this->fail("VOus n'êtes pas connecté");
         }
     }

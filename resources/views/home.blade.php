@@ -16,14 +16,6 @@
 
                     {{ __('You are logged in!') }}
                 </div>
-
-                <div class="card-body">
-                    <div class="panel-body">
-                        Checking admin sessions
-                        <a href="{{route('admin-page')}}"> Gestion des trotinettes </a>
-                    </div>
-
-                </div>
             </div>
         </div>
     </div>

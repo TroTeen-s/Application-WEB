@@ -1,10 +1,16 @@
-import React, {useEffect, useState} from 'react';
-// import {DataGrid} from '@mui/x-data-grid';
+import React, { useContext, useEffect, useState } from 'react';
+import { DataGrid } from '@mui/x-data-grid';
 import Button from "@mui/material/Button";
+import { LinearProgress } from '@mui/material';
+
+import { AuthLoadingContext } from "../context/AuthContext";
+import { Navigate } from 'react-router';
 
 const Users = () => {
 
     const [infos, setInfos] = useState();
+
+    let { loaded } = useContext(AuthLoadingContext)
 
     const columns = [
         {
@@ -37,21 +43,30 @@ const Users = () => {
             width: 150,
             editable: false,
             renderCell: (params) => (
+
                 <strong>
                     <Button
-                        variant="contained"
+                        variant="outlined"
                         color="primary"
                         size="small"
-                        style={{marginLeft: 16}}
+                        style={{ marginLeft: 16 }}
+                        onClick={() => {
+                            showMore(params);
+                        }}
                     >
                         Open
                     </Button>
-                </strong>
+                </strong >
             )
 
         }
 
     ];
+
+    const showMore = (params) => {
+        //console.log(params.row.email)
+        document.location.replace('/user/' + params.row.id)
+    }
 
     const retrieveInfos = async () => {
         try {
@@ -70,18 +85,24 @@ const Users = () => {
 
     useEffect(() => {
 
-        retrieveInfos()
-    }, [])
+        if (loaded) {
+            retrieveInfos()
+        }
+    }, [loaded])
 
 
     return (
-        <div style={{height: 400, width: '100%'}}>
+        <div style={{ height: 400, width: '100%' }}>
             <DataGrid
+                components={{
+                    LoadingOverlay: LinearProgress,
+                }}
                 rows={infos}
                 columns={columns}
                 pageSize={5}
                 rowsPerPageOptions={[5]}
                 disableSelectionOnClick
+                loading={!infos}
             />
         </div>
     );
