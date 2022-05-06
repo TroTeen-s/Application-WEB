@@ -5,17 +5,23 @@ namespace App\Http\Controllers;
 use App\Models\User;
 use App\Traits\ApiResponse;
 use Illuminate\Http\JsonResponse;
-use Illuminate\Support\Str;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Log;
 use Symfony\Component\Console\Logger\ConsoleLogger;
+use Stripe\Exception\ApiErrorException;
+use Stripe\StripeClient;
+use Throwable;
 
 class AuthController extends Controller
 {
 
     use ApiResponse;
 
+    /**
+     * @throws ApiErrorException
+     */
     public function register(Request $request): JsonResponse
     {
 
@@ -38,20 +44,41 @@ class AuthController extends Controller
             'email' => $attr['email']
         ]);
 
+        $error = '';
+
+        $stripe = new StripeClient(getenv('STRIPE_PRIVATE'));
+        try {
+            $stripeResponse = $stripe->customers->create([
+                'description' => 'My First Test Customer (created for API docs)',
+                'email' => $user->email,
+                'phone' => $user->phone_number,
+                'name' => $user->firstname . ' ' . $user->lastname
+            ]);
+
+            if (isset($stripeResponse->id)) {
+                $user->id_stripe = $stripeResponse->id;
+                $user->save();
+            }
+
+            Log::Debug($stripeResponse);
+        } catch (ApiErrorException $e) {
+            $error = $e->getMessage();
+        }
+
         return $this->success("Voici votre token d'authentification", [
-            'token' => $user->createToken('API Token')->plainTextToken
+            'token' => $user->createToken('API Token')->plainTextToken,
+            'error' => $error
         ]);
     }
 
     public function login(Request $request): JsonResponse
     {
         try {
-            $attr = $request->validate([
+            $request->validate([
                 'email' => 'required|string|email|',
                 'password' => 'required|string|min:6'
             ]);
-        }
-        catch (\Throwable $th) {
+        } catch (Throwable $th) {
             $this->fail($th->getMessage());
         }
 
@@ -73,7 +100,6 @@ class AuthController extends Controller
     {
 
 
-
         $attr = $request->validate([
             'username' => 'required|string|max:255',
             'firstname' => 'required|string|max:255',
@@ -82,15 +108,15 @@ class AuthController extends Controller
             'email' => 'required|string|email|max:254',
         ]);
 
-        $user = User::where('email', $attr['email'])
+        User::query()->where('email', $attr['email'])
             ->update([
-            'firstname' => $attr['firstname'],
-            'lastname' => $attr['lastname'],
-            'phone_number' => $attr['phone_number'],
-            'username' => $attr['username'],
+                'firstname' => $attr['firstname'],
+                'lastname' => $attr['lastname'],
+                'phone_number' => $attr['phone_number'],
+                'username' => $attr['username'],
 
 
-        ]);
+            ]);
 
         return $this->success("user bien mis à jour");
     }
@@ -103,41 +129,36 @@ class AuthController extends Controller
             'email' => 'required|string|email|max:254',
         ]);
 
-        $user = User::where('email', $attr['email'])
+        User::query()->where('email', $attr['email'])
             ->update([
-            'password' => $attr['password'],
+                'password' => $attr['password'],
 
 
-
-        ]);
+            ]);
 
         return $this->success("user bien mis à jour");
     }
 
-
-    public function delete()
+    public function delete(Request $request): JsonResponse
     {
-
         auth()->user()->tokens()->delete();
 
         auth()->user()->delete();
 
+        User::query()->where('email', $attr['email'])->delete();
 
-        return [
-            'message' => 'Compte supprimé'
-        ];
+        return $this->success("user bien supprimer");
     }
 
-    public function logout()
+    public function logout(): JsonResponse
     {
         $logoutSucceed = auth()->user()->tokens()->delete();
 
         if ($logoutSucceed) {
             // The user is logged in...
             return $this->success("Vous vous êtes déconnecté", [$logoutSucceed], 204);
-        }
-        else {
-            return $this->fail("Erreur dans la deconnexion",[$logoutSucceed]);
+        } else {
+            return $this->fail("Erreur dans la deconnexion", [$logoutSucceed]);
         }
     }
 
@@ -146,8 +167,7 @@ class AuthController extends Controller
         if (auth()->user()) {
             // The user is logged in...
             return $this->success("VOus êtes connecté", ['username' => auth()->user()->username]);
-        }
-        else {
+        } else {
             return $this->fail("VOus n'êtes pas connecté");
         }
     }
