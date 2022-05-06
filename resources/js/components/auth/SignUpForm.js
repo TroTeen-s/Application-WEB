@@ -14,20 +14,96 @@ import LockOpenIcon from '@mui/icons-material/LockOpen';
 
 export default function SignUpForm() {
     let [firstnameError, setFirstnameError] = useState({ error: false, helper: '' });
+    let [lastnameError, setLastnameError] = useState({ error: false, helper: '' });
+    let [usernameError, setUsernameError] = useState({ error: false, helper: '' });
+    let [phoneNumberError, setPhoneNumberError] = useState({ error: false, helper: '' });
+    let [emailError, setEmailError] = useState({ error: false, helper: '' });
+    let [passwordError, setPasswordError] = useState({ error: false, helper: '' });
     let navigate = useNavigate();
     let { setAuth } = useContext(AuthContext)
 
+    function validateEmail(email) {
+        var re = /\S+@\S+\.\S+/;
+        return re.test(email);
+    }
+
+
+
     const handleSubmit = async (event) => {
+
+
+
+
         event.preventDefault();
         let data = new FormData(event.currentTarget);
         let coucou = Object.fromEntries(data);
 
         let firstname = data.get('firstname');
+        let lastname = data.get('lastname');
+        let username = data.get('username');
+        let phone_number = data.get('phone_number');
+        let email = data.get('email');
+        let password = data.get('password');
+
+
+
+        // VERIFICATION DES INPUTS (FRONT)
+        //firstname
         if (firstname.trim() === '') {
             setFirstnameError({ error: true, helper: 'Champs vide' });
-        } else if (firstname.trim().length < 6 || firstname.trim().length > 50) {
+        } else if (firstname.trim().length < 2 || firstname.trim().length > 50) {
             setFirstnameError({ error: true, helper: 'trop court / trop long' });
+        } else {
+            setFirstnameError({ error: false, helper: '' });
         }
+        //lastname  
+        if (lastname.trim() === '') {
+            setLastnameError({ error: true, helper: 'Champs vide' });
+        } else if (lastname.trim().length < 4 || lastname.trim().length > 50) {
+            setLastnameError({ error: true, helper: 'trop court / trop long' });
+        }
+        else {
+            setLastnameError({ error: false, helper: '' });
+        }
+        //username
+        if (username.trim() === '') {
+            setUsernameError({ error: true, helper: 'Champs vide' });
+        } else if (username.trim().length < 2 || username.trim().length > 50) {
+            setUsernameError({ error: true, helper: 'trop court / trop long' });
+        }
+        else {
+            setUsernameError({ error: false, helper: '' });
+        }
+        //phone_number
+        if (phone_number.trim() === '') {
+            setPhoneNumberError({ error: true, helper: 'Champs vide' });
+        } else if (phone_number.trim().length != 10) {
+            setPhoneNumberError({ error: true, helper: '10 chiffres demandés' });
+        }
+        else {
+            setPhoneNumberError({ error: false, helper: '' });
+        }
+        //email
+        if (email.trim() === '') {
+            setEmailError({ error: true, helper: 'Champs vide' });
+        } else if (!validateEmail(email.trim())) {
+            setEmailError({ error: true, helper: 'format email demandé (exemple@mail.fr)' });
+        }
+        else {
+            setEmailError({ error: false, helper: '' });
+        }
+
+        //password
+        if (password.trim() === '') {
+            setPasswordError({ error: true, helper: 'Champs vide' });
+        } else if (password.trim().length < 6 || password.trim().length > 25) {
+            setPasswordError({ error: true, helper: 'entre 6 et 25 characteres' });
+        }
+        else {
+            setPasswordError({ error: false, helper: '' });
+        }
+
+
 
         console.log(Object.fromEntries(data));
         try {
@@ -77,6 +153,7 @@ export default function SignUpForm() {
                         </Grid>
                         <Grid item xs={12} sm={6}>
                             <TextField
+                                error={lastnameError.error}
                                 required
                                 fullWidth
                                 id="lastname"
@@ -86,6 +163,7 @@ export default function SignUpForm() {
                         </Grid>
                         <Grid item xs={12} sm={6}>
                             <TextField
+                                error={usernameError.error}
                                 required
                                 fullWidth
                                 id="username"
@@ -95,6 +173,7 @@ export default function SignUpForm() {
                         </Grid>
                         <Grid item xs={12} sm={6}>
                             <TextField
+                                error={phoneNumberError.error}
                                 required
                                 fullWidth
                                 id="phone_number"
@@ -104,6 +183,7 @@ export default function SignUpForm() {
                         </Grid>
                         <Grid item xs={12}>
                             <TextField
+                                error={emailError.error}
                                 required
                                 fullWidth
                                 id="email"
@@ -113,7 +193,7 @@ export default function SignUpForm() {
                         </Grid>
                         <Grid item xs={12}>
                             <TextField
-                                error
+                                error={passwordError.error}
                                 required
                                 fullWidth
                                 name="password"
@@ -124,7 +204,7 @@ export default function SignUpForm() {
                         </Grid>
                         <Grid item xs={12}>
                             <TextField
-                                error={true}
+                                error={passwordError.error}
                                 required
                                 fullWidth
                                 name="password_confirmation"

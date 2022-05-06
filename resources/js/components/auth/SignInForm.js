@@ -2,7 +2,7 @@ import Box from "@mui/material/Box";
 import TextField from "@mui/material/TextField";
 import Grid from "@mui/material/Grid";
 import Button from "@mui/material/Button";
-import * as React from "react";
+import React, { useState } from "react";
 import Paper from "@mui/material/Paper";
 import Avatar from "@mui/material/Avatar";
 import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
@@ -16,6 +16,9 @@ import { AuthContext } from "../context/AuthContext";
 export default function SignInForm() {
     let { setAuth } = useContext(AuthContext)
     let navigate = useNavigate();
+    const [isFormInvalid, setIsFormInvalid] = useState(false);
+
+
 
     const handleSubmit = async (event) => {
         event.preventDefault();
@@ -30,6 +33,8 @@ export default function SignInForm() {
                 axios.defaults.headers.common['Authorization'] = `Bearer ${response.data.data.token}`
                 setAuth(true)
                 navigate("/" + location.search);
+            } else {
+                setIsFormInvalid(true);
             }
         } catch (e) {
         }
@@ -62,6 +67,8 @@ export default function SignInForm() {
                         name="email"
                         autoComplete="email"
                         autoFocus
+                        error={isFormInvalid}
+
                     />
                     <TextField
                         margin="normal"
@@ -72,6 +79,7 @@ export default function SignInForm() {
                         type="password"
                         id="password"
                         autoComplete="current-password"
+                        error={isFormInvalid}
                     />
                     <Grid
                         container

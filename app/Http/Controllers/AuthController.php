@@ -59,10 +59,18 @@ class AuthController extends Controller
             'email' => 'required|string|email|',
             'password' => 'required|string|min:6'
         ]);
+        $log = Auth::attempt($attr);
 
-        if (!Auth::attempt($attr)) {
-            return $this->fail('Mauvais mot de passe');
+        if (!$log) {
+
+            return response()->json([
+                'success' => false,
+                'message' => "Identifiants incorrectes",
+                'data' => ""
+            ]);
         }
+        ;
+
 
         return $this->success("Voici votre token d'authentification", [
             'token' => auth()->user()->createToken('API Token')->plainTextToken
@@ -137,7 +145,7 @@ class AuthController extends Controller
             return $this->success("Vous vous êtes déconnecté", [$logoutSucceed], 204);
         }
         else {
-            return $this->fail("Erreur dans la deconnexion",[$logoutSucceed]);
+            return $this->fail("Erreur dans la deconnexion", [$logoutSucceed]);
         }
     }
 
