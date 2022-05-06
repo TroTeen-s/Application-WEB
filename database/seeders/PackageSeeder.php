@@ -3,9 +3,9 @@
 namespace Database\Seeders;
 
 use App\Models\Package;
-use Illuminate\Support\Str;
 use Illuminate\Database\Seeder;
-use Illuminate\Support\Facades\Hash;
+use Stripe\Exception\ApiErrorException;
+use Stripe\StripeClient;
 
 
 class PackageSeeder extends Seeder
@@ -14,9 +14,39 @@ class PackageSeeder extends Seeder
      * Run the database seeds.
      *
      * @return void
+     * @throws ApiErrorException
      */
-    public function run()
+    public function run(): void
     {
+        $stripe = new StripeClient(getenv('STRIPE_PRIVATE'));
+        $stripeSubscriptions = $stripe->products->create([
+            'name' => 'Abonnements Troteen\'s',
+        ]);
+
+        $basique = $stripe->prices->create([
+            'unit_amount' => 1999,
+            'currency' => 'eur',
+            'recurring' => ['interval' => 'month'],
+            'product' => $stripeSubscriptions->id,
+            'nickname' => 'basique'
+        ]);
+
+        $deluxe = $stripe->prices->create([
+            'unit_amount' => 4499,
+            'currency' => 'eur',
+            'recurring' => ['interval' => 'month'],
+            'product' => $stripeSubscriptions->id,
+            'nickname' => 'deluxe'
+        ]);
+
+        $premium = $stripe->prices->create([
+            'unit_amount' => 7999,
+            'currency' => 'eur',
+            'recurring' => ['interval' => 'month'],
+            'product' => $stripeSubscriptions->id,
+            'nickname' => 'premium'
+        ]);
+
         $package = new Package([
             'name' => 'minim',
             'price' => '0.23',
@@ -32,6 +62,7 @@ class PackageSeeder extends Seeder
         $package->save();
 
         $package = new Package([
+            'id_stripe' => $basique->id,
             'name' => 'basique',
             'price' => '19.99',
             'max_trips' => '8',
@@ -40,6 +71,7 @@ class PackageSeeder extends Seeder
         $package->save();
 
         $package = new Package([
+            'id_stripe' => $deluxe->id,
             'name' => 'deluxe',
             'price' => '44.99',
             'max_trips' => '25',
@@ -48,6 +80,7 @@ class PackageSeeder extends Seeder
         $package->save();
 
         $package = new Package([
+            'id_stripe' => $premium->id,
             'name' => 'premium',
             'price' => '79.99',
             'max_trips' => '50',

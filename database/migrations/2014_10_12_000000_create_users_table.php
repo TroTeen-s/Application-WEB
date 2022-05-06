@@ -27,6 +27,7 @@ return new class extends Migration
             $table->string('password');
             $table->dateTime('registered_at')->default(DB::raw('now()'));
             $table->integer('fidelity_points')->default(0);
+            $table->boolean('is_admin')->nullable();
             $table->rememberToken();
             $table->timestamps();
         });

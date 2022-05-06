@@ -1,8 +1,12 @@
 import Header from "./header/Header";
+import Footer from './footer/Footer'
+
+
 import React from "react";
 import { Container, createTheme, ThemeProvider } from "@mui/material";
 import { Outlet } from "react-router";
 import AuthProvider from "./context/AuthContext";
+import "./styleMainApp.css"
 
 
 const MainApp = () => {
@@ -37,11 +41,15 @@ const MainApp = () => {
     return (
         <AuthProvider>
             <ThemeProvider theme={darkTheme}>
-                <div className="bg-black-trot h-full w-full">
+                <div id="scrolling-box" className="">
                     <Header />
-                    <Container componen={'main'} className={' py-4'}>
-                        <Outlet />
-                    </Container>
+                        {/* <Container className="py-4 flex justify-center w-full"> */}
+                            <Outlet />
+
+                            <Footer />
+
+{/*                       </Container> */}
+           
                 </div>
             </ThemeProvider>
         </AuthProvider>

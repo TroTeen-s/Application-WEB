@@ -20,12 +20,24 @@ class UserSeeder extends Seeder
     {
         $loli = new User([
             'firstname' => 'Aurélien',
-            'username' => 'dite La Loli',
+            'username' => 'dite La Puteuh',
             'lastname' => 'La Loli',
             'phone_number' => Str::random(10),
-            'email' => 'loli@loli.com',
-            'password' => Hash::make('loliloli'),
+            'email' => 'ohyeah@loli.com',
+            'password' => Hash::make('loli'),
+            'is_admin' => false,
         ]);
         $loli->save();
+
+        $admin = new User([
+            'firstname' => 'Matthias',
+            'username' => 'Adib',
+            'lastname' => 'Hamchi',
+            'phone_number' => Str::random(10),
+            'email' => 'matthias@gmail.com',
+            'password' => Hash::make('admincheck'),
+            'is_admin' => true,
+        ]);
+        $admin->save();
     }
 }
