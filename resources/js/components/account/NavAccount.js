@@ -30,19 +30,19 @@ const NavAccount = (selLink) => {
                     className={selected("informations")}
                     to="/account/informations">
                     <i className="fab fa-facebook-square text-s leading-lg text-white opacity-75"></i>
-                    <span className="">Mes informations</span>
+                    <span className="duration-200 hover:text-orange-300">Mes informations</span>
                 </NavLink>
                 <NavLink
                     className={selected("password")}
                     to="/account/password">
                     <i className="fab fa-facebook-square text-s leading-lg text-white opacity-75"></i>
-                    <span className="">Mon mot de passe</span>
+                    <span className="duration-200 hover:text-orange-300">Mon mot de passe</span>
                 </NavLink>
                 <NavLink
                     className={selected("delete")}
                     to="/account/delete">
                     <i className="fab fa-facebook-square text-s leading-lg text-white opacity-75"></i>
-                    <span className="">Supprimer</span>
+                    <span className="duration-200 hover:text-orange-300">Supprimer</span>
                 </NavLink>
             </div>
         </>

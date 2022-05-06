@@ -4,10 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\User;
 use App\Traits\ApiResponse;
-use Illuminate\Http\JsonResponse;
-use Illuminate\Support\Facades\Log;
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
+use Illuminate\{Http\JsonResponse, Support\Facades\Log, Http\Request, Support\Facades\Auth};
 use Stripe\Exception\ApiErrorException;
 use Stripe\StripeClient;
 use Throwable;
@@ -137,15 +134,11 @@ class AuthController extends Controller
         return $this->success("user bien mis à jour");
     }
 
-    public function delete(Request $request): JsonResponse
+    public function delete(): JsonResponse
     {
         auth()->user()->tokens()->delete();
 
-        $attr = $request->validate([
-            'email' => 'required|string|email|max:254',
-        ]);
-
-        User::query()->where('email', $attr['email'])->delete();
+        auth()->user()->delete();
 
         return $this->success("user bien supprimer");
     }

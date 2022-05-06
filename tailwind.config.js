@@ -9,8 +9,12 @@ module.exports = {
     extend: {
       colors: {
         'orange-300': '#FF9900',
-        'black-trot': '#1D1D1D'
+        'black-trot': '#353535',
+        'white-background' : '#ffffff',
       },
+      BackgroundImage : {
+          'Europe':"url('resources/js/components/main/Images/Europe.png')",
+      }
     },
   },
   plugins: [],

@@ -1,8 +1,12 @@
 import Header from "./header/Header";
+import Footer from './footer/Footer'
+
+
 import React from "react";
-import {Container, createTheme, ThemeProvider} from "@mui/material";
-import {Outlet} from "react-router";
+import { Container, createTheme, ThemeProvider } from "@mui/material";
+import { Outlet } from "react-router";
 import AuthProvider from "./context/AuthContext";
+import "./styleMainApp.css"
 
 
 const MainApp = () => {
@@ -19,19 +23,35 @@ const MainApp = () => {
     const darkTheme = createTheme({
         palette: {
             mode: 'dark',
+            primary: {
+                light: '#FF9900',
+                main: '#FF9900',
+                dark: '#FF9900',
+                contrastText: '#FF9900',
+            },
+            secondary: {
+                light: '#FF9900',
+                main: '#FF9900',
+                dark: '#FF9900',
+                contrastText: '#FF9900',
+            },
         },
     })
 
     return (
         <AuthProvider>
-                <ThemeProvider theme={darkTheme}>
-                    <div className="bg-black-trot h-full w-full">
-                        <Header/>
-                        <Container componen={'main'} className={' py-4'}>
-                            <Outlet/>
-                        </Container>
-                    </div>
-                </ThemeProvider>
+            <ThemeProvider theme={darkTheme}>
+                <div id="scrolling-box" className="">
+                    <Header />
+                        {/* <Container className="py-4 flex justify-center w-full"> */}
+                            <Outlet />
+
+                            <Footer />
+
+{/*                       </Container> */}
+           
+                </div>
+            </ThemeProvider>
         </AuthProvider>
     )
 }

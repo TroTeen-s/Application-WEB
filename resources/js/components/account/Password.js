@@ -52,10 +52,10 @@ const Password = () => {
         }
     };
 
-
     useLayoutEffect(() => {
         retrieveInfos()
     }, [auth])
+
 
     return (
 
@@ -116,7 +116,7 @@ const Password = () => {
                         <Button
                             type="submit"
                             fullWidth
-                            variant="contained"
+                            variant="outlined"
                             sx={{ mt: 3, mb: 2 }}
                         >
                             Changer de mot de passe

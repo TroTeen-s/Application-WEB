@@ -1,11 +1,11 @@
-import React, {useEffect, useState} from 'react';
+import React, { useEffect, useState } from 'react';
 import Header from "../header/Header";
 import {
     Button,
     Container, createTheme,
     Grid, TextField, ThemeProvider
 } from "@mui/material";
-import {color} from "tailwindcss/lib/util/dataTypes";
+import { color } from "tailwindcss/lib/util/dataTypes";
 
 const LoginPage = () => {
     const darkTheme = createTheme({
@@ -35,7 +35,7 @@ const LoginPage = () => {
     };
     const [formValues, setFormValues] = useState(defaultValues);
     const handleInputChange = (e) => {
-        const {name, value} = e.target;
+        const { name, value } = e.target;
         setFormValues({
             ...formValues,
             [name]: value,
@@ -69,7 +69,7 @@ const LoginPage = () => {
     const onClickedtt = async () => {
         console.log("Le bearer est " + bearer)
         try {
-            let response = await axios.get("/api/is-auth", { headers: {Accept: 'application/json'}})
+            let response = await axios.get("/api/is-auth", { headers: { Accept: 'application/json' } })
         } catch (e) {
             console.log(e.response.data.errors)
         }
@@ -91,7 +91,7 @@ const LoginPage = () => {
                         color="error"
                         value={formValues.email}
                         onChange={handleInputChange}
-                        inputLabelPros={{color: "error", disableAnimation: true}}
+                        inputLabelPros={{ color: "error", disableAnimation: true }}
                         variant="outlined"
                     />
                 </Grid>
@@ -105,16 +105,16 @@ const LoginPage = () => {
                         onChange={handleInputChange}
                     />
                 </Grid>
-                <Button variant="contained" color="primary" type="submit">
+                <Button variant="outlined" color="primary" type="submit">
                     Submit
                 </Button>
-                <Button variant="contained" color="primary" onClick={onClickedt}>
+                <Button variant="outlined" color="primary" onClick={onClickedt}>
                     Submit
                 </Button>
-                <Button variant="contained" color="primary" onClick={onClickedtt}>
+                <Button variant="outlined" color="primary" onClick={onClickedtt}>
                     cee
                 </Button>
-                <Button variant="contained" color="primary" onClick={showLocalToken}>
+                <Button variant="outlined" color="primary" onClick={showLocalToken}>
                     voir le localstorage
                 </Button>
             </Grid>

@@ -1,0 +1,35 @@
+.full{
+    height:100vh;
+    /* margin-bottom:15%; */
+}
+
+.full_responsive{
+    height:auto;
+}
+
+html{
+    background-color:#ffffff
+}
+
+.full_second{
+    height:60vh;
+}
+
+
+#Europe{
+    /* padding-left:30%; */
+    /* position: relative; */
+    margin-left:65%;
+    z-index:0;
+}
+
+#TextEurope{
+    position: absolute;
+    z-index:2;
+}
+
+#Draw{
+    padding-bottom:95%;
+    position: absolute;
+    z-index:1;
+}

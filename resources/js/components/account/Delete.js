@@ -58,33 +58,30 @@ const Delete = () => {
         }
     }
 
-    const validate = () => {
-        handleClose(); handleSubmit()
-    }
 
     const handleSubmit = async (event) => {
-        console.log(Object.fromEntries(data))
-        event.preventDefault();
-        let data = new FormData(event.currentTarget);
-        let coucou = Object.fromEntries(data)
         console.log("test")
-
+        //console.log(Object.fromEntries(data))
+        event.preventDefault();
+        // let data = new FormData(event.currentTarget);
 
 
         try {
-            let response = await axios.post('/api/auth/delete', coucou)
-            if (response.data.success) {
-                localStorage.setItem('apiBearerToken', response.data.data.token)
-                axios.defaults.headers.common['Authorization'] = `Bearer ${response.data.data.token}`
-            }
+            await axios.post('/api/auth/delete')
+
         } catch (e) {
+            console.log(e)
+            // return navigate('/account')
         }
     };
 
-
     useLayoutEffect(() => {
         retrieveInfos()
+
     }, [auth])
+
+
+
 
     return (
         <>
@@ -99,35 +96,35 @@ const Delete = () => {
                         <NavAccount selLink='delete' />
                     </Grid>
                     <Grid item xs={8}>
-                        <Box component="form" noValidate onSubmit={handleSubmit} sx={{ mt: 3 }}>
-                            <Grid container spacing={2}>
+
+                        <Grid container spacing={2}>
 
 
-                                <Grid item xs={24} sm={12}>
-                                    <div className='text-lg'>
-                                        <p>En selectionnant ce bouton vous supprimerez votre compte Easy Scooter</p>
-                                        <p>Cette action est définitive vous serez alors déconnecter et ne pourrez plus vous connecter avec vos identifiant actuel </p>
-                                    </div>
-
-                                </Grid>
-
-
-
-
+                            <Grid item xs={24} sm={12}>
+                                <div className='text-lg'>
+                                    <p>En selectionnant ce bouton vous supprimerez votre compte Easy Scooter</p>
+                                    <p>Cette action est définitive vous serez alors déconnecter et ne pourrez plus vous connecter avec vos identifiant actuel </p>
+                                </div>
 
                             </Grid>
-                            <Button
 
-                                color='error'
-                                fullWidth
-                                variant="contained"
-                                onClick={handleClickOpen}
-                                sx={{ mt: 3, mb: 2 }}
-                            >
-                                Supprimer votre compte
-                            </Button>
 
-                        </Box>
+
+
+
+                        </Grid>
+                        <Button
+
+                            color='error'
+                            fullWidth
+                            variant="outlined"
+                            onClick={handleClickOpen}
+                            sx={{ mt: 3, mb: 2 }}
+                        >
+                            Supprimer votre compte
+                        </Button>
+
+
                     </Grid>
                 </Grid >
 
@@ -140,29 +137,18 @@ const Delete = () => {
                 onClose={handleClose}
                 aria-describedby="alert-dialog-slide-description"
             >
+
                 <DialogTitle>{"Supprimer votre compte ?"}</DialogTitle>
                 <DialogContent>
                     <DialogContentText id="alert-dialog-slide-description">
                         Êtes vous sur de vouloir supprimer votre compte ?
-                        <Grid item xs={24} sm={12}>
-                            <TextField
-                                fullWidth
-                                id="email"
-                                name="email"
-                                value={infos.email}
-                                InputProps={{
-                                    readOnly: true,
-                                    hidden: true
-                                }}
-
-                            />
-                        </Grid>
                     </DialogContentText>
                 </DialogContent>
                 <DialogActions>
                     <Button onClick={handleClose}>Ne pas Supprimer</Button>
-                    <Button color='error' variant="contained" type="submit" onClick={handleSubmit}>Supprimer</Button>
+                    <Button color='error' variant="contained" onClick={handleSubmit}>Supprimer</Button>
                 </DialogActions>
+
             </Dialog>
         </>
 
