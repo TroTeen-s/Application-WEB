@@ -72,12 +72,12 @@ function Header() {
     </>
 
     return (
-        <header className="bg-black-trot">
-            
+        <header className="bg-black-trot z-30">
+
         <nav id="header" className="w-full z-30 top-0">
 
           <div className="w-full flex pl-10 pr-10 flex-wrap items-center justify-between mt-0 py-3">
-              
+
                     <label htmlFor="menu-toggle" className="cursor-pointer md:hidden block">
                         <svg className="fill-current text-white" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20">
                             <title>menu</title>

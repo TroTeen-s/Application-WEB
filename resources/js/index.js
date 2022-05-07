@@ -29,7 +29,7 @@ import Main from './components/main/Master'
 import Trot from './components/dashboard/scoot/main';
 import InnerContent from './components/dashboard/App'
 import Following from './components/dashboard/Following'
-import Shop from './components/shop/app'
+import Shop from './components/shop/src/App'
 import Informations from "./components/account/Informations";
 import Password from "./components/account/Password";
 import Delete from "./components/account/Delete";
@@ -58,7 +58,7 @@ ReactDOM.render(
                         <Route path="password" element={<Password />} />
                         <Route path="delete" element={<Delete />} />
                     </Route>
-                    
+
 
                     <Route path="/Dashboard" element={<InnerContent />} >
                          <Route index element={<Navigate to="trot" replace />} />

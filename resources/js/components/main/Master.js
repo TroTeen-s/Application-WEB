@@ -20,7 +20,7 @@ function Main() {
         <>
             <ParallaxProvider>
                 <section class="full bg-black-trot">
-                    <div class="flex relative z-20 py-20 items-center overflow-hidden">
+                    <div class="flex relative z-20 items-center overflow-hidden">
                         <div class="container mx-auto px-6 flex relative py-16">
                             <div class="hidden md:block sm:w-1/6 lg:w-3/6 relative">
                                 <img
