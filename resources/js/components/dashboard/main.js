@@ -6,8 +6,8 @@ import Container from '@mui/material/Container';
 import Grid from '@mui/material/Grid';
 import Paper from '@mui/material/Paper';
 import Link from '@mui/material/Link';
-import TrotMaintenance from './TrotMaintenance';
-import TrotReparation from './TrotReparation';
+import TrotMaintenance from './scoot/TrotMaintenance';
+import TrotReparation from './scoot/TrotReparation';
 
 function Copyright(props) {
   return (

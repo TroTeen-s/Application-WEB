@@ -51,6 +51,7 @@ function Main() {
                                     >
                                         Get started
                                     </a>
+                                    
                                     <a
                                         href="#"
                                         class="no-underline uppercase py-2 px-12 rounded-lg bg-transparent border-2 border-orange-300 text-white dark:text-white hover:bg-black-trot hover:text-white text-md"

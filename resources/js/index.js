@@ -26,7 +26,7 @@ import Users from './components/admin/Users'
 import Scooters from './components/admin/Scooters'
 import Main from './components/main/Master'
 
-import Trot from './components/dashboard/scoot/main';
+import Trot from './components/dashboard/main';
 import InnerContent from './components/dashboard/App'
 import Following from './components/dashboard/Following'
 import Shop from './components/shop/src/App'
@@ -36,6 +36,7 @@ import Delete from "./components/account/Delete";
 import Admin from './components/admin/Admin';
 import User from './components/admin/User'
 
+import ShopAdmin from './components/dashboard/boutique/shop'
 
 
 ReactDOM.render(
@@ -64,6 +65,7 @@ ReactDOM.render(
                          <Route index element={<Navigate to="trot" replace />} />
                          <Route path="trot" element={<Trot/>}/>
                          <Route path="following" element={<Following/>}/>
+                         <Route path="shopAdmin" element={<ShopAdmin/>}/>
                     </Route>
 
                     <Route path="/admin" element={<Admin />}/>

@@ -1,11 +1,10 @@
 import Product from "./pages/Product";
 import Home from "./pages/Home";
-import ProductList from "./pages/ProductList";
-
-import Cart from "./pages/Cart";
-
+import {BrowserRouter} from 'react-router-dom'
 const App = () => {
-  return <Home/>;
+  return(
+     <Home/>
+  )
 };
 
 export default App;
