@@ -29,7 +29,7 @@ import Main from './components/main/Master'
 import Trot from './components/dashboard/main';
 import InnerContent from './components/dashboard/App'
 import Following from './components/dashboard/Following'
-import Shop from './components/shop/src/App'
+import Shop from './components/shop/App'
 import Informations from "./components/account/Informations";
 import Password from "./components/account/Password";
 import Delete from "./components/account/Delete";
