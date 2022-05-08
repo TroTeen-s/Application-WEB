@@ -16,6 +16,9 @@ use Laravel\Sanctum\HasApiTokens;
  * @property string username
  * @property string email
  * @property string phone_number
+ * @property string fidelity_points
+ * @property string role
+ * @property boolean active
  * @property mixed subscriptions
  * @method static create(array $array)
  */
@@ -32,7 +35,9 @@ class User extends Authenticatable
         'phone_number',
         'password',
         'active',
-        'role'
+        'role',
+        'registered_at',
+        'fidelity_points',
     ];
 
     protected $hidden = [

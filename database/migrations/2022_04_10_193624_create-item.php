@@ -18,9 +18,9 @@ return new class extends Migration
             $table->boolean('bought')->default(false);
             $table->boolean('returned')->default(false);
 
-            $table->unsignedBigInteger('accesory_id');
+            $table->unsignedBigInteger('product_id');
 
-            $table->foreign('accesory_id')->references('id')->on('accessories');
+            $table->foreign('product_id')->references('id')->on('products');
 
             $table->timestamps();
         });
