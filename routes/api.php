@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\SubscriptionController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
@@ -14,23 +15,42 @@ use App\Http\Controllers\ProductController;
 
 Route::post('/auth/register', [AuthController::class , 'register']);
 
+Route::post('/auth/update', [AuthController::class , 'update']);
+
+Route::post('/auth/update_password', [AuthController::class , 'update_password']);
+
+Route::post('/auth/delete', [AuthController::class , 'delete']);
+
+
+
+
 Route::post('/auth/login', [AuthController::class , 'login']);
 
+Route::get('/users', UserController::class)->middleware('auth'); // localhost:8000/api/users/
+
+Route::prefix('stripe')->group(function () {
+    Route::post('/webhook', [SubscriptionController::class, 'checkoutWebhook']);
+});
 
 Route::group(['middleware' => ['auth:sanctum']], function () {
-    Route::get('/me', [UserController::class , 'me']);
+    Route::get('/me', [UserController::class, 'me']);
 
-    Route::get('/is-auth', [AuthController::class , 'isAuth']);
+    Route::post('subscribe', [SubscriptionController::class, 'subscribe']);
 
-    Route::get('/user/{id}', [UserController::class , 'firstOne'])->where('id', '[0-9]+'); // ex :localhost:8000/api/user/?id=1
+    Route::post('checkout-sub', [SubscriptionController::class, 'createSubscriptionCheckout']);
 
+    Route::get('my-subs', [SubscriptionController::class, 'allSubscriptions']);
+
+    Route::get('/is-auth', [AuthController::class, 'isAuth']); // localhost:8000/api/users/
+
+    Route::get('/users/{id}', [UserController::class, 'firstOne'])->where('id', '[0-9]+'); // ex :localhost:8000/api/users/?id=1
     Route::get('/user/active/{id}', [UserController::class , 'active'])->where('id', '[0-9]+'); // ex :localhost:8000/api/user/?id=1
 
     Route::get('/user/desactive/{id}', [UserController::class , 'desactive'])->where('id', '[0-9]+'); // ex :localhost:8000/api/user/?id=1
 
     Route::get('/users', UserController::class); // localhost:8000/api/users/
 
-    Route::post('/auth/logout', [AuthController::class , 'logout']);
+    Route::post('/auth/logout', [AuthController::class, 'logout']);
 
     Route::post('/auth/delete', [AuthController::class , 'delete']);
 
