@@ -25,7 +25,6 @@ class UserSeeder extends Seeder
             'phone_number' => Str::random(10),
             'email' => 'ohyeah@loli.com',
             'password' => Hash::make('loli'),
-            'is_admin' => false,
         ]);
         $loli->save();
 
@@ -36,7 +35,6 @@ class UserSeeder extends Seeder
             'phone_number' => Str::random(10),
             'email' => 'matthias@gmail.com',
             'password' => Hash::make('admincheck'),
-            'is_admin' => true,
         ]);
         $admin->save();
     }
