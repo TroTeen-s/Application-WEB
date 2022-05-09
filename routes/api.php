@@ -72,7 +72,8 @@ Route::group(['middleware' => ['auth:sanctum']], function () {
 
 // For shopAdmin
 
-Route::post('/dashboard/addproduct', [ProductController::class , 'addProduct']);
+Route::post('/dashboard/addproduct', [ProductController::class, 'addProduct']);
+Route::get('/dashboard/list', [ProductController::class, 'list']);
 
 
 
