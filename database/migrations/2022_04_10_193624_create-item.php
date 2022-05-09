@@ -21,7 +21,7 @@ return new class extends Migration
             $table->unsignedBigInteger('product_id');
 
             $table->foreign('product_id')->references('id')->on('products');
-            $tale->integer('available');
+            $table->boolean('available');
 
             $table->timestamps();
         });

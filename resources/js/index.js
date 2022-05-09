@@ -37,7 +37,7 @@ import Admin from './components/admin/Admin';
 import User from './components/admin/User'
 
 import ShopAdmin from './components/dashboard/boutique/shop'
-
+import Details from './components/shop/components/Details'
 
 ReactDOM.render(
     <React.StrictMode>
@@ -50,8 +50,12 @@ ReactDOM.render(
                         <Route path="register" element={<SignUpForm />} />
                     </Route>
                     <Route path="main" element={<Main />} />
-                    <Route path="/shop" element={<Shop/>} />
+                    <Route path="shop" element={<Shop/>} />
+
+                    <Route path="products/:id" element={<Details/>} />
+
                     <Route path="need_help" element={<NeedHelp />} />
+
                     <Route path="store" element={<Store />} />
                     <Route path="account" element={<Account />} >
                         <Route index element={<Navigate to="/account/informations" replace />} />

@@ -1,0 +1,16 @@
+.cart-icon{
+    position :relative;
+    margin-right:15px;
+}
+
+.cart-icon span{
+    background: orange;
+    border-radius: 10px;
+    position: absolute;
+    top: -7px;
+    right: -7px;
+    color:white;
+    font-size:10px;
+    padding: 5px;
+
+}

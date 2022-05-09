@@ -4,6 +4,7 @@ import {
   ShoppingCartOutlined,
 } from "@material-ui/icons";
 import styled from "styled-components";
+import { NavLink } from 'react-router-dom'
 
 const Info = styled.div`
   opacity: 0;
@@ -67,17 +68,22 @@ const Icon = styled.div`
 `;
 
 const Product = ({ item }) => {
+
+  console.warn(item)
+
   return (
-    <Container>
+    <Container key={item.id}>
       <Circle />
       <Image src={item.img} />
       <Info>
-        <Icon>
-          <ShoppingCartOutlined />
-        </Icon>
+          <Icon>
+            <ShoppingCartOutlined />
+          </Icon>
+        <NavLink to={`/products/${item.id}`}>
         <Icon>
           <SearchOutlined />
         </Icon>
+        </NavLink>
       </Info>
     </Container>
   );
