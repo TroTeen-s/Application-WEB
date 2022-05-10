@@ -9,6 +9,7 @@ import PeopleIcon from "@mui/icons-material/People";
 import BarChartIcon from "@mui/icons-material/BarChart";
 import LayersIcon from "@mui/icons-material/Layers";
 import AssignmentIcon from "@mui/icons-material/Assignment";
+import LocalGroceryStoreIcon from '@mui/icons-material/LocalGroceryStore';
 
 import { NavLink } from "react-router-dom";
 
@@ -44,6 +45,14 @@ export const mainListItems = (
                 <BarChartIcon />
             </ListItemIcon>
             <ListItemText primary="API" />
+        </ListItemButton>
+        <ListItemButton>
+            <ListItemIcon>
+                <LocalGroceryStoreIcon />
+            </ListItemIcon>
+            <NavLink className="no-underline" to="shopAdmin">
+              <ListItemText primary="Boutique" />
+            </NavLink>
         </ListItemButton>
         {/* <ListItemButton>
       <ListItemIcon>

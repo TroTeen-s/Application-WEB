@@ -26,17 +26,18 @@ import Users from './components/admin/Users'
 import Scooters from './components/admin/Scooters'
 import Main from './components/main/Master'
 
-import Trot from './components/dashboard/scoot/main';
+import Trot from './components/dashboard/main';
 import InnerContent from './components/dashboard/App'
 import Following from './components/dashboard/Following'
-import Shop from './components/shop/app'
+import Shop from './components/shop/App'
 import Informations from "./components/account/Informations";
 import Password from "./components/account/Password";
 import Delete from "./components/account/Delete";
 import Admin from './components/admin/Admin';
 import User from './components/admin/User'
 
-
+import ShopAdmin from './components/dashboard/boutique/shop'
+import Details from './components/shop/components/Details'
 
 ReactDOM.render(
     <React.StrictMode>
@@ -49,8 +50,12 @@ ReactDOM.render(
                         <Route path="register" element={<SignUpForm />} />
                     </Route>
                     <Route path="main" element={<Main />} />
-                    <Route path="/shop" element={<Shop/>} />
+                    <Route path="shop" element={<Shop/>} />
+
+                    <Route path="products/:id" element={<Details/>} />
+
                     <Route path="need_help" element={<NeedHelp />} />
+
                     <Route path="store" element={<Store />} />
                     <Route path="account" element={<Account />} >
                         <Route index element={<Navigate to="/account/informations" replace />} />
@@ -58,12 +63,13 @@ ReactDOM.render(
                         <Route path="password" element={<Password />} />
                         <Route path="delete" element={<Delete />} />
                     </Route>
-                    
+
 
                     <Route path="/Dashboard" element={<InnerContent />} >
                          <Route index element={<Navigate to="trot" replace />} />
                          <Route path="trot" element={<Trot/>}/>
                          <Route path="following" element={<Following/>}/>
+                         <Route path="shopAdmin" element={<ShopAdmin/>}/>
                     </Route>
 
                     <Route path="/admin" element={<Admin />}/>

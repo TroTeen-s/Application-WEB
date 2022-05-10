@@ -7,6 +7,7 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\PackageController;
 use App\Http\Controllers\ScootersController;
+use App\Http\Controllers\ProductController;
 
 /* |-------------------------------------------------------------------------- | API Routes |-------------------------------------------------------------------------- | | Here is where you can register API routes for your application. These | routes are loaded by the RouteServiceProvider within a group which | is assigned the "api" middleware group. Enjoy building your API! | */
 
@@ -56,16 +57,24 @@ Route::group(['middleware' => ['auth:sanctum']], function () {
     Route::post('/auth/update', [AuthController::class , 'update']);
     Route::post('/auth/update_password', [AuthController::class , 'update_password']);
 
+    Route::post('/auth/update_password', [AuthController::class , 'update_password']);
+
 
     ## ROUTES SCOOTERS
     Route::get('/scooters', ScootersController::class);
     Route::post('/scooter/create', [ScootersController::class , 'create']);
-    Route::post('/scooter/active', [ScootersController::class , 'active']);
+
 
 
 
 
 });
+
+// For shopAdmin
+
+Route::post('/dashboard/addproduct', [ProductController::class, 'addProduct']);
+Route::get('/dashboard/list', [ProductController::class, 'list']);
+
 
 
 //PACKAGES

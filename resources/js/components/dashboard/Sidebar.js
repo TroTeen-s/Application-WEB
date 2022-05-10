@@ -19,7 +19,7 @@ import ChevronLeftIcon from "@mui/icons-material/ChevronLeft";
 import NotificationsIcon from "@mui/icons-material/Notifications";
 import { Outlet } from "react-router-dom";
 
-import { mainListItems, secondaryListItems } from "./scoot/listItems";
+import { mainListItems, secondaryListItems } from "./listItems";
 
 function Copyright(props) {
     return (
