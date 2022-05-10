@@ -2,12 +2,8 @@ import React, { useContext, useLayoutEffect, useState } from 'react';
 
 import { AuthContext } from "../context/AuthContext";
 import { Grid, Typography } from "@mui/material";
-import AccountCircleOutlinedIcon from '@mui/icons-material/AccountCircleOutlined';
-import Box from "@mui/material/Box";
-import TextField from "@mui/material/TextField";
 import Button from "@mui/material/Button";
 import NavAccount from './NavAccount';
-import { NavLink } from "react-router-dom";
 import { useNavigate } from "react-router";
 import Dialog from '@mui/material/Dialog';
 import DialogActions from '@mui/material/DialogActions';
@@ -33,24 +29,20 @@ const Delete = () => {
         setOpen(false);
     };
 
-    const [infos, setInfos] = useState([]);
-    let { auth } = useContext(AuthContext)
-    let navigate = useNavigate()
+    let { auth, setAuth } = useContext(AuthContext);
 
 
-    const handleChange = (event) => {
-        setInfos(event.target.value);
-    };
-
+    const [, setInfos] = useState([]);
+    useNavigate();
     const retrieveInfos = async () => {
         try {
-            let response = await axios.get('/api/me', {
+            let response = await axios.get("/api/me", {
                 headers: {
-                    'Accept': 'application/json'
+                    "Accept": "application/json"
                 }
-            })
+            });
             if (response.data.data) {
-                setInfos(response.data.data)
+                setInfos(response.data.data);
             }
             console.log(response.data)
 
@@ -61,17 +53,14 @@ const Delete = () => {
 
     const handleSubmit = async (event) => {
         console.log("test")
-        //console.log(Object.fromEntries(data))
         event.preventDefault();
-        // let data = new FormData(event.currentTarget);
 
 
         try {
-            await axios.post('/api/auth/delete')
-
+            await axios.post("/api/auth/delete");
+            setAuth(false);
         } catch (e) {
             console.log(e)
-            // return navigate('/account')
         }
     };
 

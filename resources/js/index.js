@@ -1,19 +1,14 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import '../css/app.css';
-import App from '../js/components/App';
 import {
     BrowserRouter as Router,
-    Switch,
     Route,
-    Routes,
-    Link,
-    useParams
+    Routes
 } from "react-router-dom";
 import Store from "./components/store/Store"
 import NeedHelp from "./components/needHelp/NeedHelp"
 import NotFound from "./components/notFound/NotFound"
-import LoginPage from "./components/auth/LoginPage";
 // import SignInPage from "./components/auth/SignInPage";
 import MainApp from "./components/MainApp";
 import { Navigate } from "react-router";
@@ -21,9 +16,6 @@ import AuthPage from "./components/auth/AuthPage";
 import SignUpForm from "./components/auth/SignUpForm";
 import SignInForm from "./components/auth/SignInForm";
 import Account from "./components/account/Account";
-import GestionApp from './components/gestion/Gestion'
-import Users from './components/admin/Users'
-import Scooters from './components/admin/Scooters'
 import Main from './components/main/Master'
 
 import Trot from './components/dashboard/main';
@@ -46,10 +38,11 @@ ReactDOM.render(
                 <Route exact path="/" element={<MainApp />}>
 
                     <Route index element={<Navigate to="/main" replace />} />
-                    <Route path="/main" element={<Main />} />
-                    <Route path="/shop" element={<Shop />} />
-                    <Route path="/need_help" element={<NeedHelp />} />
-                    <Route path="/store" element={<Store />} />
+                    <Route path="main" element={<Main />} />
+                    <Route path="shop" element={<Shop />} />
+                    <Route path="need_help" element={<NeedHelp />} />
+                    <Route path="store" element={<Store />} />
+                    <Route path="products/:id" element={<Details />} />
 
                     <Route path="auth" element={<AuthPage />}>
                         <Route index element={<Navigate to="/auth/login" replace />} />
@@ -57,15 +50,8 @@ ReactDOM.render(
                         <Route path="register" element={<SignUpForm />} />
                     </Route>
 
-                    <Route path="main" element={<Main />} />
-                    <Route path="shop" element={<Shop/>} />
 
-                    <Route path="products/:id" element={<Details/>} />
-
-                    <Route path="need_help" element={<NeedHelp />} />
-
-                    <Route path="store" element={<Store />} />
-                    <Route path="account" element={<Account />} >
+                    <Route path="account" element={<Account />}>
                         <Route index element={<Navigate to="/account/informations" replace />} />
                         <Route path="informations" element={<Informations />} />
                         <Route path="password" element={<Password />} />
@@ -78,9 +64,6 @@ ReactDOM.render(
                          <Route path="trot" element={<Trot/>}/>
                          <Route path="following" element={<Following/>}/>
                          <Route path="shopAdmin" element={<ShopAdmin/>}/>
-                        <Route index element={<Navigate to="trot" replace />} />
-                        <Route path="trot" element={<Trot />} />
-                        <Route path="following" element={<Following />} />
                     </Route>
 
                     <Route path="/admin" element={<Admin />} />
