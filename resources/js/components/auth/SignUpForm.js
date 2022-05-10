@@ -159,6 +159,7 @@ export default function SignUpForm() {
                                 id="lastname"
                                 label="Nom de famille"
                                 name="lastname"
+                                helperText={lastnameError.helper}
                             />
                         </Grid>
                         <Grid item xs={12} sm={6}>
@@ -169,6 +170,7 @@ export default function SignUpForm() {
                                 id="username"
                                 label="Pseudonyme"
                                 name="username"
+                                helperText={usernameError.helper}
                             />
                         </Grid>
                         <Grid item xs={12} sm={6}>
@@ -179,6 +181,7 @@ export default function SignUpForm() {
                                 id="phone_number"
                                 label="Numéro de téléphone"
                                 name="phone_number"
+                                helperText={phoneNumberError.helper}
                             />
                         </Grid>
                         <Grid item xs={12}>
@@ -189,6 +192,7 @@ export default function SignUpForm() {
                                 id="email"
                                 label="Adresse email"
                                 name="email"
+                                helperText={emailError.helper}
                             />
                         </Grid>
                         <Grid item xs={12}>
@@ -200,6 +204,7 @@ export default function SignUpForm() {
                                 label="Mot de passe"
                                 type="password"
                                 id="password"
+                                helperText={passwordError.helper}
                             />
                         </Grid>
                         <Grid item xs={12}>
@@ -211,6 +216,7 @@ export default function SignUpForm() {
                                 label="Mot de passe"
                                 type="password"
                                 id="password"
+                                helperText={passwordError.helper}
                             />
                         </Grid>
                     </Grid>

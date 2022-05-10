@@ -18,13 +18,51 @@ export default function SignInForm() {
     let navigate = useNavigate();
     const [isFormInvalid, setIsFormInvalid] = useState(false);
 
+    let [emailError, setEmailError] = useState({ error: false, helper: '' });
+    let [passwordError, setPasswordError] = useState({ error: false, helper: '' });
+
+    function validateEmail(email) {
+        var re = /\S+@\S+\.\S+/;
+        return re.test(email);
+    }
+
+    function removeError() {
+        setIsFormInvalid(false);
+    }
+
+
 
 
     const handleSubmit = async (event) => {
         event.preventDefault();
+
+
+
         let data = new FormData(event.currentTarget);
         let coucou = Object.fromEntries(data)
 
+        let email = data.get('email');
+        let password = data.get('password');
+
+
+        if (email.trim() === '') {
+            setEmailError({ error: true, helper: 'Champs vide' });
+        } else if (!validateEmail(email.trim())) {
+            setEmailError({ error: true, helper: 'format email demandé (exemple@mail.fr)' });
+        }
+        else {
+            setEmailError({ error: false, helper: '' });
+        }
+
+        //password
+        if (password.trim() === '') {
+            setPasswordError({ error: true, helper: 'Champs vide' });
+        } else if (password.trim().length < 6 || password.trim().length > 25) {
+            setPasswordError({ error: true, helper: 'entre 6 et 25 characteres' });
+        }
+        else {
+            setPasswordError({ error: false, helper: '' });
+        }
 
         try {
             let response = await axios.post('/api/auth/login', coucou)
@@ -58,6 +96,12 @@ export default function SignInForm() {
                     Connectez-vous
                 </Typography>
                 <Box component="form" noValidate onSubmit={handleSubmit} sx={{ mt: 1 }}>
+                    {isFormInvalid ?
+                        <div className=" border border-[#FF9900] p-2 rounded-md z-2 text-orange-300 shadow-lg flex items-center justify-between">
+                            <span className="m-0 p-0">Identifiants incorrectes</span>
+                            <span className="cursor-pointer" onClick={removeError}>X</span>
+                        </div> :
+                        <></>}
                     <TextField
                         margin="normal"
                         required
@@ -67,7 +111,8 @@ export default function SignInForm() {
                         name="email"
                         autoComplete="email"
                         autoFocus
-                        error={isFormInvalid}
+                        error={emailError.error}
+                        helperText={emailError.helper}
 
                     />
                     <TextField
@@ -79,7 +124,8 @@ export default function SignInForm() {
                         type="password"
                         id="password"
                         autoComplete="current-password"
-                        error={isFormInvalid}
+                        error={passwordError.error}
+                        helperText={passwordError.helper}
                     />
                     <Grid
                         container
