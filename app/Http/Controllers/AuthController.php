@@ -56,7 +56,8 @@ class AuthController extends Controller
             }
 
             Log::Debug($stripeResponse);
-        } catch (ApiErrorException $e) {
+        }
+        catch (ApiErrorException $e) {
             $error = $e->getMessage();
         }
 
@@ -73,7 +74,8 @@ class AuthController extends Controller
                 'email' => 'required|string|email|',
                 'password' => 'required|string|min:6'
             ]);
-        } catch (Throwable $th) {
+        }
+        catch (Throwable $th) {
             $this->fail($th->getMessage());
         }
 
@@ -81,10 +83,18 @@ class AuthController extends Controller
             'email' => 'required|string|email|',
             'password' => 'required|string|min:6'
         ]);
+        $log = Auth::attempt($attr);
 
-        if (!Auth::attempt($attr)) {
-            return $this->fail('Mauvais mot de passe');
+        if (!$log) {
+
+            return response()->json([
+                'success' => false,
+                'message' => "Identifiants incorrectes",
+                'data' => ""
+            ]);
         }
+        ;
+
 
         return $this->success("Voici votre token d'authentification", [
             'token' => auth()->user()->createToken('API Token')->plainTextToken
@@ -105,13 +115,13 @@ class AuthController extends Controller
 
         User::query()->where('email', $attr['email'])
             ->update([
-                'firstname' => $attr['firstname'],
-                'lastname' => $attr['lastname'],
-                'phone_number' => $attr['phone_number'],
-                'username' => $attr['username'],
+            'firstname' => $attr['firstname'],
+            'lastname' => $attr['lastname'],
+            'phone_number' => $attr['phone_number'],
+            'username' => $attr['username'],
 
 
-            ]);
+        ]);
 
         return $this->success("user bien mis à jour");
     }
@@ -126,10 +136,10 @@ class AuthController extends Controller
 
         User::query()->where('email', $attr['email'])
             ->update([
-                'password' => $attr['password'],
+            'password' => $attr['password'],
 
 
-            ]);
+        ]);
 
         return $this->success("user bien mis à jour");
     }
@@ -150,7 +160,10 @@ class AuthController extends Controller
         if ($logoutSucceed) {
             // The user is logged in...
             return $this->success("Vous vous êtes déconnecté", [$logoutSucceed], 204);
-        } else {
+
+        }
+        else {
+
             return $this->fail("Erreur dans la deconnexion", [$logoutSucceed]);
         }
     }
@@ -160,7 +173,8 @@ class AuthController extends Controller
         if (auth()->user()) {
             // The user is logged in...
             return $this->success("VOus êtes connecté", ['username' => auth()->user()->username]);
-        } else {
+        }
+        else {
             return $this->fail("VOus n'êtes pas connecté");
         }
     }
