@@ -7,7 +7,6 @@ import Paper from "@mui/material/Paper";
 import { Container, createTheme, ThemeProvider } from "@mui/material";
 import { ParallaxProvider, Parallax } from "react-scroll-parallax";
 import "./styles.css";
-import LeftFirstImage from "/Images/LeftFirstImage.png";
 import Map from "./Images/Europe.png";
 import FirstDraw from "./Images/Drawing.png";
 
@@ -24,7 +23,7 @@ function Main() {
                         <div class="container mx-auto px-6 flex relative py-16">
                             <div class="hidden md:block sm:w-1/6 lg:w-3/6 relative">
                                 <img
-                                    src="/Images/LeftFirstImage.png"
+                                    src="images/LeftFirstImage.png"
                                     class=" max-w-xs md:max-w-sm m-auto"
                                 />
                             </div>
