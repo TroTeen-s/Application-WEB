@@ -11,7 +11,7 @@ const Container = styled.div`
 
 const Products = () => {
   return (
-    <Container>
+    <Container className="h-full bg-white-background">
       {popularProducts.map((item) => (
         <Product item={item} key={item.id} />
       ))}
