@@ -26,8 +26,8 @@ const Product = () => {
         </NavLink>
       </div> */}
       <div className="">
-        <div className="flex items-center p-2 lg:p-5 overflow-hidden relative">
-          <div className="w-full max-w-6xl rounded bg-white-background shadow-xl p-20 pt-5 pb-5 lg:p-20 mx-auto text-gray-800 relative md:text-left">
+        <div className="flex items-center p-2 lg:p-5 mt-5 overflow-hidden relative">
+          <div className="w-full max-w-6xl rounded bg-white-background p-20 pt-5 pb-5 lg:p-20 mx-auto text-gray-800 relative md:text-left">
               <div className="md:flex items-center -mx-12">
                   <div className="w-full md:w-1/2 px-10 mb-10 md:mb-0">
                       <div className="relative">
@@ -63,22 +63,22 @@ const Product = () => {
 
     <div class="py-16">  
     <div class="container px-2 text-gray-500 md:px-2 xl:px-12">
-        <div class="mx-auto grid gap-12 md:w-4/4 lg:w-full lg:grid-cols-3">
-            <div class="bg-white rounded-2xl shadow-xl px-8 py-12 mb-5 sm:px-12 lg:px-8">
+        <div class="mx-auto grid ml-2 gap-12 md:w-4/4 lg:w-full lg:grid-cols-3">
+            <div class="bg-white rounded-2xl mr-4 ml-4 px-8 py-12 mb-5 sm:px-12 lg:px-8">
                 <div class="mb-12 space-y-4">
                     <h3 class="text-2xl font-semibold text-black-trot">Retour gratuit</h3>
                     <p class="mb-6">Obcaecati, quam? Eligendi, nulla numquam natus laborum porro at cum, consectetur ullam tempora ipsa iste officia sed officiis! Incidunt ea animi officiis.</p>
                 </div>
                 <img src="https://tailus.io/sources/blocks/end-image/preview/images/graphic.svg" class="w-2/3 ml-auto mb-4" alt="illustration" loading="lazy" width="900" height="600"/>
             </div>
-            <div class="bg-white rounded-2xl shadow-xl px-8 py-12 mb-5 sm:px-12 lg:px-8">
+            <div class="bg-white rounded-2xl mr-4 ml-4 px-8 py-12 mb-5 sm:px-12 lg:px-8">
                 <div class="mb-12 space-y-4">
                     <h3 class="text-2xl font-semibold text-black-trot">Made in France</h3>
                     <p class="mb-6">Obcaecati, quam? Eligendi, nulla numquam natus laborum porro at cum, consectetur ullam tempora ipsa iste officia sed officiis! Incidunt ea animi officiis.</p>
                 </div>
                 <img src="https://tailus.io/sources/blocks/end-image/preview/images/ui-design.svg" class="w-2/3 ml-auto mb-4" alt="illustration" loading="lazy" width="900" height="600"/>
             </div>
-            <div class="bg-white rounded-2xl shadow-xl px-8 py-12 mb-5 sm:px-12 lg:px-8">
+            <div class="bg-white rounded-2xl mr-4 ml-4 px-8 py-12 mb-5 sm:px-12 lg:px-8">
                 <div class="mb-12 space-y-4">
                     <h3 class="text-2xl font-semibold text-black-trot">Livraison rapide & gratuite </h3>
                     <p class="mb-6">Obcaecati, quam? Eligendi, nulla numquam natus laborum porro at cum, consectetur ullam tempora ipsa iste officia sed officiis! Incidunt ea animi officiis.</p>
