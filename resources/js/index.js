@@ -27,6 +27,7 @@ import Password from "./components/account/Password";
 import Delete from "./components/account/Delete";
 import Admin from './components/admin/Admin';
 import User from './components/admin/User'
+import Sponsors from './components/Sponsors/Sponsors';
 
 import ShopAdmin from './components/dashboard/boutique/shop'
 import Details from './components/shop/components/Details'
@@ -43,6 +44,7 @@ ReactDOM.render(
                     <Route path="need_help" element={<NeedHelp />} />
                     <Route path="store" element={<Store />} />
                     <Route path="products/:id" element={<Details />} />
+                    <Route path="sponsors" element={<Sponsors />} />
 
                     <Route path="auth" element={<AuthPage />}>
                         <Route index element={<Navigate to="/auth/login" replace />} />
@@ -60,10 +62,10 @@ ReactDOM.render(
 
 
                     <Route path="/Dashboard" element={<InnerContent />} >
-                         <Route index element={<Navigate to="trot" replace />} />
-                         <Route path="trot" element={<Trot/>}/>
-                         <Route path="following" element={<Following/>}/>
-                         <Route path="shopAdmin" element={<ShopAdmin/>}/>
+                        <Route index element={<Navigate to="trot" replace />} />
+                        <Route path="trot" element={<Trot />} />
+                        <Route path="following" element={<Following />} />
+                        <Route path="shopAdmin" element={<ShopAdmin />} />
                     </Route>
 
                     <Route path="/admin" element={<Admin />} />
