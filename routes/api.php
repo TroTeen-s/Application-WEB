@@ -39,14 +39,16 @@ Route::group(['middleware' => ['auth:sanctum']], function () {
 
     Route::post('checkout-sub', [SubscriptionController::class, 'createSubscriptionCheckout']);
 
-    Route::get('my-subs', [SubscriptionController::class, 'allSubscriptions']);
+    Route::get('subscription', [SubscriptionController::class, 'getAllSubscriptionsByUser']);
+
+    Route::get('subscription/{id}/invoices', [SubscriptionController::class, 'getInvoicesFromSubscription'])->where('id', '[0-9]+');
 
     Route::get('/is-auth', [AuthController::class, 'isAuth']); // localhost:8000/api/users/
 
-    Route::get('/users/{id}', [UserController::class, 'firstOne'])->where('id', '[0-9]+'); // ex :localhost:8000/api/users/?id=1
-    Route::get('/user/active/{id}', [UserController::class , 'active'])->where('id', '[0-9]+'); // ex :localhost:8000/api/user/?id=1
+    Route::get('/users/{id}', [UserController::class, 'firstOne'])->where('id', '[0-9]+');     // ex :localhost:8000/api/users/?id=1
+    Route::get('/user/active/{id}', [UserController::class, 'active'])->where('id', '[0-9]+'); // ex :localhost:8000/api/user/?id=1
 
-    Route::get('/user/desactive/{id}', [UserController::class , 'desactive'])->where('id', '[0-9]+'); // ex :localhost:8000/api/user/?id=1
+    Route::get('/user/desactive/{id}', [UserController::class, 'desactive'])->where('id', '[0-9]+'); // ex :localhost:8000/api/user/?id=1
 
     Route::get('/users', UserController::class); // localhost:8000/api/users/
 

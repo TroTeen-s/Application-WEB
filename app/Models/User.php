@@ -2,8 +2,10 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
@@ -19,7 +21,8 @@ use Laravel\Sanctum\HasApiTokens;
  * @property string fidelity_points
  * @property string role
  * @property boolean active
- * @property mixed subscriptions
+ * @property Collection subscriptions
+ * @property Collection packages
  * @method static create(array $array)
  */
 class User extends Authenticatable
@@ -49,14 +52,15 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
+
     /**
      * @see PackageUser
      * Les abonnements de l'utilisateurs. Crée une colonne dans la table de pivot PackageUser
      */
-    public function subscriptions(): BelongsToMany
+    public function packages(): BelongsToMany
     {
-        return $this->belongsToMany(Package::class)->withPivot('id_stripe',
-            'id_session_stripe',
+        return $this->belongsToMany(Package::class)->withPivot(
+            'id_stripe',
             'payment_status_stripe',
             'current_period_start',
             'current_period_end',
@@ -66,6 +70,15 @@ class User extends Authenticatable
             'active',
             'trip_number',
             'user_id',
-            'package_id');
+            'package_id'
+        );
+    }
+
+    /**
+     * Récupérer tous les objets (produits de ce type en entrepôt) associés.
+     */
+    public function subscriptions(): HasMany
+    {
+        return $this->hasMany(PackageUser::class);
     }
 }

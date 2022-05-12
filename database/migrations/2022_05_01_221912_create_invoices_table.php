@@ -18,6 +18,7 @@ return new class extends Migration {
             $table->date('date')->nullable();
             $table->string('billing_address')->nullable();
             $table->string('id_stripe')->nullable();
+            $table->string('id_subscription')->nullable();
         });
     }
 

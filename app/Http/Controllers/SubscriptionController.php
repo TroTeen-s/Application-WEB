@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Invoice;
 use App\Models\Package;
 use App\Models\PackageUser;
+use App\Models\Payment;
 use App\Models\User;
 use App\Traits\ApiResponse;
 use Carbon\Carbon;
@@ -28,7 +29,7 @@ class SubscriptionController extends Controller
 
         $package = Package::query()->find($idPackage);
 
-        $user->subscriptions()->attach($package, ['active' => false, 'trip_number' => 0, 'payment_status_stripe' => false]);
+        $user->packages()->attach($package, ['active' => false, 'trip_number' => 0, 'payment_status_stripe' => false]);
 
         $user = auth()->user();
 
@@ -57,6 +58,8 @@ class SubscriptionController extends Controller
                         'quantity' => 1,
                     ]],
                     'mode' => 'subscription',
+                    "billing_address_collection" => "required",
+
                     'success_url' => $YOUR_DOMAIN . '?success=true&session_id={CHECKOUT_SESSION_ID}',
                     'cancel_url' => $YOUR_DOMAIN . '?canceled=true',
                     'customer' => $user->id_stripe ?? '',
@@ -79,13 +82,22 @@ class SubscriptionController extends Controller
 
     }
 
-    public function allSubscriptions(): JsonResponse
+    public function getAllSubscriptionsByUser(): JsonResponse
     {
         $user = auth()->user();
 
-        $subscriptions = $user->subscriptions;
+        $subscriptions = $user->subscriptions->makeHidden('invoices');
 
         return $this->success("voici vos abonnements", $subscriptions);
+    }
+
+    public function getInvoicesFromSubscription(int $subscription_id): JsonResponse
+    {
+        $user = auth()->user();
+
+        $invoices = $user->subscriptions->where('id', $subscription_id)->first()->invoices()->get();
+
+        return $this->success("voici vos invoices", $invoices);
     }
 
     public function checkoutWebhook(Request $request)
@@ -112,6 +124,10 @@ class SubscriptionController extends Controller
                     $this->createInvoice($event);
                 }
                 break;
+            case 'payment_intent.succeeded':
+                Log::channel('errors')->info('on est là heyyyyy');
+                $this->createPayment($event);
+                break;
             default:
                 break;
         }
@@ -133,7 +149,7 @@ class SubscriptionController extends Controller
             $package = Package::query()->where('id_stripe', $package)->first();
 
 
-            $user->subscriptions()->attach($package, [
+            $user->packages()->attach($package, [
                 'id_stripe' => $subscription->id,
                 'active' => ($subscription->active === 'active'),
                 'created_at' => Carbon::createFromTimestamp($subscription->billing_cycle_anchor),
@@ -181,10 +197,34 @@ class SubscriptionController extends Controller
             'total_price' => $invoiceReceived->amount_paid / 100,
             'date' => Carbon::now(),
             'billing_address' => $invoiceReceived->customer_address,
-            'id_stripe' => $invoiceReceived->id
+            'id_stripe' => $invoiceReceived->id,
+            'id_subscription' => $invoiceReceived->subscription
         ]);
         $invoice->save();
 
 
+    }
+
+    public function createPayment(Event $event)
+    {
+
+        try {
+            $paymentObject = $event->data->object;
+            Log::channel('errors')->info('on est là heyyyyy');
+
+            $payment = new Payment([
+                'amount' => $paymentObject->amount / 100,
+                'date' => Carbon::createFromTimestamp($paymentObject->created),
+                'billing_address_city' => $paymentObject->charges->data[0]->billing_details->address->city,
+                'billing_address_line' => $paymentObject->charges->data[0]->billing_details->address->line1,
+                'billing_address_postal_code' => $paymentObject->charges->data[0]->billing_details->address->postal_code,
+                'card_number' => $paymentObject->charges->data[0]->payment_method_details->card->last4,
+                'id_stripe' => $paymentObject->id,
+                'id_invoice_stripe' => $paymentObject->charges->data[0]->invoice
+            ]);
+            $payment->save();
+        } catch (Exception $e) {
+            Log::channel('errors')->info($e->getMessage());
+        }
     }
 }
