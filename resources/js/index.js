@@ -27,7 +27,7 @@ import Password from "./components/account/Password";
 import Delete from "./components/account/Delete";
 import Admin from './components/admin/Admin';
 import User from './components/admin/User'
-import Sponsors from './components/Sponsors/Sponsors';
+import Sponsors from './components/sponsors/Sponsors';
 
 import ShopAdmin from './components/dashboard/boutique/shop'
 import Details from './components/shop/components/Details'

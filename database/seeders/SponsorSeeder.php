@@ -4,7 +4,7 @@ namespace Database\Seeders;
 
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
-use App\Models\SponsorCode;
+use App\Models\SponsorCodes;
 use App\Models\Sponsors;
 use Illuminate\Support\Str;
 
@@ -26,6 +26,24 @@ class SponsorSeeder extends Seeder
         ]);
         $pathe->save();
 
+        $ugc = new Sponsors([
+            'brand' => 'UGC',
+            'description' => 'Moins 15% sur les deux prochaine filme d\'horreur',
+            'end' => date_create('2022-11-10'),
+
+
+        ]);
+        $ugc->save();
+
+        $monnaie = new Sponsors([
+            'brand' => 'La monnaie de Paris',
+            'description' => 'Moins -20€ sur votre premier visite',
+            'end' => date_create('2022-11-12'),
+
+
+        ]);
+        $monnaie->save();
+
         $louvre = new Sponsors([
             'brand' => 'Le Louvre',
             'description' => 'Moins 15€ sur votre prochaine visite',
@@ -35,17 +53,17 @@ class SponsorSeeder extends Seeder
         $louvre->save();
 
         for ($i = 1; $i <= 10; $i++) {
-            $code = new SponsorCode([
+            $code = new SponsorCodes([
                 'sponsor_id' => 1,
-                'code' => Str::random(10) . '-' . Str::random(10) . '-' . Str::random(10),
+                'code' => Str::random(3) . '-' . Str::random(3) . '-' . Str::random(3),
             ]);
             $code->save();
         }
 
         for ($i = 1; $i <= 15; $i++) {
-            $code = new SponsorCode([
+            $code = new SponsorCodes([
                 'sponsor_id' => 2,
-                'code' => Str::random(10) . '-' . Str::random(10) . '-' . Str::random(10),
+                'code' => Str::random(3) . '-' . Str::random(3) . '-' . Str::random(3),
             ]);
             $code->save();
         }

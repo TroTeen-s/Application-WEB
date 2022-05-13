@@ -15,10 +15,11 @@ class Sponsors extends Model
         'description',
         'end',
 
+
     ];
 
     public function codes(): HasMany
     {
-        return $this->hasMany(SponsorCode::class);
+        return $this->hasMany(SponsorCodes::class , 'sponsor_id', 'id');
     }
 }

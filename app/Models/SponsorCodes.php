@@ -5,7 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class SponsorCode extends Model
+class SponsorCodes extends Model
 {
     use HasFactory;
 
@@ -14,4 +14,9 @@ class SponsorCode extends Model
         'user_id',
         'sponsor_id'
     ];
+
+    public function sponsor()
+    {
+        return $this->belongsTo(Sponsors::class);
+    }
 }
