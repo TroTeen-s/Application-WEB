@@ -41,7 +41,7 @@ const MainApp = () => {
     return (
         <AuthProvider>
             <ThemeProvider theme={darkTheme}>
-                <div id="scrolling-box" className="">
+                <div id="scrolling-box" className="bg-white-background">
                     <Header />
                         {/* <Container className="py-4 flex justify-center w-full"> */}
                             <Outlet />
