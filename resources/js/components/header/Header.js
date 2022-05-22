@@ -4,10 +4,147 @@ import LoginIcon from '@mui/icons-material/Login';
 import './style.css'
 
 
+import Box from '@mui/material/Box';
+import Drawer from '@mui/material/Drawer';
+import Button from '@mui/material/Button';
+import List from '@mui/material/List';
+import Divider from '@mui/material/Divider';
+import ListItem from '@mui/material/ListItem';
+import ListItemButton from '@mui/material/ListItemButton';
+import ListItemIcon from '@mui/material/ListItemIcon';
+import ListItemText from '@mui/material/ListItemText';
+import InboxIcon from '@mui/icons-material/MoveToInbox';
+import MailIcon from '@mui/icons-material/Mail';
+
 import { NavLink } from "react-router-dom";
 import { AuthContext } from "../context/AuthContext";
 
+
 function Header() {
+
+    const [state, setState] = React.useState({
+        right: false,
+      });
+    
+      const toggleDrawer = (anchor, open) => (event) => {
+        if (event.type === 'keydown' && (event.key === 'Tab' || event.key === 'Shift')) {
+          return;
+        }
+    
+        setState({ ...state, [anchor]: open });
+      };
+    
+      const list = (anchor) => (
+
+
+  <Box sx={{ width: anchor === 'top' || anchor === 'bottom' ? 'auto' : 500 }}
+          role="presentation"
+           className="fixed inset-0 bg-opacity-10 transition-opacity">
+
+  <div className="fixed inset-0 overflow-hidden">
+    <div className="absolute inset-0 overflow-hidden">
+      <div className="fixed inset-y-0 right-0 flex max-w-full pl-10">
+       
+        <div className=" w-screen max-w-md">
+          <div className="flex h-full flex-col overflow-y-scroll bg-white shadow-xl">
+            <div className="flex-1 overflow-y-auto py-6 px-4 sm:px-6">
+              <div className="flex items-start justify-between">
+                <h2 className="text-lg font-medium text-gray-900" id="slide-over-title">Shopping cart</h2>
+                <div className="ml-3 flex h-7 items-center">
+                  <button type="button" className="-m-2 p-2 text-gray-400 hover:text-gray-500">
+                    <span className="sr-only">Close panel</span>
+
+                    <svg onClick={toggleDrawer(anchor, false)} className="h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" aria-hidden="true">
+                      <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
+                    </svg>
+                  </button>
+                </div>
+              </div>
+
+              <div className="mt-8">
+                <div className="flow-root">
+                  <ul role="list" className="-my-6 divide-y divide-gray-200">
+                  <List>
+                  {['Inbox', 'Starred', 'Send email', 'Drafts'].map((text, index) => (
+                     <ListItem key={text}>
+
+                    <li className="flex py-6">
+                      <div className="h-36 w-36 flex-shrink-0 overflow-hidden rounded-md border border-gray-200">
+                        <img src="https://tailwindui.com/img/ecommerce-images/shopping-cart-page-04-product-01.jpg" alt="Salmon orange fabric pouch with match zipper, gray zipper pull, and adjustable hip belt." className="h-full w-full object-cover object-center"/>
+                      </div>
+
+                      <div className="ml-4 flex flex-col">
+                        <div>
+                          <div className="flex justify-between text-base font-medium text-gray-900">
+                            <h3>
+                            <ListItemText primary={text} />
+                            </h3>
+                          </div>
+                          <p className="text-gray-900">90.00€</p>
+                          <p className="text-gray-500">Quantité : 1</p>
+                          <a type="button" className="text-orange-300 no-underline">Remove</a>
+                        </div>
+                      
+                      </div>
+                    </li>
+
+  
+
+                    </ListItem>
+                    ))}
+                    </List>
+
+                  </ul>
+                </div>
+              </div>
+            </div>
+
+            <div className="border-t border-gray-200 py-6 px-4 sm:px-6">
+              <div className="flex justify-between text-base font-medium text-gray-900">
+                <p>Prix Total</p>
+                <p>262.00€</p>
+              </div>
+              <p className="mt-0.5 text-sm text-gray-500">TVA et taxes comprises</p>
+              <div className="mt-6">
+                <a href="#" className="flex items-center justify-center rounded-md border border-transparent bg-orange-300 px-6 py-3 text-base font-medium text-white shadow-sm hover:bg-orange-400">Acheter</a>
+              </div>
+              <div className="mt-6 flex justify-center text-center text-sm text-gray-500">
+                <p>
+                  or <button onClick={toggleDrawer(anchor, false)} type="button" className="no-underline font-medium text-orange-300 hover:text-orange-400">Continue Shopping<span aria-hidden="true"> &rarr;</span></button>
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+          {/* <List>
+            {['Inbox', 'Starred', 'Send email', 'Drafts'].map((text, index) => (
+              <ListItem key={text} disablePadding>
+              
+                  <ListItemText primary={text} />
+
+              </ListItem>
+            ))}
+          </List>
+          <Divider />
+          <List>
+            {['All mail', 'Trash', 'Spam'].map((text, index) => (
+              <ListItem key={text} disablePadding>
+                <ListItemButton>
+                  <ListItemIcon>
+                    {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
+                  </ListItemIcon>
+                  <ListItemText primary={text} />
+                </ListItemButton>
+              </ListItem>
+            ))}
+          </List> */}
+        </Box>
+      );
 
 
     let { auth, setAuth } = useContext(AuthContext)
@@ -146,7 +283,21 @@ function Header() {
                   <path d="M12 2C9.243 2 7 4.243 7 7s2.243 5 5 5 5-2.243 5-5S14.757 2 12 2zM12 10c-1.654 0-3-1.346-3-3s1.346-3 3-3 3 1.346 3 3S13.654 10 12 10zM21 21v-1c0-3.859-3.141-7-7-7h-4c-3.86 0-7 3.141-7 7v1h2v-1c0-2.757 2.243-5 5-5h4c2.757 0 5 2.243 5 5v1H21z" />
                 </svg>
               </a>
-                <a  className="cart-icon uppercase text-white font-black no-underline flex">
+
+    {['right'].map((anchor) => (
+
+        <React.Fragment key={anchor}>
+
+          <Drawer
+            anchor={anchor}
+            open={state[anchor]}
+            onClose={toggleDrawer(anchor, false)}
+          >
+            {list(anchor)}
+          </Drawer>
+
+
+                <a  className="cart-icon uppercase text-white font-black no-underline flex" onClick={toggleDrawer(anchor, true)}>
                 <span> 0 </span>
                 <svg className="fill-current hover:text-orange-300" xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 24 24">
                   <path d="M21,7H7.462L5.91,3.586C5.748,3.229,5.392,3,5,3H2v2h2.356L9.09,15.414C9.252,15.771,9.608,16,10,16h8 c0.4,0,0.762-0.238,0.919-0.606l3-7c0.133-0.309,0.101-0.663-0.084-0.944C21.649,7.169,21.336,7,21,7z M17.341,14h-6.697L8.371,9 h11.112L17.341,14z" />
@@ -154,7 +305,14 @@ function Header() {
                   <circle cx="17.5" cy="18.5" r="1.5" />
                 </svg>
               </a>
+        </React.Fragment>
+    ))}
             </div>
+
+            <div>
+    </div>
+
+    
           </div>
         </nav>
       </header>
