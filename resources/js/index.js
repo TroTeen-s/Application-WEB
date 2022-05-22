@@ -19,6 +19,7 @@ import Account from "./components/account/Account";
 import Main from './components/main/Master'
 
 import Trot from './components/dashboard/main';
+import Customers from './components/dashboard/Customers';
 import InnerContent from './components/dashboard/App'
 import Following from './components/dashboard/Following'
 import Shop from './components/shop/App'
@@ -65,6 +66,7 @@ ReactDOM.render(
                         <Route index element={<Navigate to="trot" replace />} />
                         <Route path="trot" element={<Trot />} />
                         <Route path="following" element={<Following />} />
+                        <Route path="customers" element={<Customers />} />
                         <Route path="shopAdmin" element={<ShopAdmin />} />
                     </Route>
 
