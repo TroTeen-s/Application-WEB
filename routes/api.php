@@ -8,6 +8,8 @@ use App\Http\Controllers\UserController;
 use App\Http\Controllers\PackageController;
 use App\Http\Controllers\ScootersController;
 use App\Http\Controllers\ProductController;
+use App\Http\Controllers\SponsorController;
+use App\Http\Controllers\SponsorCodeController;
 
 /* |-------------------------------------------------------------------------- | API Routes |-------------------------------------------------------------------------- | | Here is where you can register API routes for your application. These | routes are loaded by the RouteServiceProvider within a group which | is assigned the "api" middleware group. Enjoy building your API! | */
 
@@ -22,35 +24,38 @@ Route::post('/auth/update_password', [AuthController::class , 'update_password']
 Route::post('/auth/delete', [AuthController::class , 'delete']);
 
 
-
+Route::get('/sponsors', SponsorController::class);
+Route::get('/codes', SponsorCodeController::class);
+Route::get('/code/{id}', [SponsorCodeController::class , 'get_free_code'])->where('id', '[0-9]+');
+;
 
 Route::post('/auth/login', [AuthController::class , 'login']);
 
 Route::get('/users', UserController::class)->middleware('auth'); // localhost:8000/api/users/
 
 Route::prefix('stripe')->group(function () {
-    Route::post('/webhook', [SubscriptionController::class, 'checkoutWebhook']);
+    Route::post('/webhook', [SubscriptionController::class , 'checkoutWebhook']);
 });
 
 Route::group(['middleware' => ['auth:sanctum']], function () {
-    Route::get('/me', [UserController::class, 'me']);
+    Route::get('/me', [UserController::class , 'me']);
 
-    Route::post('subscribe', [SubscriptionController::class, 'subscribe']);
+    Route::post('subscribe', [SubscriptionController::class , 'subscribe']);
 
-    Route::post('checkout-sub', [SubscriptionController::class, 'createSubscriptionCheckout']);
+    Route::post('checkout-sub', [SubscriptionController::class , 'createSubscriptionCheckout']);
 
-    Route::get('my-subs', [SubscriptionController::class, 'allSubscriptions']);
+    Route::get('my-subs', [SubscriptionController::class , 'allSubscriptions']);
 
-    Route::get('/is-auth', [AuthController::class, 'isAuth']); // localhost:8000/api/users/
+    Route::get('/is-auth', [AuthController::class , 'isAuth']); // localhost:8000/api/users/
 
-    Route::get('/users/{id}', [UserController::class, 'firstOne'])->where('id', '[0-9]+'); // ex :localhost:8000/api/users/?id=1
+    Route::get('/users/{id}', [UserController::class , 'firstOne'])->where('id', '[0-9]+'); // ex :localhost:8000/api/users/?id=1
     Route::get('/user/active/{id}', [UserController::class , 'active'])->where('id', '[0-9]+'); // ex :localhost:8000/api/user/?id=1
 
     Route::get('/user/desactive/{id}', [UserController::class , 'desactive'])->where('id', '[0-9]+'); // ex :localhost:8000/api/user/?id=1
 
     Route::get('/users', UserController::class); // localhost:8000/api/users/
 
-    Route::post('/auth/logout', [AuthController::class, 'logout']);
+    Route::post('/auth/logout', [AuthController::class , 'logout']);
 
     Route::post('/auth/delete', [AuthController::class , 'delete']);
 
@@ -72,8 +77,8 @@ Route::group(['middleware' => ['auth:sanctum']], function () {
 
 // For shopAdmin
 
-Route::post('/dashboard/addproduct', [ProductController::class, 'addProduct']);
-Route::get('/dashboard/list', [ProductController::class, 'list']);
+Route::post('/dashboard/addproduct', [ProductController::class , 'addProduct']);
+Route::get('/dashboard/list', [ProductController::class , 'list']);
 
 
 
