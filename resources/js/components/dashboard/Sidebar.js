@@ -21,25 +21,7 @@ import { Outlet } from "react-router-dom";
 
 import { mainListItems, secondaryListItems } from "./listItems";
 
-function Copyright(props) {
-    return (
-        <Typography
-            variant="body2"
-            color="text.secondary"
-            align="center"
-            {...props}
-        >
-            {"Copyright © "}
-            <Link color="inherit" href="https://mui.com/">
-                Your Website
-            </Link>{" "}
-            {new Date().getFullYear()}
-            {"."}
-        </Typography>
-    );
-}
-
-const drawerWidth = 240;
+const drawerWidth = 290;
 
 const Drawer = styled(MuiDrawer, {
     shouldForwardProp: (prop) => prop !== "open",

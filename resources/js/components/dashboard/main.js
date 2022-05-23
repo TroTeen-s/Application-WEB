@@ -9,19 +9,6 @@ import Link from '@mui/material/Link';
 import TrotMaintenance from './scoot/TrotMaintenance';
 import TrotReparation from './scoot/TrotReparation';
 
-function Copyright(props) {
-  return (
-    <Typography variant="body2" color="text.secondary" align="center" {...props}>
-      {'Copyright © '}
-      <Link color="inherit" href="https://mui.com/">
-        Your Website
-      </Link>{' '}
-      {new Date().getFullYear()}
-      {'.'}
-    </Typography>
-  );
-}
-
 const drawerWidth = 240;
 
 
@@ -89,10 +76,6 @@ export default function Main() {
 
         </Grid>
 
-
-
-
-        <Copyright sx={{ pt: 4 }} />
       </Container>
     </Box>
 

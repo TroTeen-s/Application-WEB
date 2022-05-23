@@ -19,9 +19,9 @@ return new class extends Migration
             $table->date('acquired_at');
             $table->string("model_serie", 50);
             $table->date("last_revision");
-            $table->float("mileage",6,4);
-            $table->float("last_position_long", 10,9);
-            $table->float("last_position_lat", 10,9);
+            $table->float("mileage");
+            $table->float("last_position_long");
+            $table->float("last_position_lat");
             $table->boolean("available");
             $table->boolean("in_revision");
         });

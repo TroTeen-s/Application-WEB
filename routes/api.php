@@ -67,8 +67,6 @@ Route::group(['middleware' => ['auth:sanctum']], function () {
 
 
     ## ROUTES SCOOTERS
-    Route::get('/scooters', ScootersController::class);
-    Route::post('/scooter/create', [ScootersController::class , 'create']);
 
     ## SPONSOR
     Route::get('/initCode/{id}', [SponsorCodeController::class , 'init_free_code'])->where('id', '[0-9]+');
@@ -81,6 +79,9 @@ Route::group(['middleware' => ['auth:sanctum']], function () {
 
 
 });
+
+Route::get('/scooters', ScootersController::class);
+Route::post('/scooter/create', [ScootersController::class , 'create']);
 
 // For shopAdmin
 
