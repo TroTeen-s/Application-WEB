@@ -17,20 +17,29 @@ export default function Following() {
           component="main"
           sx={{
             flexGrow: 1,
-            height: '120vh',
+            height: '100vh',
           }}
         >
 
-        <MapContainer center={[51.505, -0.09]} zoom={13} scrollWheelZoom={false}>
+        <MapContainer center={[45.764043, 4.835659]} zoom={15} scrollWheelZoom={false}>
+
           <TileLayer
             attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
             url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
           />
-          <Marker position={[51.505, -0.09]}>
-            <Popup>
-              A pretty CSS3 popup. <br /> Easily customizable.
-            </Popup>
-          </Marker>
+
+            <Marker position={[45.764043, 4.835659]}>
+              <Popup>
+                A pretty CSS3 popup. <br /> Easily customizable.
+              </Popup>
+            </Marker>
+
+            <Marker position={[45.764040, 4.835659]}>
+              <Popup>
+                A pretty CSS3 popup. <br /> Easily customizable.
+              </Popup>
+            </Marker>
+
 
           
         </MapContainer>
