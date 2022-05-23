@@ -1,10 +1,13 @@
-import React from 'react';
+import React, { useContext, useLayoutEffect, useState } from 'react';
+
 
 
 
 const Card = ({ id, brand, description, end }) => {
 
-    console.log(id)
+
+
+
     const getCode = async () => {
 
         if (document.getElementById('code-' + id).innerHTML == "Obtenir mon code") {
@@ -17,11 +20,15 @@ const Card = ({ id, brand, description, end }) => {
                     }
                 })
 
-                if (response.data.data) {
-                    console.log(response.data)
-                    if (response.data.success) {
 
-                        document.getElementById('code-' + id).innerHTML = response.data.data.code[0].code
+
+
+
+                if (response.data.success != 'false') {
+                    if (response.data.data) {
+
+
+                        document.getElementById('code-' + id).innerHTML = response.data.data.code.code
                         document.getElementById('code-' + id).className = ""
 
                     } else {
@@ -29,6 +36,9 @@ const Card = ({ id, brand, description, end }) => {
                         document.getElementById('code-' + id).className = ""
 
                     }
+                } else {
+                    document.getElementById('code-' + id).innerHTML = "Aucun code disponible"
+                    document.getElementById('code-' + id).className = ""
 
                 }
             } catch (e) {
@@ -37,7 +47,30 @@ const Card = ({ id, brand, description, end }) => {
         }
     }
 
+    const initCode = async () => {
+        try {
+            let response = await axios.get('/api/initCode/' + id, {
+                headers: {
+                    'Accept': 'application/json'
+                }
+            })
 
+
+            if (response.data.success) {
+                if (response.data.data) {
+
+
+                    document.getElementById('code-' + id).innerHTML = response.data.data.code.code
+                    document.getElementById('code-' + id).className = ""
+
+                }
+            }
+        } catch (e) {
+            console.log(e)
+        }
+    }
+
+    initCode()
     return (
         <div className='bg-black-trot text-white p-8 h-96 flex flex-col justify-between rounded-md hover:shadow-xl hover:shadow-orange-300/70 transition duration-150'>
             <div className='flex flex-col justify-center items-center'>

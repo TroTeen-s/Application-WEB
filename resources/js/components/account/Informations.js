@@ -12,7 +12,7 @@ import { useNavigate } from "react-router";
 
 const Informations = () => {
 
-    const [infos, setInfos] = useState([]);
+    const [infos, setInfos] = useState([])
     let { auth } = useContext(AuthContext)
     let navigate = useNavigate()
 

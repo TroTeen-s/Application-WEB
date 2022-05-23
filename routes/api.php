@@ -27,6 +27,7 @@ Route::post('/auth/delete', [AuthController::class , 'delete']);
 Route::get('/sponsors', SponsorController::class);
 Route::get('/codes', SponsorCodeController::class);
 Route::get('/code/{id}', [SponsorCodeController::class , 'get_free_code'])->where('id', '[0-9]+');
+
 ;
 
 Route::post('/auth/login', [AuthController::class , 'login']);
@@ -48,7 +49,7 @@ Route::group(['middleware' => ['auth:sanctum']], function () {
 
     Route::get('/is-auth', [AuthController::class , 'isAuth']); // localhost:8000/api/users/
 
-    Route::get('/users/{id}', [UserController::class , 'firstOne'])->where('id', '[0-9]+'); // ex :localhost:8000/api/users/?id=1
+    Route::get('/user/{id}', [UserController::class , 'firstOne'])->where('id', '[0-9]+'); // ex :localhost:8000/api/users/?id=1
     Route::get('/user/active/{id}', [UserController::class , 'active'])->where('id', '[0-9]+'); // ex :localhost:8000/api/user/?id=1
 
     Route::get('/user/desactive/{id}', [UserController::class , 'desactive'])->where('id', '[0-9]+'); // ex :localhost:8000/api/user/?id=1
@@ -68,6 +69,12 @@ Route::group(['middleware' => ['auth:sanctum']], function () {
     ## ROUTES SCOOTERS
     Route::get('/scooters', ScootersController::class);
     Route::post('/scooter/create', [ScootersController::class , 'create']);
+
+    ## SPONSOR
+    Route::get('/initCode/{id}', [SponsorCodeController::class , 'init_free_code'])->where('id', '[0-9]+');
+    Route::get('/sponsors', SponsorController::class);
+    Route::get('/codes', SponsorCodeController::class);
+    Route::get('/code/{id}', [SponsorCodeController::class , 'get_free_code'])->where('id', '[0-9]+');
 
 
 
