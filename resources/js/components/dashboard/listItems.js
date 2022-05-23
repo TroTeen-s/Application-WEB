@@ -14,58 +14,58 @@ import LocalGroceryStoreIcon from '@mui/icons-material/LocalGroceryStore';
 import { NavLink } from "react-router-dom";
 
 export const mainListItems = (
-    <React.Fragment>
-        <ListItemButton>
-            <ListItemIcon>
-                <LayersIcon />
-            </ListItemIcon>
-            <NavLink className="no-underline" to="trot">
-                <ListItemText primary="Trotinettes" />
-            </NavLink>
-        </ListItemButton>
-        <ListItemButton>
-            <ListItemIcon>
-                <DashboardIcon />
-            </ListItemIcon>
-            <NavLink className="no-underline" to="following">
-                <ListItemText primary="Suivi des Trotinettes" />
-            </NavLink>
-        </ListItemButton>
+  <React.Fragment>
+    <ListItemButton>
+      <ListItemIcon>
+        <LayersIcon />
+      </ListItemIcon>
+      <NavLink className="no-underline" to="trot">
+        <ListItemText primary="Trotinettes" />
+      </NavLink>
+    </ListItemButton>
+    <ListItemButton>
+      <ListItemIcon>
+        <DashboardIcon />
+      </ListItemIcon>
+      <NavLink className="no-underline" to="following">
+        <ListItemText primary="Suivi des Trotinettes" />
+      </NavLink>
+    </ListItemButton>
 
-        <ListItemButton>
-            <ListItemIcon>
-                <PeopleIcon />
-            </ListItemIcon>
-            <NavLink className="no-underline" to="">
-                <ListItemText primary="Customers" />
-            </NavLink>
-        </ListItemButton>
-        <ListItemButton>
-            <ListItemIcon>
-                <BarChartIcon />
-            </ListItemIcon>
-            <ListItemText primary="API" />
-        </ListItemButton>
-        <ListItemButton>
-            <ListItemIcon>
-                <LocalGroceryStoreIcon />
-            </ListItemIcon>
-            <NavLink className="no-underline" to="shopAdmin">
-              <ListItemText primary="Boutique" />
-            </NavLink>
-        </ListItemButton>
-        {/* <ListItemButton>
+    <ListItemButton>
+      <ListItemIcon>
+        <PeopleIcon />
+      </ListItemIcon>
+      <NavLink className="no-underline" to="customers">
+        <ListItemText primary="Customers" />
+      </NavLink>
+    </ListItemButton>
+    <ListItemButton>
+      <ListItemIcon>
+        <BarChartIcon />
+      </ListItemIcon>
+      <ListItemText primary="API" />
+    </ListItemButton>
+    <ListItemButton>
+      <ListItemIcon>
+        <LocalGroceryStoreIcon />
+      </ListItemIcon>
+      <NavLink className="no-underline" to="shopAdmin">
+        <ListItemText primary="Boutique" />
+      </NavLink>
+    </ListItemButton>
+    {/* <ListItemButton>
       <ListItemIcon>
         <LayersIcon />
       </ListItemIcon>
       <ListItemText primary="Integrations" />
     </ListItemButton>  */}
-    </React.Fragment>
+  </React.Fragment>
 );
 
 export const secondaryListItems = (
-    <React.Fragment>
-        {/* <ListSubheader component="div" inset>
+  <React.Fragment>
+    {/* <ListSubheader component="div" inset>
       Saved reports
     </ListSubheader>
     <ListItemButton>
@@ -86,5 +86,5 @@ export const secondaryListItems = (
       </ListItemIcon>
       <ListItemText primary="Year-end sale" />
     </ListItemButton> */}
-    </React.Fragment>
+  </React.Fragment>
 );

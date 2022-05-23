@@ -1,48 +1,130 @@
-import * as React from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { DataGrid } from '@mui/x-data-grid';
-
-const columns = [
-  { field: 'id', headerName: 'ID', width: 70 },
-  { field: 'firstName', headerName: 'First name', width: 130 },
-  { field: 'lastName', headerName: 'Last name', width: 130 },
-  {
-    field: 'age',
-    headerName: 'Age',
-    width: 90,
-  },
-  {
-    field: 'fullName',
-    headerName: 'Full name',
-    description: 'This column has a value getter and is not sortable.',
-    sortable: false,
-    width: 160,
-    valueGetter: (params) =>
-      `${params.row.firstName || ''} ${params.row.lastName || ''}`,
-  },
-];
-
-const rows = [
-  { id: 1, lastName: 'Snow', firstName: 'Jon', age: 35 },
-  { id: 2, lastName: 'Lannister', firstName: 'Cersei', age: 42 },
-  { id: 3, lastName: 'Lannister', firstName: 'Jaime', age: 45 },
-  { id: 4, lastName: 'Stark', firstName: 'Arya', age: 16 },
-  { id: 5, lastName: 'Targaryen', firstName: 'Daenerys', age: null },
-  { id: 6, lastName: 'Melisandre', firstName: null, age: 150 },
-  { id: 7, lastName: 'Clifford', firstName: 'Ferrara', age: 44 },
-  { id: 8, lastName: 'Frances', firstName: 'Rossini', age: 36 },
-  { id: 9, lastName: 'Roxie', firstName: 'Harvey', age: 65 },
-];
+import Button from "@mui/material/Button";
+import { LinearProgress } from '@mui/material';
+import { AuthLoadingContext } from '../../context/AuthContext';
 
 export default function TrotMaintenance() {
+  const [infos, setInfos] = useState();
+
+  let { loaded } = useContext(AuthLoadingContext)
+
+  const columns = [
+    {
+      field: 'id',
+      headerName: 'ID',
+      width: 90
+    },
+    {
+      field: 'model_serie',
+      headerName: 'Modele de Serie',
+      width: 150,
+      editable: false,
+    },
+    {
+      field: 'mileage',
+      headerName: 'Kilometrage',
+      width: 150,
+      editable: false,
+    },
+
+    {
+      field: 'available',
+      headerName: 'Available',
+      width: 150,
+      editable: false,
+      renderCell: (params) => (
+        <div id={"is-active-" + params.row.id}>
+          <p className='m-0'>
+            {params.row.available ? "Activé" : "Désactivé"}
+          </p>
+        </div >
+      )
+
+    },
+
+    {
+      field: 'userLink',
+      headerName: 'Show more',
+      width: 150,
+      editable: false,
+      renderCell: (params) => (
+
+        <strong>
+          <Button
+            variant="outlined"
+            color="primary"
+            size="small"
+            style={{ marginLeft: 16 }}
+            onClick={() => {
+              active(params);
+            }}
+          >
+            {params.row.available ? "Désactiver" : "Activer"}
+          </Button>
+        </strong >
+      )
+
+    }
+
+  ];
+
+  const active = async (params) => {
+    console.log(params)
+    try {
+      let response = await axios.post('/api/scooter/active/', params.row)
+      if (response.data.success) {
+        console.log("available" + response.data.data.scooter[0])
+        console.log(response.data.data.scooter[0])
+        retrieveInfos()
+
+      }
+    } catch (e) {
+      console.log(e)
+    }
+
+  }
+
+  const retrieveInfos = async () => {
+    try {
+      let response = await axios.get('/api/scooters', {
+        headers: {
+          'Accept': 'application/json'
+        }
+      })
+
+      if (response.data.data) {
+        setInfos(response.data.data)
+      }
+    } catch (e) {
+    }
+  }
+
+  useEffect(() => {
+
+    if (loaded) {
+      retrieveInfos()
+    }
+  }, [loaded])
+
+
   return (
-    <div className="mb-5" style={{ height: 370, width: '100%' }}>
+    <div style={{ height: 450, width: '100%', paddingBottom: 10 }}>
       <h3> Trotinettes en Maintenance </h3>
       <DataGrid
-        rows={rows}
+        components={{
+          LoadingOverlay: LinearProgress,
+        }}
+        rows={infos}
         columns={columns}
         pageSize={5}
-        rowsPerPageOptions={[10]}
+        rowsPerPageOptions={[5]}
+        disableSelectionOnClick
+        loading={!infos}
+
+
       />
     </div>
   );
+
 }
