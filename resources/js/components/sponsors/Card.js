@@ -4,21 +4,36 @@ import React from 'react';
 
 const Card = ({ id, brand, description, end }) => {
 
-    const getCode = async (id) => {
-        try {
-            let response = await axios.get('/api/code/?id=' + id, {
-                headers: {
-                    'Accept': 'application/json'
+    console.log(id)
+    const getCode = async () => {
+
+        if (document.getElementById('code-' + id).innerHTML == "Obtenir mon code") {
+            document.getElementById('code-' + id).innerHTML = ""
+            document.getElementById('code-' + id).className = "w-4 h-4 border-y-2 border-white rounded-full animate-spin"
+            try {
+                let response = await axios.get('/api/code/' + id, {
+                    headers: {
+                        'Accept': 'application/json'
+                    }
+                })
+
+                if (response.data.data) {
+                    console.log(response.data)
+                    if (response.data.success) {
+
+                        document.getElementById('code-' + id).innerHTML = response.data.data.code[0].code
+                        document.getElementById('code-' + id).className = ""
+
+                    } else {
+                        document.getElementById('code-' + id).innerHTML = "Aucun code disponible"
+                        document.getElementById('code-' + id).className = ""
+
+                    }
+
                 }
-            })
-
-            if (response.data.data) {
-                console.log(response)
-
-
+            } catch (e) {
+                console.log(e)
             }
-        } catch (e) {
-            console.log(e)
         }
     }
 
@@ -30,7 +45,7 @@ const Card = ({ id, brand, description, end }) => {
                 <img className='text-center p-2 rounded-[20px]' src='https://picsum.photos/100'></img>
                 <div className='mb-4 text-center'>{description}</div>
             </div>
-            <div onClick={getCode} id={"code-" + id} className='bg-orange-300 text-white cursor-pointer p-2 rounded-md text-center'>Obtenir mon code</div>
+            <div onClick={getCode} className='bg-orange-300 text-white cursor-pointer p-2 rounded-md flex justify-center'><div id={"code-" + id}>Obtenir mon code</div></div>
         </div>
     );
 }
