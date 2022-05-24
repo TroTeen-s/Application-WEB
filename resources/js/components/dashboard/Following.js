@@ -50,7 +50,7 @@ export default function Following() {
           }}
         >
 
-        <MapContainer center={[45.764043, 4.835659]} zoom={15} scrollWheelZoom={false}>
+        <MapContainer center={[45.764043, 4.835659]} zoom={14} scrollWheelZoom={true}>
 
           <TileLayer
             attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
@@ -61,26 +61,12 @@ export default function Following() {
           
           <Marker position={[last_position_long, last_position_lat]}>
               <Popup>
-                A pretty CSS1 popup. <br /> Easily customizable.
+                ID : {[id]} <br /> Easily customizable.
               </Popup>
             </Marker>
              
           ))}
 
-            {/* <Marker position={[45.76502, 4.82003]}>
-              <Popup>
-                A pretty CSS1 popup. <br /> Easily customizable.
-              </Popup>
-            </Marker>
-
-            <Marker position={[45.7568, 4.8511]}>
-              <Popup>
-                A pretty CSS3 popup. <br /> Easily customizable.
-              </Popup>
-            </Marker> */}
-
-
-          
         </MapContainer>
 
         </Box>
