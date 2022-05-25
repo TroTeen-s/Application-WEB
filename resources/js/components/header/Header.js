@@ -15,12 +15,26 @@ import ListItemIcon from '@mui/material/ListItemIcon';
 import ListItemText from '@mui/material/ListItemText';
 import InboxIcon from '@mui/icons-material/MoveToInbox';
 import MailIcon from '@mui/icons-material/Mail';
+import IconButton from "@mui/material/IconButton";
+import Menu from "@mui/material/Menu";
+import MenuItem from "@mui/material/MenuItem";
+import Typography from "@mui/material/Typography";
 
 import { NavLink } from "react-router-dom";
 import { AuthContext } from "../context/AuthContext";
 
 
 function Header() {
+
+  const [anchorElUser, setAnchorElUser] = React.useState(null);
+
+    const handleOpenUserMenu = (event) => {
+      setAnchorElUser(event.currentTarget);
+    };
+
+    const handleCloseUserMenu = () => {
+      setAnchorElUser(null);
+    };
 
     const [state, setState] = React.useState({
         right: false,
@@ -163,18 +177,22 @@ function Header() {
     let loggedOut = <>
 
             <NavLink
-                className="no-underline px-3 py-2 flex items-center text-s uppercase font-bold leading-snug text-white hover:opacity-75"
+                className="no-underline px-3 py-2 flex items-center text-s uppercase font-bold leading-snug text-white"
                 to="/auth/login">
-                <i className="fab fa-facebook-square text-s leading-lg text-white opacity-75"></i>
-                <span className="ml-2">Connexion</span>
+                  <MenuItem className="mr-5">
+                    <i className="fab fa-facebook-square text-s leading-lg text-white opacity-75"></i>
+                    <Typography className="ml-2">Connexion</Typography>
+                  </MenuItem>
             </NavLink>
 
 
             <NavLink
-                className="no-underline px-3 py-2 flex items-center text-s uppercase font-bold leading-snug text-white hover:opacity-75"
+                className="no-underline px-3 py-2 flex items-center text-s uppercase font-bold leading-snug text-white"
                 to="/auth/register">
-                <i className="fab fa-facebook-square text-s leading-lg text-white opacity-75"></i>
-                <span className="ml-2">Inscription</span>
+                   <MenuItem>
+                    <i className="fab fa-facebook-square text-s leading-lg text-white opacity-75"></i>
+                    <Typography className="ml-2">Inscription</Typography>
+                  </MenuItem>
                 <LoginIcon className="pl-2" style={{ fontSize: 'large' }} />
             </NavLink>
 
@@ -182,31 +200,37 @@ function Header() {
 
     let loggedIn = <>
           <NavLink
-                className="no-underline px-3 py-2 flex items-center text-s uppercase font-bold leading-snug text-white hover:opacity-75"
+                className="no-underline px-3 py-2 flex items-center text-s uppercase font-bold leading-snug text-white"
                 to="/Dashboard">
-                <button className="bg-orange-300 text-gray-800 font-semibold py-2 px-4 rounded shadow">
+                  <MenuItem>
+                <Typography className=" text-white font-semibold py-2 px-4 border border-gray-400 rounded shadow">
                 Dashboard
-                </button>
+                </Typography>
+                </MenuItem>
             </NavLink>
 
             <NavLink
-                className="no-underline px-3 py-2 flex items-center text-s uppercase font-bold leading-snug text-white hover:opacity-75"
+                className="no-underline px-3 py-2 flex items-center text-s uppercase font-bold leading-snug text-white"
                 to="/account">
-                <button
-                    className="bg-white hover:bg-gray-100 text-gray-800 font-semibold py-2 px-4 border border-gray-400 rounded shadow">
+                   <MenuItem>
+                <Typography
+                    className="  text-white font-semibold py-2 px-4 border border-gray-400 rounded shadow mr-5">
                     Mon Compte
-                </button>
+                    </Typography>
+                    </MenuItem>
             </NavLink>
 
         <NavLink
-            className="no-underline px-3 py-2 flex items-center text-s uppercase font-bold leading-snug text-white hover:opacity-75"
+            className="no-underline px-3 py-2 flex items-center text-s uppercase font-bold leading-snug text-white"
             to="#">
             <i className="fab fa-facebook-square text-s leading-lg text-white opacity-75"></i>
-            <button
-                className="bg-white hover:bg-gray-100 text-gray-800 font-semibold py-2 px-4 border border-gray-400 rounded shadow"
+            <MenuItem>
+          <Typography
+                className="  text-white font-semibold py-2 px-4 border border-gray-400 rounded shadow"
                 onClick={doLogout}>
                 Déconnexion
-            </button>
+          </Typography>
+          </MenuItem>
         </NavLink>
 
     </>
@@ -233,27 +257,27 @@ function Header() {
               <nav>
                 <ul className="md:flex items-center justify-between text-base text-gray-700 pt-4 md:pt-0">
                             <NavLink
-                                className="no-underline px-3 py-2 flex items-center text-s uppercase font-bold leading-snug text-white hover:opacity-75"
+                                className="no-underline px-3 py-2 flex items-center text-s uppercase font-bold leading-snug text-white"
                                 to="/shop">
                                 <i className="fab fa-facebook-square text-s leading-lg text-white opacity-75"></i>
                                 <span className="ml-2">Notre Boutique</span>
                             </NavLink>
 
                              <NavLink
-                                className="no-underline px-3 py-2 flex items-center text-s uppercase font-bold leading-snug text-white hover:opacity-75"
+                                className="no-underline px-3 py-2 flex items-center text-s uppercase font-bold leading-snug text-white"
                                 to="/store">
                                 <i className="fab fa-facebook-square text-s leading-lg text-white opacity-75"></i>
                                 <span className="ml-2">Nos abonnements</span>
                             </NavLink>
 
                             <NavLink
-                                className="no-underline px-3 py-2 flex items-center text-s uppercase font-bold leading-snug text-white hover:opacity-75"
+                                className="no-underline px-3 py-2 flex items-center text-s uppercase font-bold leading-snug text-white"
                                 to="/sponsors">
                                 <i className="fab fa-facebook-square text-s leading-lg text-white opacity-75"></i>
                                 <span className="ml-2">Nos partenaires</span>
                             </NavLink>
 
-                            {auth ? loggedIn : loggedOut}
+                
                 </ul>
               </nav>
             </div>
@@ -278,11 +302,34 @@ function Header() {
 
             <div className="order-3 md:order-3 flex items-center pt-2" id="nav-content">
             <a  className="uppercase text-white font-black text-3xl no-underline pr-3">
+            <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
                 <svg className="fill-current hover:text-orange-300" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
                   <circle fill="none" cx="12" cy="7" r="3" />
                   <path d="M12 2C9.243 2 7 4.243 7 7s2.243 5 5 5 5-2.243 5-5S14.757 2 12 2zM12 10c-1.654 0-3-1.346-3-3s1.346-3 3-3 3 1.346 3 3S13.654 10 12 10zM21 21v-1c0-3.859-3.141-7-7-7h-4c-3.86 0-7 3.141-7 7v1h2v-1c0-2.757 2.243-5 5-5h4c2.757 0 5 2.243 5 5v1H21z" />
                 </svg>
+            </IconButton>
               </a>
+              <Menu
+              sx={{ ml: "50px", mt: "60px" }}
+              id="menu-appbar"
+              anchorEl={anchorElUser}
+              anchorOrigin={{
+                vertical: "top",
+                horizontal: "right"
+              }}
+              keepMounted
+              transformOrigin={{
+                vertical: "top",
+                horizontal: "right"
+              }}
+              open={Boolean(anchorElUser)}
+              onClose={handleCloseUserMenu}
+            >
+                <div onClick={handleCloseUserMenu}>
+                  {auth ? loggedIn : loggedOut}
+                </div>
+            
+            </Menu>
 
     {['right'].map((anchor) => (
 

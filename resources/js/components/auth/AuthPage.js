@@ -20,23 +20,9 @@ const AuthPage = () => {
 
 
     return (
-        <Grid container component="main">
-            <Grid
-                item
-                xs={false}
-                sm={4}
-                md={7}
-                sx={{
-                    backgroundImage: 'url(/images/trotinette.jpg)',
-                    backgroundRepeat: 'no-repeat',
-                    backgroundColor: (t) =>
-                        t.palette.mode === 'light' ? t.palette.grey[50] : t.palette.grey[900],
-                    backgroundSize: 'cover',
-                    backgroundPosition: 'center',
-                }}
-            />
-            <Outlet/>
-        </Grid>
+       <section className="bg-black-trot">
+           <Outlet/>
+       </section>
 
     );
 };

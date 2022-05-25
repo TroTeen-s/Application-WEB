@@ -20,7 +20,7 @@ function Main() {
             <ParallaxProvider>
                 <section class="full bg-black-trot">
                     <div class="flex relative z-20 items-center overflow-hidden">
-                        <div class="container mx-auto mt-20 px-6 flex relative pt-20">
+                        <div class="container mx-auto lg:mt-20 md:mt-10 px-6 flex relative md:pt-10 lg:pt-10">
                             <div class="hidden md:block sm:w-1/6 lg:w-3/6 relative">
                                 <img
                                     src="images/LeftFirstImage.png"

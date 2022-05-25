@@ -39,6 +39,7 @@
         "google-maps-react": "^2.0.6",
         "leaflet": "^1.8.0",
         "prettier": "^2.6.2",
+        "prop-types": "^15.8.1",
         "react-google-maps": "^9.4.5",
         "react-leaflet": "^4.0.0",
         "react-router": "^6.3.0",

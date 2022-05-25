@@ -37,6 +37,13 @@ ReactDOM.render(
     <React.StrictMode>
         <Router>
             <Routes>
+
+                    <Route path="auth" element={<AuthPage />}>
+                        <Route index element={<Navigate to="/auth/login" replace />} />
+                        <Route path="login" element={<SignInForm />} />
+                        <Route path="register" element={<SignUpForm />} />
+                    </Route>
+
                 <Route exact path="/" element={<MainApp />}>
 
                     <Route index element={<Navigate to="/main" replace />} />
@@ -46,13 +53,6 @@ ReactDOM.render(
                     <Route path="store" element={<Store />} />
                     <Route path="products/:id" element={<Details />} />
                     <Route path="sponsors" element={<Sponsors />} />
-
-                    <Route path="auth" element={<AuthPage />}>
-                        <Route index element={<Navigate to="/auth/login" replace />} />
-                        <Route path="login" element={<SignInForm />} />
-                        <Route path="register" element={<SignUpForm />} />
-                    </Route>
-
 
                     <Route path="account" element={<Account />}>
                         <Route index element={<Navigate to="/account/informations" replace />} />
