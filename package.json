@@ -38,6 +38,7 @@
         "@tomtom-international/web-sdk-maps": "^6.18.0",
         "google-maps-react": "^2.0.6",
         "leaflet": "^1.8.0",
+        "luxon": "^2.4.0",
         "prettier": "^2.6.2",
         "react-google-maps": "^9.4.5",
         "react-leaflet": "^4.0.0",

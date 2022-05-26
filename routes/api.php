@@ -1,7 +1,6 @@
 <?php
 
 use App\Http\Controllers\SubscriptionController;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\UserController;
@@ -42,6 +41,8 @@ Route::group(['middleware' => ['auth:sanctum']], function () {
     Route::get('subscription', [SubscriptionController::class, 'getAllSubscriptionsByUser']);
 
     Route::get('subscription/{id}/invoices', [SubscriptionController::class, 'getInvoicesFromSubscription'])->where('id', '[0-9]+');
+
+    Route::get('subscription/{id}', [SubscriptionController::class, 'getSubscriptionsInfos'])->where('id', '[0-9]+');
 
     Route::get('/is-auth', [AuthController::class, 'isAuth']); // localhost:8000/api/users/
 

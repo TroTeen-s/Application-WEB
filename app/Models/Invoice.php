@@ -30,6 +30,7 @@ class Invoice extends Model
     ];
 
     protected $visible = [
+        'id',
         'total_price',
         'date',
         'billing_address_city',

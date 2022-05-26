@@ -30,6 +30,7 @@ import User from './components/admin/User'
 import ShopAdmin from './components/dashboard/boutique/shop'
 import Details from "./components/shop/components/Details";
 import Subscriptions from "./components/account/Subscriptions";
+import SubscriptionDetails from "./components/account/SubscriptionDetails";
 
 ReactDOM.render(
     <React.StrictMode>
@@ -57,6 +58,7 @@ ReactDOM.render(
                         <Route path="password" element={<Password />} />
                         <Route path="delete" element={<Delete />} />
                         <Route path="subscriptions" element={<Subscriptions />} />
+                        <Route path="subscriptions/:subscriptionID" element={<SubscriptionDetails />} />
                     </Route>
 
 

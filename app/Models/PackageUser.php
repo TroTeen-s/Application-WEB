@@ -49,12 +49,15 @@ class PackageUser extends Pivot
     protected $visible = [
         'id',
         'created_at',
+        'canceled_at',
         'current_period_start',
         'current_period_end',
         'active',
         'trip_number',
         'last_payment',
         'invoices',
+        'package_name',
+        'max_trips'
     ];
 
     protected function getlastPaymentAttribute(): string
@@ -62,7 +65,15 @@ class PackageUser extends Pivot
         return $this->payment_status_stripe;
     }
 
-    protected $appends = ['last_payment', 'invoices'];
+    protected function getPackageNameAttribute(): string
+    {
+        return $this->package->name;
+    }
+
+    protected function getMaxTripsAttribute(): string
+    {
+        return $this->package->max_trips;
+    }
 
     /**
      * Récupère l'abonnement type asssocié.

@@ -86,7 +86,11 @@ class SubscriptionController extends Controller
     {
         $user = auth()->user();
 
-        $subscriptions = $user->subscriptions->makeHidden('invoices');
+        $subscriptions = $user->subscriptions;
+
+        $subscriptions->each(function ($order) {
+            $order->setAppends(['package_name', 'last_payment']);
+        });
 
         return $this->success("voici vos abonnements", $subscriptions);
     }
@@ -98,6 +102,15 @@ class SubscriptionController extends Controller
         $invoices = $user->subscriptions->where('id', $subscription_id)->first()->invoices()->get();
 
         return $this->success("voici vos invoices", $invoices);
+    }
+
+    public function getSubscriptionsInfos(int $subscription_id): JsonResponse
+    {
+        $subscription = PackageUser::query()->firstWhere('id', $subscription_id);
+
+        $subscription->setAppends(['package_name', 'invoices']);
+
+        return $this->success("voici les informations de cet abonnements", $subscription);
     }
 
     public function checkoutWebhook(Request $request)
