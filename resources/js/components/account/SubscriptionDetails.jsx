@@ -38,7 +38,7 @@ const SubscriptionDetails = () => {
             type: "number",
             flex: 1,
             renderCell: (cellValues) => {
-                return cellValues.row.amount + "€";
+                return cellValues.row.total_price + "€";
             }
         },
         {
@@ -91,8 +91,9 @@ const SubscriptionDetails = () => {
         <Container>
             <div>
                 <Grid container spacing={2}>
-                    <Grid item alignItems={"center"}>
-                        <Typography component={"span"}>{"Votre abonnement actif" + subscriptionID}</Typography>
+                    <Grid item alignItems={"center"} sx={{ m: 2 }}>
+                        <Typography variant="h3"
+                                    component={"span"}>{"Les informations de votre abonnement n°" + subscriptionID}</Typography>
                     </Grid>
 
                     <Grid container item xs={12} rowSpacing={1} columnSpacing={{ xs: 1, sm: 2, md: 3 }}>
