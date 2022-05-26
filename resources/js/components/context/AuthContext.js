@@ -12,7 +12,7 @@ export const AuthContext = createContext({
     },
 });
 /**
- * Permet d'attendre que la vérification d'authentification ait eu lieu avant de continuer sur des pages protégées
+ * Permet d'attendre que la vérification d'authentification ait eu lieu avant de continuer sur des Accueil protégées
  * @type {React.Context<{loaded: string, setLoaded: setLoaded}>}
  */
 export const AuthLoadingContext = createContext({

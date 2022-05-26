@@ -1,20 +1,13 @@
 import "../../../css/app.css";
 import React, { useContext } from "react";
-import LoginIcon from '@mui/icons-material/Login';
 import './style.css'
 
 
 import Box from '@mui/material/Box';
 import Drawer from '@mui/material/Drawer';
-import Button from '@mui/material/Button';
 import List from '@mui/material/List';
-import Divider from '@mui/material/Divider';
 import ListItem from '@mui/material/ListItem';
-import ListItemButton from '@mui/material/ListItemButton';
-import ListItemIcon from '@mui/material/ListItemIcon';
 import ListItemText from '@mui/material/ListItemText';
-import InboxIcon from '@mui/icons-material/MoveToInbox';
-import MailIcon from '@mui/icons-material/Mail';
 import IconButton from "@mui/material/IconButton";
 import Menu from "@mui/material/Menu";
 import MenuItem from "@mui/material/MenuItem";
@@ -39,16 +32,16 @@ function Header() {
     const [state, setState] = React.useState({
         right: false,
       });
-    
+
       const toggleDrawer = (anchor, open) => (event) => {
         if (event.type === 'keydown' && (event.key === 'Tab' || event.key === 'Shift')) {
           return;
         }
-    
-        setState({ ...state, [anchor]: open });
+
+          setState({ ...state, [anchor]: open });
       };
-    
-      const list = (anchor) => (
+
+    const list = (anchor) => (
 
 
   <Box sx={{ width: anchor === 'top' || anchor === 'bottom' ? 'auto' : 500 }}
@@ -58,8 +51,8 @@ function Header() {
   <div className="fixed inset-0 overflow-hidden">
     <div className="absolute inset-0 overflow-hidden">
       <div className="fixed inset-y-0 right-0 flex max-w-full pl-10">
-       
-        <div className=" w-screen max-w-md">
+
+          <div className=" w-screen max-w-md">
           <div className="flex h-full flex-col overflow-y-scroll bg-white shadow-xl">
             <div className="flex-1 overflow-y-auto py-6 px-4 sm:px-6">
               <div className="flex items-start justify-between">
@@ -98,13 +91,12 @@ function Header() {
                           <p className="text-gray-500">Quantité : 1</p>
                           <a type="button" className="text-orange-300 no-underline">Remove</a>
                         </div>
-                      
+
                       </div>
                     </li>
 
-  
 
-                    </ListItem>
+                     </ListItem>
                     ))}
                     </List>
 
@@ -138,8 +130,8 @@ function Header() {
           {/* <List>
             {['Inbox', 'Starred', 'Send email', 'Drafts'].map((text, index) => (
               <ListItem key={text} disablePadding>
-              
-                  <ListItemText primary={text} />
+
+           <ListItemText primary={text} />
 
               </ListItem>
             ))}
@@ -237,7 +229,7 @@ function Header() {
     </>
 
     return (
-      <> 
+        <>
         <header className="bg-black-trot">
 
             <nav id="header" className="w-full top-0">
@@ -279,7 +271,7 @@ function Header() {
                                 <span className="ml-2">Nos partenaires</span>
                             </NavLink>
 
-                
+
                 </ul>
               </nav>
             </div>
@@ -330,8 +322,8 @@ function Header() {
                 <div onClick={handleCloseUserMenu}>
                   {auth ? loggedIn : loggedOut}
                 </div>
-            
-            </Menu>
+
+              </Menu>
 
     {['right'].map((anchor) => (
 
@@ -361,14 +353,14 @@ function Header() {
             <div>
     </div>
 
-    
-          </div>
+
+                </div>
         </nav>
       </header>
-   
 
-</>
-      
+
+        </>
+
     );
 }
 

@@ -1,5 +1,4 @@
 import {
-  FavoriteBorderOutlined,
   SearchOutlined,
   ShoppingCartOutlined,
 } from "@material-ui/icons";
@@ -70,17 +69,17 @@ const Icon = styled.div`
   }
 `;
 
-const Product = ({ item }) => {
+const ProductShopCard = ({ item }) => {
 
-  console.warn(item)
+    console.warn(item);
 
-  return (
-    <div className="h-full bg-white-background mb-4">
-      <Container className="pb-12" key={item.id}>
-        <Circle />
-          <Image src={item.img} />
-            <Info>
-                <Icon>
+    return (
+        <div className="h-full bg-white-background mb-4">
+            <Container className="pb-12" key={item.id}>
+                <Circle />
+                <Image src={item.img} />
+                <Info>
+                    <Icon>
                   <ShoppingCartOutlined />
                 </Icon>
               <NavLink to={`/products/${item.id}`}>
@@ -98,4 +97,4 @@ const Product = ({ item }) => {
   );
 };
 
-export default Product;
+export default ProductShopCard;

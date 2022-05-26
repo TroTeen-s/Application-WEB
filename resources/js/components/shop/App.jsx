@@ -1,6 +1,4 @@
-import Product from "./pages/Product";
-import Home from "./pages/Home";
-import {BrowserRouter} from 'react-router-dom'
+import Home from "./Accueil/Home";
 
 
 const App = () => {

@@ -1,5 +1,5 @@
-import React, { Component } from 'react';
-import ReactDOM from 'react-dom';
+import React from "react";
+import ReactDOM from "react-dom";
 import '../css/app.css';
 import {
     BrowserRouter as Router,
@@ -30,8 +30,8 @@ import Admin from './components/admin/Admin';
 import User from './components/admin/User'
 import Sponsors from './components/sponsors/Sponsors';
 
-import ShopAdmin from './components/dashboard/boutique/shop'
-import Details from './components/shop/components/Details'
+import ShopAdmin from "./components/dashboard/boutique/shop";
+import ProductPage from "./components/shop/ProductPage";
 
 ReactDOM.render(
     <React.StrictMode>
@@ -51,7 +51,7 @@ ReactDOM.render(
                     <Route path="shop" element={<Shop />} />
                     <Route path="need_help" element={<NeedHelp />} />
                     <Route path="store" element={<Store />} />
-                    <Route path="products/:id" element={<Details />} />
+                    <Route path="products/:id" element={<ProductPage />} />
                     <Route path="sponsors" element={<Sponsors />} />
 
                     <Route path="account" element={<Account />}>
