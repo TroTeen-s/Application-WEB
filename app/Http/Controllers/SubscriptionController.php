@@ -211,7 +211,6 @@ class SubscriptionController extends Controller
             'date' => Carbon::now(),
             'billing_address' => $invoiceReceived->customer_address,
             'id_stripe' => $invoiceReceived->id,
-            'id_subscription' => $invoiceReceived->subscription
         ]);
         $invoice->save();
 

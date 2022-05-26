@@ -3,7 +3,6 @@
 namespace Database\Seeders;
 
 use App\Models\User;
-use App\Models\Package;
 use Illuminate\Support\Str;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\Hash;
@@ -16,7 +15,7 @@ class UserSeeder extends Seeder
      *
      * @return void
      */
-    public function run()
+    public function run(): void
     {
         $loli = new User([
             'firstname' => 'Aurélien',
@@ -28,7 +27,7 @@ class UserSeeder extends Seeder
         ]);
         $loli->save();
 
-        $admin = new User([
+        $adminMatthias = new User([
             'firstname' => 'Matthias',
             'username' => 'Adib',
             'lastname' => 'Hamchi',
@@ -36,9 +35,9 @@ class UserSeeder extends Seeder
             'email' => 'matthias@gmail.com',
             'password' => Hash::make('admincheck'),
         ]);
-        $admin->save();
+        $adminMatthias->save();
 
-        $admin = new User([
+        $adminAurel = new User([
             'firstname' => 'Aurélien',
             'username' => 'Prumme',
             'lastname' => 'Prudhomme',
@@ -47,6 +46,17 @@ class UserSeeder extends Seeder
             'password' => Hash::make('aurelAD'),
             'role' => 'admin'
         ]);
-        $admin->save();
+        $adminAurel->save();
+
+        $adminLyes = new User([
+            'firstname' => 'Lyès',
+            'username' => 'BigOtter',
+            'lastname' => 'Rolland-Monnet',
+            'phone_number' => Str::random(10),
+            'email' => 'lyes@admin.com',
+            'password' => Hash::make('lyesadmin'),
+            'role' => 'admin'
+        ]);
+        $adminLyes->save();
     }
 }

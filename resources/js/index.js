@@ -31,8 +31,6 @@ import Sponsors from './components/sponsors/Sponsors';
 
 import ShopAdmin from "./components/dashboard/boutique/shop";
 import ProductPage from "./components/shop/ProductPage";
-import ShopAdmin from './components/dashboard/boutique/shop'
-import Details from "./components/shop/components/Details";
 import Subscriptions from "./components/account/Subscriptions";
 import SubscriptionDetails from "./components/account/SubscriptionDetails";
 
@@ -40,6 +38,13 @@ ReactDOM.render(
     <React.StrictMode>
         <Router>
             <Routes>
+
+                <Route path="auth" element={<AuthPage />}>
+                    <Route index element={<Navigate to="/auth/login" replace />} />
+                    <Route path="login" element={<SignInForm />} />
+                    <Route path="register" element={<SignUpForm />} />
+                </Route>
+
                 <Route exact path="/" element={<MainApp />}>
 
                     <Route index element={<Navigate to="/main" replace />} />
@@ -49,12 +54,6 @@ ReactDOM.render(
                     <Route path="store" element={<Store />} />
                     <Route path="products/:id" element={<ProductPage />} />
                     <Route path="sponsors" element={<Sponsors />} />
-
-                    <Route path="auth" element={<AuthPage />}>
-                        <Route index element={<Navigate to="/auth/login" replace />} />
-                        <Route path="login" element={<SignInForm />} />
-                        <Route path="register" element={<SignUpForm />} />
-                    </Route>
 
 
                     <Route path="account" element={<Account />}>
