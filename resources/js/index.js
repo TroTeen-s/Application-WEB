@@ -3,15 +3,14 @@ import ReactDOM from 'react-dom';
 import '../css/app.css';
 import {
     BrowserRouter as Router,
-    Route,
-    Routes
+    Route
 } from "react-router-dom";
 import Store from "./components/store/Store"
 import NeedHelp from "./components/needHelp/NeedHelp"
 import NotFound from "./components/notFound/NotFound"
 // import SignInPage from "./components/auth/SignInPage";
 import MainApp from "./components/MainApp";
-import { Navigate } from "react-router";
+import { Navigate, Routes } from "react-router";
 import AuthPage from "./components/auth/AuthPage";
 import SignUpForm from "./components/auth/SignUpForm";
 import SignInForm from "./components/auth/SignInForm";
@@ -29,7 +28,9 @@ import Admin from './components/admin/Admin';
 import User from './components/admin/User'
 
 import ShopAdmin from './components/dashboard/boutique/shop'
-import Details from './components/shop/components/Details'
+import Details from "./components/shop/components/Details";
+import Subscriptions from "./components/account/Subscriptions";
+import SubscriptionDetails from "./components/account/SubscriptionDetails";
 
 ReactDOM.render(
     <React.StrictMode>
@@ -56,6 +57,8 @@ ReactDOM.render(
                         <Route path="informations" element={<Informations />} />
                         <Route path="password" element={<Password />} />
                         <Route path="delete" element={<Delete />} />
+                        <Route path="subscriptions" element={<Subscriptions />} />
+                        <Route path="subscriptions/:subscriptionID" element={<SubscriptionDetails />} />
                     </Route>
 
 

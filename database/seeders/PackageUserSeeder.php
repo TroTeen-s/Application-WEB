@@ -18,6 +18,6 @@ class PackageUserSeeder extends Seeder
     {
         $user = User::query()->firstWhere('firstname', 'lola');
         $package = Package::query()->firstWhere('name', 'basique');
-        $user->subscriptions()->attach($package);
+        $user->packages()->attach($package);
     }
 }
