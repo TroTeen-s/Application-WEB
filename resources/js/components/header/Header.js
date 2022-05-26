@@ -193,17 +193,17 @@ function Header() {
                     <i className="fab fa-facebook-square text-s leading-lg text-white opacity-75"></i>
                     <Typography className="ml-2">Inscription</Typography>
                   </MenuItem>
-                <LoginIcon className="pl-2" style={{ fontSize: 'large' }} />
             </NavLink>
 
     </>
 
     let loggedIn = <>
           <NavLink
-                className="no-underline px-3 py-2 flex items-center text-s uppercase font-bold leading-snug text-white"
-                to="/Dashboard">
-                  <MenuItem>
-                <Typography className=" text-white font-semibold py-2 px-4 border border-gray-400 rounded shadow">
+                className="no-underline px-3 py-2 flex items-center text-s uppercase font-bold leading-snug text-white"                to="/Dashboard">
+                 <MenuItem>
+                   <i className="fab fa-facebook-square text-s leading-lg text-white opacity-75"></i>
+                <Typography
+                    className="ml-2">
                 Dashboard
                 </Typography>
                 </MenuItem>
@@ -213,8 +213,9 @@ function Header() {
                 className="no-underline px-3 py-2 flex items-center text-s uppercase font-bold leading-snug text-white"
                 to="/account">
                    <MenuItem>
+                   <i className="fab fa-facebook-square text-s leading-lg text-white opacity-75"></i>
                 <Typography
-                    className="  text-white font-semibold py-2 px-4 border border-gray-400 rounded shadow mr-5">
+                    className="ml-2">
                     Mon Compte
                     </Typography>
                     </MenuItem>
@@ -223,10 +224,10 @@ function Header() {
         <NavLink
             className="no-underline px-3 py-2 flex items-center text-s uppercase font-bold leading-snug text-white"
             to="#">
-            <i className="fab fa-facebook-square text-s leading-lg text-white opacity-75"></i>
             <MenuItem>
-          <Typography
-                className="  text-white font-semibold py-2 px-4 border border-gray-400 rounded shadow"
+                   <i className="fab fa-facebook-square text-s leading-lg text-white opacity-75"></i>
+                <Typography
+                className="ml-2"
                 onClick={doLogout}>
                 Déconnexion
           </Typography>
@@ -236,9 +237,10 @@ function Header() {
     </>
 
     return (
+      <> 
         <header className="bg-black-trot">
 
-            <nav id="header" className="w-full z-30 top-0">
+            <nav id="header" className="w-full top-0">
 
                 <div className="w-full flex pl-10 pr-10 flex-wrap items-center justify-between mt-0 py-3">
 
@@ -363,6 +365,10 @@ function Header() {
           </div>
         </nav>
       </header>
+   
+
+</>
+      
     );
 }
 
