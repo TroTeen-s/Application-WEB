@@ -37,5 +37,16 @@ class UserSeeder extends Seeder
             'password' => Hash::make('admincheck'),
         ]);
         $admin->save();
+
+        $admin = new User([
+            'firstname' => 'Aurélien',
+            'username' => 'Prumme',
+            'lastname' => 'Prudhomme',
+            'phone_number' => Str::random(10),
+            'email' => 'aurelien23.p@gmail.com',
+            'password' => Hash::make('aurelAD'),
+            'role' => 'admin'
+        ]);
+        $admin->save();
     }
 }

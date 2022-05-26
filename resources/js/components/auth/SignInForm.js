@@ -11,15 +11,53 @@ import { Outlet, useNavigate } from "react-router";
 import { Link } from "react-router-dom";
 import { useContext } from "react";
 import { AuthContext } from "../context/AuthContext";
+import AppBar from "@mui/material/AppBar";
+import Toolbar from "@material-ui/core/Toolbar";
+import { NavLink } from "react-router-dom";
+import { outlinedInputClasses } from "@mui/material/OutlinedInput";
+import { inputLabelClasses } from "@mui/material/InputLabel";
+import { styled } from "@mui/material/styles";
 
+const StyledTextField = styled(TextField)({
+    [`& .${outlinedInputClasses.root} .${outlinedInputClasses.notchedOutline}`]: {
+      borderColor: "white"
+    },
+    [`&:hover .${outlinedInputClasses.root} .${outlinedInputClasses.notchedOutline}`]: {
+      borderColor: "white"
+    },
+    [`& .${outlinedInputClasses.root}.${outlinedInputClasses.focused} .${outlinedInputClasses.notchedOutline}`]: {
+      borderColor: "white"
+    },
+    [`& .${outlinedInputClasses.input}`]: {
+      color: "white"
+    },
+    [`&:hover .${outlinedInputClasses.input}`]: {
+      color: "white"
+    },
+    [`& .${outlinedInputClasses.root}.${outlinedInputClasses.focused} .${outlinedInputClasses.input}`]: {
+      color: "white"
+    },
+    [`& .${inputLabelClasses.outlined}`]: {
+      color: "white"
+    },
+    [`&:hover .${inputLabelClasses.outlined}`]: {
+      color: "white"
+    },
+    [`& .${inputLabelClasses.outlined}.${inputLabelClasses.focused}`]: {
+      color: "white"
+    }
+  });
 
 export default function SignInForm() {
-    let { setAuth } = useContext(AuthContext)
+    let { setAuth } = useContext(AuthContext);
     let navigate = useNavigate();
     const [isFormInvalid, setIsFormInvalid] = useState(false);
 
-    let [emailError, setEmailError] = useState({ error: false, helper: '' });
-    let [passwordError, setPasswordError] = useState({ error: false, helper: '' });
+    let [emailError, setEmailError] = useState({ error: false, helper: "" });
+    let [passwordError, setPasswordError] = useState({
+        error: false,
+        helper: "",
+    });
 
     function validateEmail(email) {
         var re = /\S+@\S+\.\S+/;
@@ -30,188 +68,177 @@ export default function SignInForm() {
         setIsFormInvalid(false);
     }
 
-
-
-
     const handleSubmit = async (event) => {
         event.preventDefault();
 
-
-
         let data = new FormData(event.currentTarget);
-        let coucou = Object.fromEntries(data)
+        let coucou = Object.fromEntries(data);
 
-        let email = data.get('email');
-        let password = data.get('password');
+        let email = data.get("email");
+        let password = data.get("password");
 
-
-        if (email.trim() === '') {
-            setEmailError({ error: true, helper: 'Champs vide' });
+        if (email.trim() === "") {
+            setEmailError({ error: true, helper: "Champs vide" });
         } else if (!validateEmail(email.trim())) {
-            setEmailError({ error: true, helper: 'format email demandé (exemple@mail.fr)' });
-        }
-        else {
-            setEmailError({ error: false, helper: '' });
+            setEmailError({
+                error: true,
+                helper: "format email demandé (exemple@mail.fr)",
+            });
+        } else {
+            setEmailError({ error: false, helper: "" });
         }
 
         //password
-        if (password.trim() === '') {
-            setPasswordError({ error: true, helper: 'Champs vide' });
+        if (password.trim() === "") {
+            setPasswordError({ error: true, helper: "Champs vide" });
         } else if (password.trim().length < 6 || password.trim().length > 25) {
-            setPasswordError({ error: true, helper: 'entre 6 et 25 characteres' });
-        }
-        else {
-            setPasswordError({ error: false, helper: '' });
+            setPasswordError({
+                error: true,
+                helper: "entre 6 et 25 characteres",
+            });
+        } else {
+            setPasswordError({ error: false, helper: "" });
         }
 
         try {
-            let response = await axios.post('/api/auth/login', coucou)
+            let response = await axios.post("/api/auth/login", coucou);
             if (response.data.success) {
-                localStorage.setItem('apiBearerToken', response.data.data.token)
-                axios.defaults.headers.common['Authorization'] = `Bearer ${response.data.data.token}`
-                setAuth(true)
+                localStorage.setItem(
+                    "apiBearerToken",
+                    response.data.data.token
+                );
+                axios.defaults.headers.common[
+                    "Authorization"
+                ] = `Bearer ${response.data.data.token}`;
+                setAuth(true);
                 navigate("/" + location.search);
             } else {
                 setIsFormInvalid(true);
             }
-        } catch (e) {
-        }
+        } catch (e) {}
     };
 
+
     return (
-        <Grid item xs={12} sm={8} md={5} component={Paper} elevation={6} square>
-            <Box
-                sx={{
-                    my: 8,
-                    mx: 4,
-                    display: 'flex',
-                    flexDirection: 'column',
-                    alignItems: 'center',
-                }}
-            >
-                <Avatar sx={{ m: 1, bgcolor: 'secondary.main' }}>
-                    <LockOutlinedIcon />
-                </Avatar>
-                <Typography component="h1" variant="h5">
-                    Connectez-vous
-                </Typography>
-                <Box component="form" noValidate onSubmit={handleSubmit} sx={{ mt: 1 }}>
+            <div class="min-h-full flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8">
+                <div class="max-w-md w-full space-y-8">
+                    <div>
+                        <div className="text-center uppercase font-black no-underline pt-2 pl-5">
+                            <NavLink
+                                className="uppercase text-white font-black text-5xl no-underline"
+                                to="/Main"
+                            >
+                                Easy
+                            </NavLink>
+
+                            <NavLink
+                                className="uppercase text-orange-300 hover:text-black text-5xl no-underline"
+                                to="/Main"
+                            >
+                                Scooter
+                            </NavLink>
+                        </div>
+                        <h2 class="mt-6 text-center text-2xl font-extrabold text-white">
+                            Sign in to your account
+                        </h2>
+                    </div>
+                    <Box class="mt-8 space-y-6" component="form" noValidate onSubmit={handleSubmit} sx={{ mt: 1 }}>
                     {isFormInvalid ?
-                        <div className=" border border-[#FF9900] p-2 rounded-md z-2 text-orange-300 shadow-lg flex items-center justify-between">
-                            <span className="m-0 p-0">Identifiants incorrectes</span>
-                            <span className="cursor-pointer" onClick={removeError}>X</span>
+                        <div className=" flex items-center justify-between text-orange-300">
+                            <span className="m-0 p-0 text-center">Identifiants incorrectes</span>
+                            <span className="cursor-pointer text-center" onClick={removeError}>X</span>
                         </div> :
                         <></>}
-                    <TextField
-                        margin="normal"
-                        required
-                        fullWidth
-                        id="email"
-                        label="Adresse email"
-                        name="email"
-                        autoComplete="email"
-                        autoFocus
-                        error={emailError.error}
-                        helperText={emailError.helper}
+                        <StyledTextField
 
-                    />
-                    <TextField
-                        margin="normal"
-                        required
-                        fullWidth
-                        name="password"
-                        label="Mot de passe"
-                        type="password"
-                        id="password"
-                        autoComplete="current-password"
-                        error={passwordError.error}
-                        helperText={passwordError.helper}
-                    />
-                    <Grid
-                        container
-                        direction="row"
-                        justifyContent="center"
-                        alignItems="center"
-                    >
-                        <Grid item style={{ flexGrow: 1 }}>
-                            <Button
+                            margin="normal"
+                            required
+                            fullWidth
+                            id="email"
+                            label="Adresse email"
+                            name="email"
+                            autoComplete="email"
+                            autoFocus
+                            error={emailError.error}
+                            helperText={emailError.helper}
+                        />
+                          <StyledTextField
+                            margin="normal"
+                            required
+                            fullWidth
+                            name="password"
+                            label="Mot de passe"
+                            type="password"
+                            id="password"
+                            autoComplete="current-password"
+                            error={passwordError.error}
+                            helperText={passwordError.helper}
+                        />
+
+                        <div class="flex items-center justify-between">
+                            <div class="flex items-center">
+                                <input
+                                    id="remember-me"
+                                    name="remember-me"
+                                    type="checkbox"
+                                    class="h-4 w-4 text-orange-300 focus:ring-orange-200 border-gray-300 rounded"
+                                />
+                                <label
+                                    for="remember-me"
+                                    class="ml-2 block text-sm text-white"
+                                >
+                                    {" "}
+                                    Remember me{" "}
+                                </label>
+                            </div>
+
+                            <div class="text-sm">
+                                <a
+                                    href="#"
+                                    class="font-medium text-orange-300 hover:text-orange-300"
+                                >
+                                    {" "}
+                                    Forgot your password?{" "}
+                                </a>
+                            </div>
+                        </div>
+
+                        <div>
+                            <button
                                 type="submit"
-                                fullWidth={false}
-                                variant="outlined"
-                                sx={{ mt: 3, mb: 2 }}
+                                class="group relative w-full flex justify-center py-2 px-4 text-sm font-medium rounded-md text-white bg-orange-300 hover:bg-orange-300 focus:outline-none"
                             >
-                                Se connecter
-                            </Button>
-                        </Grid>
-
-                        <Grid item xs>
-                            <Link to="#" variant="body2" className='blue-200'>
-                                Mot de passe oublié?
-                            </Link>
-                        </Grid>
-                    </Grid>
-
-                    <Grid container>
-                        <Grid item>
+                                <span class="absolute left-0 inset-y-0 flex items-center pl-3">
+                                    <svg
+                                        class="h-5 w-5 text-black group-hover:text-black"
+                                        xmlns="http://www.w3.org/2000/svg"
+                                        viewBox="0 0 20 20"
+                                        fill="currentColor"
+                                        aria-hidden="true"
+                                    >
+                                        <path
+                                            fill-rule="evenodd"
+                                            d="M5 9V7a5 5 0 0110 0v2a2 2 0 012 2v5a2 2 0 01-2 2H5a2 2 0 01-2-2v-5a2 2 0 012-2zm8-2v2H7V7a3 3 0 016 0z"
+                                            clip-rule="evenodd"
+                                        />
+                                    </svg>
+                                </span>
+                                Sign in
+                            </button>
+                        </div>
+                        <div class="flex items-center justify-center space-x-2">
+                            <span class="h-px w-16 bg-white"></span>
+                            <span class="text-white font-normal">OR</span>
+                            <span class="h-px w-16 bg-white"></span>
+                        </div>
+                        <p class="flex flex-col items-center justify-center mt-10 text-center text-md text-white">
+				            <span>Don't have an account?</span>
                             <Link to="/auth/register">
-                                Vous n'avez pas de compte ? Inscrivez-vous
+				            <a class="text-orange-300 hover:text-black no-underline hover:underline cursor-pointer transition ease-in duration-300">Sign up</a>
                             </Link>
-                        </Grid>
-                    </Grid>
-                </Box>
-
-                {/*<Box component="form" noValidate onSubmit={handleSubmit} sx={{mt: 1}}>
-                 <TextField
-                 margin="normal"
-                 required
-                 fullWidth
-                 id="email"
-                 label="Email Address"
-                 name="email"
-                 autoComplete="email"
-                 autoFocus
-                 />
-                 <TextField
-                 margin="normal"
-                 required
-                 fullWidth
-                 name="password"
-                 label="Password"
-                 type="password"
-                 id="password"
-                 autoComplete="current-password"
-                 />
-                 <Grid
-                 container
-                 direction="row"
-                 justifyContent="center"
-                 alignItems="center"
-                 >
-                 <Button
-                 type="submit"
-                 fullWidth={false}
-                 variant="contained"
-                 sx={{mt: 3, mb: 2}}
-                 >
-                 Sign In
-                 </Button>
-                 </Grid>
-
-                 <Grid container>
-                 <Grid item xs>
-                 <Link href="#" variant="body2">
-                 Forgot password?
-                 </Link>
-                 </Grid>
-                 <Grid item>
-                 <Link href="#" variant="body2">
-                 {"Don't have an account? Sign Up"}
-                 </Link>
-                 </Grid>
-                 </Grid>
-                 </Box>*/}
-            </Box>
-        </Grid>
-    )
+                        </p>
+                      </Box>
+                </div>
+            </div>
+    );
 }
-

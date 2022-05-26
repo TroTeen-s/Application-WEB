@@ -7,6 +7,8 @@ use App\Http\Controllers\UserController;
 use App\Http\Controllers\PackageController;
 use App\Http\Controllers\ScootersController;
 use App\Http\Controllers\ProductController;
+use App\Http\Controllers\SponsorController;
+use App\Http\Controllers\SponsorCodeController;
 
 /* |-------------------------------------------------------------------------- | API Routes |-------------------------------------------------------------------------- | | Here is where you can register API routes for your application. These | routes are loaded by the RouteServiceProvider within a group which | is assigned the "api" middleware group. Enjoy building your API! | */
 
@@ -21,14 +23,18 @@ Route::post('/auth/update_password', [AuthController::class , 'update_password']
 Route::post('/auth/delete', [AuthController::class , 'delete']);
 
 
+Route::get('/sponsors', SponsorController::class);
+Route::get('/codes', SponsorCodeController::class);
+Route::get('/code/{id}', [SponsorCodeController::class , 'get_free_code'])->where('id', '[0-9]+');
 
+;
 
 Route::post('/auth/login', [AuthController::class , 'login']);
 
 Route::get('/users', UserController::class)->middleware('auth'); // localhost:8000/api/users/
 
 Route::prefix('stripe')->group(function () {
-    Route::post('/webhook', [SubscriptionController::class, 'checkoutWebhook']);
+    Route::post('/webhook', [SubscriptionController::class , 'checkoutWebhook']);
 });
 
 Route::group(['middleware' => ['auth:sanctum']], function () {
@@ -64,14 +70,21 @@ Route::group(['middleware' => ['auth:sanctum']], function () {
 
 
     ## ROUTES SCOOTERS
-    Route::get('/scooters', ScootersController::class);
-    Route::post('/scooter/create', [ScootersController::class , 'create']);
+
+    ## SPONSOR
+    Route::get('/initCode/{id}', [SponsorCodeController::class , 'init_free_code'])->where('id', '[0-9]+');
+    Route::get('/sponsors', SponsorController::class);
+    Route::get('/codes', SponsorCodeController::class);
+    Route::get('/code/{id}', [SponsorCodeController::class , 'get_free_code'])->where('id', '[0-9]+');
 
 
 
 
 
 });
+
+Route::get('/scooters', ScootersController::class);
+Route::post('/scooter/create', [ScootersController::class , 'create']);
 
 // For shopAdmin
 

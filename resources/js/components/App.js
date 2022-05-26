@@ -7,9 +7,11 @@ export default function App() {
   const [showModal, setShowModal] = React.useState(false);
   return (
     <>
-      <section id="firstSection" className=""  >
+      <section id="firstSection" className="">
+
         <Header />
-        <div class="mt-20 md:mt-40 bg-black-trot md:bg-transparent flex flex-col md:flex-row flex-nowrap justify-between items-center pb-10 md:pb-0" onClick={() => setShowModal(false)} >
+
+        <div class="mt-40 md:mt-40 bg-black-trot md:bg-transparent flex flex-col md:flex-row flex-nowrap justify-between items-center pb-10 md:pb-0" onClick={() => setShowModal(false)} >
           <div id="Left" class="">
             <img id="img" src="images/Frame 2.png"></img>
           </div>

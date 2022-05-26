@@ -28,7 +28,7 @@ class PackageSeeder extends Seeder
             'currency' => 'eur',
             'recurring' => ['interval' => 'month'],
             'product' => $stripeSubscriptions->id,
-            'nickname' => 'basique'
+            'nickname' => 'Basique'
         ]);
 
         $deluxe = $stripe->prices->create([
@@ -36,7 +36,7 @@ class PackageSeeder extends Seeder
             'currency' => 'eur',
             'recurring' => ['interval' => 'month'],
             'product' => $stripeSubscriptions->id,
-            'nickname' => 'deluxe'
+            'nickname' => 'Deluxe'
         ]);
 
         $premium = $stripe->prices->create([
@@ -44,7 +44,7 @@ class PackageSeeder extends Seeder
             'currency' => 'eur',
             'recurring' => ['interval' => 'month'],
             'product' => $stripeSubscriptions->id,
-            'nickname' => 'premium'
+            'nickname' => 'Prenium'
         ]);
 
         $package = new Package([

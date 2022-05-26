@@ -1,5 +1,4 @@
 import {
-  FavoriteBorderOutlined,
   SearchOutlined,
   ShoppingCartOutlined,
 } from "@material-ui/icons";
@@ -23,19 +22,22 @@ const Info = styled.div`
 `;
 
 const Container = styled.div`
+
   flex: 1;
   margin: 5px;
+  border-radius:10px;
   min-width: 280px;
   height: 350px;
   display: flex;
   align-items: center;
   justify-content: center;
-  background-color: #f5fbfd;
+  background-color: #F9F9F9;
   position: relative;
 
   &:hover ${Info}{
     opacity: 1;
   }
+
 `;
 
 const Circle = styled.div`
@@ -67,26 +69,32 @@ const Icon = styled.div`
   }
 `;
 
-const Product = ({ item }) => {
+const ProductShopCard = ({ item }) => {
 
-  console.warn(item)
+    console.warn(item);
 
-  return (
-    <Container key={item.id}>
-      <Circle />
-      <Image src={item.img} />
-      <Info>
-          <Icon>
-            <ShoppingCartOutlined />
-          </Icon>
-        <NavLink to={`/products/${item.id}`}>
-        <Icon>
-          <SearchOutlined />
-        </Icon>
-        </NavLink>
-      </Info>
-    </Container>
+    return (
+        <div className="h-full bg-white-background mb-4">
+            <Container className="pb-12" key={item.id}>
+                <Circle />
+                <Image src={item.img} />
+                <Info>
+                    <Icon>
+                  <ShoppingCartOutlined />
+                </Icon>
+              <NavLink to={`/products/${item.id}`}>
+                <Icon>
+                  <SearchOutlined />
+                </Icon>
+              </NavLink>
+            </Info>
+      </Container>
+
+      <h2 className="font-bold uppercase text-base pl-2 pt-2"> Data product </h2>
+      <p className="pl-2"> 50.00 € </p>
+    </div>
+
   );
 };
 
-export default Product;
+export default ProductShopCard;

@@ -9,19 +9,6 @@ import Link from '@mui/material/Link';
 import TrotMaintenance from './scoot/TrotMaintenance';
 import TrotReparation from './scoot/TrotReparation';
 
-function Copyright(props) {
-  return (
-    <Typography variant="body2" color="text.secondary" align="center" {...props}>
-      {'Copyright © '}
-      <Link color="inherit" href="https://mui.com/">
-        Your Website
-      </Link>{' '}
-      {new Date().getFullYear()}
-      {'.'}
-    </Typography>
-  );
-}
-
 const drawerWidth = 240;
 
 
@@ -32,22 +19,22 @@ export default function Main() {
   };
 
   return (
-        <Box 
-          component="main"
-          sx={{
-            backgroundColor: (theme) =>
-              theme.palette.mode === 'light'
-                ? theme.palette.grey[100]
-                : theme.palette.grey[900],
-            flexGrow: 1,
-            height: '100vh',
-          }}
-        >
-          <Toolbar />
-          <Container className="overflow-hidden" sx={{ mt: 1, mb: 1 }}>
-            <Grid container spacing={3}>
-         
-              {/* <Grid item xs={12} md={8} lg={9}>
+    <Box
+      component="main"
+      sx={{
+        backgroundColor: (theme) =>
+          theme.palette.mode === 'light'
+            ? theme.palette.grey[100]
+            : theme.palette.grey[900],
+        flexGrow: 1,
+        height: '100vh',
+      }}
+    >
+      <Toolbar />
+      <Container className="overflow-hidden" sx={{ mt: 1, mb: 1 }}>
+        <Grid container spacing={3}>
+
+          {/* <Grid item xs={12} md={8} lg={9}>
                 <Paper
                   sx={{
                     p: 2,
@@ -72,29 +59,25 @@ export default function Main() {
                   <Deposits />
                 </Paper>
               </Grid> */}
-          
-              <Grid item xs={20}>
-                <Paper sx={{ p: 3, display: 'flex', flexDirection: 'column' }}>
-                  <TrotMaintenance />
-                </Paper>
-              </Grid>
 
-              <Grid item xs={20}>
-                <Paper sx={{ p: 3, display: 'flex', flexDirection: 'column'}}>
-                  <TrotReparation />
-                </Paper>
-              </Grid>
+          <Grid item xs={20}>
+            <Paper sx={{ p: 3, display: 'flex', flexDirection: 'column', paddingBottom: 5 }}>
+              <TrotMaintenance />
+            </Paper>
+          </Grid>
 
-
-
-            </Grid>
+          <Grid item xs={20}>
+            <Paper sx={{ p: 3, display: 'flex', flexDirection: 'column', paddingBottom: 5 }}>
+              <TrotReparation />
+            </Paper>
+          </Grid>
 
 
 
-            
-            <Copyright sx={{ pt: 4 }} />
-          </Container>
-        </Box>
+        </Grid>
+
+      </Container>
+    </Box>
 
   );
 }
