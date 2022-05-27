@@ -20,6 +20,27 @@ const Subscriptions = () => {
         }
     };
 
+    const openCustomerPortal = async () => {
+        try {
+            let response = await axios.get("/api/customer-portal");
+            if (response.data.data) {
+                console.log(response.data.success);
+                if (response.data.data.redirect) {
+                    window.location.replace(response.data.data.redirect);
+                }
+            }
+        } catch
+            (e) {
+            if (e.request) {
+                console.log(e.request);
+            }
+            if (e.message) {
+                console.log(e.message);
+            }
+        }
+    };
+
+
     const currentPeriod = (cellValues) => {
         let { row } = cellValues;
 
@@ -47,7 +68,20 @@ const Subscriptions = () => {
             field: "last_payment",
             headerName: "Dernier paiment",
             editable: false,
-            flex: 2
+            flex: 2,
+            renderCell: ({ row }) => {
+                if (row.last_payment === "paid") {
+                    return "paid";
+                } else {
+                    return (
+                        <Chip
+                            label="Régler Problème"
+                            color="warning"
+                            onClick={openCustomerPortal}
+                        />
+                    );
+                }
+            }
         },
         {
             field: "active",

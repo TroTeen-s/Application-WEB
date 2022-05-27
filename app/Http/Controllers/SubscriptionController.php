@@ -14,6 +14,7 @@ use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
 use Stripe;
+use Stripe\BillingPortal\Session;
 use Stripe\Event;
 use Stripe\StripeClient;
 
@@ -121,9 +122,6 @@ class SubscriptionController extends Controller
         $event = Event::constructFrom($params);
         var_dump($params);
         error_log(ob_get_clean(), 4);
-        /*        Log::channel('stripe')->info('event type: ' . $event->type);
-                Log::channel('stripe')->info($event->data->object);*/
-
 
         switch ($event->type) {
             case 'customer.subscription.created':
@@ -238,5 +236,26 @@ class SubscriptionController extends Controller
         } catch (Exception $e) {
             Log::channel('errors')->info($e->getMessage());
         }
+    }
+
+    public function linkCustomerPortal(): JsonResponse
+    {
+
+        $user = auth()->user();
+
+        \Stripe\Stripe::setApiKey(getenv("STRIPE_PRIVATE"));
+
+        // Authenticate your user.
+        try {
+            $portalSession = Session::create([
+                'customer' => $user->id_stripe,
+                'return_url' => getenv("APP_URL") . '/account/subscriptions',
+            ]);
+        } catch (Stripe\Exception\ApiErrorException $e) {
+            return $this->fail('erreur stripe : ' . $e->getMessage());
+        }
+
+        return $this->success('redirection', ['redirect' => $portalSession->url]);
+
     }
 }
