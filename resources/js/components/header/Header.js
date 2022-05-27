@@ -250,6 +250,7 @@ function Header() {
                     <div className="hidden md:flex md:items-center md:w-auto w-full order-2 md:order-1" id="menu">
               <nav>
                 <ul className="md:flex items-center justify-between text-base text-gray-700 pt-4 md:pt-0">
+
                             <NavLink
                                 className="no-underline px-3 py-2 flex items-center text-s uppercase font-bold leading-snug text-white"
                                 to="/shop">
@@ -271,6 +272,12 @@ function Header() {
                                 <span className="ml-2">Nos partenaires</span>
                             </NavLink>
 
+                            <NavLink
+                                className="no-underline px-3 py-2 flex items-center text-s uppercase font-bold leading-snug text-white"
+                                to="/needHelp">
+                                <i className="fab fa-facebook-square text-s leading-lg text-white opacity-75"></i>
+                                <span className="ml-2">Besoin d'aide</span>
+                            </NavLink>
 
                 </ul>
               </nav>

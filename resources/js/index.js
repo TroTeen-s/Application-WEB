@@ -50,7 +50,7 @@ ReactDOM.render(
                     <Route index element={<Navigate to="/main" replace />} />
                     <Route path="main" element={<Main />} />
                     <Route path="shop" element={<Shop />} />
-                    <Route path="need_help" element={<NeedHelp />} />
+                    <Route path="needHelp" element={<NeedHelp />} />
                     <Route path="store" element={<Store />} />
                     <Route path="products/:id" element={<ProductPage />} />
                     <Route path="sponsors" element={<Sponsors />} />

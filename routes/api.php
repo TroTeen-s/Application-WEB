@@ -10,11 +10,16 @@ use App\Http\Controllers\ProductController;
 use App\Http\Controllers\SponsorController;
 use App\Http\Controllers\SponsorCodeController;
 
+use App\Http\Controllers\NeedHelpController;
+
+
 /* |-------------------------------------------------------------------------- | API Routes |-------------------------------------------------------------------------- | | Here is where you can register API routes for your application. These | routes are loaded by the RouteServiceProvider within a group which | is assigned the "api" middleware group. Enjoy building your API! | */
 
 // Route avec une seule action (fonction __invoke(), voir https://laravel.com/docs/9.x/controllers#single-action-controllers)
 
 Route::post('/auth/register', [AuthController::class , 'register']);
+
+Route::post('/support/need', [NeedHelpController::class, 'send']);
 
 Route::post('/auth/update', [AuthController::class , 'update']);
 
