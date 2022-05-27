@@ -20,6 +20,8 @@ use App\Http\Controllers\NeedHelpController;
 Route::post('/auth/register', [AuthController::class , 'register']);
 
 Route::post('/support/need', [NeedHelpController::class, 'send']);
+Route::get('/support/list', [NeedHelpController::class, 'list']);
+
 
 Route::post('/auth/update', [AuthController::class , 'update']);
 
@@ -31,8 +33,6 @@ Route::post('/auth/delete', [AuthController::class , 'delete']);
 Route::get('/sponsors', SponsorController::class);
 Route::get('/codes', SponsorCodeController::class);
 Route::get('/code/{id}', [SponsorCodeController::class , 'get_free_code'])->where('id', '[0-9]+');
-
-;
 
 Route::post('/auth/login', [AuthController::class , 'login']);
 

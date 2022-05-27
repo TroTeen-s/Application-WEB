@@ -21,6 +21,7 @@ import Trot from './components/dashboard/main';
 import Customers from './components/dashboard/Customers';
 import InnerContent from './components/dashboard/App'
 import Following from './components/dashboard/Following'
+import Ticket from './components/dashboard/ticket/indexTicket'
 import Shop from './components/shop/App'
 import Informations from "./components/account/Informations";
 import Password from "./components/account/Password";
@@ -72,6 +73,7 @@ ReactDOM.render(
                         <Route path="following" element={<Following />} />
                         <Route path="customers" element={<Customers />} />
                         <Route path="shopAdmin" element={<ShopAdmin />} />
+                        <Route path="ticket" element={<Ticket />} />
                     </Route>
 
                     <Route path="/admin" element={<Admin />} />

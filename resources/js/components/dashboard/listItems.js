@@ -14,6 +14,7 @@ import ElectricScooterIcon from '@mui/icons-material/ElectricScooter';
 import BoltIcon from '@mui/icons-material/Bolt';
 import MapIcon from '@mui/icons-material/Map';
 import AddLocationAltIcon from '@mui/icons-material/AddLocationAlt';
+import BugReportIcon from '@mui/icons-material/BugReport';
 
 import { NavLink } from "react-router-dom";
 
@@ -55,12 +56,24 @@ export const mainListItems = (
         <ListItemText primary="Customers" />
       </NavLink>
     </ListItemButton>
+
     <ListItemButton>
       <ListItemIcon>
         <BarChartIcon />
       </ListItemIcon>
       <ListItemText primary="API" />
     </ListItemButton>
+
+    <ListItemButton>
+      <ListItemIcon>
+        <BugReportIcon />
+      </ListItemIcon>
+      <NavLink className="no-underline text-black-trot" to="ticket">
+        <ListItemText primary="Ticket" />
+      </NavLink>
+    </ListItemButton>
+
+
     <ListItemButton>
       <ListItemIcon>
         <LocalGroceryStoreIcon />

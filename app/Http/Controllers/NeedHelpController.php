@@ -21,4 +21,9 @@ class NeedHelpController extends Controller
         return $post;
         // return redirect('add-blog-post-form')->with('status', 'Help Post Form Data Has Been inserted');
     }
+
+    function list(){
+        
+        return Ticket::all();
+    }
 }

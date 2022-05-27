@@ -109,7 +109,7 @@ function NeedHelp() {
          <div class="w-full px-4">
             <div class="text-center mx-auto mb-12 lg:mb-20 max-w-[510px]">
                <span class="font-semibold text-lg text-orange-300 mb-2 block">
-               Our Services
+               Nos services
                </span>
                <h2
                   class="
@@ -121,7 +121,7 @@ function NeedHelp() {
                   mb-4
                   "
                   >
-                  What We Offer
+                 Besoin d'aide ??
                </h2>
                <p class="text-base text-body-color">
                   There are many variations of passages of Lorem Ipsum available
@@ -259,7 +259,7 @@ function NeedHelp() {
         <div className="order-2 md:order-3 col-span-full md:col-span-1 py-5 md:py-10 px-6">
             
           <div className="mx-auto max-w-xl flex flex-col space-y-5">
-            <h2 className="text-4xl font-oswald uppercase">Contact us</h2>
+            <h2 className="text-4xl font-oswald uppercase">Contactez-nous</h2>
             <p className="text-sm text-gray-500">Lorem ipsum dolor sit amet consectetur adipisicing elit. Facilis unde, voluptatibus nemo molestiae iure, repudiandae quaerat ipsam, labore sed dolorem nisi odit at esse ullam suscipit quidem necessitatibus aut modi.</p>
             <a href="#mail" className="inline-flex items-center text-sm text-blue-400 font-semibold hover:text-blue-500">
               easyscooter@gmail.com

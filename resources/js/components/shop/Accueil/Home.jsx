@@ -1,11 +1,12 @@
 import React from "react";
 import ProductsList from "./ProductsList";
+import "./style.css"
 
 
 
 const Home = () => {
   return (
-      <div className="mt-6 pt-24">
+      <section id="sectionShop">
           <div className="m-auto text-center md:w-8/12">
               <h2 className="text-2xl text-black-trot font-bold md:text-4xl">Notre boutique <span
                   className="text-orange-300">contribue</span> à votre bonheur </h2>
@@ -21,7 +22,7 @@ const Home = () => {
               <ProductsList />
 
       </div>
-    </div>
+    </section>
   );
 };
 

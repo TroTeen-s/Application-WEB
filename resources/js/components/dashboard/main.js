@@ -34,32 +34,6 @@ export default function Main() {
       <Container className="overflow-hidden" sx={{ mt: 1, mb: 1 }}>
         <Grid container spacing={3}>
 
-          {/* <Grid item xs={12} md={8} lg={9}>
-                <Paper
-                  sx={{
-                    p: 2,
-                    display: 'flex',
-                    flexDirection: 'column',
-                    height: 240,
-                  }}
-                >
-                  <Chart />
-                </Paper>
-              </Grid>
-       
-              <Grid item xs={12} md={4} lg={3}>
-                <Paper
-                  sx={{
-                    p: 2,
-                    display: 'flex',
-                    flexDirection: 'column',
-                    height: 240,
-                  }}
-                >
-                  <Deposits />
-                </Paper>
-              </Grid> */}
-
           <Grid item xs={20}>
             <Paper sx={{ p: 3, display: 'flex', flexDirection: 'column', paddingBottom: 5 }}>
               <TrotMaintenance />
