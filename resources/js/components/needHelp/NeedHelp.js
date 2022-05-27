@@ -229,7 +229,7 @@ function NeedHelp() {
         <div className="order-3 md:order-2 col-span-full md:col-span-1 py-5 md:py-10 px-6">
 
 
-          <form action="" className="mx-auto max-w-xl space-y-4" onSubmit={SendTicket}>
+          <form action="" className="mx-auto max-w-xl space-y-4">
             <div class="">
                 <input onChange={(e) => setLastname(e.target.value)} disabled={status?.type === 'success' && true} type="text" id="nom" class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Nom"/>
             </div>
@@ -246,7 +246,7 @@ function NeedHelp() {
             <textarea onChange={(e) => setMessage(e.target.value)} disabled={status?.type === 'success' && true}  id="message" required rows="4" class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Leave a comment... ( 20 characters min ) "></textarea>
 
             <div>
-              <button type="submit" disabled={status?.type === 'success' && true} className="py-2 px-6 rounded bg-orange-300 text-base text-white font-semibold uppercase">{status?.type === 'success'? 'TICKET ENVOYE':'Send Message'}</button>
+              <button onClick={SendTicket} type="button" disabled={status?.type === 'success' && true} className="py-2 px-6 rounded bg-orange-300 text-base text-white font-semibold uppercase">{status?.type === 'success'? 'TICKET ENVOYE':'Send Message'}</button>
             </div>
           </form>
 
