@@ -73,6 +73,7 @@ Route::group(['middleware' => ['auth:sanctum']], function () {
 
     Route::post('/auth/update_password', [AuthController::class , 'update_password']);
 
+    Route::get('/customer-portal', [SubscriptionController::class, 'linkCustomerPortal']);
 
     ## ROUTES SCOOTERS
 
