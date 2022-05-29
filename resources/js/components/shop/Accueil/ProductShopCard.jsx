@@ -77,22 +77,22 @@ const ProductShopCard = ({ item }) => {
         <div className="h-full bg-white-background mb-4">
             <Container className="pb-12" key={item.id}>
                 <Circle />
-                <Image src={item.img} />
+                <Image src={item.image_path} />
                 <Info>
                     <Icon>
-                  <ShoppingCartOutlined />
-                </Icon>
-              <NavLink to={`/products/${item.id}`}>
-                <Icon>
-                  <SearchOutlined />
-                </Icon>
-              </NavLink>
-            </Info>
-      </Container>
+                        <ShoppingCartOutlined />
+                    </Icon>
+                    <NavLink to={`/products/${item.id}`}>
+                        <Icon>
+                            <SearchOutlined />
+                        </Icon>
+                    </NavLink>
+                </Info>
+            </Container>
 
-      <h2 className="font-bold uppercase text-base pl-2 pt-2"> Data product </h2>
-      <p className="pl-2"> 50.00 € </p>
-    </div>
+            <h2 className="font-bold uppercase text-base pl-2 pt-2"> {item.name} </h2>
+            <p className="pl-2">{item.price} €</p>
+        </div>
 
   );
 };

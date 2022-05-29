@@ -85,14 +85,16 @@ Route::group(['middleware' => ['auth:sanctum']], function () {
 });
 
 Route::get('/scooters', ScootersController::class);
-Route::post('/scooter/create', [ScootersController::class , 'create']);
+Route::post('/scooter/create', [ScootersController::class, 'create']);
 
 // For shopAdmin
 
 Route::post('/dashboard/addproduct', [ProductController::class, 'addProduct']);
 Route::get('/dashboard/list', [ProductController::class, 'list']);
 
-
+Route::get('/product-list', [\App\Http\Controllers\ShopController::class, 'productList']);
+Route::get('/products', [\App\Http\Controllers\ShopController::class, 'getProductById']);
+Route::get('/product/{productID}', [\App\Http\Controllers\ShopController::class, 'productInfo'])->where('productID', '[0-9]+');;
 
 //PACKAGES
 
