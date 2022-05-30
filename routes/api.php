@@ -9,6 +9,7 @@ use App\Http\Controllers\ScootersController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\SponsorController;
 use App\Http\Controllers\SponsorCodeController;
+use App\Http\Controllers\WeatherController;
 
 use App\Http\Controllers\NeedHelpController;
 
@@ -31,6 +32,7 @@ Route::post('/auth/delete', [AuthController::class , 'delete']);
 
 
 Route::get('/sponsors', SponsorController::class);
+Route::get('/weather', [WeatherController::class, 'get_todays_date']);
 Route::get('/codes', SponsorCodeController::class);
 Route::get('/code/{id}', [SponsorCodeController::class , 'get_free_code'])->where('id', '[0-9]+');
 
