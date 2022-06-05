@@ -48,7 +48,7 @@ const StyledTextField = styled(TextField)({
   });
 
 
-  
+
 
 export default function SignUpForm() {
     let [firstnameError, setFirstnameError] = useState({ error: false, helper: '' });
@@ -94,7 +94,7 @@ export default function SignUpForm() {
         } else {
             setFirstnameError({ error: false, helper: '' });
         }
-        //lastname  
+        //lastname
         if (lastname.trim() === '') {
             setLastnameError({ error: true, helper: 'Champs vide' });
         } else if (lastname.trim().length < 4 || lastname.trim().length > 50) {
@@ -157,6 +157,7 @@ export default function SignUpForm() {
 
 
     return (
+        <section className="h-auto bg-black-trot">
             <div class="min-h-auto flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8">
                 <div class="max-w-md w-full space-y-8">
                     <div>
@@ -181,7 +182,7 @@ export default function SignUpForm() {
                     </div>
                     <Box class="mt-8 space-y-6" component="form" noValidate onSubmit={handleSubmit} sx={{ mt: 1 }}>
                         <input type="hidden" name="remember" value="true" />
-                        
+
                         <div class="flex items-center justify-center space-x-2">
                             <span class="h-px w-16 bg-white"></span>
                             <span class="text-white font-normal">Personnal Information</span>
@@ -189,7 +190,7 @@ export default function SignUpForm() {
                         </div>
 
                     <Grid container spacing={2}>
-                        
+
                         <Grid item xs={12} sm={6}>
                             <StyledTextField
                                 inputProps={{ style: { color: "red" } }}
@@ -237,7 +238,7 @@ export default function SignUpForm() {
                                 helperText={phoneNumberError.helper}
                             />
                         </Grid>
-                
+
                         <Grid item xs={12}>
                             <StyledTextField
                                 error={emailError.error}
@@ -349,6 +350,7 @@ export default function SignUpForm() {
                       </Box>
                 </div>
             </div>
+        </section>
     );
 }
 
