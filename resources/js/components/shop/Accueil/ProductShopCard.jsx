@@ -1,9 +1,12 @@
 import {
-  SearchOutlined,
-  ShoppingCartOutlined,
+    SearchOutlined,
+    ShoppingCartOutlined
 } from "@material-ui/icons";
 import styled from "styled-components";
-import { NavLink } from 'react-router-dom'
+import { NavLink } from "react-router-dom";
+import IconButton from "@mui/material/IconButton";
+import { useContext } from "react";
+import { CartContext } from "../../context/AuthContext";
 
 const Info = styled.div`
   opacity: 0;
@@ -71,17 +74,36 @@ const Icon = styled.div`
 
 const ProductShopCard = ({ item }) => {
 
+    let { cart, setCartAndLocalStorage } = useContext(CartContext);
+
     console.warn(item);
+
+    const addToCart = () => {
+        console.log("ok mami");
+        let cartToBe = JSON.parse(JSON.stringify(cart));
+        const { id } = item;
+        let index = cartToBe.findIndex((product) => product.id === id);
+        if (index !== -1) {
+            cartToBe[index].quantity++;
+        } else {
+            cartToBe.push({
+                id: id,
+                quantity: 1
+            });
+        }
+        setCartAndLocalStorage(cartToBe);
+    };
+
 
     return (
         <div className="h-full bg-white-background mb-4">
             <Container className="pb-12" key={item.id}>
                 <Circle />
-                <Image src={item.image_path} />
+                <Image src={"/" + item.image_path} />
                 <Info>
-                    <Icon>
+                    <IconButton onClick={addToCart}>
                         <ShoppingCartOutlined />
-                    </Icon>
+                    </IconButton>
                     <NavLink to={`/products/${item.id}`}>
                         <Icon>
                             <SearchOutlined />

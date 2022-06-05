@@ -20,7 +20,7 @@ import Button from "@mui/material/Button";
 
 function Header() {
 
-    let { cart, setCart } = useContext(CartContext);
+    let { cart, setCartAndLocalStorage } = useContext(CartContext);
 
     const [products, setProducts] = useState([]);
 
@@ -28,7 +28,29 @@ function Header() {
         let response = await axios.get(`/api/products`, { params: { productIDs } });
 
         if (response.data.success) {
-            console.log(response.data.data);
+            let products = response.data.data;
+            let cartFiltered = cart.map((productInCart) => {
+                let result = products.filter(product => product.id === productInCart.id);
+                console.log(result);
+                if (result.length > 0) {
+                    return productInCart;
+                }
+            });
+            cartFiltered = cartFiltered.filter((element) => {
+                return element !== undefined;
+            });
+
+            products = products.map((product) => {
+                let result = cart.findIndex(productSearched => productSearched.id === product.id);
+                console.log(result);
+                if (result.length > 0) {
+                    return product;
+                }
+            });
+
+            if (cartFiltered.length !== cart.length) {
+                setCartAndLocalStorage(cartFiltered);
+            }
             setProducts(response.data.data);
         }
     };
@@ -113,7 +135,7 @@ function Header() {
                                                                 <div
                                                                     className="h-36 w-36 flex-shrink-0 overflow-hidden rounded-md border border-gray-200">
                                                                     <img
-                                                                        src={product.image_path}
+                                                                        src={"/" + product.image_path}
                                                                         alt="Salmon orange fabric pouch with match zipper, gray zipper pull, and adjustable hip belt."
                                                                         className="h-full w-full object-cover object-center" />
                                                                 </div>

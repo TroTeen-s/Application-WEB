@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\ShopController;
 use App\Http\Controllers\SubscriptionController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
@@ -26,8 +27,6 @@ Route::post('/auth/delete', [AuthController::class , 'delete']);
 Route::get('/sponsors', SponsorController::class);
 Route::get('/codes', SponsorCodeController::class);
 Route::get('/code/{id}', [SponsorCodeController::class , 'get_free_code'])->where('id', '[0-9]+');
-
-;
 
 Route::post('/auth/login', [AuthController::class , 'login']);
 
@@ -79,9 +78,6 @@ Route::group(['middleware' => ['auth:sanctum']], function () {
     Route::get('/code/{id}', [SponsorCodeController::class , 'get_free_code'])->where('id', '[0-9]+');
 
 
-
-
-
 });
 
 Route::get('/scooters', ScootersController::class);
@@ -92,9 +88,9 @@ Route::post('/scooter/create', [ScootersController::class, 'create']);
 Route::post('/dashboard/addproduct', [ProductController::class, 'addProduct']);
 Route::get('/dashboard/list', [ProductController::class, 'list']);
 
-Route::get('/product-list', [\App\Http\Controllers\ShopController::class, 'productList']);
-Route::get('/products', [\App\Http\Controllers\ShopController::class, 'getProductById']);
-Route::get('/product/{productID}', [\App\Http\Controllers\ShopController::class, 'productInfo'])->where('productID', '[0-9]+');;
+Route::get('/product-list', [ShopController::class, 'productList']);
+Route::get('/products', [ShopController::class, 'getProductById']);
+Route::get('/product/{productID}', [ShopController::class, 'productInfo'])->where('productID', '[0-9]+');
 
 //PACKAGES
 

@@ -35,6 +35,7 @@ const AuthProvider = ({ children }) => {
     let [cart, setCart] = useState(false);
 
     let setCartAndLocalStorage = (cartObject) => {
+        console.log("On change le panier hehehe");
         setCart(cartObject);
         let cartString = JSON.stringify(cartObject);
 

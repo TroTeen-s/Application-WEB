@@ -57,7 +57,7 @@ const Product = () => {
                                     </button>
                                 </div>
                             </div>
-                            <img src={product.image_path} width="400" height="400"
+                            <img src={"/" + product.image_path} width="400" height="400"
                                  className="md:w-5/12 m-auto" alt="mobility_illustration" />
                         </div>
                     </div>
