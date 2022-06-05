@@ -35,3 +35,11 @@ html{
     position: absolute;
     z-index:1;
 }
+
+/* html {
+    scroll-snap-type: y mandatory
+}
+
+.childy {
+    scroll-snap-align: start;
+  } */
