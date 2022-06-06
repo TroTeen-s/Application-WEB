@@ -6,6 +6,8 @@ use App\Models\User;
 use Illuminate\Support\Str;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\Hash;
+use Stripe\Exception\ApiErrorException;
+use Stripe\StripeClient;
 
 
 class UserSeeder extends Seeder
@@ -18,14 +20,31 @@ class UserSeeder extends Seeder
     public function run(): void
     {
         $loli = new User([
-            'firstname' => 'Aurélien',
-            'username' => 'dite La Puteuh',
-            'lastname' => 'La Loli',
+            'firstname' => 'lola',
+            'username' => 'lola',
+            'lastname' => 'lola',
             'phone_number' => Str::random(10),
-            'email' => 'ohyeah@loli.com',
-            'password' => Hash::make('loli'),
+            'email' => 'lola@lola.com',
+            'password' => Hash::make('lolalola'),
         ]);
         $loli->save();
+
+        $stripe = new StripeClient(getenv('STRIPE_PRIVATE'));
+        try {
+            $stripeResponse = $stripe->customers->create([
+                'description' => 'lola',
+                'email' => $loli->email,
+                'phone' => $loli->phone_number,
+                'name' => $loli->firstname . ' ' . $loli->lastname
+            ]);
+
+            if (isset($stripeResponse->id)) {
+                $loli->id_stripe = $stripeResponse->id;
+                $loli->save();
+            }
+        } catch (ApiErrorException $e) {
+            $error = $e->getMessage();
+        }
 
         $adminMatthias = new User([
             'firstname' => 'Matthias',

@@ -2,10 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Cart;
 use App\Models\Product;
 use App\Traits\ApiResponse;
 use Illuminate\Http\Request;
 use Illuminate\Http\JsonResponse;
+use Stripe\Exception\ApiErrorException;
+use Stripe\StripeClient;
 
 class ShopController extends Controller
 {
@@ -37,7 +40,7 @@ class ShopController extends Controller
     {
         if (!$request->has('productIDs')) {
             return $this->fail('paramètre productIDs manquant');
-        };
+        }
 
         $productIDs = $request->input("productIDs");
         $products = Product::query()->findMany($productIDs);
@@ -47,5 +50,75 @@ class ShopController extends Controller
         }
 
         return $this->success("voici les infos des produits demandés", $products);
+    }
+
+    public function buyCart(Request $request): JsonResponse
+    {
+        $user = auth()->user();
+        if (!$request->has('productIDs')) {
+            return $this->fail('paramètre productIDs manquant');
+        }
+
+        $productIDs = $request->input("productIDs");
+        $products = Product::query()->findMany($productIDs);
+
+        $items = [];
+        $price = 0;
+        $cart = new Cart(['user_id' => $user->id]);
+        $cart->save();
+
+        foreach ($products as $product) {
+            $item = $product->getOneAvailableForPurchase();
+            if (empty($item)) {
+                return $this->fail("erreur dans la récupération d'un item pour " . $product->name);
+            }
+            $cart->items()->attach($item);
+            $price += $product->price;
+            $items[] = $item;
+        }
+
+        $cart->save();
+
+        $stripe = new StripeClient(getenv('STRIPE_PRIVATE'));
+
+        try {
+            $stripe->paymentIntents->create([
+                'amount' => $price,
+                'currency' => 'eur',
+            ]);
+        } catch (ApiErrorException $e) {
+            return $this->fail("erreur dans la créttion du payment intent", $e->getMessage());
+        }
+
+        try {
+            $checkout_session = $stripe->checkout->sessions->create(array_filter([
+                'mode' => 'payment',
+                'payment_method_types' => ['card'],
+                'line_items' => [[
+                    'price_data' => [
+                        'currency' => 'eur',
+                        'product_data' => [
+                            'name' => 'Panier',
+                        ],
+                        'unit_amount' => $price * 100,
+                    ],
+                    'quantity' => 1,
+                ]],
+                "billing_address_collection" => "required",
+
+                'success_url' => getenv('APP_URL') . '?success=true&session_id={CHECKOUT_SESSION_ID}',
+                'cancel_url' => getenv('APP_URL') . '?canceled=true',
+                'customer' => $user->id_stripe ?? '',
+            ]));
+
+            $cart->checkout_id = $checkout_session->id;
+            $cart->save();
+
+        } catch (ApiErrorException $e) {
+            return $this->fail('erreur', $e->getMessage());
+        }
+
+
+        return $this->success('redirection', ['redirect' => $checkout_session->url]);
     }
 }

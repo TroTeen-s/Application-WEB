@@ -88,7 +88,6 @@ class PackageUser extends Pivot
      */
     public function invoices(): HasMany
     {
-        //        return Invoice::query()->where('id_subscription', $this->id_stripe)->get();
         return $this->HasMany(Invoice::class, 'id_subscription', 'id_stripe');
     }
 

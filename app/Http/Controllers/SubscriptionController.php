@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Cart;
 use App\Models\Invoice;
 use App\Models\Package;
 use App\Models\PackageUser;
@@ -64,7 +65,6 @@ class SubscriptionController extends Controller
                     'success_url' => $YOUR_DOMAIN . '?success=true&session_id={CHECKOUT_SESSION_ID}',
                     'cancel_url' => $YOUR_DOMAIN . '?canceled=true',
                     'customer' => $user->id_stripe ?? '',
-                    //                    'cancel_at' => Carbon::now()->addYear(),
                     'subscription_data' => [
                         'metadata' => [
                             'cancel_at' => Carbon::now()->addYear()
@@ -127,18 +127,26 @@ class SubscriptionController extends Controller
             case 'customer.subscription.created':
                 $this->createSubscription($event);
                 break;
+
             case 'customer.subscription.updated':
                 $this->updateSubscription($event);
                 break;
-            case  'invoice.paid':
+
+            case 'invoice.paid':
                 if ($event->data->object->subscription) {
                     $this->createInvoice($event);
                 }
                 break;
+
             case 'payment_intent.succeeded':
                 Log::channel('errors')->info('on est là heyyyyy');
                 $this->createPayment($event);
                 break;
+
+            case 'checkout.session.completed':
+                $this->finishCart($event);
+                break;
+
             default:
                 break;
         }
@@ -257,5 +265,25 @@ class SubscriptionController extends Controller
 
         return $this->success('redirection', ['redirect' => $portalSession->url]);
 
+    }
+
+    public function finishCart(Event $event): JsonResponse
+    {
+        $cart = Cart::query()->firstWhere('checkout_id', $event->data->object->id);
+        $cart->save();
+        $cart->update([
+            'bought' => true,
+            'payment_id' => $event->data->object->payment_intent
+        ]);
+        $itemsBought = $cart->items;
+
+        foreach ($itemsBought as $item) {
+            $item->update([
+                'bought' => true,
+                'available' => true
+            ]);
+        }
+
+        return $this->success('test', $cart->items);
     }
 }

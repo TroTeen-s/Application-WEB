@@ -69,12 +69,19 @@ function Header() {
     }, [cart]);
 
 
-    const readCart = () => {
+    const readCart = async () => {
         console.log(cart);
         console.log(products);
         console.log("Le total est " + total);
+        let productIDs = cart.map((carProduct) => {
+            return carProduct.id;
+        });
 
-        let response = axios.get("/api/shop/buy-cart", { params: { products: cart } });
+        let response = await axios.get("/api/shop/buy-cart", { params: { productIDs: productIDs } });
+        if (response.data.data.redirect) {
+            window.location.replace(response.data.data.redirect);
+        }
+
     };
 
     const [anchorElUser, setAnchorElUser] = React.useState(null);

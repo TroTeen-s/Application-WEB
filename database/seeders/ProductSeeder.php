@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Models\Item;
 use App\Models\Product;
 use Illuminate\Database\Seeder;
 
@@ -23,6 +24,7 @@ class ProductSeeder extends Seeder
 
         $casque->save();
 
+
         $gant = new Product([
             'name' => 'Gants en cuir',
             'price' => 20,
@@ -31,5 +33,17 @@ class ProductSeeder extends Seeder
         ]);
 
         $gant->save();
+        Item::factory(10)->create([
+            'product_id' => $gant->id,
+            'bought' => false,
+            'returned' => false
+        ]);
+
+        Item::factory(10)->create([
+            'product_id' => $casque->id,
+            'bought' => false,
+            'returned' => false
+        ]);
+
     }
 }
