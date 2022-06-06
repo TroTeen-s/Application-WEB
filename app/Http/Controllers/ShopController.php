@@ -82,15 +82,6 @@ class ShopController extends Controller
         $stripe = new StripeClient(getenv('STRIPE_PRIVATE'));
 
         try {
-            $stripe->paymentIntents->create([
-                'amount' => $price,
-                'currency' => 'eur',
-            ]);
-        } catch (ApiErrorException $e) {
-            return $this->fail("erreur dans la créttion du payment intent", $e->getMessage());
-        }
-
-        try {
             $checkout_session = $stripe->checkout->sessions->create(array_filter([
                 'mode' => 'payment',
                 'payment_method_types' => ['card'],
@@ -120,5 +111,25 @@ class ShopController extends Controller
 
 
         return $this->success('redirection', ['redirect' => $checkout_session->url]);
+    }
+
+    public function getAllCartsInfo(Request $request): JsonResponse
+    {
+        $carts = Cart::query()->where('bought', true)->get();
+
+        $carts->each(function ($cart) {
+            $cart->setAppends(['payment', 'itemNumber']);
+        });
+
+        return $this->success('alors', $carts);
+
+    }
+
+    public function getCartInfo(Request $request): JsonResponse
+    {
+        $cart = Cart::query()->firstWhere('id', $request->input('id'));
+
+        return $this->success('alors', $cart->setAppends(['payment', 'itemNumber', 'items']));
+
     }
 }

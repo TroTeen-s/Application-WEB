@@ -278,12 +278,18 @@ class SubscriptionController extends Controller
         $itemsBought = $cart->items;
 
         foreach ($itemsBought as $item) {
-            $item->update([
-                'bought' => true,
-                'available' => true
-            ]);
+            $item->bought = true;
+            $item->available = false;
+            $item->save();
         }
 
         return $this->success('test', $cart->items);
+    }
+
+    public function test(Request $request): JsonResponse
+    {
+        $cart = Cart::query()->firstWhere('id', $request->input('id'));
+
+        return $this->success('alors', $cart->setAppends(['payment', 'itemNumber']));
     }
 }

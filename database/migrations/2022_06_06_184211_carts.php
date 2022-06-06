@@ -16,6 +16,7 @@ return new class extends Migration {
             $table->id();
             $table->string('checkout_id')->nullable();
             $table->string('payment_id')->nullable();
+            $table->timestamps();
             $table->boolean('bought')->nullable()->default(false);
             $table->unsignedBigInteger('user_id');
             $table->foreign('user_id')->references('id')->on('users');

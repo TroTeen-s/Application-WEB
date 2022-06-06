@@ -79,7 +79,9 @@ Route::group(['middleware' => ['auth:sanctum']], function () {
 
     ## ROUTES SHOP
     Route::get('/shop/buy-cart', [ShopController::class, 'buyCart']);
-    Route::get('/shop/test', [SubscriptionController::class, 'finishCart']);
+    Route::get('/shop/test', [SubscriptionController::class, 'test']);
+    Route::get('/carts', [ShopController::class, 'getAllCartsInfo']);
+    Route::get('/cart', [ShopController::class, 'getCartInfo']);
 
 
 });

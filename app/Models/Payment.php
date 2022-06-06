@@ -18,6 +18,15 @@ class Payment extends Model
         'id_invoice_stripe'
     ];
 
+    protected $hidden = [
+        'id_stripe',
+        'id_invoice_stripe',
+        'user_id',
+        'bought',
+        'id'
+    ];
+
+
     public $timestamps = false;
 
     use HasFactory;
