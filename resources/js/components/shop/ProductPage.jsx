@@ -1,7 +1,16 @@
-import React, { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import React, { useContext, useEffect, useState } from "react";
+import { NavLink, useParams } from "react-router-dom";
+import { ACTIONS, CartContext } from "../context/CartContext";
+import ArrowBackIosNewIcon from "@mui/icons-material/ArrowBackIosNew";
 
 const Product = () => {
+
+    let { dispatch } = useContext(CartContext);
+
+    const addToCart = (id) => {
+        dispatch({ type: ACTIONS.CART_ADD_UNIQUE, payload: { id: id } });
+    };
+
 
     const { id } = useParams();
 
@@ -19,22 +28,20 @@ const Product = () => {
 
         retrieveProductInfos();
     }, []);
-
-
-    const [showModal, setShowModal] = React.useState(false);
-
     if (product)
         return (
 
             <section className="bg-white-background">
-                {/* <div ClassName="flex mt-5 ml-5">
-                 <NavLink to="/shop" style={{ color: 'black', textDecoration: 'none !important' }}>
-                 <div className="align-bottom">
-                 <ArrowBackIosIcon  className="leading-none align-baseline" style={{ color: 'black', textDecoration: 'none !important' }} fontSize="large"/>
-                 <h1 className="font-bold uppercase text-2xl mb-5 leading-none align-baseline">Retour</h1>
-                 </div>
-                 </NavLink>
-                 </div> */}
+                <div className="flex mt-5 ml-5">
+                    <NavLink to="/shop" style={{ color: "black", textDecoration: "none !important" }}>
+                        <div className="align-bottom">
+                            <ArrowBackIosNewIcon className="leading-none align-baseline"
+                                                 style={{ color: "black", textDecoration: "none !important" }}
+                                                 fontSize="large" />
+                            <h1 className="font-bold uppercase text-2xl mb-5 leading-none align-baseline">Retour</h1>
+                        </div>
+                    </NavLink>
+                </div>
 
                 <div className="py-16 bg-green-50 mt-12 pt-5 ">
                     <div className="container m-auto px-6 space-y-8 md:px-12 lg:px-20">
@@ -51,6 +58,7 @@ const Product = () => {
                                 </div>
                                 <div className="flex flex-wrap justify-center gap-4 lg:gap-6 md:justify-start">
                                     <button
+                                        onClick={() => addToCart(product?.id)}
                                         className="bg-orange-300 opacity-75 hover:opacity-100 text-black-trot px-10 py-2 font-semibold">
                                         <i className="mdi mdi-cart -ml-2 mr-2"></i>
                                         Ajouter au panier

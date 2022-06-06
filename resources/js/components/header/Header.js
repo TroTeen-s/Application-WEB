@@ -14,13 +14,16 @@ import MenuItem from "@mui/material/MenuItem";
 import Typography from "@mui/material/Typography";
 
 import { NavLink } from "react-router-dom";
-import { AuthContext, CartContext } from "../context/AuthContext";
 import Button from "@mui/material/Button";
+import { ACTIONS, CartContext } from "../context/CartContext";
+import { AuthContext } from "../context/AuthContext";
 
 
 function Header() {
 
-    let { cart, setCartAndLocalStorage } = useContext(CartContext);
+    let [total, setTotal] = useState(0);
+
+    let { cart, dispatch } = useContext(CartContext);
 
     const [products, setProducts] = useState([]);
 
@@ -28,9 +31,14 @@ function Header() {
         let response = await axios.get(`/api/products`, { params: { productIDs } });
 
         if (response.data.success) {
-            let products = response.data.data;
+            let productsReceived = response.data.data;
+            let totalCalculus = 0;
+            productsReceived.forEach(product => totalCalculus = totalCalculus + product.price);
+            if (total !== totalCalculus) {
+                setTotal(totalCalculus);
+            }
             let cartFiltered = cart.map((productInCart) => {
-                let result = products.filter(product => product.id === productInCart.id);
+                let result = productsReceived.filter(product => product.id === productInCart.id);
                 console.log(result);
                 if (result.length > 0) {
                     return productInCart;
@@ -40,16 +48,8 @@ function Header() {
                 return element !== undefined;
             });
 
-            products = products.map((product) => {
-                let result = cart.findIndex(productSearched => productSearched.id === product.id);
-                console.log(result);
-                if (result.length > 0) {
-                    return product;
-                }
-            });
-
             if (cartFiltered.length !== cart.length) {
-                setCartAndLocalStorage(cartFiltered);
+                dispatch({ type: ACTIONS.CART_INIT, payload: { intialCart: cartFiltered } });
             }
             setProducts(response.data.data);
         }
@@ -57,6 +57,10 @@ function Header() {
 
     useEffect(() => {
         if (cart) {
+            if (cart.length <= 0) {
+                setProducts([]);
+                return;
+            }
             let productIDs = cart.map((carProduct) => {
                 return carProduct.id;
             });
@@ -68,6 +72,9 @@ function Header() {
     const readCart = () => {
         console.log(cart);
         console.log(products);
+        console.log("Le total est " + total);
+
+        let response = axios.get("/api/shop/buy-cart", { params: { products: cart } });
     };
 
     const [anchorElUser, setAnchorElUser] = React.useState(null);
@@ -149,8 +156,11 @@ function Header() {
                                                                             </h3>
                                                                         </div>
                                                                         <p className="text-gray-900">{product.price}€</p>
-                                                                        <p className="text-gray-500">Quantité : 1</p>
                                                                         <a type="button"
+                                                                           onClick={() => dispatch({
+                                                                               type: ACTIONS.CART_REMOVE_UNIQUE,
+                                                                               payload: { id: product.id }
+                                                                           })}
                                                                            className="text-orange-300 no-underline">Remove</a>
                                                                     </div>
 
@@ -170,7 +180,7 @@ function Header() {
                                 <div className="border-t border-gray-200 py-6 px-4 sm:px-6">
                                     <div className="flex justify-between text-base font-medium text-gray-900">
                                         <p>Prix Total</p>
-                                        <p>262.00€</p>
+                                        <p>{total}€</p>
                                     </div>
                                     <p className="mt-0.5 text-sm text-gray-500">TVA et taxes comprises</p>
                                     <div className="mt-6">

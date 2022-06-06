@@ -6,7 +6,7 @@ import styled from "styled-components";
 import { NavLink } from "react-router-dom";
 import IconButton from "@mui/material/IconButton";
 import { useContext } from "react";
-import { CartContext } from "../../context/AuthContext";
+import { ACTIONS, CartContext } from "../../context/CartContext";
 
 const Info = styled.div`
   opacity: 0;
@@ -74,24 +74,10 @@ const Icon = styled.div`
 
 const ProductShopCard = ({ item }) => {
 
-    let { cart, setCartAndLocalStorage } = useContext(CartContext);
-
-    console.warn(item);
+    let { cart, dispatch } = useContext(CartContext);
 
     const addToCart = () => {
-        console.log("ok mami");
-        let cartToBe = JSON.parse(JSON.stringify(cart));
-        const { id } = item;
-        let index = cartToBe.findIndex((product) => product.id === id);
-        if (index !== -1) {
-            cartToBe[index].quantity++;
-        } else {
-            cartToBe.push({
-                id: id,
-                quantity: 1
-            });
-        }
-        setCartAndLocalStorage(cartToBe);
+        dispatch({ type: ACTIONS.CART_ADD_UNIQUE, payload: { id: item.id } });
     };
 
 
@@ -116,7 +102,7 @@ const ProductShopCard = ({ item }) => {
             <p className="pl-2">{item.price} €</p>
         </div>
 
-  );
+    );
 };
 
 export default ProductShopCard;

@@ -11,8 +11,7 @@ export default function shop() {
 
   async function addProduct(){
 
-    
-    console.warn(name,file,price,description)
+
     const formData = new FormData();
     formData.append('file',file)
     formData.append('price',price)
@@ -36,8 +35,8 @@ export default function shop() {
     setData(result)
   },[])
 
-  
-const columns = [
+
+    const columns = [
   { field: 'id', headerName: 'ID', width: 70 },
   { field: 'name', headerName: 'Name', width: 200 },
   { field: 'description', headerName: 'Description', width: 250 },
@@ -48,23 +47,29 @@ const columns = [
 ]
 
 
-  console.warn("result",data)
 
   return (
     <div className="col-sm-8 mr-2 ml-1 offset-sm-1">
-      <div className="">
-        <br/>
-          <input type="text" className="form-control" onChange={(e) => setName(e.target.value)} placeholder="Name"/> <br/>
-          <input type="file" className="form-control" onChange={(e) => setFile(e.target.files[0])} placeholder="file"/> <br/>
-          <input type="text" className="form-control" onChange={(e) => setPrice(e.target.value)} placeholder="price"/> <br/>
-          <input type="text" className="form-control" onChange={(e) => setPrice(e.target.value)} placeholder="quantity"/> <br/>
-          <input type="text" className="form-control" onChange={(e) => setDescription(e.target.value)} placeholder="description"/> <br/>
-          <button onClick={addProduct} className="bg-orange-300 text-gray-800 font-semibold py-2 px-4 rounded shadow"> Ajouter un produit </button> 
-          
-      </div>
-     
+        <div className="">
+            <br />
+            <input type="text" className="form-control" onChange={(e) => setName(e.target.value)} placeholder="Name" />
+            <br />
+            <input type="file" className="form-control" onChange={(e) => setFile(e.target.files[0])}
+                   placeholder="file" /> <br />
+            <input type="text" className="form-control" onChange={(e) => setPrice(e.target.value)}
+                   placeholder="price" /> <br />
+            <input type="text" className="form-control" onChange={(e) => setPrice(e.target.value)}
+                   placeholder="quantity" /> <br />
+            <input type="text" className="form-control" onChange={(e) => setDescription(e.target.value)}
+                   placeholder="description" /> <br />
+            <button onClick={addProduct}
+                    className="bg-orange-300 text-gray-800 font-semibold py-2 px-4 rounded shadow"> Ajouter un produit
+            </button>
 
-      <div className="mt-5 mb-5" style={{ height: 370, width: '100%' }}>
+        </div>
+
+
+        <div className="mt-5 mb-5" style={{ height: 370, width: '100%' }}>
         <h3> Product Lists </h3>
         <DataGrid
           rows={data}
@@ -77,5 +82,4 @@ const columns = [
   )
 
 
-  
 }
