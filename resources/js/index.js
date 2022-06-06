@@ -34,8 +34,10 @@ import ShopAdmin from "./components/dashboard/boutique/shop";
 import ProductPage from "./components/shop/ProductPage";
 import Subscriptions from "./components/account/Subscriptions";
 import SubscriptionDetails from "./components/account/SubscriptionDetails";
+import './i18n.js'
 
 ReactDOM.render(
+
     <React.StrictMode>
         <Router>
             <Routes>

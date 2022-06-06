@@ -17,11 +17,20 @@ import { NavLink } from "react-router-dom";
 import { AuthContext } from "../context/AuthContext";
 
 import Weather from "./components/Weather";
+import { useTranslation } from 'react-i18next';
 
+
+
+import { Trans } from 'react-i18next';
 
 
 
 function Header() {
+
+  const { t, i18n } = useTranslation();
+
+
+
 
   const [anchorElUser, setAnchorElUser] = React.useState(null);
 
@@ -44,6 +53,7 @@ function Header() {
 
     setState({ ...state, [anchor]: open });
   };
+
 
   const list = (anchor) => (
 
@@ -177,7 +187,7 @@ function Header() {
       to="/auth/login">
       <MenuItem className="mr-5">
         <i className="fab fa-facebook-square text-s leading-lg text-white opacity-75"></i>
-        <Typography className="ml-2">Connexion</Typography>
+        <Typography className="ml-2">{t('log in')}</Typography>
       </MenuItem>
     </NavLink>
 
@@ -187,7 +197,7 @@ function Header() {
       to="/auth/register">
       <MenuItem>
         <i className="fab fa-facebook-square text-s leading-lg text-white opacity-75"></i>
-        <Typography className="ml-2">Inscription</Typography>
+        <Typography className="ml-2">{t('Register')}</Typography>
       </MenuItem>
     </NavLink>
 
@@ -200,7 +210,7 @@ function Header() {
         <i className="fab fa-facebook-square text-s leading-lg text-white opacity-75"></i>
         <Typography
           className="ml-2">
-          Dashboard
+          {t('Dashboard')}
         </Typography>
       </MenuItem>
     </NavLink>
@@ -212,7 +222,7 @@ function Header() {
         <i className="fab fa-facebook-square text-s leading-lg text-white opacity-75"></i>
         <Typography
           className="ml-2">
-          Mon Compte
+          {t('My account')}
         </Typography>
       </MenuItem>
     </NavLink>
@@ -225,10 +235,12 @@ function Header() {
         <Typography
           className="ml-2"
           onClick={doLogout}>
-          Déconnexion
+          {t('Log out')}
         </Typography>
       </MenuItem>
     </NavLink>
+
+
 
   </>
 
@@ -259,28 +271,30 @@ function Header() {
                     className="no-underline px-3 py-2 flex items-center text-s uppercase font-bold leading-snug text-white"
                     to="/shop">
                     <i className="fab fa-facebook-square text-s leading-lg text-white opacity-75"></i>
-                    <span className="ml-2">Notre Boutique</span>
+                    <span className="ml-2">{t('Shop')}</span>
                   </NavLink>
+
+
 
                   <NavLink
                     className="no-underline px-3 py-2 flex items-center text-s uppercase font-bold leading-snug text-white"
                     to="/store">
                     <i className="fab fa-facebook-square text-s leading-lg text-white opacity-75"></i>
-                    <span className="ml-2">Nos abonnements</span>
+                    <span className="ml-2">{t('Subscriptions')}</span>
                   </NavLink>
 
                   <NavLink
                     className="no-underline px-3 py-2 flex items-center text-s uppercase font-bold leading-snug text-white"
                     to="/sponsors">
                     <i className="fab fa-facebook-square text-s leading-lg text-white opacity-75"></i>
-                    <span className="ml-2">Nos partenaires</span>
+                    <span className="ml-2">{t('Partners')}</span>
                   </NavLink>
 
                   <NavLink
                     className="no-underline px-3 py-2 flex items-center text-s uppercase font-bold leading-snug text-white"
                     to="/needHelp">
                     <i className="fab fa-facebook-square text-s leading-lg text-white opacity-75"></i>
-                    <span className="ml-2">Besoin d'aide</span>
+                    <span className="ml-2">{t('Need help')}</span>
                   </NavLink>
 
                 </ul>
