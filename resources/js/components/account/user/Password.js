@@ -1,25 +1,19 @@
 import React, { useContext, useLayoutEffect, useState } from 'react';
-
-import { AuthContext } from "../context/AuthContext";
 import { Grid, Typography } from "@mui/material";
-import AccountCircleOutlinedIcon from '@mui/icons-material/AccountCircleOutlined';
 import Box from "@mui/material/Box";
 import TextField from "@mui/material/TextField";
 import Button from "@mui/material/Button";
-import NavAccount from './NavAccount';
-import { NavLink } from "react-router-dom";
-import { useNavigate } from "react-router";
+import NavAccount from "./NavAccount";
+import { AuthContext } from "../../context/AuthContext";
 
-const Informations = () => {
+const Password = () => {
 
-    const [infos, setInfos] = useState([])
+    let error_new_password = false
+    let error_confirm_new_password = false
+
+
+    const [infos, setInfos] = useState([]);
     let { auth } = useContext(AuthContext)
-    let navigate = useNavigate()
-
-
-    const handleChange = (event) => {
-        setInfos(event.target.value);
-    };
 
     const retrieveInfos = async () => {
         try {
@@ -36,7 +30,6 @@ const Informations = () => {
         } catch (e) {
         }
     }
-
     const handleSubmit = async (event) => {
         event.preventDefault();
         let data = new FormData(event.currentTarget);
@@ -45,7 +38,7 @@ const Informations = () => {
 
         console.log(Object.fromEntries(data))
         try {
-            let response = await axios.post('/api/auth/update', coucou)
+            let response = await axios.post('/api/auth/update_password', coucou)
             if (response.data.success) {
                 localStorage.setItem('apiBearerToken', response.data.data.token)
                 axios.defaults.headers.common['Authorization'] = `Bearer ${response.data.data.token}`
@@ -54,76 +47,51 @@ const Informations = () => {
         }
     };
 
-
     useLayoutEffect(() => {
         retrieveInfos()
     }, [auth])
+
 
     return (
 
         <Grid container spacing={2}>
             <Grid item xs={12}>
                 <Typography variant="h3">
-                    Modification d'information personnelles
+                    Modification de Mot de passe
                 </Typography>
             </Grid>
             <Grid container item xs={12}>
                 <Grid xs={4} className='text-[5]' alignItems="center" justifyContent="center">
-                    <NavAccount selLink='informations' />
+                    <NavAccount selLink="password" />
                 </Grid>
                 <Grid item xs={8}>
                     <Box component="form" noValidate onSubmit={handleSubmit} sx={{ mt: 3 }}>
                         <Grid container spacing={2}>
-                            <Grid item xs={12} sm={6}>
+
+                            <Grid item xs={12}>
                                 <TextField
-                                    autoComplete="given-name"
-                                    name="firstname"
+                                    error={error_new_password}
                                     required
                                     fullWidth
-                                    id="firstname"
-                                    label="Prénom"
-                                    autoFocus
-                                    value={infos.firstname}
-                                    onChange={handleChange}
-                                    InputLabelProps={{ shrink: true }}
+                                    name="password"
+                                    label="Nouveau mot de passe"
+                                    type="password"
+                                    id="password"
                                 />
                             </Grid>
-                            <Grid item xs={12} sm={6}>
+                            <Grid item xs={12}>
                                 <TextField
+                                    error={error_confirm_new_password}
                                     required
                                     fullWidth
-                                    id="lastname"
-                                    label="Nom de famille"
-                                    name="lastname"
-                                    value={infos.lastname}
-                                    onChange={handleChange}
-                                    InputLabelProps={{ shrink: true }}
+                                    name="password_confirmation"
+                                    label="Confirmation du nouveau mot de passe"
+                                    type="password"
+                                    id="password"
                                 />
                             </Grid>
-                            <Grid item xs={12} sm={6}>
-                                <TextField
-                                    required
-                                    fullWidth
-                                    id="username"
-                                    label="Pseudonyme"
-                                    name="username"
-                                    value={infos.username}
-                                    onChange={handleChange}
-                                    InputLabelProps={{ shrink: true }}
-                                />
-                            </Grid>
-                            <Grid item xs={12} sm={6}>
-                                <TextField
-                                    required
-                                    fullWidth
-                                    id="phone_number"
-                                    label="Numéro de téléphone"
-                                    name="phone_number"
-                                    value={infos.phone_number}
-                                    onChange={handleChange}
-                                    InputLabelProps={{ shrink: true }}
-                                />
-                            </Grid>
+
+
                             <Grid item xs={24} sm={12}>
                                 <TextField
                                     fullWidth
@@ -146,16 +114,17 @@ const Informations = () => {
                             variant="outlined"
                             sx={{ mt: 3, mb: 2 }}
                         >
-                            Changer mes informations personnelles
+                            Changer de mot de passe
                         </Button>
 
                     </Box>
                 </Grid>
-            </Grid>
 
+            </Grid>
         </Grid>
+
 
     );
 };
 
-export default Informations;
+export default Password;

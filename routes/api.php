@@ -81,7 +81,7 @@ Route::group(['middleware' => ['auth:sanctum']], function () {
     Route::get('/shop/buy-cart', [ShopController::class, 'buyCart']);
     Route::get('/shop/test', [SubscriptionController::class, 'test']);
     Route::get('/carts', [ShopController::class, 'getAllCartsInfo']);
-    Route::get('/cart', [ShopController::class, 'getCartInfo']);
+    Route::get('/cart/{id}', [ShopController::class, 'getCartInfo'])->where('id', '[0-9]+');
 
 
 });

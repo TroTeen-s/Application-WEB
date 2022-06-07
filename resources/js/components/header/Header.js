@@ -17,9 +17,12 @@ import { NavLink } from "react-router-dom";
 import Button from "@mui/material/Button";
 import { ACTIONS, CartContext } from "../context/CartContext";
 import { AuthContext } from "../context/AuthContext";
+import { useNavigate } from "react-router";
 
 
 function Header() {
+
+    let navigate = useNavigate();
 
     let [total, setTotal] = useState(0);
 
@@ -39,7 +42,6 @@ function Header() {
             }
             let cartFiltered = cart.map((productInCart) => {
                 let result = productsReceived.filter(product => product.id === productInCart.id);
-                console.log(result);
                 if (result.length > 0) {
                     return productInCart;
                 }
@@ -70,9 +72,9 @@ function Header() {
 
 
     const readCart = async () => {
-        console.log(cart);
-        console.log(products);
-        console.log("Le total est " + total);
+        if (!auth) {
+            navigate("/auth/login");
+        }
         let productIDs = cart.map((carProduct) => {
             return carProduct.id;
         });
@@ -193,7 +195,7 @@ function Header() {
                                     <div className="mt-6">
                                         <Button
                                             onClick={readCart}
-                                            className="flex items-center justify-center rounded-md border border-transparent bg-orange-300 px-6 py-3 text-base font-medium shadow-sm hover:bg-orange-400">Acheter
+                                            className="flex items-center justify-center rounded-md border border-transparent bg-orange-300 px-6 py-3 text-base font-medium shadow-sm hover:bg-orange-400">{auth ? "Acheter" : "Se connecter pour acheter"}
                                         </Button>
                                     </div>
                                     <div className="mt-6 flex justify-center text-center text-sm text-gray-500">

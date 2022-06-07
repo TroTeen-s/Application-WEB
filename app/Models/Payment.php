@@ -9,7 +9,7 @@ class Payment extends Model
 {
     protected $fillable = [
         'amount',
-        'date',
+        'payment_date',
         'billing_address_city',
         'billing_address_line',
         'billing_address_postal_code',

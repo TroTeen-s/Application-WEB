@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
@@ -24,7 +25,9 @@ class Cart extends Model
         'checkout_id',
         'payment_id',
         'user_id',
-        'bought'
+        'bought',
+        'created_at',
+        'updated_at'
     ];
 
     /**
@@ -56,17 +59,17 @@ class Cart extends Model
         return $this->hasOne(Payment::class, 'id_stripe', 'payment_id');
     }
 
-    function getPaymentAttribute()
+    function getPaymentAttribute(): Collection
     {
         return $this->payment()->get();
     }
 
-    function getItemNumberAttribute()
+    function getItemNumberAttribute(): int
     {
         return $this->cartItems()->count();
     }
 
-    function getItemsAttribute()
+    function getItemsAttribute(): HasMany
     {
         return $this->cartItems();
     }

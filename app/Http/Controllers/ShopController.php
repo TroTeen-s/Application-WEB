@@ -62,7 +62,6 @@ class ShopController extends Controller
         $productIDs = $request->input("productIDs");
         $products = Product::query()->findMany($productIDs);
 
-        $items = [];
         $price = 0;
         $cart = new Cart(['user_id' => $user->id]);
         $cart->save();
@@ -74,7 +73,6 @@ class ShopController extends Controller
             }
             $cart->items()->attach($item);
             $price += $product->price;
-            $items[] = $item;
         }
 
         $cart->save();
@@ -113,9 +111,15 @@ class ShopController extends Controller
         return $this->success('redirection', ['redirect' => $checkout_session->url]);
     }
 
-    public function getAllCartsInfo(Request $request): JsonResponse
+    public function getAllCartsInfo(): JsonResponse
     {
-        $carts = Cart::query()->where('bought', true)->get();
+        $carts = Cart::query()
+            ->where(['bought' => true, 'user_id' => auth()->id()])
+            ->get();
+
+        if (empty($carts)) {
+            return $this->fail('aucun panier correspondant');
+        }
 
         $carts->each(function ($cart) {
             $cart->setAppends(['payment', 'itemNumber']);
@@ -125,9 +129,13 @@ class ShopController extends Controller
 
     }
 
-    public function getCartInfo(Request $request): JsonResponse
+    public function getCartInfo($id): JsonResponse
     {
-        $cart = Cart::query()->firstWhere('id', $request->input('id'));
+        $cart = Cart::query()->firstWhere('id', $id);
+
+        if (empty($cart)) {
+            return $this->fail('aucun panier correspondant', ['id' => $id]);
+        }
 
         return $this->success('alors', $cart->setAppends(['payment', 'itemNumber', 'items']));
 

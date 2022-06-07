@@ -144,7 +144,8 @@ class SubscriptionController extends Controller
                 break;
 
             case 'checkout.session.completed':
-                $this->finishCart($event);
+                if ($event->data->object->mode === 'payment')
+                    $this->finishCart($event);
                 break;
 
             default:
@@ -232,7 +233,7 @@ class SubscriptionController extends Controller
 
             $payment = new Payment([
                 'amount' => $paymentObject->amount / 100,
-                'date' => Carbon::createFromTimestamp($paymentObject->created),
+                'payment_date' => Carbon::createFromTimestamp($paymentObject->created),
                 'billing_address_city' => $paymentObject->charges->data[0]->billing_details->address->city,
                 'billing_address_line' => $paymentObject->charges->data[0]->billing_details->address->line1,
                 'billing_address_postal_code' => $paymentObject->charges->data[0]->billing_details->address->postal_code,
@@ -251,7 +252,7 @@ class SubscriptionController extends Controller
 
         $user = auth()->user();
 
-        \Stripe\Stripe::setApiKey(getenv("STRIPE_PRIVATE"));
+        Stripe\Stripe::setApiKey(getenv("STRIPE_PRIVATE"));
 
         // Authenticate your user.
         try {
