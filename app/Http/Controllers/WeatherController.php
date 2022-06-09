@@ -28,4 +28,10 @@ class WeatherController extends Controller
 
         return response()->json(array('success'=> true, 'data' => $weather));
     }
+
+    function list(){
+
+        return Weather::all();
+
+    }
 }

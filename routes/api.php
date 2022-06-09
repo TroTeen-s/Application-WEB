@@ -94,11 +94,11 @@ Route::group(['middleware' => ['auth:sanctum']], function () {
 Route::get('/scooters', ScootersController::class);
 Route::post('/scooter/create', [ScootersController::class , 'create']);
 
-// For shopAdmin
+// For Admin
 
 Route::post('/dashboard/addproduct', [ProductController::class, 'addProduct']);
 Route::get('/dashboard/list', [ProductController::class, 'list']);
-
+Route::get('/dashboard/api/weather/list', [WeatherController::class, 'list']);
 
 
 //PACKAGES

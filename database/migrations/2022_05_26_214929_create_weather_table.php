@@ -15,10 +15,9 @@ return new class extends Migration
     {
         Schema::create('weather', function (Blueprint $table) {
             $table->id();
-            $table->timestamps();
             $table->string('description')->nullable();
             $table->integer("temp")->nullable();
-            $table->integer("feel_like")->nullable();
+            $table->integer("feels_like")->nullable();
             $table->integer("temp_min")->nullable();
             $table->integer("temp_max")->nullable();
             $table->integer("pressure")->nullable();

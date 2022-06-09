@@ -57,12 +57,14 @@ export const mainListItems = (
     </ListItemButton>
     </NavLink>
 
+    <NavLink className="no-underline text-black-trot" to="api">
     <ListItemButton>
       <ListItemIcon>
         <BarChartIcon />
       </ListItemIcon>
       <ListItemText primary="API" />
     </ListItemButton>
+    </NavLink>
 
     <NavLink className="no-underline text-black-trot" to="ticket">
     <ListItemButton>
