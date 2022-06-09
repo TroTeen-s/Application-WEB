@@ -138,7 +138,7 @@ const Subscriptions = () => {
     return (
         <>
             <Container>
-                <h1>Voici la liste de vos abonnements : </h1>
+                {/* <h1>Voici la liste de vos abonnements : </h1> */}
                 <div style={{ height: 400, width: "100%" }}>
                     <DataGrid
                         rows={data}

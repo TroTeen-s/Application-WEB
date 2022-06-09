@@ -20,42 +20,42 @@ import { NavLink } from "react-router-dom";
 
 export const mainListItems = (
   <React.Fragment>
+    <NavLink className="no-underline text-black-trot" to="trot">
     <ListItemButton>
       <ListItemIcon>
         <ElectricScooterIcon />
       </ListItemIcon>
-      <NavLink className="no-underline text-black-trot" to="trot">
         <ListItemText primary="Trotinettes" />
-      </NavLink>
     </ListItemButton>
+    </NavLink>
 
+    <NavLink className="no-underline text-black-trot" to="following">
     <ListItemButton>
       <ListItemIcon>
         <AddLocationAltIcon />
       </ListItemIcon>
-      <NavLink className="no-underline text-black-trot" to="following">
         <ListItemText primary="Ajouter des Trotinettes" />
-      </NavLink>
     </ListItemButton>
+    </NavLink>
 
 
+    <NavLink className="no-underline text-black-trot" to="following">
     <ListItemButton>
       <ListItemIcon>
         <MapIcon />
       </ListItemIcon>
-      <NavLink className="no-underline text-black-trot" to="following">
         <ListItemText primary="Suivi des Trotinettes" />
-      </NavLink>
     </ListItemButton>
+    </NavLink>
 
+    <NavLink className="no-underline text-black-trot" to="customers">
     <ListItemButton>
       <ListItemIcon>
         <PeopleIcon />
       </ListItemIcon>
-      <NavLink className="no-underline text-black-trot" to="customers">
         <ListItemText primary="Customers" />
-      </NavLink>
     </ListItemButton>
+    </NavLink>
 
     <ListItemButton>
       <ListItemIcon>
@@ -64,24 +64,24 @@ export const mainListItems = (
       <ListItemText primary="API" />
     </ListItemButton>
 
+    <NavLink className="no-underline text-black-trot" to="ticket">
     <ListItemButton>
       <ListItemIcon>
         <BugReportIcon />
       </ListItemIcon>
-      <NavLink className="no-underline text-black-trot" to="ticket">
         <ListItemText primary="Ticket" />
-      </NavLink>
     </ListItemButton>
+    </NavLink>
 
 
+    <NavLink className="no-underline text-black-trot" to="shopAdmin">
     <ListItemButton>
       <ListItemIcon>
         <LocalGroceryStoreIcon />
       </ListItemIcon>
-      <NavLink className="no-underline text-black-trot" to="shopAdmin">
         <ListItemText primary="Boutique" />
-      </NavLink>
     </ListItemButton>
+    </NavLink>
     {/* <ListItemButton>
       <ListItemIcon>
         <LayersIcon />
