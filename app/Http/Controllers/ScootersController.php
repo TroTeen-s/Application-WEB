@@ -6,9 +6,18 @@ use Illuminate\Http\Request;
 use App\Traits\ApiResponse;
 use Illuminate\Http\JsonResponse;
 use App\Models\Scooters;
+use Illuminate\Support\Facades\DB;
 
 class ScootersController extends Controller
 {
+
+ /**
+     * Handle the incoming request.
+     *
+     * @param  \Illuminate\Http\Request
+     * @return \Illuminate\Http\Response
+     */
+
     public function __invoke(): JsonResponse
     {
         $scooter = Scooters::all();
@@ -64,5 +73,13 @@ class ScootersController extends Controller
         }
 
         return response()->json(array('success' => 'true', 'data' => ['scooter' => $scooter]));
+    }
+
+    public function get_maintenance_scoot(Request $request)
+    {
+
+        $specific_boolean = 1;
+        return Scooters::find($specific_boolean);
+
     }
 }

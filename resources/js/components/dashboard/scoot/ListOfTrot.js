@@ -4,9 +4,7 @@ import Button from "@mui/material/Button";
 import { LinearProgress } from '@mui/material';
 import { AuthLoadingContext } from '../../context/AuthContext';
 
-
-
-export default function TrotReparation() {
+export default function ListOfTrot() {
   const [infos, setInfos] = useState();
 
   let { loaded } = useContext(AuthLoadingContext)
@@ -152,8 +150,8 @@ export default function TrotReparation() {
 
 
   return (
-    <div style={{ height: 280, width: '100%', marginBottom: 10 }}>
-      <h3> Trotinettes en Réparation </h3>
+    <div style={{ height: 400, width: '100%', paddingBottom: 10 }}>
+      <h3> Liste des trotinettes </h3>
       <DataGrid
         components={{
           LoadingOverlay: LinearProgress,

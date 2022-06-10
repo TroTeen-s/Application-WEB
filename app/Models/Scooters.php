@@ -16,8 +16,8 @@ class Scooters extends Model
         'mileage',
         'last_position_long',
         'last_position_lat',
-        'available',
-        'in_revision'
+        'maintenance',
+        'fixing'
 
     ];
 

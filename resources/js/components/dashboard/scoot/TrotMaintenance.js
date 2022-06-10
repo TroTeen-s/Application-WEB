@@ -18,7 +18,7 @@ export default function TrotMaintenance() {
     {
       field: 'model_serie',
       headerName: 'Modele de Serie',
-      width: 150,
+      width: 250,
       editable: false,
     },
     {
@@ -29,14 +29,14 @@ export default function TrotMaintenance() {
     },
 
     {
-      field: 'available',
-      headerName: 'Available',
-      width: 150,
+      field: 'maintenance',
+      headerName: 'maintenance',
+      width: 100,
       editable: false,
       renderCell: (params) => (
         <div id={"is-active-" + params.row.id}>
           <p className='m-0'>
-            {params.row.available ? "Activé" : "Désactivé"}
+            {params.row.available ? "true" : "false"}
           </p>
         </div >
       )
@@ -44,46 +44,72 @@ export default function TrotMaintenance() {
     },
 
     {
-      field: 'userLink',
-      headerName: 'Show more',
+        field: 'MaintenanceLink',
+        headerName: 'Send to maintenance',
+        width: 150,
+        editable: false,
+        renderCell: (params) => (
+
+            <strong>
+                <Button
+                    variant="outlined"
+                    color="primary"
+                    size="small"
+                    style={{ marginLeft: 16 }}
+                    onClick={() => {
+                        showMore(params);
+                    }}
+                >
+                    Envoyer
+                </Button>
+            </strong >
+        )
+
+      },
+
+    {
+        field: 'fixing',
+        headerName: 'fixing',
+        width: 60,
+        editable: false,
+        renderCell: (params) => (
+          <div id={"is-active-" + params.row.id}>
+            <p className='m-0'>
+              {params.row.available ? "true" : "false"}
+            </p>
+          </div >
+        )
+
+      },
+
+
+
+    {
+      field: 'FixingLink',
+      headerName: 'Send to fixing',
       width: 150,
       editable: false,
       renderCell: (params) => (
 
         <strong>
-          <Button
-            variant="outlined"
-            color="primary"
-            size="small"
-            style={{ marginLeft: 16 }}
-            onClick={() => {
-              active(params);
-            }}
-          >
-            {params.row.available ? "Désactiver" : "Activer"}
-          </Button>
+            <Button
+                variant="outlined"
+                color="primary"
+                size="small"
+                style={{ marginLeft: 16 }}
+                onClick={() => {
+                    showMore(params);
+                }}
+            >
+                Envoyer
+            </Button>
         </strong >
-      )
+    )
 
     }
 
   ];
 
-  const active = async (params) => {
-    console.log(params)
-    try {
-      let response = await axios.post('/api/scooter/active/', params.row)
-      if (response.data.success) {
-        console.log("available" + response.data.data.scooter[0])
-        console.log(response.data.data.scooter[0])
-        retrieveInfos()
-
-      }
-    } catch (e) {
-      console.log(e)
-    }
-
-  }
 
   const retrieveInfos = async () => {
     try {
@@ -109,7 +135,7 @@ export default function TrotMaintenance() {
 
 
   return (
-    <div style={{ height: 450, width: '100%', paddingBottom: 10 }}>
+    <div style={{ height: 280, width: '100%', paddingBottom: 10 }}>
       <h3> Trotinettes en Maintenance </h3>
       <DataGrid
         components={{

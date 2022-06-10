@@ -17,7 +17,7 @@ import SignInForm from "./components/auth/SignInForm";
 import Account from "./components/account/Account";
 import Main from './components/main/Master'
 
-import Trot from './components/dashboard/main';
+import Trot from './components/dashboard/scoot/main';
 import Customers from './components/dashboard/Customers';
 import InnerContent from './components/dashboard/App'
 import Following from './components/dashboard/Following'

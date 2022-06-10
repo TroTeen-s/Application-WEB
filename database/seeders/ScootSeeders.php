@@ -27,8 +27,8 @@ class ScootSeeders extends Seeder
             'mileage' => 350.000,
             'last_position_long' => 45.7568,
             'last_position_lat' => 4.8511,
-            'available' => 1,
-            'in_revision' => 0,
+            'maintenance' => 0,
+            'fixing' => 0,
         ]);
         $first->save();
 
@@ -39,8 +39,8 @@ class ScootSeeders extends Seeder
             'mileage' => 50.000,
             'last_position_long' => 45.76502,
             'last_position_lat' => 4.82003,
-            'available' => 1,
-            'in_revision' => 0,
+            'maintenance' => 0,
+            'fixing' => 0,
         ]);
         $second->save();
 
@@ -51,8 +51,8 @@ class ScootSeeders extends Seeder
             'mileage' => 288.000,
             'last_position_long' => 45.75156,
             'last_position_lat' => 4.82513,
-            'available' => 1,
-            'in_revision' => 0,
+            'maintenance' => 0,
+            'fixing' => 0,
         ]);
         $three->save();
     }
