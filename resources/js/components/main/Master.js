@@ -15,13 +15,13 @@ function Main() {
     return (
         <>
             <div class="relative contain">
-                <div class="sticky childy top-0 h-screen flex flex-col items-center justify-center bg-black-trot">
+                <div class="sticky childy top-0 h-screen flex flex-col items-center justify-center bg-black-trot pb-10">
                 <div class="flex relative z-20 items-center overflow-hidden">
                         <div class="container mx-auto px-6 flex relative">
                             <div class="hidden md:block sm:w-1/6 lg:w-3/6 relative">
                                 <img
                                     src="images/LeftFirstImage.png"
-                                    class=" max-w-xs md:max-w-sm m-auto"
+                                    class=" max-w-xs md:max-w-xs m-auto"
                                 />
                             </div>
                             <div class="m-4 sm:w-2/3 lg:w-2/5 flex flex-col relative z-20 py-3">
@@ -59,7 +59,7 @@ function Main() {
                         </div>
                     </div>
                  </div>
-               
+
                 <div class="sticky childy top-0 h-full flex flex-col items-center justify-center bg-white-background text-black">
                     <div class="px-4 py-16 mx-auto sm:max-w-xl md:max-w-full lg:max-w-screen-xl md:px-12 lg:px-4 lg:py-20">
                         <div class="max-w-xl mb-10 md:mx-auto sm:text-center lg:max-w-2xl md:mb-12">
@@ -101,8 +101,8 @@ function Main() {
                             </a> */}
                             </div>
                         </div>
-                        </div>  
-     
+                        </div>
+
 
 
                 </div>
