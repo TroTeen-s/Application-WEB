@@ -1,4 +1,4 @@
-import {createContext, useEffect, useState} from "react";
+import { createContext, useEffect, useState } from "react";
 
 export const BearerContext = createContext({
     token: '',
@@ -11,6 +11,12 @@ export const AuthContext = createContext({
     setAuth: () => {
     },
 });
+
+export const LanguageContext = createContext({
+    language: '',
+    setLanguage: () => { }
+})
+
 /**
  * Permet d'attendre que la vérification d'authentification ait eu lieu avant de continuer sur des Accueil protégées
  * @type {React.Context<{loaded: string, setLoaded: setLoaded}>}
@@ -21,10 +27,12 @@ export const AuthLoadingContext = createContext({
     },
 });
 
-const AuthProvider = ({children}) => {
+const AuthProvider = ({ children }) => {
     let [auth, setAuth] = useState(false);
     let [token, setToken] = useState();
     let [loaded, setLoaded] = useState(false);
+    let [language, setLanguage] = useState();
+
 
     useEffect(() => {
         let bearer = localStorage.getItem('apiBearerToken');
@@ -34,7 +42,7 @@ const AuthProvider = ({children}) => {
         }
         const checkAuth = async () => {
             try {
-                let response = await axios.get("/api/is-auth", {headers: {Accept: 'application/json'}});
+                let response = await axios.get("/api/is-auth", { headers: { Accept: 'application/json' } });
                 if (response.data.success) {
                     setAuth(true);
                 } else {
@@ -45,6 +53,7 @@ const AuthProvider = ({children}) => {
                 setAuth(false);
             }
             setLoaded(true);
+            setLanguage('fr');
         };
         checkAuth();
     }, []);
@@ -52,10 +61,12 @@ const AuthProvider = ({children}) => {
 
     return (
         <>
-            <AuthContext.Provider value={{auth, setAuth}}>
-                <AuthLoadingContext.Provider value={{loaded, setLoaded}}>
-                    <BearerContext.Provider value={{token, setToken}}>
-                        {children}
+            <AuthContext.Provider value={{ auth, setAuth }}>
+                <AuthLoadingContext.Provider value={{ loaded, setLoaded }}>
+                    <BearerContext.Provider value={{ token, setToken }}>
+                        <LanguageContext.Provider value={{ language, setLanguage }}>
+                            {children}
+                        </LanguageContext.Provider>
                     </BearerContext.Provider>
                 </AuthLoadingContext.Provider>
             </AuthContext.Provider>

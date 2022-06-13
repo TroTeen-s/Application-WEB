@@ -18,7 +18,7 @@ i18n
                 translation: require('../../public/locales/fr/translation.json')
             }
         },
-        lng: "en", // if you're using a language detector, do not define the lng option
+        lng: "fr", // if you're using a language detector, do not define the lng option
         fallbackLng: "en",
 
         interpolation: {

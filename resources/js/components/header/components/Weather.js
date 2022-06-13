@@ -47,9 +47,6 @@ const Weather = () => {
     }, [loaded])
 
 
-
-    console.log(description)
-
     switch (description) {
         case "nuageux":
             return (

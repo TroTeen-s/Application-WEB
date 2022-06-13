@@ -12,6 +12,8 @@ import IconButton from "@mui/material/IconButton";
 import Menu from "@mui/material/Menu";
 import MenuItem from "@mui/material/MenuItem";
 import Typography from "@mui/material/Typography";
+import { LanguageContext } from "../context/AuthContext";
+import Flag from "./components/Flag";
 
 import { NavLink } from "react-router-dom";
 import { AuthContext } from "../context/AuthContext";
@@ -27,7 +29,11 @@ import { Trans } from 'react-i18next';
 
 function Header() {
 
+  let { language, setLanguage } = useContext(LanguageContext)
+
   const { t, i18n } = useTranslation();
+
+
 
 
 
@@ -41,6 +47,16 @@ function Header() {
   const handleCloseUserMenu = () => {
     setAnchorElUser(null);
   };
+
+  const switchLanguage = () => {
+    if (language == 'fr') {
+      i18n.changeLanguage('en');
+      setLanguage('en');
+    } else {
+      i18n.changeLanguage('fr');
+      setLanguage('fr');
+    }
+  }
 
   const [state, setState] = React.useState({
     right: false,
@@ -132,8 +148,8 @@ function Header() {
                     <p>
                       or
                       <NavLink
-                            className=""
-                            to="/shop">
+                        className=""
+                        to="/shop">
                         <button onClick={toggleDrawer(anchor, false)} type="button" className="no-underline font-medium text-orange-300 hover:text-orange-400">Continue Shopping<span aria-hidden="true"> &rarr;</span></button>
                       </NavLink>
                     </p>
@@ -272,12 +288,17 @@ function Header() {
               <nav>
                 <ul className="md:flex items-center justify-between text-base text-gray-700 pt-4 md:pt-0">
 
+                  <div className="h-5 w-5 rounded-md" onClick={switchLanguage}>
+                    <Flag />
+                  </div>
+
                   <NavLink
                     className="no-underline px-3 py-2 flex items-center text-s uppercase font-bold leading-snug text-white"
                     to="/shop">
                     <i className="fab fa-facebook-square text-s leading-lg text-white opacity-75"></i>
                     <span className="ml-2">{t('Shop')}</span>
                   </NavLink>
+
 
 
 
@@ -327,6 +348,7 @@ function Header() {
 
 
             </div>
+
 
 
             <div className="order-3 md:order-3 flex items-center pt-2" id="nav-content">
