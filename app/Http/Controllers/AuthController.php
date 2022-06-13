@@ -95,12 +95,12 @@ class AuthController extends Controller
             ]);
         }
         ;
-        $params = (object) [
+        $params = (object)[
             'MON_PARAMETRE1' => 'VALEUR1',
             'MON_PARAMETRE2' => 'VALEUR2'
-         ];
+        ];
 
-        MailController::send(1, ["email"=>$request->input('email')], $params);
+        # MailController::send(1, ["email"=>$request->input('email')], $params);
         return $this->success("Voici votre token d'authentification", [
             'token' => auth()->user()->createToken('API Token')->plainTextToken
         ]);

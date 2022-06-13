@@ -50,7 +50,7 @@ function NeedHelp() {
         } else {
             setFirstnameError({ error: true, helper: '' });
         }
-        //lastname  
+        //lastname
         if (lastname.trim() === '') {
             setLastnameError({ error: false, helper: 'Champs vide' });
         } else if (lastname.trim().length < 4 || lastname.trim().length > 50) {
@@ -95,9 +95,9 @@ function NeedHelp() {
         }else{
             setStatus({ type: 'error', error });
         }
-    
-    
-    
+
+
+
       }
 
 
@@ -121,7 +121,7 @@ function NeedHelp() {
                   mb-4
                   "
                   >
-                 Besoin d'aide ??
+                 Besoin d'aide
                </h2>
                <p class="text-base text-body-color">
                   There are many variations of passages of Lorem Ipsum available
@@ -207,7 +207,7 @@ function NeedHelp() {
          </div>
        </div>
        <div className="grid grid-cols-2 mt-24">
-        
+
         {/* :MAP CONTAINER */}
         <div className="order-1 col-span-full">
                 <MapContainer className="max-w-7xl max-h-60" center={[45.764043, 4.835659]} zoom={14} scrollWheelZoom={false}>
@@ -242,7 +242,7 @@ function NeedHelp() {
                     </div>
                 <input onChange={(e) => setEmail(e.target.value)} disabled={status?.type === 'success' && true} type="text" required id="email" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full pl-10 p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="name@gmail.com"/>
             </div>
-            
+
             <textarea onChange={(e) => setMessage(e.target.value)} disabled={status?.type === 'success' && true}  id="message" required rows="4" class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Leave a comment... ( 20 characters min ) "></textarea>
 
             <div>
@@ -257,7 +257,7 @@ function NeedHelp() {
 
 
         <div className="order-2 md:order-3 col-span-full md:col-span-1 py-5 md:py-10 px-6">
-            
+
           <div className="mx-auto max-w-xl flex flex-col space-y-5">
             <h2 className="text-4xl font-oswald uppercase">Contactez-nous</h2>
             <p className="text-sm text-gray-500">Lorem ipsum dolor sit amet consectetur adipisicing elit. Facilis unde, voluptatibus nemo molestiae iure, repudiandae quaerat ipsam, labore sed dolorem nisi odit at esse ullam suscipit quidem necessitatibus aut modi.</p>
@@ -292,14 +292,14 @@ function NeedHelp() {
       {status?.type === 'success' && <div class="p-4 mb-4 text-sm text-green-700 bg-green-100 rounded-lg dark:bg-green-200 dark:text-green-800" role="alert">
                                     <span class="font-medium">Ticket envoyé !</span> Une réponse du support vous sera addressé par mail le plus vite possible :)
                                     </div> }
-                                    
+
       {status?.type === 'error' && (
         <div class="p-4 mb-4 text-sm text-red-700 bg-red-100 rounded-lg dark:bg-red-200 dark:text-red-800" role="alert">
         <span class="font-medium">Erreur dans l'envoi du ticket !</span> L'équipe de maintenance s'en charge !
         </div>
       )}
 
-      
+
     {pressing?.status == true && firstnameError?.error === false && (
          <div class="p-4 mb-4 text-sm text-yellow-700 bg-yellow-100 rounded-lg dark:bg-yellow-200 dark:text-yellow-800" role="alert">
          <span class="font-medium">Attention ! </span> {firstnameError.helper}

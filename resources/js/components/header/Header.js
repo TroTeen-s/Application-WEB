@@ -130,7 +130,12 @@ function Header() {
                   </div>
                   <div className="mt-6 flex justify-center text-center text-sm text-gray-500">
                     <p>
-                      or <button onClick={toggleDrawer(anchor, false)} type="button" className="no-underline font-medium text-orange-300 hover:text-orange-400">Continue Shopping<span aria-hidden="true"> &rarr;</span></button>
+                      or
+                      <NavLink
+                            className=""
+                            to="/shop">
+                        <button onClick={toggleDrawer(anchor, false)} type="button" className="no-underline font-medium text-orange-300 hover:text-orange-400">Continue Shopping<span aria-hidden="true"> &rarr;</span></button>
+                      </NavLink>
                     </p>
                   </div>
                 </div>

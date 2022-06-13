@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
+
 class Weather extends Model
 {
     use HasFactory;
@@ -24,4 +25,7 @@ class Weather extends Model
 
 
     ];
+
+    public $timestamps = false;
+
 }

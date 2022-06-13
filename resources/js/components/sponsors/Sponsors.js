@@ -60,8 +60,12 @@ const Sponsors = () => {
         );
     } else {
         return (
-
-            <div className='h-screen'></div>
+            <div className='h-screen flex items-center justify-center'>
+                <h2>Aucun Partenaire pour le moment</h2>
+                <div className='ml-2 h-4 w-4 rounded-full border-2 border-black bg-white'></div>
+                <div className='ml-2 h-4 w-4 rounded-full border-2 border-black bg-white'></div>
+                <div className='ml-2 h-4 w-4 rounded-full border-2 border-black bg-white'></div>
+            </div>
         );
     }
 }
