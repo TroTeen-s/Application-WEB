@@ -14,61 +14,76 @@ import ElectricScooterIcon from '@mui/icons-material/ElectricScooter';
 import BoltIcon from '@mui/icons-material/Bolt';
 import MapIcon from '@mui/icons-material/Map';
 import AddLocationAltIcon from '@mui/icons-material/AddLocationAlt';
+import BugReportIcon from '@mui/icons-material/BugReport';
 
 import { NavLink } from "react-router-dom";
 
 export const mainListItems = (
   <React.Fragment>
+    <NavLink className="no-underline text-black-trot" to="trot">
     <ListItemButton>
       <ListItemIcon>
         <ElectricScooterIcon />
       </ListItemIcon>
-      <NavLink className="no-underline text-black-trot" to="trot">
         <ListItemText primary="Trotinettes" />
-      </NavLink>
     </ListItemButton>
+    </NavLink>
 
+    <NavLink className="no-underline text-black-trot" to="following">
     <ListItemButton>
       <ListItemIcon>
         <AddLocationAltIcon />
       </ListItemIcon>
-      <NavLink className="no-underline text-black-trot" to="following">
         <ListItemText primary="Ajouter des Trotinettes" />
-      </NavLink>
     </ListItemButton>
+    </NavLink>
 
 
+    <NavLink className="no-underline text-black-trot" to="following">
     <ListItemButton>
       <ListItemIcon>
         <MapIcon />
       </ListItemIcon>
-      <NavLink className="no-underline text-black-trot" to="following">
         <ListItemText primary="Suivi des Trotinettes" />
-      </NavLink>
     </ListItemButton>
+    </NavLink>
 
+    <NavLink className="no-underline text-black-trot" to="customers">
     <ListItemButton>
       <ListItemIcon>
         <PeopleIcon />
       </ListItemIcon>
-      <NavLink className="no-underline text-black-trot" to="customers">
         <ListItemText primary="Customers" />
-      </NavLink>
     </ListItemButton>
+    </NavLink>
+
+    <NavLink className="no-underline text-black-trot" to="api">
     <ListItemButton>
       <ListItemIcon>
         <BarChartIcon />
       </ListItemIcon>
       <ListItemText primary="API" />
     </ListItemButton>
+    </NavLink>
+
+    <NavLink className="no-underline text-black-trot" to="ticket">
+    <ListItemButton>
+      <ListItemIcon>
+        <BugReportIcon />
+      </ListItemIcon>
+        <ListItemText primary="Ticket" />
+    </ListItemButton>
+    </NavLink>
+
+
+    <NavLink className="no-underline text-black-trot" to="shopAdmin">
     <ListItemButton>
       <ListItemIcon>
         <LocalGroceryStoreIcon />
       </ListItemIcon>
-      <NavLink className="no-underline text-black-trot" to="shopAdmin">
         <ListItemText primary="Boutique" />
-      </NavLink>
     </ListItemButton>
+    </NavLink>
     {/* <ListItemButton>
       <ListItemIcon>
         <LayersIcon />

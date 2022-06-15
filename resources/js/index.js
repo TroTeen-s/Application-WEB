@@ -1,13 +1,13 @@
-import React from "react";
-import ReactDOM from "react-dom";
-import "../css/app.css";
+import React from 'react';
+import ReactDOM from 'react-dom';
+import '../css/app.css';
 import {
     BrowserRouter as Router,
     Route
 } from "react-router-dom";
-import Store from "./components/store/Store";
-import NeedHelp from "./components/needHelp/NeedHelp";
-import NotFound from "./components/notFound/NotFound";
+import Store from "./components/store/Store"
+import NeedHelp from "./components/needHelp/NeedHelp"
+import NotFound from "./components/notFound/NotFound"
 // import SignInPage from "./components/auth/SignInPage";
 import MainApp from "./components/MainApp";
 import { Navigate, Routes } from "react-router";
@@ -16,14 +16,17 @@ import SignUpForm from "./components/auth/SignUpForm";
 import SignInForm from "./components/auth/SignInForm";
 import Main from "./components/main/Master";
 
-import Trot from "./components/dashboard/main";
-import Customers from "./components/dashboard/Customers";
-import InnerContent from "./components/dashboard/App";
-import Following from "./components/dashboard/Following";
-import Shop from "./components/shop/App";
-import Admin from "./components/admin/Admin";
-import User from "./components/admin/User";
-import Sponsors from "./components/sponsors/Sponsors";
+import Trot from './components/dashboard/main';
+import Customers from './components/dashboard/Customers';
+import InnerContent from './components/dashboard/App'
+import Following from './components/dashboard/Following'
+import Shop from './components/shop/App'
+import Informations from "./components/account/Informations";
+import Password from "./components/account/Password";
+import Delete from "./components/account/Delete";
+import Admin from './components/admin/Admin';
+import User from './components/admin/User'
+import Sponsors from './components/sponsors/Sponsors';
 
 import ShopAdmin from "./components/dashboard/boutique/shop";
 import ProductPage from "./components/shop/ProductPage";
@@ -52,7 +55,7 @@ ReactDOM.render(
                     <Route index element={<Navigate to="/main" replace />} />
                     <Route path="main" element={<Main />} />
                     <Route path="shop" element={<Shop />} />
-                    <Route path="need_help" element={<NeedHelp />} />
+                    <Route path="needHelp" element={<NeedHelp />} />
                     <Route path="store" element={<Store />} />
                     <Route path="products/:id" element={<ProductPage />} />
                     <Route path="sponsors" element={<Sponsors />} />
@@ -76,6 +79,8 @@ ReactDOM.render(
                         <Route path="following" element={<Following />} />
                         <Route path="customers" element={<Customers />} />
                         <Route path="shopAdmin" element={<ShopAdmin />} />
+                        <Route path="ticket" element={<Ticket />} />
+                        <Route path="api" element={<Api/>}/>
                     </Route>
 
                     <Route path="/admin" element={<Admin />} />

@@ -6,8 +6,9 @@ import Container from '@mui/material/Container';
 import Grid from '@mui/material/Grid';
 import Paper from '@mui/material/Paper';
 import Link from '@mui/material/Link';
-import TrotMaintenance from './scoot/TrotMaintenance';
-import TrotReparation from './scoot/TrotReparation';
+import TrotMaintenance from './TrotMaintenance';
+import TrotReparation from './TrotReparation';
+import ListOfTrot from './ListOfTrot';
 
 const drawerWidth = 240;
 
@@ -27,38 +28,18 @@ export default function Main() {
             ? theme.palette.grey[100]
             : theme.palette.grey[900],
         flexGrow: 1,
-        height: '100vh',
+        height: '200vh',
       }}
     >
       <Toolbar />
-      <Container className="overflow-hidden" sx={{ mt: 1, mb: 1 }}>
+      <Container className="h-full overflow-hidden" sx={{ mb: 1 }}>
         <Grid container spacing={3}>
 
-          {/* <Grid item xs={12} md={8} lg={9}>
-                <Paper
-                  sx={{
-                    p: 2,
-                    display: 'flex',
-                    flexDirection: 'column',
-                    height: 240,
-                  }}
-                >
-                  <Chart />
-                </Paper>
-              </Grid>
-       
-              <Grid item xs={12} md={4} lg={3}>
-                <Paper
-                  sx={{
-                    p: 2,
-                    display: 'flex',
-                    flexDirection: 'column',
-                    height: 240,
-                  }}
-                >
-                  <Deposits />
-                </Paper>
-              </Grid> */}
+        <Grid item xs={20}>
+            <Paper sx={{ p: 3, display: 'flex', flexDirection: 'column', paddingBottom: 5 }}>
+              <ListOfTrot />
+            </Paper>
+          </Grid>
 
           <Grid item xs={20}>
             <Paper sx={{ p: 3, display: 'flex', flexDirection: 'column', paddingBottom: 5 }}>

@@ -20,7 +20,7 @@ const AuthPage = () => {
 
 
     return (
-       <section className="bg-black-trot">
+       <section>
            <Outlet/>
        </section>
 

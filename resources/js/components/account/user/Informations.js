@@ -1,16 +1,55 @@
 import React, { useContext, useLayoutEffect, useState } from 'react';
 
+import { AuthContext } from "../context/AuthContext";
 import { Grid, Typography } from "@mui/material";
+import AccountCircleOutlinedIcon from '@mui/icons-material/AccountCircleOutlined';
 import Box from "@mui/material/Box";
 import TextField from "@mui/material/TextField";
 import Button from "@mui/material/Button";
-import NavAccount from "./NavAccount";
-import { AuthContext } from "../../context/AuthContext";
+import NavAccount from './NavAccount';
+import { NavLink } from "react-router-dom";
+import { useNavigate } from "react-router";
+import { styled } from "@mui/material/styles";
+import { outlinedInputClasses } from "@mui/material/OutlinedInput";
+import { inputLabelClasses } from "@mui/material/InputLabel";
+
+const StyledTextField = styled(TextField)({
+    [`& .${outlinedInputClasses.root} .${outlinedInputClasses.notchedOutline}`]: {
+      borderColor: "black"
+    },
+    [`&:hover .${outlinedInputClasses.root} .${outlinedInputClasses.notchedOutline}`]: {
+      borderColor: "black"
+    },
+    [`& .${outlinedInputClasses.root}.${outlinedInputClasses.focused} .${outlinedInputClasses.notchedOutline}`]: {
+      borderColor: "black"
+    },
+    [`& .${outlinedInputClasses.input}`]: {
+      color: "black"
+    },
+    [`&:hover .${outlinedInputClasses.input}`]: {
+      color: "black"
+    },
+    [`& .${outlinedInputClasses.root}.${outlinedInputClasses.focused} .${outlinedInputClasses.input}`]: {
+      color: "black"
+    },
+    [`& .${inputLabelClasses.outlined}`]: {
+      color: "black"
+    },
+    [`&:hover .${inputLabelClasses.outlined}`]: {
+      color: "black"
+    },
+    [`& .${inputLabelClasses.outlined}.${inputLabelClasses.focused}`]: {
+      color: "black"
+    }
+  });
+
+
 
 const Informations = () => {
 
     const [infos, setInfos] = useState([])
     let { auth } = useContext(AuthContext)
+    let navigate = useNavigate()
 
 
     const handleChange = (event) => {
@@ -58,11 +97,11 @@ const Informations = () => {
     return (
 
         <Grid container spacing={2}>
-            <Grid item xs={12}>
+            {/* <Grid item xs={12}>
                 <Typography variant="h3">
                     Modification d'information personnelles
                 </Typography>
-            </Grid>
+            </Grid> */}
             <Grid container item xs={12}>
                 <Grid xs={4} className='text-[5]' alignItems="center" justifyContent="center">
                     <NavAccount selLink='informations' />
@@ -71,7 +110,7 @@ const Informations = () => {
                     <Box component="form" noValidate onSubmit={handleSubmit} sx={{ mt: 3 }}>
                         <Grid container spacing={2}>
                             <Grid item xs={12} sm={6}>
-                                <TextField
+                                <StyledTextField
                                     autoComplete="given-name"
                                     name="firstname"
                                     required
@@ -85,7 +124,7 @@ const Informations = () => {
                                 />
                             </Grid>
                             <Grid item xs={12} sm={6}>
-                                <TextField
+                                <StyledTextField
                                     required
                                     fullWidth
                                     id="lastname"
@@ -97,7 +136,7 @@ const Informations = () => {
                                 />
                             </Grid>
                             <Grid item xs={12} sm={6}>
-                                <TextField
+                                <StyledTextField
                                     required
                                     fullWidth
                                     id="username"
@@ -109,7 +148,7 @@ const Informations = () => {
                                 />
                             </Grid>
                             <Grid item xs={12} sm={6}>
-                                <TextField
+                                <StyledTextField
                                     required
                                     fullWidth
                                     id="phone_number"
@@ -121,7 +160,7 @@ const Informations = () => {
                                 />
                             </Grid>
                             <Grid item xs={24} sm={12}>
-                                <TextField
+                                <StyledTextField
                                     fullWidth
                                     id="email"
                                     name="email"

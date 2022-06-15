@@ -8,6 +8,7 @@ use Illuminate\{Http\JsonResponse, Support\Facades\Log, Http\Request, Support\Fa
 use Stripe\Exception\ApiErrorException;
 use Stripe\StripeClient;
 use Throwable;
+use App\Http\Controllers\MailController;
 
 class AuthController extends Controller
 {
@@ -94,8 +95,12 @@ class AuthController extends Controller
             ]);
         }
         ;
+        $params = (object)[
+            'MON_PARAMETRE1' => 'VALEUR1',
+            'MON_PARAMETRE2' => 'VALEUR2'
+        ];
 
-
+        # MailController::send(1, ["email"=>$request->input('email')], $params);
         return $this->success("Voici votre token d'authentification", [
             'token' => auth()->user()->createToken('API Token')->plainTextToken
         ]);

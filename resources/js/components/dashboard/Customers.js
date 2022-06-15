@@ -2,6 +2,7 @@ import React, { useContext, useEffect, useState } from 'react';
 import { DataGrid } from '@mui/x-data-grid';
 import Button from "@mui/material/Button";
 import { LinearProgress } from '@mui/material';
+import Container from '@mui/material/Container';
 
 import { AuthLoadingContext } from "../context/AuthContext";
 import { Navigate } from 'react-router';
@@ -14,32 +15,41 @@ const Customers = () => {
 
     const columns = [
         {
-            field: 'id',
-            headerName: 'ID',
-            width: 90
+          field: 'id',
+          headerName: 'ID',
+          width: 90
         },
         {
-            field: 'firstname',
-            headerName: 'First name',
-            width: 150,
-            editable: false,
+          field: 'model_serie',
+          headerName: 'Modele de Serie',
+          width: 150,
+          editable: false,
         },
         {
-            field: 'lastname',
-            headerName: 'Last name',
-            width: 150,
-            editable: false,
-        },
-        {
-            field: 'email',
-            headerName: 'email',
-            width: 150,
-            editable: false,
+          field: 'mileage',
+          headerName: 'Kilometrage',
+          width: 150,
+          editable: false,
         },
 
         {
-            field: 'userLink',
-            headerName: 'Show more',
+          field: 'maintenance',
+          headerName: 'maintenance',
+          width: 100,
+          editable: false,
+          renderCell: (params) => (
+            <div id={"is-active-" + params.row.id}>
+              <p className='m-0'>
+                {params.row.available ? "true" : "false"}
+              </p>
+            </div >
+          )
+
+        },
+
+        {
+            field: 'MaintenanceLink',
+            headerName: 'Send to maintenance',
             width: 150,
             editable: false,
             renderCell: (params) => (
@@ -54,14 +64,55 @@ const Customers = () => {
                             showMore(params);
                         }}
                     >
-                        Open
+                        Envoyer
                     </Button>
                 </strong >
             )
 
+          },
+
+        {
+            field: 'fixing',
+            headerName: 'fixing',
+            width: 60,
+            editable: false,
+            renderCell: (params) => (
+              <div id={"is-active-" + params.row.id}>
+                <p className='m-0'>
+                  {params.row.available ? "true" : "false"}
+                </p>
+              </div >
+            )
+
+          },
+
+
+
+        {
+          field: 'FixingLink',
+          headerName: 'Send to fixing',
+          width: 150,
+          editable: false,
+          renderCell: (params) => (
+
+            <strong>
+                <Button
+                    variant="outlined"
+                    color="primary"
+                    size="small"
+                    style={{ marginLeft: 16 }}
+                    onClick={() => {
+                        showMore(params);
+                    }}
+                >
+                    Envoyer
+                </Button>
+            </strong >
+        )
+
         }
 
-    ];
+      ];
 
     const showMore = (params) => {
         //console.log(params.row.email)
@@ -92,6 +143,8 @@ const Customers = () => {
 
 
     return (
+
+        <Container className="h-full overflow-hidden" sx={{ mt: 4 }}>
         <div style={{ height: 400, width: '100%' }}>
             <DataGrid
                 components={{
@@ -105,6 +158,8 @@ const Customers = () => {
                 loading={!infos}
             />
         </div>
+    </Container>
+
     );
 
 };

@@ -22,9 +22,9 @@ import { Outlet } from "react-router-dom";
 
 import Sidebar from './Sidebar'
 
- 
+
   const mdTheme = createTheme();
-  
+
 export default function App(){
     const [open, setOpen] = React.useState(true);
     const toggleDrawer = () => {
@@ -33,11 +33,11 @@ export default function App(){
     return (
 
     <ThemeProvider theme={mdTheme}>
-      <Box className="overflow-y-hidden" sx={{ display: 'flex'}}>
-    
+      <Box className="overflow-y-hidden h-100" sx={{ display: 'flex'}}>
+
         <Sidebar/>
         <Outlet/>
-    
+
       </Box>
     </ThemeProvider>
     )

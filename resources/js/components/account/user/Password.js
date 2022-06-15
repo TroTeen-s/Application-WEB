@@ -1,10 +1,47 @@
 import React, { useContext, useLayoutEffect, useState } from 'react';
+import { AuthContext } from "../context/AuthContext";
 import { Grid, Typography } from "@mui/material";
+import AccountCircleOutlinedIcon from '@mui/icons-material/AccountCircleOutlined';
 import Box from "@mui/material/Box";
 import TextField from "@mui/material/TextField";
 import Button from "@mui/material/Button";
-import NavAccount from "./NavAccount";
-import { AuthContext } from "../../context/AuthContext";
+import { Link } from "react-router-dom";
+import { useNavigate } from "react-router";
+import NavAccount from './NavAccount';
+import { styled } from "@mui/material/styles";
+import { outlinedInputClasses } from "@mui/material/OutlinedInput";
+import { inputLabelClasses } from "@mui/material/InputLabel";
+
+const StyledTextField = styled(TextField)({
+    [`& .${outlinedInputClasses.root} .${outlinedInputClasses.notchedOutline}`]: {
+      borderColor: "black"
+    },
+    [`&:hover .${outlinedInputClasses.root} .${outlinedInputClasses.notchedOutline}`]: {
+      borderColor: "black"
+    },
+    [`& .${outlinedInputClasses.root}.${outlinedInputClasses.focused} .${outlinedInputClasses.notchedOutline}`]: {
+      borderColor: "black"
+    },
+    [`& .${outlinedInputClasses.input}`]: {
+      color: "black"
+    },
+    [`&:hover .${outlinedInputClasses.input}`]: {
+      color: "black"
+    },
+    [`& .${outlinedInputClasses.root}.${outlinedInputClasses.focused} .${outlinedInputClasses.input}`]: {
+      color: "black"
+    },
+    [`& .${inputLabelClasses.outlined}`]: {
+      color: "black"
+    },
+    [`&:hover .${inputLabelClasses.outlined}`]: {
+      color: "black"
+    },
+    [`& .${inputLabelClasses.outlined}.${inputLabelClasses.focused}`]: {
+      color: "black"
+    }
+  });
+
 
 const Password = () => {
 
@@ -14,6 +51,7 @@ const Password = () => {
 
     const [infos, setInfos] = useState([]);
     let { auth } = useContext(AuthContext)
+    let navigate = useNavigate()
 
     const retrieveInfos = async () => {
         try {
@@ -30,6 +68,7 @@ const Password = () => {
         } catch (e) {
         }
     }
+
     const handleSubmit = async (event) => {
         event.preventDefault();
         let data = new FormData(event.currentTarget);
@@ -56,9 +95,9 @@ const Password = () => {
 
         <Grid container spacing={2}>
             <Grid item xs={12}>
-                <Typography variant="h3">
+                {/* <Typography variant="h3">
                     Modification de Mot de passe
-                </Typography>
+                </Typography> */}
             </Grid>
             <Grid container item xs={12}>
                 <Grid xs={4} className='text-[5]' alignItems="center" justifyContent="center">
@@ -69,7 +108,7 @@ const Password = () => {
                         <Grid container spacing={2}>
 
                             <Grid item xs={12}>
-                                <TextField
+                                <StyledTextField
                                     error={error_new_password}
                                     required
                                     fullWidth
@@ -80,7 +119,7 @@ const Password = () => {
                                 />
                             </Grid>
                             <Grid item xs={12}>
-                                <TextField
+                                <StyledTextField
                                     error={error_confirm_new_password}
                                     required
                                     fullWidth
@@ -93,7 +132,7 @@ const Password = () => {
 
 
                             <Grid item xs={24} sm={12}>
-                                <TextField
+                                <StyledTextField
                                     fullWidth
                                     id="email"
                                     name="email"

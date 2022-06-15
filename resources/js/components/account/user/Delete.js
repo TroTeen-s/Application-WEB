@@ -76,9 +76,9 @@ const Delete = () => {
         <>
             <Grid container spacing={2}>
                 <Grid item xs={12}>
-                    <Typography variant="h3">
+                    {/* <Typography ClassName="text-black-trot" variant="h2">
                         Supprimer votre compte
-                    </Typography>
+                    </Typography> */}
                 </Grid>
                 <Grid container item xs={12}>
                     <Grid xs={4} className='text-[5]' alignItems="center" justifyContent="center">

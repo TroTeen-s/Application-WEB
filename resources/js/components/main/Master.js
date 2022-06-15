@@ -7,24 +7,21 @@ import Paper from "@mui/material/Paper";
 import { Container, createTheme, ThemeProvider } from "@mui/material";
 import { ParallaxProvider, Parallax } from "react-scroll-parallax";
 import "./styles.css";
-import Map from "./Images/Europe.png";
-import FirstDraw from "./Images/Drawing.png";
+import Second from './secondDiv/index';
 
-import First from "./First";
-import Second from "./Second";
 import { HistoryToggleOffRounded } from "@mui/icons-material";
 
 function Main() {
     return (
         <>
-            <ParallaxProvider>
-                <section class="full bg-black-trot">
-                    <div class="flex relative z-20 items-center overflow-hidden">
-                        <div class="container mx-auto lg:mt-20 md:mt-10 px-6 flex relative md:pt-10 lg:pt-10">
+            <div class="relative contain">
+                <div class="sticky childy top-0 h-screen flex flex-col items-center justify-center bg-black-trot pb-10">
+                <div class="flex relative z-20 items-center overflow-hidden">
+                        <div class="container mx-auto px-6 flex relative">
                             <div class="hidden md:block sm:w-1/6 lg:w-3/6 relative">
                                 <img
                                     src="images/LeftFirstImage.png"
-                                    class=" max-w-xs md:max-w-sm m-auto"
+                                    class=" max-w-xs md:max-w-xs m-auto"
                                 />
                             </div>
                             <div class="m-4 sm:w-2/3 lg:w-2/5 flex flex-col relative z-20 py-3">
@@ -50,7 +47,7 @@ function Main() {
                                     >
                                         Get started
                                     </a>
-                                    
+
                                     <a
                                         href="#"
                                         class="no-underline uppercase py-2 px-12 rounded-lg bg-transparent border-2 border-orange-300 text-white dark:text-white hover:bg-black-trot hover:text-white text-md"
@@ -61,277 +58,55 @@ function Main() {
                             </div>
                         </div>
                     </div>
-                </section>
+                 </div>
 
-                <section class="full_second bg-white-background">
-                    <div>
-                        <div id="Draw" className="sm:w-200 md:w-200 lg:w-200 relative object-none">
-                            <img
-                                className=""
-                                src={FirstDraw}
-                            />
+                <div class="sticky childy top-0 h-full flex flex-col items-center justify-center bg-white-background text-black">
+                    <div class="px-4 py-16 mx-auto sm:max-w-xl md:max-w-full lg:max-w-screen-xl md:px-12 lg:px-4 lg:py-20">
+                        <div class="max-w-xl mb-10 md:mx-auto sm:text-center lg:max-w-2xl md:mb-12">
+                            <div>
+                            <p class="inline-block px-3 py-px mb-4 text-xs font-semibold tracking-wider text-teal-900 uppercase rounded-full bg-teal-accent-400">
+                                Actualités
+                            </p>
+                            </div>
+                            <h2 class="max-w-lg mb-6 font-sans text-3xl font-bold leading-none tracking-tight text-gray-900 sm:text-4xl md:mx-auto">
+                            <span class="relative inline-block">
+                                <svg viewBox="0 0 52 24" fill="currentColor" class="absolute top-0 left-0 z-0 hidden w-32 -mt-8 -ml-20 text-blue-gray-100 lg:w-32 lg:-ml-28 lg:-mt-10 sm:block">
+                                <defs>
+                                    <pattern id="679d5905-e08c-4b91-a66c-84aefbb9d2f5" x="0" y="0" width=".135" height=".30">
+                                    <circle cx="1" cy="1" r=".7"></circle>
+                                    </pattern>
+                                </defs>
+                                <rect fill="url(#679d5905-e08c-4b91-a66c-84aefbb9d2f5)" width="52" height="24"></rect>
+                                </svg>
+                                <span class="relative">
+                                Nous déposons nos clés à la ville de Lyon
+                                </span>
+                            </span>
+                            </h2>
+                            <p class="text-base text-gray-700 md:text-lg">
+                            Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque rem aperiam, eaque ipsa quae.
+                            </p>
                         </div>
-                        <div id="TextEurope" className="m-5">
-                            <div className="">
-                                <a class="no-underline text-4xl md:text-5xl font-bold mb-5 text-gray-600  hover:text-black-trot">
-                                    Une entreprise née en France
-                                </a>
-                            </div>
-
-                            <div class="mt-5 max-w-2xl px-8 py-4 mx-auto bg-white dark:bg-gray-800 rounded-md shadow-lg">
-                                <div class="flex items-center justify-between">
-                                    <span class="text-sm font-light text-orange-300 dark:text-gray-400">
-                                        2 Janvier, 2022
-                                    </span>
+                        <div class="mx-auto lg:max-w-2xl">
+                            <div class="relative w-full transition-shadow duration-300 hover:shadow-xl">
+                            <img class="object-cover w-full h-56 rounded shadow-lg sm:h-64 md:h-80 lg:h-96" src="https://media.lyon-france.com/1280x852/190527/9124493.jpg" alt="" />
+                            {/* <a href="/" aria-label="Play Video" class="absolute inset-0 flex items-center justify-center w-full h-full transition-colors duration-300 bg-gray-900 bg-opacity-50 group hover:bg-opacity-25">
+                                <div class="flex items-center justify-center w-16 h-16 transition duration-300 transform bg-gray-100 rounded-full shadow-2xl group-hover:scale-110">
+                                <svg class="w-10 text-gray-900" fill="currentColor" viewBox="0 0 24 24">
+                                    <path
+                                    d="M16.53,11.152l-8-5C8.221,5.958,7.833,5.949,7.515,6.125C7.197,6.302,7,6.636,7,7v10 c0,0.364,0.197,0.698,0.515,0.875C7.667,17.958,7.833,18,8,18c0.184,0,0.368-0.051,0.53-0.152l8-5C16.822,12.665,17,12.345,17,12 S16.822,11.335,16.53,11.152z"
+                                    ></path>
+                                </svg>
                                 </div>
-
-                                <div class="mt-2">
-                                    <a class="no-underline text-2xl font-bold text-gray-600 dark:text-white hover:text-gray-600 dark:hover:text-gray-200 hover:underline">
-                                        {" "}
-                                        Création de notre entreprise{" "}
-                                    </a>
-                                    <p class="mt-2 text-gray-600 dark:text-gray-300">
-                                        Lorem ipsum dolor sit, amet consectetur
-                                        adipisicing elit. Tempora expedita dicta
-                                        totam aspernatur doloremque. Excepturi
-                                        iste iusto eos enim reprehenderit nisi,
-                                        accusamus delectus nihil quis facere in
-                                        modi ratione libero!
-                                    </p>
-                                </div>
-                            </div>
-
-                            <div class="mt-5 max-w-2xl px-8 py-4 mx-auto bg-white dark:bg-gray-800 rounded-md shadow-lg">
-                                <div class="flex items-center justify-between">
-                                    <span class="text-sm font-light text-orange-300 dark:text-gray-400">
-                                        20 Mars, 2022
-                                    </span>
-                                </div>
-
-                                <div class="mt-2">
-                                    <a class="no-underline text-2xl font-bold text-gray-600 dark:text-white hover:text-gray-600 dark:hover:text-gray-200 hover:underline">
-                                        {" "}
-                                        Ouverture de nos services à Lyon{" "}
-                                    </a>
-                                    <p class="mt-2 text-gray-600 dark:text-gray-300">
-                                        Lorem ipsum dolor sit, amet consectetur
-                                        adipisicing elit. Tempora expedita dicta
-                                        totam aspernatur doloremque. Excepturi
-                                        iste iusto eos enim reprehenderit nisi,
-                                        accusamus delectus nihil quis facere in
-                                        modi ratione libero!
-                                    </p>
-                                </div>
+                            </a> */}
                             </div>
                         </div>
-
-                        <div
-                            id="Europe"
-                            className="sm:w-200 md:w-200 lg:w-200 relative object-none"
-                        >
-                            <img
-                                className="max-w-xxl md:max-w-xxl m-auto "
-                                src={Map}
-                            />
-                        </div>
-                    </div>
-                </section>
-
-                <section class="full_responsive bg-white-background">
-                    <div class="w-full mx-auto bg-white px-5 py-10 text-gray-600 mb-10">
-                        <div class="text-center max-w-xl mx-auto">
-                            <h1 class="text-5xl md:text-6xl font-bold mb-5">
-                                Nos abonnements
-                            </h1>
-                            <h3 class="text-xl font-medium mb-10">
-                                Lorem ipsum dolor sit amet consectetur
-                                adipisicing elit repellat dignissimos laboriosam
-                                odit accusamus porro
-                            </h3>
-                        </div>
-                        <div class="max-w-4xl mx-auto md:flex">
-                            <div class="w-full md:w-1/3 md:max-w-none bg-white px-8 md:px-10 py-8 md:py-10 mb-3 mx-auto md:my-6 rounded-md shadow-lg shadow-gray-600 md:flex md:flex-col">
-                                <div class="w-full flex-grow">
-                                    <h2 class="text-center font-bold uppercase mb-4">
-                                        PERSONAL
-                                    </h2>
-                                    <h3 class="text-center font-bold text-orange-300 text-4xl mb-5">
-                                        5€/Mois
-                                    </h3>
-                                    <ul class="text-sm px-5 mb-8">
-                                        <li class="leading-tight">
-                                            <i class="mdi mdi-check-bold text-lg"></i>{" "}
-                                            Lorem ipsum
-                                        </li>
-                                        <li class="leading-tight">
-                                            <i class="mdi mdi-check-bold text-lg"></i>{" "}
-                                            Dolor sit amet
-                                        </li>
-                                    </ul>
-                                </div>
-                                <div class="w-full">
-                                    <button class="font-bold bg-gray-600 hover:bg-gray-700 text-white rounded-md px-10 py-2 transition-colors w-full">
-                                        Buy Now
-                                    </button>
-                                </div>
-                            </div>
-                            <div class="w-full md:w-1/3 md:max-w-none bg-white px-8 md:px-10 py-8 md:py-10 mx-auto md:-mx-3  md:mb-0 rounded-md shadow-lg shadow-gray-600 md:relative md:z-50 md:flex md:flex-col">
-                                <div class="w-full flex-grow">
-                                    <h2 class="text-center font-bold uppercase mb-4">
-                                        TEAM
-                                    </h2>
-                                    <h3 class="text-center font-bold text-orange-300 text-4xl md:text-5xl mb-5">
-                                        20€/Mois
-                                    </h3>
-                                    <ul class="text-sm px-5 mb-8">
-                                        <li class="leading-tight">
-                                            <i class="mdi mdi-check-bold text-lg"></i>{" "}
-                                            Lorem ipsum
-                                        </li>
-                                        <li class="leading-tight">
-                                            <i class="mdi mdi-check-bold text-lg"></i>{" "}
-                                            Dolor sit amet
-                                        </li>
-                                        <li class="leading-tight">
-                                            <i class="mdi mdi-check-bold text-lg"></i>{" "}
-                                            Consectetur
-                                        </li>
-                                        <li class="leading-tight">
-                                            <i class="mdi mdi-check-bold text-lg"></i>{" "}
-                                            Adipisicing
-                                        </li>
-                                        <li class="leading-tight">
-                                            <i class="mdi mdi-check-bold text-lg"></i>{" "}
-                                            Elit repellat
-                                        </li>
-                                    </ul>
-                                </div>
-                                <div class="w-full">
-                                    <button class="font-bold bg-gray-600 hover:bg-gray-700 text-white rounded-md px-10 py-2 transition-colors w-full">
-                                        Buy Now
-                                    </button>
-                                </div>
-                            </div>
-                            <div class="w-full md:w-1/3 md:max-w-none bg-white px-8 md:px-10 py-8 md:py-10 mb-3 mx-auto mt-3 md:my-6 rounded-md shadow-lg shadow-gray-600 md:flex md:flex-col">
-                                <div class="w-full flex-grow">
-                                    <h2 class="text-center font-bold uppercase mb-4">
-                                        PRO
-                                    </h2>
-                                    <h3 class="text-center text-orange-300 font-bold text-4xl mb-5">
-                                        55€/Mois
-                                    </h3>
-                                    <ul class="text-sm px-5 mb-8">
-                                        <li class="leading-tight">
-                                            <i class="mdi mdi-check-bold text-lg"></i>{" "}
-                                            Lorem ipsum
-                                        </li>
-                                        <li class="leading-tight">
-                                            <i class="mdi mdi-check-bold text-lg"></i>{" "}
-                                            Dolor sit amet
-                                        </li>
-                                        <li class="leading-tight">
-                                            <i class="mdi mdi-check-bold text-lg"></i>{" "}
-                                            Consectetur
-                                        </li>
-                                        <li class="leading-tight">
-                                            <i class="mdi mdi-check-bold text-lg"></i>{" "}
-                                            Adipisicing
-                                        </li>
-                                        <li class="leading-tight">
-                                            <i class="mdi mdi-check-bold text-lg"></i>{" "}
-                                            Much more...
-                                        </li>
-                                    </ul>
-                                </div>
-                                <div class="w-full">
-                                    <button class="font-bold bg-gray-600 hover:bg-gray-700 text-white rounded-md px-10 py-2 transition-colors w-full">
-                                        Buy Now
-                                    </button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </section>
-
-                <section class="mt-10 full_responsive bg-white-background">
-                    <div class="w-full mx-auto bg-white px-5 py-10 pb-5 text-gray-600">
-                        <div class="text-center max-w-xl mx-auto pb-10">
-                            <h1 class="text-5xl md:text-6xl font-bold mb-10">
-                                Notre Boutique{" "}
-                            </h1>
                         </div>
 
-                        <div class="grid grid-cols-1 gap-y-10 sm:grid-cols-2 gap-x-12 lg:grid-cols-3 xl:grid-cols-4 xl:gap-x-20 pl-20 pr-20">
-                            <a class="no-underline group">
-                                <div class="w-full aspect-w-1 aspect-h-1 bg-gray-200 rounded-lg overflow-hidden xl:aspect-w-7 xl:aspect-h-8">
-                                    <img
-                                        src="https://tailwindui.com/img/ecommerce-images/category-page-04-image-card-01.jpg"
-                                        alt="Tall slender porcelain bottle with natural clay textured body and cork stopper."
-                                        class="w-full h-full object-center object-cover group-hover:opacity-75"
-                                    />
-                                </div>
-                                <h3 class="mt-4 text-sm text-gray-700">
-                                    Earthen Bottle
-                                </h3>
-                                <p class="mt-1 text-lg font-medium text-orange-300">
-                                    $48
-                                </p>
-                            </a>
 
-                            <a class="no-underline group">
-                                <div class="w-full aspect-w-1 aspect-h-1 bg-gray-200 rounded-lg overflow-hidden xl:aspect-w-7 xl:aspect-h-8">
-                                    <img
-                                        src="https://tailwindui.com/img/ecommerce-images/category-page-04-image-card-02.jpg"
-                                        alt="Olive drab green insulated bottle with flared screw lid and flat top."
-                                        class="w-full h-full object-center object-cover group-hover:opacity-75"
-                                    />
-                                </div>
-                                <h3 class="mt-4 text-sm text-gray-700">
-                                    Nomad Tumbler
-                                </h3>
-                                <p class="mt-1 text-lg font-medium text-orange-300">
-                                    $35
-                                </p>
-                            </a>
 
-                            <a class="no-underline group">
-                                <div class="w-full aspect-w-1 aspect-h-1 bg-gray-200 rounded-lg overflow-hidden xl:aspect-w-7 xl:aspect-h-8">
-                                    <img
-                                        src="https://tailwindui.com/img/ecommerce-images/category-page-04-image-card-03.jpg"
-                                        alt="Person using a pen to cross a task off a productivity paper card."
-                                        class="w-full h-full object-center object-cover group-hover:opacity-75"
-                                    />
-                                </div>
-                                <h3 class="mt-4 text-sm text-gray-700">
-                                    Focus Paper Refill
-                                </h3>
-                                <p class="mt-1 text-lg font-medium text-orange-300">
-                                    $89
-                                </p>
-                                <button>
-                                    Ajouter au panier
-                                </button>
-                            </a>
-
-                            <a class="no-underline group">
-                                <div class="w-full aspect-w-1 aspect-h-1 bg-gray-200 rounded-lg overflow-hidden xl:aspect-w-7 xl:aspect-h-8">
-                                    <img
-                                        src="https://tailwindui.com/img/ecommerce-images/category-page-04-image-card-04.jpg"
-                                        alt="Hand holding black machined steel mechanical pencil with brass tip and top."
-                                        class="w-full h-full object-center object-cover group-hover:opacity-75"
-                                    />
-                                </div>
-                                <h3 class="mt-4 text-sm text-gray-700">
-                                    Machined Mechanical Pencil
-                                </h3>
-                                <p class="mt-1 text-lg font-medium text-orange-300">
-                                    $35
-                                </p>
-                            </a>
-                        </div>
-                    </div>
-                </section>
-            </ParallaxProvider>
+                </div>
+            </div>
         </>
     );
 }
