@@ -37,7 +37,7 @@ class Product extends Model
      */
     protected function getinStockAvailableAttribute(): int
     {
-        return $this->items()->where('bought', false)->count();
+        return $this->items()->where(['available' => true, 'bought' => false])->count();
     }
 
 
