@@ -123,6 +123,8 @@ class ScootersController extends Controller
             'fixing' => 0
             ]);
 
+            
+
             if (!$data) {
                 return response()->json(array('success' => 'false', 'message' => "Erreur pour l'application en status maintenance"), 400);
             }
@@ -149,7 +151,7 @@ class ScootersController extends Controller
             if (!$data) {
                 return response()->json(array('success' => 'false', 'message' => "Erreur pour l'application en status maintenance"), 400);
             }
-            
+
             $scooter = Scooters::all();
 
             return response()->json(array('success' => 'true', 'data' => $scooter));
