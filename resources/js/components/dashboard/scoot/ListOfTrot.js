@@ -5,7 +5,9 @@ import { LinearProgress } from '@mui/material';
 import { AuthLoadingContext } from '../../context/AuthContext';
 
 export default function ListOfTrot() {
+
   const [infos, setInfos] = useState();
+  
 
   let { loaded } = useContext(AuthLoadingContext)
 
@@ -35,14 +37,13 @@ export default function ListOfTrot() {
       editable: false,
       renderCell: (params) => (
         <div id={"is-active-" + params.row.id}>
-          <p className='m-0'>
-            {params.row.available ? "true" : "false"}
+          <p className={params.row.maintenance ? "m-0 text-primary" : "m-0 text-black"}>
+            {params.row.maintenance ? "true" : "false"}
           </p>
         </div >
       )
 
     },
-
     {
         field: 'MaintenanceLink',
         headerName: 'Send to maintenance',
@@ -57,7 +58,7 @@ export default function ListOfTrot() {
                     size="small"
                     style={{ marginLeft: 16 }}
                     onClick={() => {
-                        showMore(params);
+                      HandleMaintenance(params.row.id);
                     }}
                 >
                     Envoyer
@@ -74,8 +75,8 @@ export default function ListOfTrot() {
         editable: false,
         renderCell: (params) => (
           <div id={"is-active-" + params.row.id}>
-            <p className='m-0'>
-              {params.row.available ? "true" : "false"}
+            <p className={params.row.fixing ? "m-0 text-primary" : "m-0 text-black"}>
+              {params.row.fixing ? "true" : "false"}
             </p>
           </div >
         )
@@ -98,7 +99,7 @@ export default function ListOfTrot() {
                 size="small"
                 style={{ marginLeft: 16 }}
                 onClick={() => {
-                    showMore(params);
+                  HandleFixing(params.row.id);
                 }}
             >
                 Envoyer
@@ -108,33 +109,40 @@ export default function ListOfTrot() {
 
     }
 
-  ];
+  ]
 
-  const active = async (params) => {
-    console.log(params)
-    try {
-      let response = await axios.post('/api/scooter/active/', params.row)
-      if (response.data.success) {
-        console.log("available" + response.data.data.scooter[0])
-        console.log(response.data.data.scooter[0])
-        retrieveInfos()
+  const HandleFixing = async (event) => {
+         
+      let response = await axios.get(`/api/dashboard/api/scooters/fixing/newstatus/${event}`);
 
+      if (response.data.data) {
+        console.log(response.data.data)
+        setInfos(response.data.data)
       }
-    } catch (e) {
-      console.log(e)
+
+  };
+
+  const HandleMaintenance = async (event) => {
+
+    let response = await axios.get(`/api/dashboard/api/scooters/maintenance/newstatus/${event}`);
+
+    if (response.data.data) {
+      setInfos(response.data.data)
     }
 
-  }
+  };
+
 
   const retrieveInfos = async () => {
     try {
-      let response = await axios.get('/api/scooters', {
+      let response = await axios.get('/api/scooters/list', {
         headers: {
           'Accept': 'application/json'
         }
       })
 
       if (response.data.data) {
+        console.log(response.data.data)
         setInfos(response.data.data)
       }
     } catch (e) {
@@ -162,7 +170,6 @@ export default function ListOfTrot() {
         rowsPerPageOptions={[5]}
         disableSelectionOnClick
         loading={!infos}
-
 
       />
     </div>

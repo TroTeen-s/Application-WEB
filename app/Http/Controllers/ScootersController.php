@@ -7,9 +7,11 @@ use App\Traits\ApiResponse;
 use Illuminate\Http\JsonResponse;
 use App\Models\Scooters;
 use Illuminate\Support\Facades\DB;
-
+use Exception;
 class ScootersController extends Controller
 {
+
+    use ApiResponse;
 
  /**
      * Handle the incoming request.
@@ -31,7 +33,6 @@ class ScootersController extends Controller
 
         $attr = $request->validate([
             'model-serie' => 'required|string|min:6'
-
         ]);
 
         $scooter =
@@ -75,11 +76,86 @@ class ScootersController extends Controller
         return response()->json(array('success' => 'true', 'data' => ['scooter' => $scooter]));
     }
 
-    public function get_maintenance_scoot(Request $request)
+    public function get_maintenance_scoot(): JsonResponse
     {
 
-        $specific_boolean = 1;
-        return Scooters::find($specific_boolean);
+        try{
 
+        $data = Scooters::whereIn('maintenance', [1])->get();
+
+        if (!$data) {
+            return response()->json(array('success' => 'false', 'message' => "Aucun user trouvé"), 400);
+        }
+        return response()->json(array('success' => 'true', 'data' => $data));
+
+        }catch(Exception $e){
+            return $this->fail('erreur', $e->getMessage());
+        }
+
+    }
+
+    public function get_fixing_scoot(): JsonResponse
+    {
+
+        try{
+
+        $data = Scooters::whereIn('fixing', [1])->get();
+
+        if (!$data) {
+            return response()->json(array('success' => 'false', 'message' => "Aucun user trouvé"), 400);
+        }
+
+        return response()->json(array('success' => 'true', 'data' => $data));
+
+        }catch(Exception $e){
+            return $this->fail('erreur', $e->getMessage());
+        }
+
+    }
+
+    public function MaintenanceStatus(Request $request) : JsonResponse
+    {
+        try{
+    
+            $data = Scooters::where('id',$request["id"])
+            ->update([
+            'maintenance' => 1,
+            'fixing' => 0
+            ]);
+
+            if (!$data) {
+                return response()->json(array('success' => 'false', 'message' => "Erreur pour l'application en status maintenance"), 400);
+            }
+
+            $scooter = Scooters::all();
+
+            return response()->json(array('success' => 'true', 'data' => $scooter));
+    
+            }catch(Exception $e){
+                return $this->fail('erreur', $e->getMessage());
+            }
+    }
+
+    public function FixingStatus(Request $request) : JsonResponse
+    {
+        try{
+    
+            $data = Scooters::where('id',$request["id"])
+            ->update([
+            'maintenance' => 0,
+            'fixing' => 1
+            ]);
+
+            if (!$data) {
+                return response()->json(array('success' => 'false', 'message' => "Erreur pour l'application en status maintenance"), 400);
+            }
+            
+            $scooter = Scooters::all();
+
+            return response()->json(array('success' => 'true', 'data' => $scooter));
+    
+            }catch(Exception $e){
+                return $this->fail('erreur', $e->getMessage());
+            }
     }
 }

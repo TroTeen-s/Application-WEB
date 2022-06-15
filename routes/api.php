@@ -91,7 +91,8 @@ Route::group(['middleware' => ['auth:sanctum']], function () {
 
 });
 
-Route::get('/scooters', ScootersController::class);
+
+Route::get('/scooters/list', ScootersController::class);
 Route::post('/scooter/create', [ScootersController::class , 'create']);
 
 // For Admin
@@ -99,6 +100,16 @@ Route::post('/scooter/create', [ScootersController::class , 'create']);
 Route::post('/dashboard/addproduct', [ProductController::class, 'addProduct']);
 Route::get('/dashboard/list', [ProductController::class, 'list']);
 Route::get('/dashboard/api/weather/list', [WeatherController::class, 'list']);
+
+
+
+Route::get('/dashboard/api/scooters/maintenance/list', [ScootersController::class, 'get_maintenance_scoot']);
+Route::get('/dashboard/api/scooters/fixing/list', [ScootersController::class, 'get_fixing_scoot']);
+
+
+
+Route::get('/dashboard/api/scooters/maintenance/newstatus/{id}', [ScootersController::class, 'MaintenanceStatus']);
+Route::get('/dashboard/api/scooters/fixing/newstatus/{id}', [ScootersController::class, 'FixingStatus']);
 
 
 //PACKAGES

@@ -35,8 +35,8 @@ export default function TrotMaintenance() {
       editable: false,
       renderCell: (params) => (
         <div id={"is-active-" + params.row.id}>
-          <p className='m-0'>
-            {params.row.available ? "true" : "false"}
+          <p className={params.row.maintenance ? "m-0 text-primary" : "m-0 text-black"}>
+            {params.row.maintenance ? "true" : "false"}
           </p>
         </div >
       )
@@ -57,7 +57,8 @@ export default function TrotMaintenance() {
                     size="small"
                     style={{ marginLeft: 16 }}
                     onClick={() => {
-                        showMore(params);
+                      HandleMaintenance(params.row.id);
+                      retrieveInfos(params.row.id);
                     }}
                 >
                     Envoyer
@@ -74,8 +75,8 @@ export default function TrotMaintenance() {
         editable: false,
         renderCell: (params) => (
           <div id={"is-active-" + params.row.id}>
-            <p className='m-0'>
-              {params.row.available ? "true" : "false"}
+            <p className={params.row.fixing ? "m-0 text-primary" : "m-0 text-black"}>
+              {params.row.fixing ? "true" : "false"}
             </p>
           </div >
         )
@@ -98,7 +99,8 @@ export default function TrotMaintenance() {
                 size="small"
                 style={{ marginLeft: 16 }}
                 onClick={() => {
-                    showMore(params);
+                  HandleFixing(params.row.id);
+                  retrieveInfos(params.row.id);
                 }}
             >
                 Envoyer
@@ -110,16 +112,39 @@ export default function TrotMaintenance() {
 
   ];
 
+  
+  const HandleFixing = async (event) => {
+         
+    let response = await axios.get(`/api/dashboard/api/scooters/fixing/newstatus/${event}`);
+
+    if (response.data.data) {
+      console.log(response.data.data)
+    }
+
+};
+
+const HandleMaintenance = async (event) => {
+
+  let response = await axios.get(`/api/dashboard/api/scooters/maintenance/newstatus/${event}`);
+
+  if (response.data.data) {
+    setInfos(response.data.data)
+  }
+
+};
+
+
 
   const retrieveInfos = async () => {
     try {
-      let response = await axios.get('/api/scooters', {
+      let response = await axios.get('/api/dashboard/api/scooters/maintenance/list', {
         headers: {
           'Accept': 'application/json'
         }
       })
 
       if (response.data.data) {
+        console.log(response.data.data)
         setInfos(response.data.data)
       }
     } catch (e) {
@@ -130,6 +155,7 @@ export default function TrotMaintenance() {
 
     if (loaded) {
       retrieveInfos()
+      console.log(infos)
     }
   }, [loaded])
 

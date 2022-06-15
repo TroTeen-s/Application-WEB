@@ -37,8 +37,8 @@ export default function TrotReparation() {
       editable: false,
       renderCell: (params) => (
         <div id={"is-active-" + params.row.id}>
-          <p className='m-0'>
-            {params.row.available ? "true" : "false"}
+            <p className={params.row.maintenance ? "m-0 text-primary" : "m-0 text-black"}>
+            {params.row.maintenance ? "true" : "false"}
           </p>
         </div >
       )
@@ -58,8 +58,9 @@ export default function TrotReparation() {
                     color="primary"
                     size="small"
                     style={{ marginLeft: 16 }}
-                    onClick={() => {
-                        showMore(params);
+                      onClick={() => {
+                      HandleMaintenance(params.row.id);
+                      retrieveInfos(params.row.id);
                     }}
                 >
                     Envoyer
@@ -76,8 +77,8 @@ export default function TrotReparation() {
         editable: false,
         renderCell: (params) => (
           <div id={"is-active-" + params.row.id}>
-            <p className='m-0'>
-              {params.row.available ? "true" : "false"}
+           <p className={params.row.fixing ? "m-0 text-primary" : "m-0 text-black"}>
+              {params.row.fixing ? "true" : "false"}
             </p>
           </div >
         )
@@ -100,8 +101,10 @@ export default function TrotReparation() {
                 size="small"
                 style={{ marginLeft: 16 }}
                 onClick={() => {
-                    showMore(params);
+                  HandleFixing(params.row.id);
+                  retrieveInfos(params.row.id);
                 }}
+                
             >
                 Envoyer
             </Button>
@@ -112,35 +115,38 @@ export default function TrotReparation() {
 
   ];
 
-  const active = async (params) => {
-    console.log(params)
-    try {
-      let response = await axios.post('/api/scooter/active/', params.row)
-      if (response.data.success) {
-        console.log("available" + response.data.data.scooter[0])
-        console.log(response.data.data.scooter[0])
-        retrieveInfos()
+  // const active = async (params) => {
+  //   console.log(params)
+  //   try {
+  //     let response = await axios.post('/dashboard/api/scooters/fixing/list', params.row)
+  //     if (response.data.success) {
+  //       console.log("available" + response.data.data.scooter[0])
+  //       console.log(response.data.data.scooter[0])
+  //       retrieveInfos()
 
-      }
-    } catch (e) {
-      console.log(e)
-    }
+  //     }
+  //   } catch (e) {
+  //     console.log(e)
+  //   }
 
-  }
+  // }
 
   const retrieveInfos = async () => {
+    setTimeout(async() => {
     try {
-      let response = await axios.get('/api/scooters', {
+      let response = await axios.get('/api/dashboard/api/scooters/fixing/list', {
         headers: {
           'Accept': 'application/json'
         }
       })
 
       if (response.data.data) {
+        console.log(response.data.data)
         setInfos(response.data.data)
       }
     } catch (e) {
     }
+  })
   }
 
   useEffect(() => {
