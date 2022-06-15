@@ -79,7 +79,7 @@ const Purchases = () => {
                         label="Détails"
                         color="success"
                         onClick={() => {
-                            navigate(`/account/purchase/${cellValues.row.id}`);
+                            navigate(`/account/purchases/${cellValues.row.id}`);
                         }}
                     />
                 );

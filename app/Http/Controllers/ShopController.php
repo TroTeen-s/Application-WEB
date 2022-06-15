@@ -71,7 +71,7 @@ class ShopController extends Controller
             if (empty($item)) {
                 return $this->fail("erreur dans la récupération d'un item pour " . $product->name);
             }
-            $cart->items()->attach($item);
+            $cart->items()->attach($item, ['item_price' => $product->price]);
             $price += $product->price;
         }
 
@@ -137,7 +137,7 @@ class ShopController extends Controller
             return $this->fail('aucun panier correspondant', ['id' => $id]);
         }
 
-        return $this->success('alors', $cart->setAppends(['payment', 'itemNumber', 'items']));
+        return $this->success('informations sur l\'achat', $cart->setAppends(['payment', 'itemNumber', 'items']));
 
     }
 }

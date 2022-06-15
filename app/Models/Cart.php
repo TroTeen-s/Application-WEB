@@ -27,7 +27,9 @@ class Cart extends Model
         'user_id',
         'bought',
         'created_at',
-        'updated_at'
+        'updated_at',
+        'item_id',
+        'cart_id',
     ];
 
     /**
@@ -49,9 +51,13 @@ class Cart extends Model
     public function items(): BelongsToMany
     {
         return $this->belongsToMany(Item::class)->withPivot(
-            'item_id',
-            'cart_id'
+            'item_price'
         );
+    }
+
+    function getItemsAttribute(): Collection
+    {
+        return $this->items()->get();
     }
 
     public function payment(): HasOne
@@ -67,10 +73,5 @@ class Cart extends Model
     function getItemNumberAttribute(): int
     {
         return $this->cartItems()->count();
-    }
-
-    function getItemsAttribute(): HasMany
-    {
-        return $this->cartItems();
     }
 }

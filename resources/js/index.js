@@ -34,6 +34,7 @@ import SubscriptionDetails from "./components/account/services/SubscriptionDetai
 import Account from "./components/account/user/Account";
 import Purchases from "./components/account/shop/Purchases";
 import Password from "./components/account/user/Password";
+import Purchase from "./components/account/shop/Purchase";
 
 ReactDOM.render(
     <React.StrictMode>
@@ -65,7 +66,7 @@ ReactDOM.render(
                         <Route path="subscriptions" element={<Subscriptions />} />
                         <Route path="subscriptions/:subscriptionID" element={<SubscriptionDetails />} />
                         <Route path="purchases" element={<Purchases />} />
-                        <Route path="purchases" element={<Purchases />} />
+                        <Route path="purchases/:purchaseID" element={<Purchase />} />
                     </Route>
 
 

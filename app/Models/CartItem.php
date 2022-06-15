@@ -12,7 +12,13 @@ class CartItem extends Pivot
 
     protected $fillable = [
         'item_id',
-        'cart_id'
+        'cart_id',
+        'item_price'
+    ];
+
+    protected $hidden = [
+        'item_id',
+        'cart_id',
     ];
 
     public function item(): BelongsTo
