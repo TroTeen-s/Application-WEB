@@ -12,6 +12,8 @@ import IconButton from "@mui/material/IconButton";
 import Menu from "@mui/material/Menu";
 import MenuItem from "@mui/material/MenuItem";
 import Typography from "@mui/material/Typography";
+import { LanguageContext } from "../context/AuthContext";
+import Flag from "./components/Flag";
 
 import { NavLink } from "react-router-dom";
 import { ACTIONS, CartContext } from "../context/CartContext";
@@ -19,9 +21,26 @@ import { AuthContext } from "../context/AuthContext";
 import { useNavigate } from "react-router";
 import Weather from "./components/Weather";
 import Button from "@mui/material/Button";
+import { useTranslation } from 'react-i18next';
+
+
+
+import { Trans } from 'react-i18next';
+
+
 
 function Header() {
 
+  let { language, setLanguage } = useContext(LanguageContext)
+
+  const { t, i18n } = useTranslation();
+
+
+
+
+
+
+  const [anchorElUser, setAnchorElUser] = React.useState(null);
     let navigate = useNavigate();
 
     let [total, setTotal] = useState(0);
@@ -88,17 +107,27 @@ function Header() {
 
     const [anchorElUser, setAnchorElUser] = React.useState(null);
 
-    const handleOpenUserMenu = (event) => {
-      setAnchorElUser(event.currentTarget);
-    };
+  const handleOpenUserMenu = (event) => {
+    setAnchorElUser(event.currentTarget);
+  };
 
-    const handleCloseUserMenu = () => {
-      setAnchorElUser(null);
-    };
+  const handleCloseUserMenu = () => {
+    setAnchorElUser(null);
+  };
 
-    const [state, setState] = React.useState({
-        right: false,
-      });
+  const switchLanguage = () => {
+    if (language == 'fr') {
+      i18n.changeLanguage('en');
+      setLanguage('en');
+    } else {
+      i18n.changeLanguage('fr');
+      setLanguage('fr');
+    }
+  }
+
+  const [state, setState] = React.useState({
+    right: false,
+  });
 
       const toggleDrawer = (anchor, open) => (event) => {
         if (event.type === 'keydown' && (event.key === 'Tab' || event.key === 'Shift')) {
@@ -259,6 +288,14 @@ function Header() {
                     <Typography className="ml-2">Connexion</Typography>
                   </MenuItem>
             </NavLink>
+    <NavLink
+      className="no-underline px-3 py-2 flex items-center text-s uppercase font-bold leading-snug text-white"
+      to="/auth/login">
+      <MenuItem className="mr-5">
+        <i className="fab fa-facebook-square text-s leading-lg text-white opacity-75"></i>
+        <Typography className="ml-2">{t('log in')}</Typography>
+      </MenuItem>
+    </NavLink>
 
 
             <NavLink
@@ -269,6 +306,14 @@ function Header() {
                     <Typography className="ml-2">Inscription</Typography>
                   </MenuItem>
             </NavLink>
+    <NavLink
+      className="no-underline px-3 py-2 flex items-center text-s uppercase font-bold leading-snug text-white"
+      to="/auth/register">
+      <MenuItem>
+        <i className="fab fa-facebook-square text-s leading-lg text-white opacity-75"></i>
+        <Typography className="ml-2">{t('Register')}</Typography>
+      </MenuItem>
+    </NavLink>
 
     </>
 
@@ -283,6 +328,17 @@ function Header() {
                 </Typography>
                 </MenuItem>
             </NavLink>
+  let loggedIn = <>
+    <NavLink
+      className="no-underline px-3 py-2 flex items-center text-s uppercase font-bold leading-snug text-white" to="/Dashboard">
+      <MenuItem>
+        <i className="fab fa-facebook-square text-s leading-lg text-white opacity-75"></i>
+        <Typography
+          className="ml-2">
+          {t('Dashboard')}
+        </Typography>
+      </MenuItem>
+    </NavLink>
 
             <NavLink
                 className="no-underline px-3 py-2 flex items-center text-s uppercase font-bold leading-snug text-white"
@@ -295,6 +351,17 @@ function Header() {
                     </Typography>
                     </MenuItem>
             </NavLink>
+    <NavLink
+      className="no-underline px-3 py-2 flex items-center text-s uppercase font-bold leading-snug text-white"
+      to="/account">
+      <MenuItem>
+        <i className="fab fa-facebook-square text-s leading-lg text-white opacity-75"></i>
+        <Typography
+          className="ml-2">
+          {t('My account')}
+        </Typography>
+      </MenuItem>
+    </NavLink>
 
         <NavLink
             className="no-underline px-3 py-2 flex items-center text-s uppercase font-bold leading-snug text-white"
@@ -308,8 +375,23 @@ function Header() {
           </Typography>
           </MenuItem>
         </NavLink>
+    <NavLink
+      className="no-underline px-3 py-2 flex items-center text-s uppercase font-bold leading-snug text-white"
+      to="#">
+      <MenuItem>
+        <i className="fab fa-facebook-square text-s leading-lg text-white opacity-75"></i>
+        <Typography
+          className="ml-2"
+          onClick={doLogout}>
+          {t('Log out')}
+        </Typography>
+      </MenuItem>
+    </NavLink>
 
     </>
+
+
+  </>
 
     return (
         <>
@@ -333,32 +415,40 @@ function Header() {
                     <div className="hidden md:flex md:items-center md:w-auto w-full order-2 md:order-1" id="menu">
               <nav>
                 <ul className="md:flex items-center justify-between text-base text-gray-700 pt-4 md:pt-0">
-                            <NavLink
-                                className="no-underline px-3 py-2 flex items-center text-s uppercase font-bold leading-snug text-white"
-                                to="/shop">
-                                <i className="fab fa-facebook-square text-s leading-lg text-white opacity-75"></i>
-                                <span className="ml-2">Notre Boutique</span>
-                            </NavLink>
 
-                             <NavLink
-                                className="no-underline px-3 py-2 flex items-center text-s uppercase font-bold leading-snug text-white"
-                                to="/store">
-                                <i className="fab fa-facebook-square text-s leading-lg text-white opacity-75"></i>
-                                <span className="ml-2">Nos abonnements</span>
-                            </NavLink>
+                  <div className="h-5 w-5 rounded-md" onClick={switchLanguage}>
+                    <Flag />
+                  </div>
 
-                            <NavLink
-                                className="no-underline px-3 py-2 flex items-center text-s uppercase font-bold leading-snug text-white"
-                                to="/sponsors">
-                                <i className="fab fa-facebook-square text-s leading-lg text-white opacity-75"></i>
-                                <span className="ml-2">Nos partenaires</span>
-                            </NavLink>
+                  <NavLink
+                    className="no-underline px-3 py-2 flex items-center text-s uppercase font-bold leading-snug text-white"
+                    to="/shop">
+                    <i className="fab fa-facebook-square text-s leading-lg text-white opacity-75"></i>
+                    <span className="ml-2">{t('Shop')}</span>
+                  </NavLink>
+
+
+
+
+                  <NavLink
+                    className="no-underline px-3 py-2 flex items-center text-s uppercase font-bold leading-snug text-white"
+                    to="/store">
+                    <i className="fab fa-facebook-square text-s leading-lg text-white opacity-75"></i>
+                    <span className="ml-2">{t('Subscriptions')}</span>
+                  </NavLink>
+
+                  <NavLink
+                    className="no-underline px-3 py-2 flex items-center text-s uppercase font-bold leading-snug text-white"
+                    to="/sponsors">
+                    <i className="fab fa-facebook-square text-s leading-lg text-white opacity-75"></i>
+                    <span className="ml-2">{t('Partners')}</span>
+                  </NavLink>
 
                   <NavLink
                     className="no-underline px-3 py-2 flex items-center text-s uppercase font-bold leading-snug text-white"
                     to="/needHelp">
                     <i className="fab fa-facebook-square text-s leading-lg text-white opacity-75"></i>
-                    <span className="ml-2">Besoin d'aide</span>
+                    <span className="ml-2">{t('Need help')}</span>
                   </NavLink>
 
                 </ul>
@@ -419,9 +509,9 @@ function Header() {
 
               </Menu>
 
-    {['right'].map((anchor) => (
+              {['right'].map((anchor) => (
 
-        <React.Fragment key={anchor}>
+                <React.Fragment key={anchor}>
 
           <Drawer
             anchor={anchor}
@@ -445,17 +535,17 @@ function Header() {
             </div>
 
             <div>
-    </div>
+            </div>
 
 
-                </div>
+          </div>
         </nav>
       </header>
 
 
-        </>
+    </>
 
-    );
+  );
 }
 
 

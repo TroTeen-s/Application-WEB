@@ -1,12 +1,17 @@
 import React, { useContext, useEffect, useState } from 'react';
 import Card from './Card';
 import { AuthLoadingContext } from "../context/AuthContext";
+import { LanguageContext } from '../context/AuthContext';
 import { LoadScript } from '@react-google-maps/api';
+import { IosShare } from '@mui/icons-material';
 
 const Sponsors = () => {
 
     let { loaded } = useContext(AuthLoadingContext)
     const [infos, setInfos] = useState();
+    let { language } = useContext(LanguageContext)
+
+    setLanguage('fr')
 
     const retrieveInfos = async () => {
         try {
@@ -43,8 +48,8 @@ const Sponsors = () => {
 
 
             <div className='bg-white-background'>
-                <div class="flex justify-center px-[10%] py-6">
-                    <div class="grid grid-cols-3 gap-12">
+                <div className="flex justify-center px-[10%] py-6">
+                    <div className="mt-12 grid grid-cols-3 items-center gap-6 md:grid-cols-2 lg:flex lg:space-x-8">
                         {infos.map(({ id, brand, description, end }) => (
                             <Card
                                 id={id}
