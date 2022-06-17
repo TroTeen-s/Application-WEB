@@ -9,9 +9,9 @@ const Sponsors = () => {
 
     let { loaded } = useContext(AuthLoadingContext)
     const [infos, setInfos] = useState();
-    let { language } = useContext(LanguageContext)
 
-    setLanguage('fr')
+
+
 
     const retrieveInfos = async () => {
         try {
