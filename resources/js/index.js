@@ -16,17 +16,17 @@ import SignUpForm from "./components/auth/SignUpForm";
 import SignInForm from "./components/auth/SignInForm";
 import Main from "./components/main/Master";
 
-import Trot from './components/dashboard/main';
-import Customers from './components/dashboard/Customers';
-import InnerContent from './components/dashboard/App'
-import Following from './components/dashboard/Following'
-import Shop from './components/shop/App'
-import Informations from "./components/account/Informations";
-import Password from "./components/account/Password";
-import Delete from "./components/account/Delete";
-import Admin from './components/admin/Admin';
-import User from './components/admin/User'
-import Sponsors from './components/sponsors/Sponsors';
+import Trot from "./components/dashboard/scoot/main";
+import Customers from "./components/dashboard/Customers";
+import InnerContent from "./components/dashboard/App";
+import Following from "./components/dashboard/Following";
+import Ticket from "./components/dashboard/ticket/indexTicket";
+import Api from "./components/dashboard/api/api";
+
+import Shop from "./components/shop/App";
+import Admin from "./components/admin/Admin";
+import User from "./components/admin/User";
+import Sponsors from "./components/sponsors/Sponsors";
 
 import ShopAdmin from "./components/dashboard/boutique/shop";
 import ProductPage from "./components/shop/ProductPage";
@@ -34,10 +34,10 @@ import Informations from "./components/account/user/Informations";
 import Delete from "./components/account/user/Delete";
 import Subscriptions from "./components/account/services/Subscriptions";
 import SubscriptionDetails from "./components/account/services/SubscriptionDetails";
-import Account from "./components/account/user/Account";
 import Purchases from "./components/account/shop/Purchases";
 import Password from "./components/account/user/Password";
 import Purchase from "./components/account/shop/Purchase";
+import Account from "./components/account/Account";
 
 ReactDOM.render(
     <React.StrictMode>

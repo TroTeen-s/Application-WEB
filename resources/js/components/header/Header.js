@@ -1,6 +1,6 @@
 import "../../../css/app.css";
-import React, { useContext } from "react";
-import './style.css'
+import React, { useContext, useEffect, useState } from "react";
+import "./style.css";
 
 
 import Box from '@mui/material/Box';
@@ -14,15 +14,11 @@ import MenuItem from "@mui/material/MenuItem";
 import Typography from "@mui/material/Typography";
 
 import { NavLink } from "react-router-dom";
-import Button from "@mui/material/Button";
 import { ACTIONS, CartContext } from "../context/CartContext";
 import { AuthContext } from "../context/AuthContext";
 import { useNavigate } from "react-router";
-
 import Weather from "./components/Weather";
-
-
-
+import Button from "@mui/material/Button";
 
 function Header() {
 
@@ -129,70 +125,86 @@ function Header() {
               <div className="flex items-start justify-between">
                 <h2 className="text-lg font-medium text-gray-900" id="slide-over-title">Shopping cart</h2>
                 <div className="ml-3 flex h-7 items-center">
-                  <button type="button" className="-m-2 p-2 text-gray-400 hover:text-gray-500">
-                    <span className="sr-only">Close panel</span>
+                    <button type="button" className="-m-2 p-2 text-gray-400 hover:text-gray-500">
+                        <span className="sr-only">Close panel</span>
 
-                    <svg onClick={toggleDrawer(anchor, false)} className="h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" aria-hidden="true">
-                      <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
-                    </svg>
-                  </button>
+                        <svg onClick={toggleDrawer(anchor, false)} className="h-6 w-6"
+                             xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="2"
+                             stroke="currentColor" aria-hidden="true">
+                            <path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" />
+                        </svg>
+                    </button>
                 </div>
               </div>
 
-              <div className="mt-8">
-                <div className="flow-root">
-                  <ul role="list" className="-my-6 divide-y divide-gray-200">
-                  <List>
-                  {['Inbox', 'Starred', 'Send email', 'Drafts'].map((text, index) => (
-                     <ListItem key={text}>
+                <div className="mt-8">
+                    <div className="flow-root">
+                        <ul role="list" className="-my-6 divide-y divide-gray-200">
+                            <List>
+                                {products.map((product) => (
+                                    <ListItem key={product.id}>
 
-                    <li className="flex py-6">
-                      <div className="h-36 w-36 flex-shrink-0 overflow-hidden rounded-md border border-gray-200">
-                        <img src="https://tailwindui.com/img/ecommerce-images/shopping-cart-page-04-product-01.jpg" alt="Salmon orange fabric pouch with match zipper, gray zipper pull, and adjustable hip belt." className="h-full w-full object-cover object-center"/>
-                      </div>
+                                        <li className="flex py-6">
+                                            <div
+                                                className="h-36 w-36 flex-shrink-0 overflow-hidden rounded-md border border-gray-200">
+                                                <img
+                                                    src={"/" + product.image_path}
+                                                    alt="Salmon orange fabric pouch with match zipper, gray zipper pull, and adjustable hip belt."
+                                                    className="h-full w-full object-cover object-center" />
+                                            </div>
 
-                      <div className="ml-4 flex flex-col">
-                        <div>
-                          <div className="flex justify-between text-base font-medium text-gray-900">
-                            <h3>
-                            <ListItemText primary={text} />
-                            </h3>
-                          </div>
-                          <p className="text-gray-900">90.00€</p>
-                          <p className="text-gray-500">Quantité : 1</p>
-                          <a type="button" className="text-orange-300 no-underline">Remove</a>
-                        </div>
+                                            <div className="ml-4 flex flex-col">
+                                                <div>
+                                                    <div
+                                                        className="flex justify-between text-base font-medium text-gray-900">
+                                                        <h3>
+                                                            <ListItemText primary={product.name} />
+                                                        </h3>
+                                                    </div>
+                                                    <p className="text-gray-900">{product.price}€</p>
+                                                    <a type="button"
+                                                       onClick={() => dispatch({
+                                                           type: ACTIONS.CART_REMOVE_UNIQUE,
+                                                           payload: { id: product.id }
+                                                       })}
+                                                       className="text-orange-300 no-underline">Remove</a>
+                                                </div>
 
-                      </div>
-                    </li>
+                                            </div>
+                                        </li>
 
 
-                     </ListItem>
-                    ))}
-                    </List>
+                                    </ListItem>
+                                ))}
+                            </List>
 
-                  </ul>
+                        </ul>
+                    </div>
                 </div>
-              </div>
             </div>
 
-            <div className="border-t border-gray-200 py-6 px-4 sm:px-6">
-              <div className="flex justify-between text-base font-medium text-gray-900">
-                <p>Prix Total</p>
-                <p>262.00€</p>
+              <div className="border-t border-gray-200 py-6 px-4 sm:px-6">
+                  <div className="flex justify-between text-base font-medium text-gray-900">
+                      <p>Prix Total</p>
+                      <p>{total}€</p>
+                  </div>
+                  <p className="mt-0.5 text-sm text-gray-500">TVA et taxes comprises</p>
+                  <div className="mt-6">
+                      <Button
+                          onClick={readCart}
+                          className="flex items-center justify-center rounded-md border border-transparent bg-orange-300 px-6 py-3 text-base font-medium shadow-sm hover:bg-orange-400">{auth ? "Acheter" : "Se connecter pour acheter"}
+                      </Button>
+                  </div>
+                  <div className="mt-6 flex justify-center text-center text-sm text-gray-500">
+                      <p>
+                          or <button onClick={toggleDrawer(anchor, false)} type="button"
+                                     className="no-underline font-medium text-orange-300 hover:text-orange-400">Continue
+                          Shopping<span aria-hidden="true"> &rarr;</span></button>
+                      </p>
+                  </div>
               </div>
-              <p className="mt-0.5 text-sm text-gray-500">TVA et taxes comprises</p>
-              <div className="mt-6">
-                <a href="#" className="flex items-center justify-center rounded-md border border-transparent bg-orange-300 px-6 py-3 text-base font-medium text-white shadow-sm hover:bg-orange-400">Acheter</a>
-              </div>
-              <div className="mt-6 flex justify-center text-center text-sm text-gray-500">
-                <p>
-                  or <button onClick={toggleDrawer(anchor, false)} type="button" className="no-underline font-medium text-orange-300 hover:text-orange-400">Continue Shopping<span aria-hidden="true"> &rarr;</span></button>
-                </p>
-              </div>
-            </div>
           </div>
-        </div>
+          </div>
       </div>
     </div>
   </div>
@@ -354,21 +366,26 @@ function Header() {
             </div>
 
             <div className="order-1 md:order-2">
-                <div className="uppercase font-black no-underline pt-2 pl-5">
+                <div className="font-black no-underline pt-2 pl-5 flex items-center space-x-4">
 
-                <NavLink
-                    className="uppercase text-white font-black text-3xl no-underline"
-                    to="/Main">
-                    Easy
-                </NavLink>
+                    <div>
+                        <NavLink
+                            className="uppercase text-white font-black text-3xl no-underline"
+                            to="/Main">
+                            Easy
+                        </NavLink>
 
-                <NavLink
-                    className="uppercase text-orange-300 hover:text-white text-3xl no-underline"
-                    to="/Main">
-                    Scooter
-                </NavLink>
+                        <NavLink
+                            className="uppercase text-orange-300 hover:text-white text-3xl no-underline"
+                            to="/Main">
+                            Scooter
+                        </NavLink>
 
+                    </div>
+                    <div><Weather /></div>
                 </div>
+
+
             </div>
 
             <div className="order-3 md:order-3 flex items-center pt-2" id="nav-content">
