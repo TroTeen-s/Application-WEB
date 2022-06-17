@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\ShopController;
 use App\Http\Controllers\SubscriptionController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
@@ -80,19 +81,25 @@ Route::group(['middleware' => ['auth:sanctum']], function () {
     ## ROUTES SCOOTERS
 
     ## SPONSOR
-    Route::get('/initCode/{id}', [SponsorCodeController::class , 'init_free_code'])->where('id', '[0-9]+');
+    Route::get('/initCode/{id}', [SponsorCodeController::class, 'init_free_code'])->where('id', '[0-9]+');
     Route::get('/sponsors', SponsorController::class);
     Route::get('/codes', SponsorCodeController::class);
-    Route::get('/code/{id}', [SponsorCodeController::class , 'get_free_code'])->where('id', '[0-9]+');
+    Route::get('/code/{id}', [SponsorCodeController::class, 'get_free_code'])->where('id', '[0-9]+');
 
-
-
+    ## ROUTES SHOP
+    Route::get('/shop/buy-cart', [ShopController::class, 'buyCart']);
+    Route::get('/shop/test', [SubscriptionController::class, 'test']);
+    Route::get('/carts', [ShopController::class, 'getAllCartsInfo']);
+    Route::get('/cart/{id}', [ShopController::class, 'getCartInfo'])->where('id', '[0-9]+');
 
 
 });
 
-Route::get('/scooters', ScootersController::class);
+
+Route::get('/scooters/list', ScootersController::class);
 Route::post('/scooter/create', [ScootersController::class , 'create']);
+Route::get('/scooters', ScootersController::class);
+Route::post('/scooter/create', [ScootersController::class, 'create']);
 
 // For Admin
 
@@ -100,6 +107,19 @@ Route::post('/dashboard/addproduct', [ProductController::class, 'addProduct']);
 Route::get('/dashboard/list', [ProductController::class, 'list']);
 Route::get('/dashboard/api/weather/list', [WeatherController::class, 'list']);
 
+
+
+Route::get('/dashboard/api/scooters/maintenance/list', [ScootersController::class, 'get_maintenance_scoot']);
+Route::get('/dashboard/api/scooters/fixing/list', [ScootersController::class, 'get_fixing_scoot']);
+
+
+
+Route::get('/dashboard/api/scooters/maintenance/newstatus/{id}', [ScootersController::class, 'MaintenanceStatus']);
+Route::get('/dashboard/api/scooters/fixing/newstatus/{id}', [ScootersController::class, 'FixingStatus']);
+
+Route::get('/product-list', [ShopController::class, 'productList']);
+Route::get('/products', [ShopController::class, 'getProductById']);
+Route::get('/product/{productID}', [ShopController::class, 'productInfo'])->where('productID', '[0-9]+');
 
 //PACKAGES
 

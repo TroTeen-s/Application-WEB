@@ -1,9 +1,12 @@
 import {
-  SearchOutlined,
-  ShoppingCartOutlined,
+    SearchOutlined,
+    ShoppingCartOutlined
 } from "@material-ui/icons";
 import styled from "styled-components";
-import { NavLink } from 'react-router-dom'
+import { NavLink } from "react-router-dom";
+import IconButton from "@mui/material/IconButton";
+import { useContext } from "react";
+import { ACTIONS, CartContext } from "../../context/CartContext";
 
 const Info = styled.div`
   opacity: 0;
@@ -71,30 +74,35 @@ const Icon = styled.div`
 
 const ProductShopCard = ({ item }) => {
 
-    console.warn(item);
+    let { cart, dispatch } = useContext(CartContext);
+
+    const addToCart = () => {
+        dispatch({ type: ACTIONS.CART_ADD_UNIQUE, payload: { id: item.id } });
+    };
+
 
     return (
         <div className="h-full bg-white-background mb-4">
             <Container className="pb-12" key={item.id}>
                 <Circle />
-                <Image src={item.img} />
+                <Image src={"/" + item.image_path} />
                 <Info>
-                    <Icon>
-                  <ShoppingCartOutlined />
-                </Icon>
-              <NavLink to={`/products/${item.id}`}>
-                <Icon>
-                  <SearchOutlined />
-                </Icon>
-              </NavLink>
-            </Info>
-      </Container>
+                    <IconButton onClick={addToCart}>
+                        <ShoppingCartOutlined />
+                    </IconButton>
+                    <NavLink to={`/products/${item.id}`}>
+                        <Icon>
+                            <SearchOutlined />
+                        </Icon>
+                    </NavLink>
+                </Info>
+            </Container>
 
-      <h2 className="font-bold uppercase text-base pl-2 pt-2"> Data product </h2>
-      <p className="pl-2"> 50.00 € </p>
-    </div>
+            <h2 className="font-bold uppercase text-base pl-2 pt-2"> {item.name} </h2>
+            <p className="pl-2">{item.price} €</p>
+        </div>
 
-  );
+    );
 };
 
 export default ProductShopCard;

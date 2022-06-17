@@ -1,6 +1,5 @@
 import React, { useContext, useLayoutEffect, useState } from 'react';
 
-import { AuthContext } from "../context/AuthContext";
 import { Grid, Typography } from "@mui/material";
 import Button from "@mui/material/Button";
 import NavAccount from './NavAccount';
@@ -10,7 +9,8 @@ import DialogActions from '@mui/material/DialogActions';
 import DialogContent from '@mui/material/DialogContent';
 import DialogContentText from '@mui/material/DialogContentText';
 import DialogTitle from '@mui/material/DialogTitle';
-import Slide from '@mui/material/Slide';
+import Slide from "@mui/material/Slide";
+import { AuthContext } from "../../context/AuthContext";
 
 const Transition = React.forwardRef(function Transition(props, ref) {
     return <Slide direction="up" ref={ref} {...props} />;

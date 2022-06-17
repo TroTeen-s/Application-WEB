@@ -9,7 +9,7 @@ class Payment extends Model
 {
     protected $fillable = [
         'amount',
-        'date',
+        'payment_date',
         'billing_address_city',
         'billing_address_line',
         'billing_address_postal_code',
@@ -17,6 +17,15 @@ class Payment extends Model
         'id_stripe',
         'id_invoice_stripe'
     ];
+
+    protected $hidden = [
+        'id_stripe',
+        'id_invoice_stripe',
+        'user_id',
+        'bought',
+        'id'
+    ];
+
 
     public $timestamps = false;
 

@@ -15,7 +15,7 @@ return new class extends Migration {
         Schema::create('Payments', function (Blueprint $table) {
             $table->id();
             $table->float('amount')->nullable();
-            $table->date('date')->nullable();
+            $table->dateTime('payment_date')->nullable();
             $table->string('billing_address_city')->nullable();
             $table->string('billing_address_line')->nullable();
             $table->string('billing_address_postal_code')->nullable();

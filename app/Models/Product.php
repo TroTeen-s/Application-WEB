@@ -24,6 +24,11 @@ class Product extends Model
         return $this->hasMany(Item::class);
     }
 
+    public function getOneAvailableForPurchase(): Model|HasMany
+    {
+        return $this->items()->firstWhere('available', true);
+    }
+
 
     /**
      * Renvoie lles objets associés qui sont disponibles à la vente

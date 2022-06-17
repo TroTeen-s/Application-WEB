@@ -18,7 +18,7 @@ export default function TrotMaintenance() {
     {
       field: 'model_serie',
       headerName: 'Modele de Serie',
-      width: 150,
+      width: 250,
       editable: false,
     },
     {
@@ -29,14 +29,14 @@ export default function TrotMaintenance() {
     },
 
     {
-      field: 'available',
-      headerName: 'Available',
-      width: 150,
+      field: 'maintenance',
+      headerName: 'maintenance',
+      width: 100,
       editable: false,
       renderCell: (params) => (
         <div id={"is-active-" + params.row.id}>
-          <p className='m-0'>
-            {params.row.available ? "Activé" : "Désactivé"}
+          <p className={params.row.maintenance ? "m-0 text-primary" : "m-0 text-black"}>
+            {params.row.maintenance ? "true" : "false"}
           </p>
         </div >
       )
@@ -44,56 +44,107 @@ export default function TrotMaintenance() {
     },
 
     {
-      field: 'userLink',
-      headerName: 'Show more',
+        field: 'MaintenanceLink',
+        headerName: 'Send to maintenance',
+        width: 150,
+        editable: false,
+        renderCell: (params) => (
+
+            <strong>
+                <Button
+                    variant="outlined"
+                    color="primary"
+                    size="small"
+                    style={{ marginLeft: 16 }}
+                    onClick={() => {
+                      HandleMaintenance(params.row.id);
+                      retrieveInfos(params.row.id);
+                    }}
+                >
+                    Envoyer
+                </Button>
+            </strong >
+        )
+
+      },
+
+    {
+        field: 'fixing',
+        headerName: 'fixing',
+        width: 60,
+        editable: false,
+        renderCell: (params) => (
+          <div id={"is-active-" + params.row.id}>
+            <p className={params.row.fixing ? "m-0 text-primary" : "m-0 text-black"}>
+              {params.row.fixing ? "true" : "false"}
+            </p>
+          </div >
+        )
+
+      },
+
+
+
+    {
+      field: 'FixingLink',
+      headerName: 'Send to fixing',
       width: 150,
       editable: false,
       renderCell: (params) => (
 
         <strong>
-          <Button
-            variant="outlined"
-            color="primary"
-            size="small"
-            style={{ marginLeft: 16 }}
-            onClick={() => {
-              active(params);
-            }}
-          >
-            {params.row.available ? "Désactiver" : "Activer"}
-          </Button>
+            <Button
+                variant="outlined"
+                color="primary"
+                size="small"
+                style={{ marginLeft: 16 }}
+                onClick={() => {
+                  HandleFixing(params.row.id);
+                  retrieveInfos(params.row.id);
+                }}
+            >
+                Envoyer
+            </Button>
         </strong >
-      )
+    )
 
     }
 
   ];
 
-  const active = async (params) => {
-    console.log(params)
-    try {
-      let response = await axios.post('/api/scooter/active/', params.row)
-      if (response.data.success) {
-        console.log("available" + response.data.data.scooter[0])
-        console.log(response.data.data.scooter[0])
-        retrieveInfos()
+  
+  const HandleFixing = async (event) => {
+         
+    let response = await axios.get(`/api/dashboard/api/scooters/fixing/newstatus/${event}`);
 
-      }
-    } catch (e) {
-      console.log(e)
+    if (response.data.data) {
+      console.log(response.data.data)
     }
 
+};
+
+const HandleMaintenance = async (event) => {
+
+  let response = await axios.get(`/api/dashboard/api/scooters/maintenance/newstatus/${event}`);
+
+  if (response.data.data) {
+    setInfos(response.data.data)
   }
+
+};
+
+
 
   const retrieveInfos = async () => {
     try {
-      let response = await axios.get('/api/scooters', {
+      let response = await axios.get('/api/dashboard/api/scooters/maintenance/list', {
         headers: {
           'Accept': 'application/json'
         }
       })
 
       if (response.data.data) {
+        console.log(response.data.data)
         setInfos(response.data.data)
       }
     } catch (e) {
@@ -104,12 +155,13 @@ export default function TrotMaintenance() {
 
     if (loaded) {
       retrieveInfos()
+      console.log(infos)
     }
   }, [loaded])
 
 
   return (
-    <div style={{ height: 450, width: '100%', paddingBottom: 10 }}>
+    <div style={{ height: 280, width: '100%', paddingBottom: 10 }}>
       <h3> Trotinettes en Maintenance </h3>
       <DataGrid
         components={{

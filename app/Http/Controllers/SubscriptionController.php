@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Cart;
 use App\Models\Invoice;
 use App\Models\Package;
 use App\Models\PackageUser;
@@ -64,7 +65,6 @@ class SubscriptionController extends Controller
                     'success_url' => $YOUR_DOMAIN . '?success=true&session_id={CHECKOUT_SESSION_ID}',
                     'cancel_url' => $YOUR_DOMAIN . '?canceled=true',
                     'customer' => $user->id_stripe ?? '',
-                    //                    'cancel_at' => Carbon::now()->addYear(),
                     'subscription_data' => [
                         'metadata' => [
                             'cancel_at' => Carbon::now()->addYear()
@@ -127,18 +127,27 @@ class SubscriptionController extends Controller
             case 'customer.subscription.created':
                 $this->createSubscription($event);
                 break;
+
             case 'customer.subscription.updated':
                 $this->updateSubscription($event);
                 break;
-            case  'invoice.paid':
+
+            case 'invoice.paid':
                 if ($event->data->object->subscription) {
                     $this->createInvoice($event);
                 }
                 break;
+
             case 'payment_intent.succeeded':
                 Log::channel('errors')->info('on est là heyyyyy');
                 $this->createPayment($event);
                 break;
+
+            case 'checkout.session.completed':
+                if ($event->data->object->mode === 'payment')
+                    $this->finishCart($event);
+                break;
+
             default:
                 break;
         }
@@ -224,7 +233,7 @@ class SubscriptionController extends Controller
 
             $payment = new Payment([
                 'amount' => $paymentObject->amount / 100,
-                'date' => Carbon::createFromTimestamp($paymentObject->created),
+                'payment_date' => Carbon::createFromTimestamp($paymentObject->created),
                 'billing_address_city' => $paymentObject->charges->data[0]->billing_details->address->city,
                 'billing_address_line' => $paymentObject->charges->data[0]->billing_details->address->line1,
                 'billing_address_postal_code' => $paymentObject->charges->data[0]->billing_details->address->postal_code,
@@ -243,7 +252,7 @@ class SubscriptionController extends Controller
 
         $user = auth()->user();
 
-        \Stripe\Stripe::setApiKey(getenv("STRIPE_PRIVATE"));
+        Stripe\Stripe::setApiKey(getenv("STRIPE_PRIVATE"));
 
         // Authenticate your user.
         try {
@@ -257,5 +266,31 @@ class SubscriptionController extends Controller
 
         return $this->success('redirection', ['redirect' => $portalSession->url]);
 
+    }
+
+    public function finishCart(Event $event): JsonResponse
+    {
+        $cart = Cart::query()->firstWhere('checkout_id', $event->data->object->id);
+        $cart->save();
+        $cart->update([
+            'bought' => true,
+            'payment_id' => $event->data->object->payment_intent
+        ]);
+        $itemsBought = $cart->items;
+
+        foreach ($itemsBought as $item) {
+            $item->bought = true;
+            $item->available = false;
+            $item->save();
+        }
+
+        return $this->success('test', $cart->items);
+    }
+
+    public function test(Request $request): JsonResponse
+    {
+        $cart = Cart::query()->firstWhere('id', $request->input('id'));
+
+        return $this->success('alors', $cart->setAppends(['payment', 'itemNumber']));
     }
 }

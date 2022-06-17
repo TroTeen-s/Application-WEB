@@ -17,7 +17,7 @@ export default function Following() {
 
   const retrieveInfos = async () => {
     try {
-      let response = await axios.get('/api/scooters', {
+      let response = await axios.get('/api/scooters/list', {
         headers: {
           'Accept': 'application/json'
         }
@@ -28,6 +28,7 @@ export default function Following() {
         setInfos(response.data.data)
       }
     } catch (e) {
+      console.log(e)
     }
   }
 
@@ -57,11 +58,11 @@ export default function Following() {
             url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
           />
           
-          {infos.map(({ id, last_position_long, last_position_lat }) => (  
+          {infos.map(({ id, last_position_long, last_position_lat, model_serie }) => (  
           
           <Marker position={[last_position_long, last_position_lat]}>
               <Popup>
-                ID : {[id]} <br /> Easily customizable.
+                ID : {[id]} <br /> {[model_serie]}
               </Popup>
             </Marker>
              
