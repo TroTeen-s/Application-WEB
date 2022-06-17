@@ -38,6 +38,7 @@ import Purchases from "./components/account/shop/Purchases";
 import Password from "./components/account/user/Password";
 import Purchase from "./components/account/shop/Purchase";
 import Account from "./components/account/Account";
+import "./i18n.js";
 
 ReactDOM.render(
     <React.StrictMode>

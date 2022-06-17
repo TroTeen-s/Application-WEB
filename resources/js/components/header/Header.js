@@ -24,11 +24,6 @@ import Button from "@mui/material/Button";
 import { useTranslation } from 'react-i18next';
 
 
-
-import { Trans } from 'react-i18next';
-
-
-
 function Header() {
 
   let { language, setLanguage } = useContext(LanguageContext)
@@ -40,7 +35,6 @@ function Header() {
 
 
 
-  const [anchorElUser, setAnchorElUser] = React.useState(null);
     let navigate = useNavigate();
 
     let [total, setTotal] = useState(0);
@@ -116,13 +110,14 @@ function Header() {
   };
 
   const switchLanguage = () => {
-    if (language == 'fr') {
-      i18n.changeLanguage('en');
-      setLanguage('en');
-    } else {
-      i18n.changeLanguage('fr');
-      setLanguage('fr');
-    }
+      console.log("cliqc loli");
+      if (language === "fr") {
+          i18n.changeLanguage("en");
+          setLanguage("en");
+      } else {
+          i18n.changeLanguage("fr");
+          setLanguage("fr");
+      }
   }
 
   const [state, setState] = React.useState({
