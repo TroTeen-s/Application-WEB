@@ -6,13 +6,6 @@ const Sponsors = () => {
 
     let { loaded } = useContext(AuthLoadingContext)
     const [infos, setInfos] = useState();
-<<<<<<< HEAD
-
-
-
-
-=======
->>>>>>> main
     const retrieveInfos = async () => {
         try {
             let response = await axios.get('/api/sponsors/', {
