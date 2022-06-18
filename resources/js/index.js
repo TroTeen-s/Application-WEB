@@ -14,32 +14,33 @@ import { Navigate, Routes } from "react-router";
 import AuthPage from "./components/auth/AuthPage";
 import SignUpForm from "./components/auth/SignUpForm";
 import SignInForm from "./components/auth/SignInForm";
-import Account from "./components/account/Account";
-import Main from './components/main/Master'
+import Main from "./components/main/Master";
 
-import Trot from './components/dashboard/main';
-import Customers from './components/dashboard/Customers';
-import InnerContent from './components/dashboard/App'
-import Following from './components/dashboard/Following'
-import Ticket from './components/dashboard/ticket/indexTicket'
-import Api from './components/dashboard/api/api'
+import Trot from "./components/dashboard/scoot/main";
+import Customers from "./components/dashboard/Customers";
+import InnerContent from "./components/dashboard/App";
+import Following from "./components/dashboard/Following";
+import Ticket from "./components/dashboard/ticket/indexTicket";
+import Api from "./components/dashboard/api/api";
 
-import Shop from './components/shop/App'
-import Informations from "./components/account/Informations";
-import Password from "./components/account/Password";
-import Delete from "./components/account/Delete";
-import Admin from './components/admin/Admin';
-import User from './components/admin/User'
-import Sponsors from './components/sponsors/Sponsors';
+import Shop from "./components/shop/App";
+import Admin from "./components/admin/Admin";
+import User from "./components/admin/User";
+import Sponsors from "./components/sponsors/Sponsors";
 
 import ShopAdmin from "./components/dashboard/boutique/shop";
 import ProductPage from "./components/shop/ProductPage";
-import Subscriptions from "./components/account/Subscriptions";
-import SubscriptionDetails from "./components/account/SubscriptionDetails";
-import './i18n.js'
+import Informations from "./components/account/user/Informations";
+import Delete from "./components/account/user/Delete";
+import Subscriptions from "./components/account/services/Subscriptions";
+import SubscriptionDetails from "./components/account/services/SubscriptionDetails";
+import Purchases from "./components/account/shop/Purchases";
+import Password from "./components/account/user/Password";
+import Purchase from "./components/account/shop/Purchase";
+import Account from "./components/account/Account";
+import "./i18n.js";
 
 ReactDOM.render(
-
     <React.StrictMode>
         <Router>
             <Routes>
@@ -68,10 +69,12 @@ ReactDOM.render(
                         <Route path="delete" element={<Delete />} />
                         <Route path="subscriptions" element={<Subscriptions />} />
                         <Route path="subscriptions/:subscriptionID" element={<SubscriptionDetails />} />
+                        <Route path="purchases" element={<Purchases />} />
+                        <Route path="purchases/:purchaseID" element={<Purchase />} />
                     </Route>
 
 
-                    <Route path="/Dashboard" element={<InnerContent />} >
+                    <Route path="/Dashboard" element={<InnerContent />}>
                         <Route index element={<Navigate to="trot" replace />} />
                         <Route path="trot" element={<Trot />} />
                         <Route path="following" element={<Following />} />
@@ -91,6 +94,6 @@ ReactDOM.render(
         </Router>
 
     </React.StrictMode>,
-    document.getElementById('root')
+    document.getElementById("root")
 );
 

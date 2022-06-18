@@ -81,6 +81,7 @@ class UserController extends Controller
                 'email' => $user->email,
                 'phone_number' => $user->phone_number,
                 'fidelity_points' => $user->phone_number,
+                'subscribed' => $user->subscribed
             ];
             return $this->success("VOus êtes connecté", $userInfo);
         }

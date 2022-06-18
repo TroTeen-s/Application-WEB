@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
@@ -80,5 +81,21 @@ class User extends Authenticatable
     public function subscriptions(): HasMany
     {
         return $this->hasMany(PackageUser::class);
+    }
+
+    public function carts(): HasMany
+    {
+        return $this->hasMany(Cart::class);
+    }
+
+    public function getSubscribedAttribute(): bool
+    {
+        $active = PackageUser::query()->where(['user_id' => $this->id, 'active' => true])->get();
+
+        if ($active) {
+            return $this->active;
+        } else {
+            return false;
+        }
     }
 }

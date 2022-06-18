@@ -40,6 +40,12 @@ const NavAccount = (selLink) => {
                     <i className="fab fa-facebook-square text-s leading-lg text-black-trot opacity-75"></i>
                     <span className="duration-200 hover:text-black-trot">Mes abonnements</span>
                 </NavLink>
+                <NavLink
+                    className={selected("purchases")}
+                    to="/account/purchases">
+                    <i className="fab fa-facebook-square text-s leading-lg text-white opacity-75"></i>
+                    <span className="duration-200 hover:text-orange-300">Mes achats</span>
+                </NavLink>
             </div>
         </>
     );

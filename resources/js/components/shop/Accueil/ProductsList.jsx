@@ -1,6 +1,6 @@
 import styled from "styled-components";
-import { popularProducts } from "../data";
 import ProductShopCard from "./ProductShopCard";
+import { useEffect, useState } from "react";
 
 const Container = styled.div`
     padding: 20px;
@@ -10,13 +10,40 @@ const Container = styled.div`
 `;
 
 const ProductsList = () => {
-    return (
-        <Container className="h-full bg-white-background">
-            {popularProducts.map((item) => (
-                <ProductShopCard item={item} key={item.id} />
-            ))}
-        </Container>
-    );
+
+    const [products, setProducts] = useState([]);
+
+    const retrieveProducts = async () => {
+        let response = await axios.get(`/api/product-list/`);
+
+        if (response.data.success) {
+            setProducts(response.data.data);
+        }
+    };
+
+    useEffect(() => {
+
+        retrieveProducts();
+    }, []);
+
+
+    if (products) {
+        return (
+            <Container className="h-full bg-white-background">
+                {products.map((item) => (
+                    <ProductShopCard item={item} key={item.id} />
+                ))}
+            </Container>
+        );
+
+    } else {
+        return (
+            <Container className="h-full bg-white-background">
+                <div>Aucun produit à afficher</div>
+            </Container>
+        );
+
+    }
 };
 
 export default ProductsList;

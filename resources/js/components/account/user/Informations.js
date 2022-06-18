@@ -1,17 +1,15 @@
 import React, { useContext, useLayoutEffect, useState } from 'react';
 
-import { AuthContext } from "../context/AuthContext";
-import { Grid, Typography } from "@mui/material";
-import AccountCircleOutlinedIcon from '@mui/icons-material/AccountCircleOutlined';
+import { Grid } from "@mui/material";
 import Box from "@mui/material/Box";
 import TextField from "@mui/material/TextField";
 import Button from "@mui/material/Button";
 import NavAccount from './NavAccount';
-import { NavLink } from "react-router-dom";
 import { useNavigate } from "react-router";
 import { styled } from "@mui/material/styles";
 import { outlinedInputClasses } from "@mui/material/OutlinedInput";
 import { inputLabelClasses } from "@mui/material/InputLabel";
+import { AuthContext } from "../../context/AuthContext";
 
 const StyledTextField = styled(TextField)({
     [`& .${outlinedInputClasses.root} .${outlinedInputClasses.notchedOutline}`]: {

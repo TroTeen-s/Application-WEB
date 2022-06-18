@@ -14,3 +14,4 @@ yarn-error.log
 /.vscode
 /public
 !public/locales/fr/translation.json
+!./public/locales/fr/translation.json

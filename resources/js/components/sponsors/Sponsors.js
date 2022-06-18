@@ -1,18 +1,18 @@
 import React, { useContext, useEffect, useState } from 'react';
 import Card from './Card';
 import { AuthLoadingContext } from "../context/AuthContext";
-import { LanguageContext } from '../context/AuthContext';
-import { LoadScript } from '@react-google-maps/api';
-import { IosShare } from '@mui/icons-material';
 
 const Sponsors = () => {
 
     let { loaded } = useContext(AuthLoadingContext)
     const [infos, setInfos] = useState();
+<<<<<<< HEAD
 
 
 
 
+=======
+>>>>>>> main
     const retrieveInfos = async () => {
         try {
             let response = await axios.get('/api/sponsors/', {

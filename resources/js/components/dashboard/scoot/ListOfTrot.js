@@ -4,10 +4,10 @@ import Button from "@mui/material/Button";
 import { LinearProgress } from '@mui/material';
 import { AuthLoadingContext } from '../../context/AuthContext';
 
+export default function ListOfTrot() {
 
-
-export default function TrotReparation() {
   const [infos, setInfos] = useState();
+  
 
   let { loaded } = useContext(AuthLoadingContext)
 
@@ -37,14 +37,13 @@ export default function TrotReparation() {
       editable: false,
       renderCell: (params) => (
         <div id={"is-active-" + params.row.id}>
-            <p className={params.row.maintenance ? "m-0 text-primary" : "m-0 text-black"}>
+          <p className={params.row.maintenance ? "m-0 text-primary" : "m-0 text-black"}>
             {params.row.maintenance ? "true" : "false"}
           </p>
         </div >
       )
 
     },
-
     {
         field: 'MaintenanceLink',
         headerName: 'Send to maintenance',
@@ -58,9 +57,8 @@ export default function TrotReparation() {
                     color="primary"
                     size="small"
                     style={{ marginLeft: 16 }}
-                      onClick={() => {
+                    onClick={() => {
                       HandleMaintenance(params.row.id);
-                      retrieveInfos(params.row.id);
                     }}
                 >
                     Envoyer
@@ -77,7 +75,7 @@ export default function TrotReparation() {
         editable: false,
         renderCell: (params) => (
           <div id={"is-active-" + params.row.id}>
-           <p className={params.row.fixing ? "m-0 text-primary" : "m-0 text-black"}>
+            <p className={params.row.fixing ? "m-0 text-primary" : "m-0 text-black"}>
               {params.row.fixing ? "true" : "false"}
             </p>
           </div >
@@ -102,9 +100,7 @@ export default function TrotReparation() {
                 style={{ marginLeft: 16 }}
                 onClick={() => {
                   HandleFixing(params.row.id);
-                  retrieveInfos(params.row.id);
                 }}
-                
             >
                 Envoyer
             </Button>
@@ -113,28 +109,33 @@ export default function TrotReparation() {
 
     }
 
-  ];
+  ]
 
-  // const active = async (params) => {
-  //   console.log(params)
-  //   try {
-  //     let response = await axios.post('/dashboard/api/scooters/fixing/list', params.row)
-  //     if (response.data.success) {
-  //       console.log("available" + response.data.data.scooter[0])
-  //       console.log(response.data.data.scooter[0])
-  //       retrieveInfos()
+  const HandleFixing = async (event) => {
+         
+      let response = await axios.get(`/api/dashboard/api/scooters/fixing/newstatus/${event}`);
 
-  //     }
-  //   } catch (e) {
-  //     console.log(e)
-  //   }
+      if (response.data.data) {
+        console.log(response.data.data)
+        setInfos(response.data.data)
+      }
 
-  // }
+  };
+
+  const HandleMaintenance = async (event) => {
+
+    let response = await axios.get(`/api/dashboard/api/scooters/maintenance/newstatus/${event}`);
+
+    if (response.data.data) {
+      setInfos(response.data.data)
+    }
+
+  };
+
 
   const retrieveInfos = async () => {
-    setTimeout(async() => {
     try {
-      let response = await axios.get('/api/dashboard/api/scooters/fixing/list', {
+      let response = await axios.get('/api/scooters/list', {
         headers: {
           'Accept': 'application/json'
         }
@@ -146,7 +147,6 @@ export default function TrotReparation() {
       }
     } catch (e) {
     }
-  })
   }
 
   useEffect(() => {
@@ -158,8 +158,8 @@ export default function TrotReparation() {
 
 
   return (
-    <div style={{ height: 280, width: '100%', marginBottom: 10 }}>
-      <h3> Trotinettes en Réparation </h3>
+    <div style={{ height: 400, width: '100%', paddingBottom: 10 }}>
+      <h3> Liste des trotinettes </h3>
       <DataGrid
         components={{
           LoadingOverlay: LinearProgress,
@@ -170,7 +170,6 @@ export default function TrotReparation() {
         rowsPerPageOptions={[5]}
         disableSelectionOnClick
         loading={!infos}
-
 
       />
     </div>
