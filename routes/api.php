@@ -69,14 +69,19 @@ Route::group(['middleware' => ['auth:sanctum']], function () {
 
     Route::post('/auth/logout', [AuthController::class, 'logout']);
 
-    Route::post('/auth/delete', [AuthController::class , 'delete']);
+    Route::post('/auth/delete', [AuthController::class, 'delete']);
 
-    Route::post('/auth/update', [AuthController::class , 'update']);
-    Route::post('/auth/update_password', [AuthController::class , 'update_password']);
+    Route::post('/auth/update', [AuthController::class, 'update']);
+    Route::post('/auth/update_password', [AuthController::class, 'update_password']);
 
-    Route::post('/auth/update_password', [AuthController::class , 'update_password']);
+    Route::post('/auth/update_password', [AuthController::class, 'update_password']);
 
     Route::get('/customer-portal', [SubscriptionController::class, 'linkCustomerPortal']);
+
+    Route::post('refund', [ShopController::class, 'initRefund']);
+    Route::get('issue-refund/{refund_id}', [ShopController::class, 'issueRefund'])->where('refund_id', '[0-9]+');
+    Route::patch('refund/{refund_id}', [ShopController::class, 'updateRefund'])->where('refund_id', '[0-9]+');
+    Route::get('refunds', [ShopController::class, 'getAllRefunds']);
 
     ## ROUTES SCOOTERS
 

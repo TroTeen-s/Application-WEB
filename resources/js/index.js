@@ -39,6 +39,7 @@ import Password from "./components/account/user/Password";
 import Purchase from "./components/account/shop/Purchase";
 import Account from "./components/account/Account";
 import "./i18n.js";
+import Refunds from "./components/dashboard/Refunds";
 
 ReactDOM.render(
     <React.StrictMode>
@@ -81,7 +82,8 @@ ReactDOM.render(
                         <Route path="customers" element={<Customers />} />
                         <Route path="shopAdmin" element={<ShopAdmin />} />
                         <Route path="ticket" element={<Ticket />} />
-                        <Route path="api" element={<Api/>}/>
+                        <Route path="api" element={<Api />} />
+                        <Route path="refunds" element={<Refunds />} />
                     </Route>
 
                     <Route path="/admin" element={<Admin />} />

@@ -3,7 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Models\Cart;
+use App\Models\CartItem;
+use App\Models\ItemRefund;
 use App\Models\Product;
+use App\Models\Refund;
 use App\Traits\ApiResponse;
 use Illuminate\Http\Request;
 use Illuminate\Http\JsonResponse;
@@ -139,5 +142,107 @@ class ShopController extends Controller
 
         return $this->success('informations sur l\'achat', $cart->setAppends(['payment', 'itemNumber', 'items']));
 
+    }
+
+    public function initRefund(Request $request): JsonResponse
+    {
+        //        return $this->success('loli', $request->all());
+        if (!$request->has(['item_ids', 'cart_id'])) {
+            return $this->fail("item ids missing", [$request->all()]);
+        }
+
+        $itemIds = $request->input('item_ids');
+        $cartID = $request->input('cart_id');
+
+        $cart = Cart::query()->find($cartID);
+        $cartUser = $cart->user;
+
+        if ($cartUser->id !== auth()->id()) {
+            return $this->fail('not your purchase !');
+        }
+
+        $refund = new Refund([
+            'reason' => $request->input('reason') ?? 'not specified',
+            'cart_id' => $cartID,
+            'amount' => 0.00
+        ]);
+
+        $total = 0;
+
+        if ($refund->save()) {
+            foreach ($itemIds as $itemID) {
+                $item = CartItem::query()->firstWhere([
+                    'cart_id' => $cartID,
+                    'item_id' => $itemID
+                ]);
+
+                $total += $item->item_price;
+
+                $refundItem = new ItemRefund([
+                    'refund_id' => $refund->id,
+                    'item_id' => $itemID
+                ]);
+
+                $refundItem->save();
+            }
+            $refund->amount = $total;
+            $refund->save();
+            return $this->success('refund created');
+        }
+
+        return $this->fail('refund creation failed');
+    }
+
+    public function getAllRefunds(): JsonResponse
+    {
+        $refunds = Refund::all();
+        return $this->success('les retours demandés', $refunds);
+    }
+
+    /**
+     * @throws ApiErrorException
+     */
+    public function issueRefund(int $refund_id): JsonResponse
+    {
+        if (empty($refund_id) && $refund_id !== 1) {
+            return $this->fail('need refund id');
+        }
+
+        $refund = Refund::query()->where('id', $refund_id)->first();
+        $cart = $refund->cart()->get()->first();
+        $payment = $cart->payment()->get()->first();
+
+        $stripe = new StripeClient(getenv('STRIPE_PRIVATE'));
+
+        try {
+            $refundRequest = $stripe->refunds->create(
+                ['payment_intent' => $payment->id_stripe, 'amount' => $refund->amount * 100]
+            );
+        } catch (ApiErrorException $e) {
+            return $this->fail('erreur stripe: ', [$e->getMessage(), $refund]);
+        }
+
+        $refund->refunded = true;
+        $refund->status = 'closed';
+        $refund->save();
+
+        return $this->success('les infos', [$refund, $cart, $payment, $refundRequest]);
+
+    }
+
+    public function updateRefund(Request $request, int $refund_id): JsonResponse
+    {
+        $refundParams = $request->all();
+
+        $refundParams['status'] = $refundParams['validated'] ? 'validated' : 'refused';
+
+
+        $refund = Refund::query()->where('id', $refund_id)->update($refundParams);
+
+        if ($refund) {
+            return $this->success('updated successfully', $refund);
+        } else {
+            return $this->fail('update failed');
+        }
     }
 }
