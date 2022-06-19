@@ -20,10 +20,21 @@ return new class extends Migration
             $table->string("model_serie", 50);
             $table->date("last_revision");
             $table->float("mileage");
-            $table->float("last_position_long");
-            $table->float("last_position_lat");
+            $table->decimal("last_position_long",15, 10);
+            $table->decimal("last_position_lat",15, 10);
             $table->boolean("maintenance");
             $table->boolean("fixing");
+        });
+
+        
+        Schema::table('scooters', function($table) {
+            $table->unsignedBigInteger('maintenance_center_id')->nullable();
+            $table->foreign('maintenance_center_id')->references('id')->on('maintenance_centers')->onDelete('cascade');;
+        });
+
+        Schema::table('scooters', function($table) {
+            $table->unsignedBigInteger('fixing_center_id')->nullable();
+            $table->foreign('fixing_center_id')->references('id')->on('fixing_centers')->onDelete('cascade');;
         });
     }
 

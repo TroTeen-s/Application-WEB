@@ -11,6 +11,12 @@ use App\Http\Controllers\ProductController;
 use App\Http\Controllers\SponsorController;
 use App\Http\Controllers\SponsorCodeController;
 use App\Http\Controllers\WeatherController;
+use App\Http\Controllers\MaintenanceController;
+use App\Http\Controllers\FixingController;
+
+use App\Http\Controllers\MailController;
+
+
 
 use App\Http\Controllers\NeedHelpController;
 
@@ -96,10 +102,13 @@ Route::group(['middleware' => ['auth:sanctum']], function () {
 });
 
 
-Route::get('/scooters/list', ScootersController::class);
+Route::get('/dashboard/scooters/list', ScootersController::class);
 Route::post('/scooter/create', [ScootersController::class , 'create']);
 Route::get('/scooters', ScootersController::class);
 Route::post('/scooter/create', [ScootersController::class, 'create']);
+
+Route::get('/dashboard/MaintenanceCenter/list', MaintenanceController::class);
+Route::get('/dashboard/FixingCenter/list', FixingController::class);
 
 // For Admin
 
@@ -113,9 +122,15 @@ Route::get('/dashboard/api/scooters/maintenance/list', [ScootersController::clas
 Route::get('/dashboard/api/scooters/fixing/list', [ScootersController::class, 'get_fixing_scoot']);
 
 
-
 Route::get('/dashboard/api/scooters/maintenance/newstatus/{id}', [ScootersController::class, 'MaintenanceStatus']);
 Route::get('/dashboard/api/scooters/fixing/newstatus/{id}', [ScootersController::class, 'FixingStatus']);
+Route::get('/dashboard/api/scooters/service/newstatus/{id}', [ScootersController::class, 'ServiceStatus']);
+
+Route::get('/dashboard/api/scooters/add', [ScootersController::class, 'addScoot']);
+
+Route::get('/dashboard/api/dashboard/api/scooters/delete/{id}', [ScootersController::class, 'deleteFromID'])->where('id', '[0-9]+');
+
+
 
 Route::get('/product-list', [ShopController::class, 'productList']);
 Route::get('/products', [ShopController::class, 'getProductById']);

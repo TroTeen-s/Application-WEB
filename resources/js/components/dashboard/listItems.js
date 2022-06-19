@@ -32,16 +32,6 @@ export const mainListItems = (
     <NavLink className="no-underline text-black-trot" to="following">
     <ListItemButton>
       <ListItemIcon>
-        <AddLocationAltIcon />
-      </ListItemIcon>
-        <ListItemText primary="Ajouter des Trotinettes" />
-    </ListItemButton>
-    </NavLink>
-
-
-    <NavLink className="no-underline text-black-trot" to="following">
-    <ListItemButton>
-      <ListItemIcon>
         <MapIcon />
       </ListItemIcon>
         <ListItemText primary="Suivi des Trotinettes" />

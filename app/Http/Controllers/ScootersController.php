@@ -2,12 +2,16 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\FixingCenter;
 use Illuminate\Http\Request;
 use App\Traits\ApiResponse;
 use Illuminate\Http\JsonResponse;
 use App\Models\Scooters;
+use App\Models\MaintenanceCenter;
 use Illuminate\Support\Facades\DB;
 use Exception;
+use Illuminate\Support\Str;
+use Carbon\Carbon;
 class ScootersController extends Controller
 {
 
@@ -22,11 +26,35 @@ class ScootersController extends Controller
 
     public function __invoke(): JsonResponse
     {
-        $scooter = Scooters::all();
+        try{
 
+            $MaintenanceList = MaintenanceCenter::all();
 
-        return response()->json(array('data' => $scooter));
-    }
+            $scooters = Scooters::where('mileage', '>', 150)->where('fixing', '!==', 1)->get();
+
+            $arrayGet = array();
+                
+            foreach($scooters as $arrayGet){
+
+                $array = json_decode($MaintenanceList, true);
+                $one_item = $array[rand(0, count($array) - 1)];
+
+                $arrayGet ->update([
+                    'maintenance' => 1,
+                    'last_position_long' => $one_item["last_position_long"],
+                    'last_position_lat' => $one_item["last_position_lat"],
+                    'maintenance_center_id' => $one_item["id"]
+                ]);
+            }
+
+            $scooterList = Scooters::all();
+            return response()->json(array('data' => $scooterList,'infos' => $scooters));
+
+            }catch(Exception $e){
+                return $this->fail('erreur', $e->getMessage());
+            }
+
+    } 
 
     public function create(Request $request): JsonResponse
     {
@@ -113,20 +141,122 @@ class ScootersController extends Controller
 
     }
 
+
+    public function deleteFromID(Request $id) : JsonResponse
+    {
+
+        try{
+
+            $data = Scooters::where('id',$id["id"])->delete();
+
+            if (!$data) {
+                return response()->json(array('success' => 'false', 'message' => "Aucun utilisateur trouvé"), 400);
+            }
+
+            $scooter = Scooters::all();
+
+            return response()->json(array('success' => 'true', 'data' => $scooter));
+    
+        }catch(Exception $e){
+            return $this->fail('erreur', $e->getMessage());
+        }
+    }
+
     public function MaintenanceStatus(Request $request) : JsonResponse
     {
         try{
     
-            $data = Scooters::where('id',$request["id"])
-            ->update([
-            'maintenance' => 1,
-            'fixing' => 0
-            ]);
+            $MaintenanceList = MaintenanceCenter::all();
 
-            
-
+            $data = Scooters::where('id',$request["id"]);
+                    
+                $array = json_decode($MaintenanceList, true);
+                $one_item = $array[rand(0, count($array) - 1)];
+    
+                $data->update([
+                    'fixing' => 0,
+                    'maintenance' => 1,
+                    'maintenance_center_id' => $one_item["id"],
+                    'fixing_center_id' => null
+                    ]);
+    
             if (!$data) {
-                return response()->json(array('success' => 'false', 'message' => "Erreur pour l'application en status maintenance"), 400);
+                return response()->json(array('success' => 'false', 'message' => "Erreur pour la mise en maintenance"), 400);
+            }
+    
+            $scooter = Scooters::all();
+    
+            return response()->json(array('success' => 'true', 'data' =>  $scooter));
+    
+            }catch(Exception $e){
+                return $this->fail('erreur', $e->getMessage());
+            }
+    }
+
+    public function FixingStatus(Request $request) : JsonResponse
+    {
+
+        
+        try{
+
+        $FixingList = FixingCenter::all();
+
+        $data = Scooters::where('id',$request["id"]);
+                
+            $array = json_decode($FixingList, true);
+            $one_item = $array[rand(0, count($array) - 1)];
+
+            $data->update([
+                'fixing' => 1,
+                'maintenance' => 0,
+                'fixing_center_id' => $one_item["id"],
+                'maintenance_center_id' => null
+                ]);
+
+        if (!$data) {
+            return response()->json(array('success' => 'false', 'message' => "Erreur pour la mise en réparation"), 400);
+        }
+
+        $scooter = Scooters::all();
+
+        return response()->json(array('success' => 'true', 'data' =>  $scooter));
+
+            }catch(Exception $e){
+                return $this->fail('erreur', $e->getMessage());
+            }
+    }
+
+    public function ServiceStatus(Request $request) : JsonResponse
+    {
+        try{
+
+            $scooters = Scooters::all();
+
+            $arrayGet = array();
+
+            foreach($scooters as $arrayGet){
+
+                $lastlong = rand(4.787*100,4.870*100)/100;
+                $lastlat = rand(45.725*100,45.781*100)/100;
+    
+                $randomNumberAfter = rand(0,1000000);
+                $cLong = "$lastlong$randomNumberAfter";
+                $cLat = "$lastlat$randomNumberAfter";
+
+                $data = Scooters::where('id',$request["id"])
+                ->update([
+                'maintenance' => 0,
+                'fixing' => 0,
+                'maintenance_center_id' => null,
+                'mileage' => 0,
+                'last_position_lat' => $cLong,
+                'last_position_long' => $cLat
+            ]);
+            }
+
+
+            if (!$arrayGet) {
+                return response()->json(array('success' => 'false', 'message' => "Erreur pour la remise en service"), 400);
             }
 
             $scooter = Scooters::all();
@@ -138,25 +268,40 @@ class ScootersController extends Controller
             }
     }
 
-    public function FixingStatus(Request $request) : JsonResponse
+
+
+    public function addScoot() : JsonResponse
     {
+
+        
+        $lastlong = rand(4.787*100,4.870*100)/100;
+        $lastlat = rand(45.725*100,45.781*100)/100;
+
+        $randomNumberAfter = rand(0,1000000);
+        $cLong = "$lastlong$randomNumberAfter";
+        $cLat = "$lastlat$randomNumberAfter";
+
+
         try{
     
-            $data = Scooters::where('id',$request["id"])
-            ->update([
-            'maintenance' => 0,
-            'fixing' => 1
+            $scooter =
+                new Scooters([
+                'acquired_at' => date_create('now'),
+                'model_serie' => Str::random(20),
+                'last_revision' => date_create('now'),
+                'mileage' => 0.0,
+                'last_position_lat' => $cLong,
+                'last_position_long' => $cLat,
+                'maintenance' => 0,
+                'fixing' => 0,
             ]);
+            $scooter->save();
 
-            if (!$data) {
-                return response()->json(array('success' => 'false', 'message' => "Erreur pour l'application en status maintenance"), 400);
-            }
+            $scooterList = Scooters::all();
 
-            $scooter = Scooters::all();
+            return response()->json(array('success' => 'true', 'data' => $scooterList));
 
-            return response()->json(array('success' => 'true', 'data' => $scooter));
-    
-            }catch(Exception $e){
+        }catch(Exception $e){
                 return $this->fail('erreur', $e->getMessage());
             }
     }
