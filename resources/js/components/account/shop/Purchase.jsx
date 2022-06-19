@@ -87,6 +87,8 @@ const ProductCard = (props) => {
     const navigate = useNavigate();
     const { infos } = props;
     const { product, pivot } = infos;
+
+    const returnArticles = axios.patch("/api/");
     return (
         <Card sx={{ maxWidth: 200 }}>
             <CardMedia
@@ -105,7 +107,7 @@ const ProductCard = (props) => {
             </CardContent>
             <CardActions>
                 <Button size="small" onClick={() => navigate(`/products/${product.id}`)}>Racheter</Button>
-                <Button size="small">Retourner</Button>
+                <Button size="small" onClick={returnArticles}>Retourner</Button>
             </CardActions>
         </Card>
     );
