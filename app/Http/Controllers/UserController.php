@@ -24,6 +24,42 @@ class UserController extends Controller
         return response()->json(array('data' => $users));
     }
 
+    public function putUser(Request $request, $id): JsonResponse
+    {
+        $user = User::where('id', $id)
+        ->update([
+        'role' => null,
+    ]);
+
+
+
+    if (!$user) {
+        return response()->json(array('success' => 'false', 'message' => "Aucun utilisateur trouvé"), 400);
+    }
+
+    $users = User::all();
+
+    return response()->json(array('success' => 'true', 'data' => $users));
+    }
+
+    public function putAdmin(Request $request, $id): JsonResponse
+    {
+        $user = User::where('id', $id)
+        ->update([
+        'role' => 'admin',
+    ]);
+
+
+
+    if (!$user) {
+        return response()->json(array('success' => 'false', 'message' => "Aucun utilisateur trouvé"), 400);
+    }
+
+    $users = User::all();
+
+    return response()->json(array('success' => 'true', 'data' => $users));
+    }
+
     public function firstOne(Request $request, $id): JsonResponse
     {
 

@@ -52,11 +52,11 @@ const Customers = () => {
         { field: 'admin', 
         headerName: 'admin', 
         type: 'boolean',
-        width: 120 
+        width: 70 
         },
         { field: 'fidelity_points', 
         headerName: 'fidelity_points', 
-        width: 150,
+        width: 110,
         editable: false,
         },
         {
@@ -77,6 +77,29 @@ const Customers = () => {
                   }} 
                   className={params.row.active ? "m-0 text-primary" : "m-0 text-black"}>
                   {params.row.active ? "Desactiver" : "Activer"}
+              </Button>
+          </div >
+          )
+  
+        },
+        {
+          field: 'role',
+          headerName: 'admin',
+          width: 80,
+          editable: false,
+          renderCell: (params) => (
+
+  
+            <div id={"is-active-" + params.row.id}>
+              <Button variant="outlined"
+                  color="primary"
+                  size="small"
+                  style={{ marginLeft: 16 }}
+                  onClick={() => {
+                    {params.row.role == 'admin' ? HandleUser(params.row.id) : HandleAdmin(params.row.id)}
+                  }} 
+                  className= {params.row.role == "admin" ? "m-0 text-primary" : "m-0 text-black"}>
+                  {params.row.role == 'admin' ? "Admin" : "User"}
               </Button>
           </div >
           )
@@ -117,6 +140,45 @@ const Customers = () => {
         }
     
     };
+
+    
+    const HandleAdmin = async (event) => {
+
+      try{
+
+      let response = await axios.post(`/api/user/putadmin/${event}`);
+  
+      if (response.data.data) {
+        console.log(response.data.data)
+        setInfos(response.data.data)
+      }
+
+              
+      }catch(error){
+          console.log(error)
+      }
+  
+  };
+
+
+  
+  const HandleUser = async (event) => {
+
+    try{
+
+    let response = await axios.post(`/api/user/putuser/${event}`);
+
+    if (response.data.data) {
+      console.log(response.data.data)
+      setInfos(response.data.data)
+    }
+
+            
+    }catch(error){
+        console.log(error)
+    }
+
+};
 
     
     const HandleDesactive = async (event) => {
