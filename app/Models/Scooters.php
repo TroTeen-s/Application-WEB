@@ -33,8 +33,4 @@ class Scooters extends Model
     // {
     //     return $this->items()->where('maintenance', 1)->get();
     // }
-
-
-
-
 }

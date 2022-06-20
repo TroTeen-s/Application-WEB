@@ -6,8 +6,12 @@ import Container from '@mui/material/Container';
 import DeleteIcon from '@mui/icons-material/Delete';
 import { AuthLoadingContext } from "../context/AuthContext";
 import { Navigate } from 'react-router';
+import {NotificationContainer, NotificationManager} from 'react-notifications';
+
 
 const Customers = () => {
+
+  
 
     const [infos, setInfos] = useState();
 
@@ -22,7 +26,7 @@ const Customers = () => {
         {
           field: 'firstname',
           headerName: 'firstname',
-          width: 150,
+          width: 110,
           editable: false,
         },
         {
@@ -35,7 +39,7 @@ const Customers = () => {
         {
           field: 'username',
           headerName: 'username',
-          width: 150,
+          width: 110,
           editable: false,
         },
 
@@ -44,6 +48,39 @@ const Customers = () => {
           headerName: 'email',
           width: 200,
           editable: false,
+        },
+        { field: 'admin', 
+        headerName: 'admin', 
+        type: 'boolean',
+        width: 120 
+        },
+        { field: 'fidelity_points', 
+        headerName: 'fidelity_points', 
+        width: 150,
+        editable: false,
+        },
+        {
+          field: 'active',
+          headerName: 'active',
+          width: 150,
+          editable: false,
+          renderCell: (params) => (
+
+  
+            <div id={"is-active-" + params.row.id}>
+              <Button variant="outlined"
+                  color="primary"
+                  size="small"
+                  style={{ marginLeft: 16 }}
+                  onClick={() => {
+                    {params.row.active ? HandleDesactive(params.row.id) : HandleActive(params.row.id)}
+                  }} 
+                  className={params.row.active ? "m-0 text-primary" : "m-0 text-black"}>
+                  {params.row.active ? "Desactiver" : "Activer"}
+              </Button>
+          </div >
+          )
+  
         },
         {
             field: 'actions',
@@ -62,6 +99,43 @@ const Customers = () => {
 
   
       ];
+
+      const HandleActive = async (event) => {
+
+        try{
+
+        let response = await axios.get(`/api/user/active/${event}`);
+    
+        if (response.data.data) {
+          console.log(response.data.data)
+          setInfos(response.data.data)
+        }
+
+                
+        }catch(error){
+            console.log(error)
+        }
+    
+    };
+
+    
+    const HandleDesactive = async (event) => {
+
+      try{
+
+      let response = await axios.get(`/api/user/desactive/${event}`);
+  
+      if (response.data.data) {
+        console.log(response.data.data)
+        setInfos(response.data.data)
+      }
+
+              
+      }catch(error){
+          console.log(error)
+      }
+  
+  };
 
     const DeleteUser = async (event) => {
 

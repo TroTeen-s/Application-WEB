@@ -6,7 +6,23 @@ import { AuthLoadingContext } from '../../context/AuthContext';
 import DeleteIcon from '@mui/icons-material/Delete';
 import ElectricScooterIcon from '@mui/icons-material/ElectricScooter';
 
+import toast, { Toaster } from 'react-hot-toast';
+
 export default function ListOfTrot() {
+
+  const notify = () => toast.success('+1 Trotinette ajouté');
+  const SendToFix = (event) => toast(`Trotinette ID : ${event} envoyé en réparation !`, {
+    icon: '💤',
+  });
+
+  const SendToMaintenance = (event) => toast(`Trotinette ID : ${event} envoyé en maintenance !`, {
+    icon: '💬',
+  });
+
+  const Service = (event) => toast(`Trotinette ID : ${event} remis en service !`, {
+    icon: '👏',
+  });
+  
 
   const [infos, setInfos] = useState();
   
@@ -122,6 +138,7 @@ export default function ListOfTrot() {
       if (response.data.data) {
         console.log(response.data.data)
         setInfos(response.data.data)
+        SendToFix(event)
       }
 
   };
@@ -132,6 +149,7 @@ export default function ListOfTrot() {
 
     if (response.data.data) {
       setInfos(response.data.data)
+      SendToMaintenance(event)
     }
 
   };
@@ -153,7 +171,8 @@ export default function ListOfTrot() {
     let response = await axios.get(`/api/dashboard/api/scooters/add`);
 
     if (response.data.data) {
-      setInfos(response.data.data)
+      setInfos(response.data.data);
+      notify();
     }
 
   };
@@ -164,6 +183,7 @@ export default function ListOfTrot() {
 
     if (response.data.data) {
       setInfos(response.data.data)
+      Service(event)
     }
 
   };
@@ -194,7 +214,13 @@ export default function ListOfTrot() {
 
 
   return (
+    <>   
+
     <div style={{ height: 400, width: '100%', paddingBottom: 10 }}>
+
+    <Toaster/>
+
+
       <h3> Liste des trotinettes </h3>
       <DataGrid
         components={{
@@ -215,6 +241,7 @@ export default function ListOfTrot() {
 
     </div>
     
+    </>
 
   );
 

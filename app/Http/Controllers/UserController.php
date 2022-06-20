@@ -52,7 +52,9 @@ class UserController extends Controller
             return response()->json(array('success' => 'false', 'message' => "Aucun utilisateur trouvé"), 400);
         }
 
-        return response()->json(array('success' => 'true', 'message' => "Voici l'utilisateur", 'data' => ['user' => $user, 'id' => $id]));
+        $users = User::all();
+
+        return response()->json(array('success' => 'true', 'message' => "Voici l'utilisateur", 'data' => $users));
     }
 
     public function desactive(Request $request, $id): JsonResponse
@@ -67,8 +69,8 @@ class UserController extends Controller
             return response()->json(array('success' => 'false', 'message' => "Aucun utilisateur trouvé"), 400);
         }
 
-        return response()->json(array('success' => 'true', 'message' => "Voici l'utilisateur", 'data' => ['user' => $user, 'id' => $id]));
-    }
+        $users = User::all();
+        return response()->json(array('success' => 'true', 'message' => "Voici l'utilisateur", 'data' => $users));    }
 
     public function me(Request $request)
     {
