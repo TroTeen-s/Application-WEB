@@ -14,9 +14,9 @@ use App\Http\Controllers\WeatherController;
 use App\Http\Controllers\MaintenanceController;
 use App\Http\Controllers\FixingController;
 
+use App\Http\Controllers\ProblemsController;
+
 use App\Http\Controllers\MailController;
-
-
 
 use App\Http\Controllers\NeedHelpController;
 
@@ -92,6 +92,7 @@ Route::group(['middleware' => ['auth:sanctum']], function () {
     Route::get('/codes', SponsorCodeController::class);
     Route::get('/code/{id}', [SponsorCodeController::class, 'get_free_code'])->where('id', '[0-9]+');
 
+
     ## ROUTES SHOP
     Route::get('/shop/buy-cart', [ShopController::class, 'buyCart']);
     Route::get('/shop/test', [SubscriptionController::class, 'test']);
@@ -110,13 +111,21 @@ Route::post('/scooter/create', [ScootersController::class, 'create']);
 Route::get('/dashboard/MaintenanceCenter/list', MaintenanceController::class);
 Route::get('/dashboard/FixingCenter/list', FixingController::class);
 
+
+
+
+Route::post('/dashboard/users/delete/{id}', [UserController::class, 'deleteUser'])->where('id', '[0-9]+');;
+
+
 // For Admin
 
 Route::post('/dashboard/addproduct', [ProductController::class, 'addProduct']);
 Route::get('/dashboard/list', [ProductController::class, 'list']);
 Route::get('/dashboard/api/weather/list', [WeatherController::class, 'list']);
 
+// problemes
 
+Route::get('/problems/list', ProblemsController::class);
 
 Route::get('/dashboard/api/scooters/maintenance/list', [ScootersController::class, 'get_maintenance_scoot']);
 Route::get('/dashboard/api/scooters/fixing/list', [ScootersController::class, 'get_fixing_scoot']);

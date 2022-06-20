@@ -23,6 +23,7 @@ class DatabaseSeeder extends Seeder
             WeatherSeeder::class,
             MaintenanceCenterSeeder::class,
             FixingCenterSeeder::class,
+            ProblemsSeeder::class,
         ]);
     }
 }

@@ -1,9 +1,9 @@
 import React, { useContext, useEffect, useState } from 'react';
-import { DataGrid } from '@mui/x-data-grid';
+import { DataGrid, GridActionsCellItem } from '@mui/x-data-grid';
 import Button from "@mui/material/Button";
 import { LinearProgress } from '@mui/material';
 import Container from '@mui/material/Container';
-
+import DeleteIcon from '@mui/icons-material/Delete';
 import { AuthLoadingContext } from "../context/AuthContext";
 import { Navigate } from 'react-router';
 
@@ -20,104 +20,67 @@ const Customers = () => {
           width: 90
         },
         {
-          field: 'model_serie',
-          headerName: 'Modele de Serie',
+          field: 'firstname',
+          headerName: 'firstname',
           width: 150,
           editable: false,
         },
         {
-          field: 'mileage',
-          headerName: 'Kilometrage',
+          field: 'lastname',
+          headerName: 'lastname',
           width: 150,
           editable: false,
         },
 
         {
-          field: 'maintenance',
-          headerName: 'maintenance',
-          width: 100,
+          field: 'username',
+          headerName: 'username',
+          width: 150,
           editable: false,
-          renderCell: (params) => (
-            <div id={"is-active-" + params.row.id}>
-              <p className='m-0'>
-                {params.row.available ? "true" : "false"}
-              </p>
-            </div >
-          )
-
         },
 
         {
-            field: 'MaintenanceLink',
-            headerName: 'Send to maintenance',
-            width: 150,
-            editable: false,
-            renderCell: (params) => (
-
-                <strong>
-                    <Button
-                        variant="outlined"
-                        color="primary"
-                        size="small"
-                        style={{ marginLeft: 16 }}
-                        onClick={() => {
-                            showMore(params);
-                        }}
-                    >
-                        Envoyer
-                    </Button>
-                </strong >
-            )
-
+          field: 'email',
+          headerName: 'email',
+          width: 200,
+          editable: false,
+        },
+        {
+            field: 'actions',
+            type: 'actions',
+            width: 50,
+            getActions: (params) => [
+              <GridActionsCellItem
+                icon={<DeleteIcon />}
+                label="Delete"
+                onClick={() => {
+                  DeleteUser(params.row.id)}
+                }
+              />,
+            ],
           },
 
-        {
-            field: 'fixing',
-            headerName: 'fixing',
-            width: 60,
-            editable: false,
-            renderCell: (params) => (
-              <div id={"is-active-" + params.row.id}>
-                <p className='m-0'>
-                  {params.row.available ? "true" : "false"}
-                </p>
-              </div >
-            )
-
-          },
-
-
-
-        {
-          field: 'FixingLink',
-          headerName: 'Send to fixing',
-          width: 150,
-          editable: false,
-          renderCell: (params) => (
-
-            <strong>
-                <Button
-                    variant="outlined"
-                    color="primary"
-                    size="small"
-                    style={{ marginLeft: 16 }}
-                    onClick={() => {
-                        showMore(params);
-                    }}
-                >
-                    Envoyer
-                </Button>
-            </strong >
-        )
-
-        }
-
+  
       ];
 
-    const showMore = (params) => {
-        //console.log(params.row.email)
-        document.location.replace('/user/' + params.row.id)
-    }
+    const DeleteUser = async (event) => {
+
+        try{
+
+        let response = await axios.post(`/api/dashboard/users/delete/${event}`);
+    
+        if (response.data.data) {
+          console.log(response.data.data)
+          setInfos(response.data.data)
+        }
+
+                
+        }catch(error){
+            console.log(error)
+        }
+    
+    };
+
 
     const retrieveInfos = async () => {
         try {

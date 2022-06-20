@@ -8,6 +8,7 @@ use App\Models\User;
 use App\Traits\ApiResponse;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
+use Exception;
 
 
 class UserController extends Controller
@@ -88,5 +89,27 @@ class UserController extends Controller
         else {
             return $this->fail("VOus n'êtes pas connecté");
         }
+    }
+
+    public function deleteUser($id) : JsonResponse
+    {
+
+        try{
+
+            $users = User::findOrFail($id);
+            $users -> delete();
+
+        if (!$users) {
+            return response()->json(array('success' => 'false', 'message' => "Aucun utilisateur supprimé"), 400);
+        }
+
+        $user = User::all();
+
+        return response()->json(array('success' => 'true', 'data' => $user));
+
+        }catch(Exception $e){
+            return $this->fail('erreur', $e->getMessage());
+        }
+
     }
 }
