@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Cart;
+use App\Models\Fidelity;
 use App\Models\Invoice;
 use App\Models\Package;
 use App\Models\PackageUser;
@@ -278,11 +279,30 @@ class SubscriptionController extends Controller
         ]);
         $itemsBought = $cart->items;
 
+        $total = 0;
+
         foreach ($itemsBought as $item) {
             $item->bought = true;
             $item->available = false;
             $item->save();
+            $total = +$item->item_price;
         }
+
+        $total = floor($total);
+
+        $fidelityHistory = new Fidelity([
+            'amount' => $total,
+            'reason' => "Achat sur la boutique",
+            'date' => Carbon::now(),
+            'payment_id' => $event->data->object->payment_intent,
+        ]);
+
+        $user = User::query()->find($cart->user_id);
+
+        $user->fidelity_points += $total;
+        $user->save();
+
+        $fidelityHistory->save();
 
         return $this->success('test', $cart->items);
     }
