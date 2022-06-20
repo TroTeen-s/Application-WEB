@@ -243,6 +243,15 @@ class SubscriptionController extends Controller
                 'id_invoice_stripe' => $paymentObject->charges->data[0]->invoice
             ]);
             $payment->save();
+
+            $fidelityHistory = new Fidelity([
+                'amount' => $paymentObject->amount / 100,
+                'reason' => stripos($paymentObject->description, "subscription") !== false ? "Paiment pour l'abonnement" : "Paiment sur le site Troteen's",
+                'date' => Carbon::now(),
+                'payment_id' => $paymentObject->id,
+            ]);
+
+            $fidelityHistory->save();
         } catch (Exception $e) {
             Log::channel('errors')->info($e->getMessage());
         }
@@ -285,7 +294,7 @@ class SubscriptionController extends Controller
             $item->bought = true;
             $item->available = false;
             $item->save();
-            $total = +$item->item_price;
+            $total += $item->pivot->item_price;
         }
 
         $total = floor($total);

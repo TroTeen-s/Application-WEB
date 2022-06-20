@@ -18,11 +18,7 @@ return new class extends Migration
             $table->string('reason');
             $table->integer('amount');
             $table->dateTime('date');
-
-            $table->unsignedBigInteger('payment_id')->nullable();
-
-            $table->foreign('payment_id')->references('id')->on('payment');
-
+            $table->string('payment_id')->nullable();
         });
 
     }
