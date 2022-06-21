@@ -2,7 +2,6 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
@@ -47,10 +46,20 @@ class User extends Authenticatable
     protected $hidden = [
         'password',
         'remember_token',
+        'created_at',
+        'updated_at',
+        'email_configured',
+        'email_verified_at',
+        'id_stripe',
+        'role',
     ];
 
     protected $casts = [
         'email_verified_at' => 'datetime',
+    ];
+
+    protected $appends = [
+        'subscribed'
     ];
 
 
@@ -88,12 +97,23 @@ class User extends Authenticatable
         return $this->hasMany(Cart::class);
     }
 
-    public function getSubscribedAttribute(): bool
+    /*    public function getSubscribedAttribute(): bool
+        {
+            $active = PackageUser::query()->where(['user_id' => $this->id, 'active' => true])->get();
+
+            if ($active) {
+                return $this->active;
+            } else {
+                return false;
+            }
+        }*/
+
+    public function getSubscribedAttribute()
     {
-        $active = PackageUser::query()->where(['user_id' => $this->id, 'active' => true])->get();
+        $active = PackageUser::query()->firstWhere(['user_id' => $this->id, 'active' => true]);
 
         if ($active) {
-            return $this->active;
+            return true;
         } else {
             return false;
         }

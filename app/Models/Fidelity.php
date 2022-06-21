@@ -14,7 +14,8 @@ class Fidelity extends Model
         'amount',
         'date',
         'reason',
-        'payment_id'
+        'payment_id',
+        'user_id'
     ];
 
     public function payment(): BelongsTo

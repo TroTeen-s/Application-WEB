@@ -74,16 +74,7 @@ class UserController extends Controller
         if (auth()->user()) {
             // The user is logged in...
             $user = auth()->user();
-            $userInfo = [
-                'username' => $user->username,
-                'firstname' => $user->firstname,
-                'lastname' => $user->lastname,
-                'email' => $user->email,
-                'phone_number' => $user->phone_number,
-                'fidelity_points' => $user->phone_number,
-                'subscribed' => $user->subscribed
-            ];
-            return $this->success("VOus êtes connecté", $userInfo);
+            return $this->success("VOus êtes connecté", $user);
         }
         else {
             return $this->fail("VOus n'êtes pas connecté");
