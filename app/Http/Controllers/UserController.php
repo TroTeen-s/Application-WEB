@@ -7,7 +7,6 @@ namespace App\Http\Controllers;
 use App\Models\User;
 use App\Traits\ApiResponse;
 use Illuminate\Http\JsonResponse;
-use Illuminate\Http\Request;
 
 
 class UserController extends Controller
@@ -23,7 +22,7 @@ class UserController extends Controller
         return response()->json(array('data' => $users));
     }
 
-    public function firstOne(Request $request, $id): JsonResponse
+    public function firstOne($id): JsonResponse
     {
 
         $user = User::find($id);
@@ -37,14 +36,13 @@ class UserController extends Controller
         return response()->json(array('success' => 'true', 'message' => "Voici l'utilisateur", 'data' => ['user' => $user, 'id' => $id]));
     }
 
-    public function active(Request $request, $id): JsonResponse
+    public function active($id): JsonResponse
     {
 
         $user = User::where('id', $id)
             ->update([
-            'active' => true,
-        ]);
-
+                'active' => true,
+            ]);
 
 
         if (!$user) {
@@ -54,13 +52,13 @@ class UserController extends Controller
         return response()->json(array('success' => 'true', 'message' => "Voici l'utilisateur", 'data' => ['user' => $user, 'id' => $id]));
     }
 
-    public function desactive(Request $request, $id): JsonResponse
+    public function desactive($id): JsonResponse
     {
 
         $user = User::where('id', $id)
             ->update([
-            'active' => false,
-        ]);
+                'active' => false,
+            ]);
 
         if (!$user) {
             return response()->json(array('success' => 'false', 'message' => "Aucun utilisateur trouvé"), 400);
@@ -69,15 +67,49 @@ class UserController extends Controller
         return response()->json(array('success' => 'true', 'message' => "Voici l'utilisateur", 'data' => ['user' => $user, 'id' => $id]));
     }
 
-    public function me(Request $request)
+    public function me(): JsonResponse
     {
         if (auth()->user()) {
             // The user is logged in...
             $user = auth()->user();
             return $this->success("VOus êtes connecté", $user);
-        }
-        else {
+        } else {
             return $this->fail("VOus n'êtes pas connecté");
         }
+    }
+
+    public function myFidelity(): JsonResponse
+    {
+        if (auth()->user()) {
+            // The user is logged in...
+            $user = auth()->user();
+        } else {
+            return $this->fail("VOus n'êtes pas connecté");
+        }
+
+        $user->setHidden([
+            'id',
+            'id_stripe',
+            "email_configured",
+            "email_verified_at",
+            "password",
+            "role",
+            "active",
+            "remember_token",
+            "created_at",
+            "updated_at",
+            'firstname',
+            'lastname',
+            'username',
+            'email',
+            'phone_number',
+            'registered_at',
+            'subscribed',
+        ]);
+
+        $user->setAppends(['fidelity', 'fidelityTotal']);
+
+        return $this->success('voici votre historique de fidélité', $user);
+
     }
 }

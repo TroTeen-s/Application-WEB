@@ -32,10 +32,10 @@ const Rainy = () => {
                         </g>
                     </g>
                     <g transform="translate(34,46), rotate(10)">
-                        <line class="am-weather-rain-1" fill="none" stroke="#91C0F8" strokeDasharray="4,7"
+                        <line className="am-weather-rain-1" fill="none" stroke="#91C0F8" strokeDasharray="4,7"
                               strokeLinecap="round" strokeWidth="2" transform="translate(-6,1)" x1="0" x2="0" y1="0"
                               y2="8" />
-                        <line class="am-weather-rain-2" fill="none" stroke="#91C0F8" strokeDasharray="4,7"
+                        <line className="am-weather-rain-2" fill="none" stroke="#91C0F8" strokeDasharray="4,7"
                               strokeLinecap="round" strokeWidth="2" transform="translate(0,-1)" x1="0" x2="0" y1="0"
                               y2="8" />
                     </g>

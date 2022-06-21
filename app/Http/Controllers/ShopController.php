@@ -8,8 +8,8 @@ use App\Models\ItemRefund;
 use App\Models\Product;
 use App\Models\Refund;
 use App\Traits\ApiResponse;
-use Illuminate\Http\Request;
 use Illuminate\Http\JsonResponse;
+use Illuminate\Http\Request;
 use Stripe\Exception\ApiErrorException;
 use Stripe\StripeClient;
 
@@ -98,8 +98,8 @@ class ShopController extends Controller
                 ]],
                 "billing_address_collection" => "required",
 
-                'success_url' => getenv('APP_URL') . '?success=true&session_id={CHECKOUT_SESSION_ID}',
-                'cancel_url' => getenv('APP_URL') . '?canceled=true',
+                'success_url' => getenv('APP_URL') . 'account/purchases',
+                'cancel_url' => getenv('APP_URL'),
                 'customer' => $user->id_stripe ?? '',
             ]));
 

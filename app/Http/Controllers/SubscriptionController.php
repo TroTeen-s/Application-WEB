@@ -68,8 +68,8 @@ class SubscriptionController extends Controller
                     'mode' => 'subscription',
                     "billing_address_collection" => "required",
 
-                    'success_url' => $YOUR_DOMAIN . '?success=true&session_id={CHECKOUT_SESSION_ID}',
-                    'cancel_url' => $YOUR_DOMAIN . '?canceled=true',
+                    'success_url' => $YOUR_DOMAIN . '/account/subscriptions',
+                    'cancel_url' => $YOUR_DOMAIN,
                     'customer' => $user->id_stripe ?? '',
                     'subscription_data' => [
                         'metadata' => [
@@ -261,6 +261,9 @@ class SubscriptionController extends Controller
             ]);
 
             $fidelityHistory->save();
+
+            $user->fidelity_points += $paymentObject->amount / 100;
+            $user->save();
         } catch (Exception $e) {
             Log::channel('errors')->info($e->getMessage());
         }

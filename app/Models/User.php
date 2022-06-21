@@ -52,6 +52,7 @@ class User extends Authenticatable
         'email_verified_at',
         'id_stripe',
         'role',
+        'fidelity_history'
     ];
 
     protected $casts = [
@@ -97,16 +98,10 @@ class User extends Authenticatable
         return $this->hasMany(Cart::class);
     }
 
-    /*    public function getSubscribedAttribute(): bool
-        {
-            $active = PackageUser::query()->where(['user_id' => $this->id, 'active' => true])->get();
-
-            if ($active) {
-                return $this->active;
-            } else {
-                return false;
-            }
-        }*/
+    public function fidelity(): HasMany
+    {
+        return $this->hasMany(Fidelity::class);
+    }
 
     public function getSubscribedAttribute()
     {
@@ -117,5 +112,27 @@ class User extends Authenticatable
         } else {
             return false;
         }
+    }
+
+    public function getFidelityTotalAttribute(): int
+    {
+        $fidelityHistory = $this->fidelity;
+
+        $total = 0;
+
+        foreach ($fidelityHistory as $transaction) {
+            if ($transaction->amount > 0) {
+                $total += $transaction->amount;
+            }
+        }
+
+        return $total;
+
+
+    }
+
+    public function getFidelityAttribute(): Collection
+    {
+        return $this->fidelity()->get();
     }
 }

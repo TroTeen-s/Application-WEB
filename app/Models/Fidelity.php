@@ -18,6 +18,11 @@ class Fidelity extends Model
         'user_id'
     ];
 
+    protected $hidden = [
+        'user_id',
+        'payment_id'
+    ];
+
     public function payment(): BelongsTo
     {
         return $this->belongsTo(Payment::class, 'payment_id', 'id_stripe');

@@ -75,49 +75,29 @@ const Delete = () => {
     return (
         <>
             <Grid container spacing={2}>
-                <Grid item xs={12}>
-                    {/* <Typography ClassName="text-black-trot" variant="h2">
-                        Supprimer votre compte
-                    </Typography> */}
+
+
+                <Grid item xs={24} sm={12}>
+                    <div className="text-lg">
+                        <p>En selectionnant ce bouton vous supprimerez votre compte Easy Scooter</p>
+                        <p>Cette action est définitive vous serez alors déconnecter et ne pourrez plus
+                            vous connecter avec vos identifiant actuel </p>
+                    </div>
+
                 </Grid>
-                <Grid container item xs={12}>
-                    <Grid xs={4} className='text-[5]' alignItems="center" justifyContent="center">
-                        <NavAccount selLink='delete' />
-                    </Grid>
-                    <Grid item xs={8}>
-
-                        <Grid container spacing={2}>
 
 
-                            <Grid item xs={24} sm={12}>
-                                <div className='text-lg'>
-                                    <p>En selectionnant ce bouton vous supprimerez votre compte Easy Scooter</p>
-                                    <p>Cette action est définitive vous serez alors déconnecter et ne pourrez plus vous connecter avec vos identifiant actuel </p>
-                                </div>
+            </Grid>
+            <Button
 
-                            </Grid>
-
-
-
-
-
-                        </Grid>
-                        <Button
-
-                            color='error'
-                            fullWidth
-                            variant="outlined"
-                            onClick={handleClickOpen}
-                            sx={{ mt: 3, mb: 2 }}
-                        >
-                            Supprimer votre compte
-                        </Button>
-
-
-                    </Grid>
-                </Grid >
-
-            </Grid >
+                color="error"
+                fullWidth
+                variant="outlined"
+                onClick={handleClickOpen}
+                sx={{ mt: 3, mb: 2 }}
+            >
+                Supprimer votre compte
+            </Button>
 
             <Dialog
                 open={open}
@@ -135,7 +115,7 @@ const Delete = () => {
                 </DialogContent>
                 <DialogActions>
                     <Button onClick={handleClose}>Ne pas Supprimer</Button>
-                    <Button color='error' variant="contained" onClick={handleSubmit}>Supprimer</Button>
+                    <Button color="error" variant="contained" onClick={handleSubmit}>Supprimer</Button>
                 </DialogActions>
 
             </Dialog>
