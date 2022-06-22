@@ -23,7 +23,6 @@ class Cart extends Model
 
     protected $hidden = [
         'checkout_id',
-        'payment_id',
         'user_id',
         'bought',
         'created_at',
