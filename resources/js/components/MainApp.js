@@ -6,7 +6,6 @@ import React from "react";
 import { createTheme, ThemeProvider } from "@mui/material";
 import { Outlet } from "react-router";
 import AuthProvider from "./context/AuthContext";
-import "./styleMainApp.css";
 import CartProvider from "./context/CartContext";
 
 

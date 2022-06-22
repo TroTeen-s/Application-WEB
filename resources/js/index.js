@@ -38,12 +38,15 @@ import Purchases from "./components/account/shop/Purchases";
 import Password from "./components/account/user/Password";
 import Purchase from "./components/account/shop/Purchase";
 import Account from "./components/account/Account";
+import WEBGL from './components/webgl/WEBGL'
 import "./i18n.js";
 
 ReactDOM.render(
     <React.StrictMode>
         <Router>
             <Routes>
+
+                {/* <Route path="webgl" element={<WEBGL/>}> </Route> */}
 
                 <Route path="auth" element={<AuthPage />}>
                     <Route index element={<Navigate to="/auth/login" replace />} />
