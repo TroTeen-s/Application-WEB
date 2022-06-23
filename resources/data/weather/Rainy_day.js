@@ -25,7 +25,7 @@ const Rainy_day = () => {
                 <g filter="url(#blur)" id="rainy-3">
                     <g transform="translate(20,10)">
                         <g transform="translate(0,16)">
-                            <g class="am-weather-sun">
+                            <g className="am-weather-sun">
                                 <g>
                                     <line fill="none" stroke="orange" strokeLinecap="round" strokeWidth="2"
                                           transform="translate(0,9)" x1="0" x2="0" y1="0" y2="3" />
@@ -69,10 +69,10 @@ const Rainy_day = () => {
                         </g>
                     </g>
                     <g transform="translate(34,46), rotate(10)">
-                        <line class="am-weather-rain-1" fill="none" stroke="#91C0F8" strokeDasharray="4,7"
+                        <line className="am-weather-rain-1" fill="none" stroke="#91C0F8" strokeDasharray="4,7"
                               strokeLinecap="round" strokeWidth="2" transform="translate(-6,1)" x1="0" x2="0" y1="0"
                               y2="8" />
-                        <line class="am-weather-rain-2" fill="none" stroke="#91C0F8" strokeDasharray="4,7"
+                        <line className="am-weather-rain-2" fill="none" stroke="#91C0F8" strokeDasharray="4,7"
                               strokeLinecap="round" strokeWidth="2" transform="translate(0,-1)" x1="0" x2="0" y1="0"
                               y2="8" />
                     </g>

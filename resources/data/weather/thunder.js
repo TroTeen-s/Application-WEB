@@ -31,7 +31,7 @@ const Thunder = () => {
                                 transform="translate(-20,-11)" />
                         </g>
                         <g transform="translate(-9,28), scale(1.2)">
-                            <polygon class="am-weather-stroke" fill="orange" stroke="white" strokeWidth="1"
+                            <polygon className="am-weather-stroke" fill="orange" stroke="white" strokeWidth="1"
                                      points="14.3,-2.9 20.5,-2.9 16.4,4.3 20.3,4.3 11.5,14.6 14.9,6.9 11.1,6.9" />
                         </g>
                     </g>

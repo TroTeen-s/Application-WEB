@@ -106,6 +106,7 @@ Route::group(['middleware' => ['auth:sanctum']], function () {
     Route::get('/shop/test', [SubscriptionController::class, 'test']);
     Route::get('/carts', [ShopController::class, 'getAllCartsInfo']);
     Route::get('/cart/{id}', [ShopController::class, 'getCartInfo'])->where('id', '[0-9]+');
+    Route::get('/my-fidelity', [UserController::class, 'myFidelity']);
 
 
 });

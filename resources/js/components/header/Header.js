@@ -1,5 +1,5 @@
 import "../../../css/app.css";
-import React, { useContext, useEffect, useState } from "react";
+import React, {useContext, useEffect, useState} from "react";
 import "./style.css";
 
 
@@ -12,23 +12,22 @@ import IconButton from "@mui/material/IconButton";
 import Menu from "@mui/material/Menu";
 import MenuItem from "@mui/material/MenuItem";
 import Typography from "@mui/material/Typography";
-import { LanguageContext } from "../context/AuthContext";
+import {AuthContext, LanguageContext} from "../context/AuthContext";
 import Flag from "./components/Flag";
 
-import { NavLink } from "react-router-dom";
-import { ACTIONS, CartContext } from "../context/CartContext";
-import { AuthContext } from "../context/AuthContext";
-import { useNavigate } from "react-router";
+import {NavLink} from "react-router-dom";
+import {ACTIONS, CartContext} from "../context/CartContext";
+import {useNavigate} from "react-router";
 import Weather from "./components/Weather";
 import Button from "@mui/material/Button";
-import { useTranslation } from 'react-i18next';
+import {useTranslation} from 'react-i18next';
 
 
 function Header() {
 
-  let { language, setLanguage } = useContext(LanguageContext)
+    let {language, setLanguage} = useContext(LanguageContext);
 
-  const { t, i18n } = useTranslation();
+    const {t, i18n} = useTranslation();
 
 
 
@@ -64,7 +63,7 @@ function Header() {
             });
 
             if (cartFiltered.length !== cart.length) {
-                dispatch({ type: ACTIONS.CART_INIT, payload: { intialCart: cartFiltered } });
+                dispatch({type: ACTIONS.CART_INIT, payload: {initialCart: cartFiltered}});
             }
             setProducts(response.data.data);
         }

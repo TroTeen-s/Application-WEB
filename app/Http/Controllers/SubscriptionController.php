@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Cart;
+use App\Models\Fidelity;
 use App\Models\Invoice;
 use App\Models\Package;
 use App\Models\PackageUser;
@@ -47,9 +48,14 @@ class SubscriptionController extends Controller
 
         $YOUR_DOMAIN = getenv('APP_URL');
 
+        $user = auth()->user();
+
+        if ($user->subscribed) {
+            return $this->fail("already subscribed");
+        }
+
         if (isset($params['name'])) {
             $package = Package::query()->firstWhere('name', $params['name']);
-            $user = auth()->user();
 
             try {
                 $stripe = new StripeClient(getenv('STRIPE_PRIVATE'));
@@ -62,8 +68,8 @@ class SubscriptionController extends Controller
                     'mode' => 'subscription',
                     "billing_address_collection" => "required",
 
-                    'success_url' => $YOUR_DOMAIN . '?success=true&session_id={CHECKOUT_SESSION_ID}',
-                    'cancel_url' => $YOUR_DOMAIN . '?canceled=true',
+                    'success_url' => $YOUR_DOMAIN . '/account/subscriptions',
+                    'cancel_url' => $YOUR_DOMAIN,
                     'customer' => $user->id_stripe ?? '',
                     'subscription_data' => [
                         'metadata' => [
@@ -231,6 +237,8 @@ class SubscriptionController extends Controller
             $paymentObject = $event->data->object;
             Log::channel('errors')->info('on est là heyyyyy');
 
+            $user = User::query()->firstWhere('id_stripe', $paymentObject->customer);
+
             $payment = new Payment([
                 'amount' => $paymentObject->amount / 100,
                 'payment_date' => Carbon::createFromTimestamp($paymentObject->created),
@@ -239,9 +247,25 @@ class SubscriptionController extends Controller
                 'billing_address_postal_code' => $paymentObject->charges->data[0]->billing_details->address->postal_code,
                 'card_number' => $paymentObject->charges->data[0]->payment_method_details->card->last4,
                 'id_stripe' => $paymentObject->id,
-                'id_invoice_stripe' => $paymentObject->charges->data[0]->invoice
+                'id_invoice_stripe' => $paymentObject->charges->data[0]->invoice,
+                'user_id' => $user->id,
             ]);
             $payment->save();
+
+            if (stripos($paymentObject->description, "subscription") !== false) {
+                $fidelityHistory = new Fidelity([
+                    'amount' => $paymentObject->amount / 100,
+                    'reason' => stripos($paymentObject->description, "subscription") !== false ? "Paiment pour l'abonnement" : "Paiment sur le site Troteen's",
+                    'date' => Carbon::now(),
+                    'payment_id' => $paymentObject->id,
+                    'user_id' => $user->id,
+                ]);
+                $fidelityHistory->save();
+                $user->fidelity_points += $paymentObject->amount / 100;
+                $user->save();
+            }
+
+
         } catch (Exception $e) {
             Log::channel('errors')->info($e->getMessage());
         }
@@ -278,11 +302,31 @@ class SubscriptionController extends Controller
         ]);
         $itemsBought = $cart->items;
 
+        $total = 0;
+
         foreach ($itemsBought as $item) {
             $item->bought = true;
             $item->available = false;
             $item->save();
+            $total += $item->pivot->item_price;
         }
+
+        $total = floor($total);
+
+        $fidelityHistory = new Fidelity([
+            'amount' => $total,
+            'reason' => "Achat sur la boutique",
+            'date' => Carbon::now(),
+            'payment_id' => $event->data->object->payment_intent,
+            'user_id' => $cart->user_id,
+        ]);
+
+        $user = User::query()->find($cart->user_id);
+
+        $user->fidelity_points += $total;
+        $user->save();
+
+        $fidelityHistory->save();
 
         return $this->success('test', $cart->items);
     }
