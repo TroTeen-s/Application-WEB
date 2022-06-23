@@ -13,6 +13,7 @@ use App\Http\Controllers\SponsorCodeController;
 use App\Http\Controllers\WeatherController;
 
 use App\Http\Controllers\NeedHelpController;
+use App\Http\Controllers\ScooterProblemController;
 
 
 /* |-------------------------------------------------------------------------- | API Routes |-------------------------------------------------------------------------- | | Here is where you can register API routes for your application. These | routes are loaded by the RouteServiceProvider within a group which | is assigned the "api" middleware group. Enjoy building your API! | */
@@ -21,8 +22,8 @@ use App\Http\Controllers\NeedHelpController;
 
 Route::post('/auth/register', [AuthController::class , 'register']);
 
-Route::post('/support/need', [NeedHelpController::class, 'send']);
-Route::get('/support/list', [NeedHelpController::class, 'list']);
+Route::post('/support/need', [NeedHelpController::class , 'send']);
+Route::get('/support/list', [NeedHelpController::class , 'list']);
 
 
 Route::post('/auth/update', [AuthController::class , 'update']);
@@ -33,7 +34,7 @@ Route::post('/auth/delete', [AuthController::class , 'delete']);
 
 
 Route::get('/sponsors', SponsorController::class);
-Route::get('/weather', [WeatherController::class, 'get_todays_date']);
+Route::get('/weather', [WeatherController::class , 'get_todays_date']);
 Route::get('/codes', SponsorCodeController::class);
 Route::get('/code/{id}', [SponsorCodeController::class , 'get_free_code'])->where('id', '[0-9]+');
 
@@ -46,28 +47,28 @@ Route::prefix('stripe')->group(function () {
 });
 
 Route::group(['middleware' => ['auth:sanctum']], function () {
-    Route::get('/me', [UserController::class, 'me']);
+    Route::get('/me', [UserController::class , 'me']);
 
-    Route::post('subscribe', [SubscriptionController::class, 'subscribe']);
+    Route::post('subscribe', [SubscriptionController::class , 'subscribe']);
 
-    Route::post('checkout-sub', [SubscriptionController::class, 'createSubscriptionCheckout']);
+    Route::post('checkout-sub', [SubscriptionController::class , 'createSubscriptionCheckout']);
 
-    Route::get('subscription', [SubscriptionController::class, 'getAllSubscriptionsByUser']);
+    Route::get('subscription', [SubscriptionController::class , 'getAllSubscriptionsByUser']);
 
-    Route::get('subscription/{id}/invoices', [SubscriptionController::class, 'getInvoicesFromSubscription'])->where('id', '[0-9]+');
+    Route::get('subscription/{id}/invoices', [SubscriptionController::class , 'getInvoicesFromSubscription'])->where('id', '[0-9]+');
 
-    Route::get('subscription/{id}', [SubscriptionController::class, 'getSubscriptionsInfos'])->where('id', '[0-9]+');
+    Route::get('subscription/{id}', [SubscriptionController::class , 'getSubscriptionsInfos'])->where('id', '[0-9]+');
 
-    Route::get('/is-auth', [AuthController::class, 'isAuth']); // localhost:8000/api/users/
+    Route::get('/is-auth', [AuthController::class , 'isAuth']); // localhost:8000/api/users/
 
-    Route::get('/users/{id}', [UserController::class, 'firstOne'])->where('id', '[0-9]+');     // ex :localhost:8000/api/users/?id=1
-    Route::get('/user/active/{id}', [UserController::class, 'active'])->where('id', '[0-9]+'); // ex :localhost:8000/api/user/?id=1
+    Route::get('/users/{id}', [UserController::class , 'firstOne'])->where('id', '[0-9]+'); // ex :localhost:8000/api/users/?id=1
+    Route::get('/user/active/{id}', [UserController::class , 'active'])->where('id', '[0-9]+'); // ex :localhost:8000/api/user/?id=1
 
-    Route::get('/user/desactive/{id}', [UserController::class, 'desactive'])->where('id', '[0-9]+'); // ex :localhost:8000/api/user/?id=1
+    Route::get('/user/desactive/{id}', [UserController::class , 'desactive'])->where('id', '[0-9]+'); // ex :localhost:8000/api/user/?id=1
 
     Route::get('/users', UserController::class); // localhost:8000/api/users/
 
-    Route::post('/auth/logout', [AuthController::class, 'logout']);
+    Route::post('/auth/logout', [AuthController::class , 'logout']);
 
     Route::post('/auth/delete', [AuthController::class , 'delete']);
 
@@ -76,21 +77,21 @@ Route::group(['middleware' => ['auth:sanctum']], function () {
 
     Route::post('/auth/update_password', [AuthController::class , 'update_password']);
 
-    Route::get('/customer-portal', [SubscriptionController::class, 'linkCustomerPortal']);
+    Route::get('/customer-portal', [SubscriptionController::class , 'linkCustomerPortal']);
 
     ## ROUTES SCOOTERS
 
     ## SPONSOR
-    Route::get('/initCode/{id}', [SponsorCodeController::class, 'init_free_code'])->where('id', '[0-9]+');
+    Route::get('/initCode/{id}', [SponsorCodeController::class , 'init_free_code'])->where('id', '[0-9]+');
     Route::get('/sponsors', SponsorController::class);
     Route::get('/codes', SponsorCodeController::class);
-    Route::get('/code/{id}', [SponsorCodeController::class, 'get_free_code'])->where('id', '[0-9]+');
+    Route::get('/code/{id}', [SponsorCodeController::class , 'get_free_code'])->where('id', '[0-9]+');
 
     ## ROUTES SHOP
-    Route::get('/shop/buy-cart', [ShopController::class, 'buyCart']);
-    Route::get('/shop/test', [SubscriptionController::class, 'test']);
-    Route::get('/carts', [ShopController::class, 'getAllCartsInfo']);
-    Route::get('/cart/{id}', [ShopController::class, 'getCartInfo'])->where('id', '[0-9]+');
+    Route::get('/shop/buy-cart', [ShopController::class , 'buyCart']);
+    Route::get('/shop/test', [SubscriptionController::class , 'test']);
+    Route::get('/carts', [ShopController::class , 'getAllCartsInfo']);
+    Route::get('/cart/{id}', [ShopController::class , 'getCartInfo'])->where('id', '[0-9]+');
 
 
 });
@@ -99,27 +100,29 @@ Route::group(['middleware' => ['auth:sanctum']], function () {
 Route::get('/scooters/list', ScootersController::class);
 Route::post('/scooter/create', [ScootersController::class , 'create']);
 Route::get('/scooters', ScootersController::class);
-Route::post('/scooter/create', [ScootersController::class, 'create']);
+Route::post('/scooter/create', [ScootersController::class , 'create']);
 
 // For Admin
 
-Route::post('/dashboard/addproduct', [ProductController::class, 'addProduct']);
-Route::get('/dashboard/list', [ProductController::class, 'list']);
-Route::get('/dashboard/api/weather/list', [WeatherController::class, 'list']);
+Route::post('/dashboard/addproduct', [ProductController::class , 'addProduct']);
+Route::get('/dashboard/list', [ProductController::class , 'list']);
+Route::get('/dashboard/api/weather/list', [WeatherController::class , 'list']);
 
 
 
-Route::get('/dashboard/api/scooters/maintenance/list', [ScootersController::class, 'get_maintenance_scoot']);
-Route::get('/dashboard/api/scooters/fixing/list', [ScootersController::class, 'get_fixing_scoot']);
+Route::get('/dashboard/api/scooters/maintenance/list', [ScootersController::class , 'get_maintenance_scoot']);
+Route::get('/dashboard/api/scooters/fixing/list', [ScootersController::class , 'get_fixing_scoot']);
+
+Route::post('/scooter_probleme/add', [ScooterProblemController::class , 'add_scooter_problem']);
+Route::get('/scooter_probleme', ScooterProblemController::class);
 
 
+Route::get('/dashboard/api/scooters/maintenance/newstatus/{id}', [ScootersController::class , 'MaintenanceStatus']);
+Route::get('/dashboard/api/scooters/fixing/newstatus/{id}', [ScootersController::class , 'FixingStatus']);
 
-Route::get('/dashboard/api/scooters/maintenance/newstatus/{id}', [ScootersController::class, 'MaintenanceStatus']);
-Route::get('/dashboard/api/scooters/fixing/newstatus/{id}', [ScootersController::class, 'FixingStatus']);
-
-Route::get('/product-list', [ShopController::class, 'productList']);
-Route::get('/products', [ShopController::class, 'getProductById']);
-Route::get('/product/{productID}', [ShopController::class, 'productInfo'])->where('productID', '[0-9]+');
+Route::get('/product-list', [ShopController::class , 'productList']);
+Route::get('/products', [ShopController::class , 'getProductById']);
+Route::get('/product/{productID}', [ShopController::class , 'productInfo'])->where('productID', '[0-9]+');
 
 //PACKAGES
 
