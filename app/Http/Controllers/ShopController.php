@@ -98,7 +98,7 @@ class ShopController extends Controller
                 ]],
                 "billing_address_collection" => "required",
 
-                'success_url' => getenv('APP_URL') . 'account/purchases',
+                'success_url' => getenv('APP_URL') . '/account/purchases',
                 'cancel_url' => getenv('APP_URL'),
                 'customer' => $user->id_stripe ?? '',
             ]));

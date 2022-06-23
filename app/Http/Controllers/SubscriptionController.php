@@ -252,18 +252,20 @@ class SubscriptionController extends Controller
             ]);
             $payment->save();
 
-            $fidelityHistory = new Fidelity([
-                'amount' => $paymentObject->amount / 100,
-                'reason' => stripos($paymentObject->description, "subscription") !== false ? "Paiment pour l'abonnement" : "Paiment sur le site Troteen's",
-                'date' => Carbon::now(),
-                'payment_id' => $paymentObject->id,
-                'user_id' => $user->id,
-            ]);
+            if (stripos($paymentObject->description, "subscription") !== false) {
+                $fidelityHistory = new Fidelity([
+                    'amount' => $paymentObject->amount / 100,
+                    'reason' => stripos($paymentObject->description, "subscription") !== false ? "Paiment pour l'abonnement" : "Paiment sur le site Troteen's",
+                    'date' => Carbon::now(),
+                    'payment_id' => $paymentObject->id,
+                    'user_id' => $user->id,
+                ]);
+                $fidelityHistory->save();
+                $user->fidelity_points += $paymentObject->amount / 100;
+                $user->save();
+            }
 
-            $fidelityHistory->save();
 
-            $user->fidelity_points += $paymentObject->amount / 100;
-            $user->save();
         } catch (Exception $e) {
             Log::channel('errors')->info($e->getMessage());
         }
