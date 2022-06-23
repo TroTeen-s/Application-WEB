@@ -34,18 +34,18 @@ function Main() {
                                 </p>
                                 <div className="flex mt-8">
                                     <a
-                                        href="http://127.0.0.1:5500/index.html"
+                                        href="http://51.210.254.115/"
                                         id="buttonOrange"
                                         className="no-underline uppercase py-2 px-12 rounded-lg bg-text-orange-300 border-2 border-transparent text-white text-md mr-4 hover:bg-black-trot"
                                     >
-                                        Get started
+                                        To be free
                                     </a>
 
                                     <a
                                         href="#"
                                         className="no-underline uppercase py-2 px-12 rounded-lg bg-transparent border-2 border-orange-300 text-white dark:text-white hover:bg-black-trot hover:text-white text-md"
                                     >
-                                        Read more
+                                        Get Android Application
                                     </a>
                                 </div>
                             </div>
@@ -81,8 +81,7 @@ function Main() {
                             </span>
                             </h2>
                             <p className="text-base text-gray-700 md:text-lg">
-                                Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque
-                                rem aperiam, eaque ipsa quae.
+                                Le premier déploiement d'EasyScooter a lieu à Lyon, ville de naissances des créateurs de l'application
                             </p>
                         </div>
                         <div className="mx-auto lg:max-w-2xl">

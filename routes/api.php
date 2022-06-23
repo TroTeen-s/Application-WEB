@@ -96,7 +96,6 @@ Route::group(['middleware' => ['auth:sanctum']], function () {
 
     ## SPONSOR
     Route::get('/initCode/{id}', [SponsorCodeController::class, 'init_free_code'])->where('id', '[0-9]+');
-    Route::get('/sponsors', SponsorController::class);
     Route::get('/codes', SponsorCodeController::class);
     Route::get('/code/{id}', [SponsorCodeController::class, 'get_free_code'])->where('id', '[0-9]+');
 

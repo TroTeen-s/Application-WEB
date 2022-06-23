@@ -4,6 +4,7 @@ import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
 import { DateTime } from "luxon";
 import { DataGrid } from "@mui/x-data-grid";
+import './style.css';
 
 const FidelityHistory = () => {
 

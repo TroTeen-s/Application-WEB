@@ -86,8 +86,7 @@ function NeedHelp() {
             setStatus({ type: 'error', error });
         }
 
-
-
+       
       }
 
 
@@ -96,49 +95,71 @@ function NeedHelp() {
         <section className="pt-20 lg:pt-[120px]">
             <div className="container">
                 <div className="flex flex-wrap -mx-4">
-                    <div className="w-full px-4">
-                        <div className="text-center mx-auto mb-12 lg:mb-20 max-w-[510px]">
-               <span className="font-semibold text-lg text-orange-300 mb-2 block">
-               Nos services
-               </span>
-                            <h2
-                                className="
-                  font-bold
-                  text-3xl
-                  sm:text-4xl
-                  md:text-[40px]
-                  text-dark
-                  mb-4
-                  "
-                            >
-                                Besoin d'aide
-                            </h2>
-                            <p className="text-base text-body-color">
-                                There are many variations of passages of Lorem Ipsum available
-                                but the majority have suffered alteration in some form.
-                            </p>
+                    <div className="m-auto text-center md:w-8/12">
+                        <h2 className="text-2xl text-black-trot font-bold md:text-4xl"> Besoin <span className="text-orange-300"> d'aide </span> </h2>
+                        <h3 className="text-xl font-medium mb-10 pt-4"> Vous avez une question ou un problème ? Contactez-nous  </h3>
+                    </div>
+                </div>
+
+    <div className="mt-12 grid gap-6 md:grid-cols-2 lg:flex lg:space-x-8">
+        <div className="relative md:col-span-1 group lg:w-[32%]">
+           <div aria-hidden="true" className="absolute top-0 w-full h-full rounded-2xl p-4 bg-white shadow-xl transition duration-500 group-hover:scale-105 lg:group-hover:scale-110"></div>
+              <div className="relative p-6 space-y-6">
+                <div className="relative">
+                    <div class=" w-[70px] h-[70px] flex items-center justify-center bg-orange-300 rounded-2xl mb-2">
+                        <svg width="32"height="32"viewBox="0 0 35 35" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M18.6746 0.26779C10.0637 -1.33065 1.86522 4.39279 0.266779 13.0037C-0.506658 17.1803 0.421467 21.3568 2.79334 24.8631C5.21678 28.3693 8.82615 30.6897 12.9512 31.4631C13.9308 31.6178 14.859 31.7209 15.7871 31.7209C23.2637 31.7209 29.9668 26.3584 31.359 18.6756C32.9574 10.0647 27.234 1.81466 18.6746 0.26779ZM29.6574 18.3662C29.5543 18.8819 29.4512 19.449 29.2965 19.9131L16.7668 15.2209V1.81466C17.2824 1.86623 17.8496 1.91779 18.3652 2.02091C25.9449 3.4131 30.998 10.735 29.6574 18.3662ZM14.9105 1.81466V14.9115H1.86522C1.91678 14.3959 1.96834 13.8287 2.07147 13.3131C3.20584 6.86779 8.67147 2.22716 14.9105 1.81466ZM13.3121 29.6584C9.65115 28.9881 6.45428 26.9256 4.28865 23.8318C2.79334 21.7178 1.96834 19.2428 1.81365 16.7678H15.6324L28.5746 21.6147C26.048 27.3381 19.7574 30.8443 13.3121 29.6584Z" fill="white"/>
+                        </svg>
+                    </div>
+                </div>
+                <h2 className="text-2xl text-orange-300 font-semibold">Fiabilité </h2>
+                    <p class="text-body-color">
+                    We dejoy working with discerning clients, people for whom
+                    qualuty, service, integrity & aesthetics.
+                    </p>
+
             </div>
          </div>
-      </div>
-      <div className="mt-12 grid gap-6 md:grid-cols-2 lg:flex lg:space-x-8">
-          <div className="relative md:col-span-1 group lg:w-[32%]">
-              <div aria-hidden="true"
-                   className="absolute top-0 w-full h-full rounded-2xl p-4 bg-white shadow-xl transition duration-500 group-hover:scale-105 lg:group-hover:scale-110"></div>
+         <div className="relative md:col-span-1 group lg:w-[32%]">
+           <div aria-hidden="true" className="absolute top-0 w-full h-full rounded-2xl p-4 bg-white shadow-xl transition duration-500 group-hover:scale-105 lg:group-hover:scale-110"></div>
               <div className="relative p-6 space-y-6">
-                  <div className="relative">
-                      <div
-                          className=" w-[70px] h-[70px] flex items-center justify-center bg-orange-300 rounded-2xl mb-2">
-                          <svg width="32" viewBox="0 0 35 35" fill="none" xmlns="http://www.w3.org/2000/svg">
-                              <path
-                                  d="M17.5 7.875C8.20312 7.875 0.65625 16.0781 0.65625 26.1406C0.65625 26.6875 1.09375 27.125 1.64062 27.125H33.3594C33.9062 27.125 34.3438 26.6875 34.3438 26.1406C34.3438 16.0781 26.7969 7.875 17.5 7.875ZM19.4687 25.2109L17.9922 20.5078C17.8281 20.0156 17.1719 20.0156 17.0078 20.5078L15.5312 25.2109H2.625C3.0625 16.625 9.57031 9.78906 17.5 9.78906C25.4297 9.78906 31.9375 16.625 32.375 25.2109H19.4687Z"
-                                  fill="white"
-                              />
-                              <path
-                                  d="M17.5 13.7812C16.9531 13.7812 16.5156 14.2187 16.5156 14.7656V16.1875C16.5156 16.7344 16.9531 17.1719 17.5 17.1719C18.0469 17.1719 18.4844 16.7344 18.4844 16.1875V14.7656C18.4844 14.2187 18.0469 13.7812 17.5 13.7812Z"
-                                  fill="white"
-                              />
-                              <path
-                                  d="M25.8672 17.8828L24.9922 18.8125C24.6094 19.1953 24.6094 19.7969 24.9922 20.1797C25.1563 20.3438 25.4297 20.4531 25.6484 20.4531C25.9219 20.4531 26.1406 20.3438 26.3594 20.1797L27.2344 19.25C27.6172 18.8672 27.6172 18.2656 27.2344 17.8828C26.8516 17.5 26.25 17.5 25.8672 17.8828Z"
+                <div className="relative">
+                    <div class=" w-[70px] h-[70px] flex items-center justify-center bg-orange-300 rounded-2xl mb-2">
+                        <svg width="32"height="32"viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path
+                        d="M4.04684 15.5859C4.2109 15.5859 4.37497 15.5859 4.48434 15.5313L10.5547 13.3984C11.0468 13.2344 11.3203 12.6875 11.1562 12.1953C10.9922 11.7031 10.4453 11.4297 9.95309 11.5938L6.28903 12.9063C8.09372 7.92969 12.8515 4.53906 18.375 4.53906C24.2265 4.53906 29.3672 8.42188 30.789 14.0547C30.8984 14.5469 31.4453 14.875 31.9375 14.7656C32.4297 14.6563 32.7578 14.1094 32.6484 13.6172C31.0078 7.16406 25.1015 2.67969 18.375 2.67969C11.8125 2.67969 6.12497 6.89063 4.26559 13.0156L2.57028 8.25781C2.40622 7.76563 1.85934 7.49219 1.36715 7.65625C0.874967 7.82031 0.60153 8.36719 0.765592 8.85938L2.84372 14.8203C3.00778 15.2578 3.55465 15.5859 4.04684 15.5859Z"
+                        fill="white"
+                        />
+                     <path
+                        d="M34.2343 27.2891L31.9922 21.3828C31.8828 21.0547 31.6093 20.7812 31.2812 20.6719C30.9531 20.5625 30.625 20.5078 30.2968 20.6719L24.2812 22.9687C23.789 23.1328 23.5156 23.7344 23.7343 24.2266C23.8984 24.7187 24.5 24.9922 24.9922 24.7734L28.7109 23.3516C26.6328 27.6719 22.2031 30.5156 17.1718 30.5156C11.6484 30.5156 6.78122 27.0703 5.0859 21.9297C4.86715 21.4375 4.32028 21.1641 3.82809 21.3281C3.3359 21.4922 3.06247 22.0391 3.22653 22.5312C5.19528 28.4375 10.7734 32.4297 17.1172 32.4297C23.1328 32.4297 28.4922 28.875 30.6797 23.4609L32.4297 28C32.5937 28.3828 32.9218 28.6016 33.3047 28.6016C33.414 28.6016 33.5234 28.6016 33.6328 28.5469C34.1797 28.3281 34.4531 27.7813 34.2343 27.2891Z"
+                        fill="white"
+                        />                        </svg>
+                    </div>
+                </div>
+                <h2 className="text-2xl text-orange-300 font-semibold">Efficacité</h2>
+                    <p class="text-body-color">
+                    We dejoy working with discerning clients, people for whom
+                    qualuty, service, integrity & aesthetics.
+                    </p>
+
+            </div>
+         </div>
+         <div className="relative md:col-span-1 group lg:w-[32%]">
+           <div aria-hidden="true" className="absolute top-0 w-full h-full rounded-2xl p-4 bg-white shadow-xl transition duration-500 group-hover:scale-105 lg:group-hover:scale-110"></div>
+              <div className="relative p-6 space-y-6">
+                <div className="relative">
+                    <div class=" w-[70px] h-[70px] flex items-center justify-center bg-orange-300 rounded-2xl mb-2">
+                        <svg width="32"height="32"viewBox="0 0 35 35" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path
+                        d="M17.5 7.875C8.20312 7.875 0.65625 16.0781 0.65625 26.1406C0.65625 26.6875 1.09375 27.125 1.64062 27.125H33.3594C33.9062 27.125 34.3438 26.6875 34.3438 26.1406C34.3438 16.0781 26.7969 7.875 17.5 7.875ZM19.4687 25.2109L17.9922 20.5078C17.8281 20.0156 17.1719 20.0156 17.0078 20.5078L15.5312 25.2109H2.625C3.0625 16.625 9.57031 9.78906 17.5 9.78906C25.4297 9.78906 31.9375 16.625 32.375 25.2109H19.4687Z"
+                        fill="white"
+                        />
+                     <path
+                        d="M17.5 13.7812C16.9531 13.7812 16.5156 14.2187 16.5156 14.7656V16.1875C16.5156 16.7344 16.9531 17.1719 17.5 17.1719C18.0469 17.1719 18.4844 16.7344 18.4844 16.1875V14.7656C18.4844 14.2187 18.0469 13.7812 17.5 13.7812Z"
+                        fill="white"
+                        />
+                     <path
+                        d="M25.8672 17.8828L24.9922 18.8125C24.6094 19.1953 24.6094 19.7969 24.9922 20.1797C25.1563 20.3438 25.4297 20.4531 25.6484 20.4531C25.9219 20.4531 26.1406 20.3438 26.3594 20.1797L27.2344 19.25C27.6172 18.8672 27.6172 18.2656 27.2344 17.8828C26.8516 17.5 26.25 17.5 25.8672 17.8828Z"
                         fill="white"
                         />
                      <path
@@ -147,15 +168,17 @@ function NeedHelp() {
                         />                        </svg>
                     </div>
                 </div>
-                  <h2 className="text-2xl text-orange-300 font-semibold">Rapidité</h2>
-                  <p className="text-body-color">
-                      We dejoy working with discerning clients, people for whom
-                      qualuty, service, integrity & aesthetics.
-                  </p>
+                <h2 className="text-2xl text-orange-300 font-semibold">Rapidité</h2>
+                    <p class="text-body-color">
+                    We dejoy working with discerning clients, people for whom
+                    qualuty, service, integrity & aesthetics.
+                    </p>
 
             </div>
          </div>
        </div>
+
+
        <div className="grid grid-cols-2 mt-24">
 
         {/* :MAP CONTAINER */}

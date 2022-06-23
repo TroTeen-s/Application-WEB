@@ -70,8 +70,8 @@ function Header() {
                 </a>
             </div>
 
-            <div className="text-center">
-                <span className="text-sm tracking-wide">Copyright © tailus <span id="year"></span> | All right reserved</span>
+            <div className="text-center text-white">
+                <span className="text-sm tracking-wide">Copyright © EasyScooter <span id="year"></span> | All right reserved</span>
             </div>
         </div>
     </div>

@@ -16,10 +16,10 @@ class ProductSeeder extends Seeder
     public function run(): void
     {
         $casque = new Product([
-            'name' => 'Gros Casque de Loli',
+            'name' => 'Urban Casque',
             'price' => 45,
-            'description' => 'Un casque généralement utilisé par les personnes de type loli',
-            'image_path' => 'images/product/gros_casque_loli.jpg',
+            'description' => 'Urban Casque noir avec visière noir mat',
+            'image_path' => 'products/casque-kali-city-noir-mat.png',
         ]);
 
         $casque->save();
@@ -27,12 +27,23 @@ class ProductSeeder extends Seeder
 
         $gant = new Product([
             'name' => 'Gants en cuir',
-            'price' => 20,
-            'description' => 'Des gants pour protéger des chutes en trotinettes',
-            'image_path' => 'images/product/gant_en_cuir.jpg',
+            'price' => 30,
+            'description' => 'Gants cuir noirs doublés',
+            'image_path' => 'products/044895.png',
         ]);
 
         $gant->save();
+
+
+        $parapluie = new Product([
+            'name' => 'Parapluie',
+            'price' => 25,
+            'description' => 'Parapluie courbe Acacia',
+            'image_path' => 'products/parapluie-classic-canes.png',
+        ]);
+
+        $parapluie->save();
+
         Item::factory(10)->create([
             'product_id' => $gant->id,
             'bought' => false,
@@ -41,6 +52,12 @@ class ProductSeeder extends Seeder
 
         Item::factory(10)->create([
             'product_id' => $casque->id,
+            'bought' => false,
+            'returned' => false
+        ]);
+
+        Item::factory(10)->create([
+            'product_id' => $parapluie->id,
             'bought' => false,
             'returned' => false
         ]);

@@ -80,6 +80,8 @@ const ProductShopCard = ({ item }) => {
         dispatch({ type: ACTIONS.CART_ADD_UNIQUE, payload: { id: item.id } });
     };
 
+    console.log(item.image_path)
+
 
     return (
         <div className="h-full bg-white-background mb-4">

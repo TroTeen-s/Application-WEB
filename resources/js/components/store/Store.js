@@ -1,7 +1,12 @@
 import React from "react";
+import {useTranslation} from 'react-i18next';
 
 
 function Store() {
+
+    const {t, i18n} = useTranslation();
+
+
     const packages = [
         {
             id: 1,
@@ -50,15 +55,13 @@ function Store() {
             <section className="full_responsive mt-10">
                 <div className="container m-auto px-6 py-20 md:px-12 lg:px-20">
                     <div className="m-auto text-center lg:w-7/12 mb-10">
-                        <h2 className="text-2xl text-black-trot font-bold md:text-4xl">Nos <span
+                        <h2 className="text-2xl text-black-trot font-bold md:text-4xl">{t('Our')} <span
                             className="text-orange-300">Abonnements</span></h2>
                         <h3 className="text-xl font-medium pb-15 mt-5">
-                            Lorem ipsum dolor sit amet consectetur
-                            adipisicing elit repellat dignissimos laboriosam
-                            odit accusamus porro
+                            Fidélisez-vous à EasyScooter pour profiter d'offres plus avantageuses
                         </h3>
                     </div>
-                    <div className="mt-12 grid items-center gap-6 md:grid-cols-2 lg:flex lg:space-x-8">
+                    <div className="mt-24 grid items-center gap-6 md:grid-cols-2 lg:flex lg:space-x-8">
                         {packages.map(({ id, price, student_offer, cycle, name }) => (
                             <div key={id} className="relative md:col-span-1 group lg:w-[32%]">
                                 <div aria-hidden="true"

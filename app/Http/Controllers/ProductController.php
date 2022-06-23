@@ -21,7 +21,10 @@ class ProductController extends Controller
         $product->name = $req->input('name');
         $product->price = $req->input('price');
         $product->description = $req->input('description');
-        $product->image_path = $req->file('file')->store('images/products');
+
+        $product->image_path = $req->file('file')->store('products');
+
+
         if ($product->save() === true) {
             $quantity = $req->input('quantity');
             Item::factory()->count($quantity)->create([

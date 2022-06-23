@@ -11,9 +11,7 @@ const Home = () => {
               <h2 className="text-2xl text-black-trot font-bold md:text-4xl">Notre boutique <span
                   className="text-orange-300">contribue</span> à votre bonheur </h2>
               <h3 className="text-xl font-medium mb-10 pt-4">
-                  Lorem ipsum dolor sit amet consectetur
-                  adipisicing elit repellat dignissimos laboriosam
-                  odit accusamus porro
+                  Nos produits made in France ont été créer à votre goût !
               </h3>
           </div>
 

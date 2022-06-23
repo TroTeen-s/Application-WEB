@@ -3,12 +3,14 @@ import React, { useContext } from "react";
 
 import { NavLink } from "react-router-dom";
 import { AuthContext } from "../context/AuthContext";
+import {useTranslation} from 'react-i18next';
+
 
 function Header() {
 
-
     let { auth, setAuth } = useContext(AuthContext)
 
+    const {t, i18n} = useTranslation();
 
     let loggedOut = <>
         <li className="nav-item">

@@ -245,7 +245,7 @@ const Customers = () => {
 
 
   return (
-    <div style={{ height: 400, width: '100%' }}>
+    <div style={{ height: 400, width: '100%', paddingBottom: 10 }}>
       <DataGrid
         components={{
           LoadingOverlay: LinearProgress,

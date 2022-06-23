@@ -20,6 +20,8 @@ import {ACTIONS, CartContext} from "../context/CartContext";
 import {useNavigate} from "react-router";
 import Weather from "./components/Weather";
 import Button from "@mui/material/Button";
+
+
 import {useTranslation} from 'react-i18next';
 
 
@@ -169,7 +171,7 @@ function Header() {
 
                                         <li className="flex py-6">
                                             <div
-                                                className="h-36 w-36 flex-shrink-0 overflow-hidden rounded-md border border-gray-200">
+                                                className="h-36 w-36 flex-shrink-0 overflow-hidden rounded-md ">
                                                 <img
                                                     src={"/" + product.image_path}
                                                     alt="Salmon orange fabric pouch with match zipper, gray zipper pull, and adjustable hip belt."
@@ -213,10 +215,16 @@ function Header() {
                   </div>
                   <p className="mt-0.5 text-sm text-gray-500">TVA et taxes comprises</p>
                   <div className="mt-6">
-                      <Button
-                          onClick={readCart}
-                          className="flex items-center justify-center rounded-md border border-transparent bg-orange-300 px-6 py-3 text-base font-medium shadow-sm hover:bg-orange-400">{auth ? "Acheter" : "Se connecter pour acheter"}
-                      </Button>
+
+                  <div onClick={readCart} className="mt-6">
+                    <a href="#" className="flex items-center justify-center rounded-md border border-transparent bg-orange-300 px-6 py-3 text-base font-medium text-white shadow-sm hover:bg-orange-400">{auth ? "Acheter" : "Se connecter pour acheter"}</a>
+                  </div>
+
+                  
+                  {/* <div className="mt-6">
+                    <a href="#" className="flex items-center justify-center rounded-md border border-transparent bg-orange-300 px-6 py-3 text-base font-medium text-white shadow-sm hover:bg-orange-400">Acheter</a>
+                  </div> */}
+          
                   </div>
                   <div className="mt-6 flex justify-center text-center text-sm text-gray-500">
                       <p>
