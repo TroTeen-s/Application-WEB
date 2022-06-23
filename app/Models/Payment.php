@@ -15,7 +15,8 @@ class Payment extends Model
         'billing_address_postal_code',
         'card_number',
         'id_stripe',
-        'id_invoice_stripe'
+        'id_invoice_stripe',
+        'user_id'
     ];
 
     protected $hidden = [

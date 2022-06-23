@@ -18,7 +18,9 @@ class Scooters extends Model
         'last_position_long',
         'last_position_lat',
         'maintenance',
-        'fixing'
+        'fixing',
+        'maintenance_center_id',
+        'fixing_center_id'
 
     ];
 
@@ -31,8 +33,4 @@ class Scooters extends Model
     // {
     //     return $this->items()->where('maintenance', 1)->get();
     // }
-
-
-
-
 }

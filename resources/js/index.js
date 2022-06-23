@@ -39,6 +39,8 @@ import Password from "./components/account/user/Password";
 import Purchase from "./components/account/shop/Purchase";
 import Account from "./components/account/Account";
 import "./i18n.js";
+import Refunds from "./components/dashboard/Refunds";
+import FidelityHistory from "./components/account/user/FidelityHistory";
 
 ReactDOM.render(
     <React.StrictMode>
@@ -71,6 +73,7 @@ ReactDOM.render(
                         <Route path="subscriptions/:subscriptionID" element={<SubscriptionDetails />} />
                         <Route path="purchases" element={<Purchases />} />
                         <Route path="purchases/:purchaseID" element={<Purchase />} />
+                        <Route path="my-fidelity" element={<FidelityHistory />} />
                     </Route>
 
 
@@ -81,7 +84,8 @@ ReactDOM.render(
                         <Route path="customers" element={<Customers />} />
                         <Route path="shopAdmin" element={<ShopAdmin />} />
                         <Route path="ticket" element={<Ticket />} />
-                        <Route path="api" element={<Api/>}/>
+                        <Route path="api" element={<Api />} />
+                        <Route path="refunds" element={<Refunds />} />
                     </Route>
 
                     <Route path="/admin" element={<Admin />} />

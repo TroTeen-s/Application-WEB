@@ -41,7 +41,7 @@ export default function Main() {
             </Paper>
           </Grid>
 
-          <Grid item xs={20}>
+          {/* <Grid item xs={20}>
             <Paper sx={{ p: 3, display: 'flex', flexDirection: 'column', paddingBottom: 5 }}>
               <TrotMaintenance />
             </Paper>
@@ -51,7 +51,7 @@ export default function Main() {
             <Paper sx={{ p: 3, display: 'flex', flexDirection: 'column', paddingBottom: 5 }}>
               <TrotReparation />
             </Paper>
-          </Grid>
+          </Grid> */}
 
 
 

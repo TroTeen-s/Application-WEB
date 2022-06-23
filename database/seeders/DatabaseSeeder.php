@@ -20,8 +20,10 @@ class DatabaseSeeder extends Seeder
             ItemSeeder::class,
             SponsorSeeder::class,
             ScootSeeders::class,
-            WeatherSeeder::class
-
+            WeatherSeeder::class,
+            MaintenanceCenterSeeder::class,
+            FixingCenterSeeder::class,
+            ProblemsSeeder::class,
         ]);
     }
 }

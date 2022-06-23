@@ -91,74 +91,59 @@ const Password = () => {
 
     return (
 
-        <Grid container spacing={2}>
-            <Grid item xs={12}>
-                {/* <Typography variant="h3">
-                    Modification de Mot de passe
-                </Typography> */}
-            </Grid>
-            <Grid container item xs={12}>
-                <Grid xs={4} className='text-[5]' alignItems="center" justifyContent="center">
-                    <NavAccount selLink="password" />
+        <Box component="form" noValidate onSubmit={handleSubmit} sx={{ mt: 3 }}>
+            <Grid container spacing={2}>
+
+                <Grid item xs={12}>
+                    <StyledTextField
+                        error={error_new_password}
+                        required
+                        fullWidth
+                        name="password"
+                        label="Nouveau mot de passe"
+                        type="password"
+                        id="password"
+                    />
                 </Grid>
-                <Grid item xs={8}>
-                    <Box component="form" noValidate onSubmit={handleSubmit} sx={{ mt: 3 }}>
-                        <Grid container spacing={2}>
-
-                            <Grid item xs={12}>
-                                <StyledTextField
-                                    error={error_new_password}
-                                    required
-                                    fullWidth
-                                    name="password"
-                                    label="Nouveau mot de passe"
-                                    type="password"
-                                    id="password"
-                                />
-                            </Grid>
-                            <Grid item xs={12}>
-                                <StyledTextField
-                                    error={error_confirm_new_password}
-                                    required
-                                    fullWidth
-                                    name="password_confirmation"
-                                    label="Confirmation du nouveau mot de passe"
-                                    type="password"
-                                    id="password"
-                                />
-                            </Grid>
-
-
-                            <Grid item xs={24} sm={12}>
-                                <StyledTextField
-                                    fullWidth
-                                    id="email"
-                                    name="email"
-                                    value={infos.email}
-                                    InputProps={{
-                                        readOnly: true,
-                                        hidden: true
-                                    }}
-
-                                />
-                            </Grid>
-
-
-                        </Grid>
-                        <Button
-                            type="submit"
-                            fullWidth
-                            variant="outlined"
-                            sx={{ mt: 3, mb: 2 }}
-                        >
-                            Changer de mot de passe
-                        </Button>
-
-                    </Box>
+                <Grid item xs={12}>
+                    <StyledTextField
+                        error={error_confirm_new_password}
+                        required
+                        fullWidth
+                        name="password_confirmation"
+                        label="Confirmation du nouveau mot de passe"
+                        type="password"
+                        id="password"
+                    />
                 </Grid>
 
+
+                <Grid item xs={24} sm={12}>
+                    <StyledTextField
+                        fullWidth
+                        id="email"
+                        name="email"
+                        value={infos.email}
+                        InputProps={{
+                            readOnly: true,
+                            hidden: true
+                        }}
+
+                    />
+                </Grid>
+
+
             </Grid>
-        </Grid>
+            <Button
+                type="submit"
+                fullWidth
+                variant="outlined"
+                sx={{ mt: 3, mb: 2 }}
+            >
+                Changer de mot de passe
+            </Button>
+
+        </Box>
 
 
     );

@@ -15,3 +15,4 @@ yarn-error.log
 /public
 !public/locales/fr/translation.json
 !./public/locales/fr/translation.json
+stripe.cmd

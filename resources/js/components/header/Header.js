@@ -1,5 +1,5 @@
 import "../../../css/app.css";
-import React, { useContext, useEffect, useState } from "react";
+import React, {useContext, useEffect, useState} from "react";
 import "./style.css";
 
 
@@ -12,23 +12,22 @@ import IconButton from "@mui/material/IconButton";
 import Menu from "@mui/material/Menu";
 import MenuItem from "@mui/material/MenuItem";
 import Typography from "@mui/material/Typography";
-import { LanguageContext } from "../context/AuthContext";
+import {AuthContext, LanguageContext} from "../context/AuthContext";
 import Flag from "./components/Flag";
 
-import { NavLink } from "react-router-dom";
-import { ACTIONS, CartContext } from "../context/CartContext";
-import { AuthContext } from "../context/AuthContext";
-import { useNavigate } from "react-router";
+import {NavLink} from "react-router-dom";
+import {ACTIONS, CartContext} from "../context/CartContext";
+import {useNavigate} from "react-router";
 import Weather from "./components/Weather";
 import Button from "@mui/material/Button";
-import { useTranslation } from 'react-i18next';
+import {useTranslation} from 'react-i18next';
 
 
 function Header() {
 
-  let { language, setLanguage } = useContext(LanguageContext)
+    let {language, setLanguage} = useContext(LanguageContext);
 
-  const { t, i18n } = useTranslation();
+    const {t, i18n} = useTranslation();
 
 
 
@@ -64,7 +63,7 @@ function Header() {
             });
 
             if (cartFiltered.length !== cart.length) {
-                dispatch({ type: ACTIONS.CART_INIT, payload: { intialCart: cartFiltered } });
+                dispatch({type: ACTIONS.CART_INIT, payload: {initialCart: cartFiltered}});
             }
             setProducts(response.data.data);
         }
@@ -275,14 +274,6 @@ function Header() {
 
     let loggedOut = <>
 
-            <NavLink
-                className="no-underline px-3 py-2 flex items-center text-s uppercase font-bold leading-snug text-white"
-                to="/auth/login">
-                  <MenuItem className="mr-5">
-                    <i className="fab fa-facebook-square text-s leading-lg text-white opacity-75"></i>
-                    <Typography className="ml-2">Connexion</Typography>
-                  </MenuItem>
-            </NavLink>
     <NavLink
       className="no-underline px-3 py-2 flex items-center text-s uppercase font-bold leading-snug text-white"
       to="/auth/login">
@@ -293,14 +284,6 @@ function Header() {
     </NavLink>
 
 
-            <NavLink
-                className="no-underline px-3 py-2 flex items-center text-s uppercase font-bold leading-snug text-white"
-                to="/auth/register">
-                   <MenuItem>
-                    <i className="fab fa-facebook-square text-s leading-lg text-white opacity-75"></i>
-                    <Typography className="ml-2">Inscription</Typography>
-                  </MenuItem>
-            </NavLink>
     <NavLink
       className="no-underline px-3 py-2 flex items-center text-s uppercase font-bold leading-snug text-white"
       to="/auth/register">
@@ -313,17 +296,7 @@ function Header() {
     </>
 
     let loggedIn = <>
-          <NavLink
-                className="no-underline px-3 py-2 flex items-center text-s uppercase font-bold leading-snug text-white"                to="/Dashboard">
-                 <MenuItem>
-                   <i className="fab fa-facebook-square text-s leading-lg text-white opacity-75"></i>
-                <Typography
-                    className="ml-2">
-                Dashboard
-                </Typography>
-                </MenuItem>
-            </NavLink>
-  let loggedIn = <>
+
     <NavLink
       className="no-underline px-3 py-2 flex items-center text-s uppercase font-bold leading-snug text-white" to="/Dashboard">
       <MenuItem>
@@ -335,17 +308,6 @@ function Header() {
       </MenuItem>
     </NavLink>
 
-            <NavLink
-                className="no-underline px-3 py-2 flex items-center text-s uppercase font-bold leading-snug text-white"
-                to="/account">
-                   <MenuItem>
-                   <i className="fab fa-facebook-square text-s leading-lg text-white opacity-75"></i>
-                <Typography
-                    className="ml-2">
-                    Mon Compte
-                    </Typography>
-                    </MenuItem>
-            </NavLink>
     <NavLink
       className="no-underline px-3 py-2 flex items-center text-s uppercase font-bold leading-snug text-white"
       to="/account">
@@ -358,18 +320,6 @@ function Header() {
       </MenuItem>
     </NavLink>
 
-        <NavLink
-            className="no-underline px-3 py-2 flex items-center text-s uppercase font-bold leading-snug text-white"
-            to="#">
-            <MenuItem>
-                   <i className="fab fa-facebook-square text-s leading-lg text-white opacity-75"></i>
-                <Typography
-                className="ml-2"
-                onClick={doLogout}>
-                Déconnexion
-          </Typography>
-          </MenuItem>
-        </NavLink>
     <NavLink
       className="no-underline px-3 py-2 flex items-center text-s uppercase font-bold leading-snug text-white"
       to="#">
@@ -383,7 +333,6 @@ function Header() {
       </MenuItem>
     </NavLink>
 
-    </>
 
 
   </>
@@ -518,12 +467,14 @@ function Header() {
 
 
                 <a  className="cart-icon uppercase text-white font-black no-underline flex" onClick={toggleDrawer(anchor, true)}>
-                <span> 0 </span>
-                <svg className="fill-current hover:text-orange-300" xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 24 24">
-                  <path d="M21,7H7.462L5.91,3.586C5.748,3.229,5.392,3,5,3H2v2h2.356L9.09,15.414C9.252,15.771,9.608,16,10,16h8 c0.4,0,0.762-0.238,0.919-0.606l3-7c0.133-0.309,0.101-0.663-0.084-0.944C21.649,7.169,21.336,7,21,7z M17.341,14h-6.697L8.371,9 h11.112L17.341,14z" />
-                  <circle cx="10.5" cy="18.5" r="1.5" />
-                  <circle cx="17.5" cy="18.5" r="1.5" />
-                </svg>
+                    <span> {cart.length}</span>
+                    <svg className="fill-current hover:text-orange-300" xmlns="http://www.w3.org/2000/svg" width="30"
+                         height="30" viewBox="0 0 24 24">
+                        <path
+                            d="M21,7H7.462L5.91,3.586C5.748,3.229,5.392,3,5,3H2v2h2.356L9.09,15.414C9.252,15.771,9.608,16,10,16h8 c0.4,0,0.762-0.238,0.919-0.606l3-7c0.133-0.309,0.101-0.663-0.084-0.944C21.649,7.169,21.336,7,21,7z M17.341,14h-6.697L8.371,9 h11.112L17.341,14z" />
+                        <circle cx="10.5" cy="18.5" r="1.5" />
+                        <circle cx="17.5" cy="18.5" r="1.5" />
+                    </svg>
               </a>
         </React.Fragment>
     ))}

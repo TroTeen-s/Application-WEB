@@ -21,8 +21,6 @@ class SponsorSeeder extends Seeder
             'brand' => 'Pathé',
             'description' => 'Moins 20% sur les deux prochaines scéances',
             'end' => date_create('2022-10-10'),
-
-
         ]);
         $pathe->save();
 
@@ -30,8 +28,6 @@ class SponsorSeeder extends Seeder
             'brand' => 'UGC',
             'description' => 'Moins 15% sur les deux prochains films d\'horreur',
             'end' => date_create('2022-11-10'),
-
-
         ]);
         $ugc->save();
 

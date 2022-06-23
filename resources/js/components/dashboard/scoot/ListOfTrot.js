@@ -1,49 +1,54 @@
 import React, { useContext, useEffect, useState } from 'react';
-import { DataGrid } from '@mui/x-data-grid';
+import { DataGrid, GridActionsCellItem } from '@mui/x-data-grid';
 import Button from "@mui/material/Button";
 import { LinearProgress } from '@mui/material';
 import { AuthLoadingContext } from '../../context/AuthContext';
+import DeleteIcon from '@mui/icons-material/Delete';
+import ElectricScooterIcon from '@mui/icons-material/ElectricScooter';
+
+import toast, { Toaster } from 'react-hot-toast';
 
 export default function ListOfTrot() {
 
-  const [infos, setInfos] = useState();
+  const notify = () => toast.success('+1 Trotinette ajouté');
+  const SendToFix = (event) => toast(`Trotinette ID : ${event} envoyé en réparation !`, {
+    icon: '💤',
+  });
+
+  const SendToMaintenance = (event) => toast(`Trotinette ID : ${event} envoyé en maintenance !`, {
+    icon: '💬',
+  });
+
+  const Service = (event) => toast(`Trotinette ID : ${event} remis en service !`, {
+    icon: '👏',
+  });
   
 
+  const [infos, setInfos] = useState();
+  
   let { loaded } = useContext(AuthLoadingContext)
 
   const columns = [
     {
       field: 'id',
       headerName: 'ID',
-      width: 90
+      width: 40
     },
     {
       field: 'model_serie',
       headerName: 'Modele de Serie',
-      width: 250,
+      width: 220,
       editable: false,
     },
     {
       field: 'mileage',
       headerName: 'Kilometrage',
-      width: 150,
-      editable: false,
-    },
-
-    {
-      field: 'maintenance',
-      headerName: 'maintenance',
       width: 100,
       editable: false,
-      renderCell: (params) => (
-        <div id={"is-active-" + params.row.id}>
-          <p className={params.row.maintenance ? "m-0 text-primary" : "m-0 text-black"}>
-            {params.row.maintenance ? "true" : "false"}
-          </p>
-        </div >
-      )
-
     },
+
+    { field: 'maintenance', type: 'boolean', width: 120 },
+
     {
         field: 'MaintenanceLink',
         headerName: 'Send to maintenance',
@@ -68,22 +73,7 @@ export default function ListOfTrot() {
 
       },
 
-    {
-        field: 'fixing',
-        headerName: 'fixing',
-        width: 60,
-        editable: false,
-        renderCell: (params) => (
-          <div id={"is-active-" + params.row.id}>
-            <p className={params.row.fixing ? "m-0 text-primary" : "m-0 text-black"}>
-              {params.row.fixing ? "true" : "false"}
-            </p>
-          </div >
-        )
-
-      },
-
-
+    { field: 'fixing', headerName: 'fixing', type: 'boolean', width: 120 },
 
     {
       field: 'FixingLink',
@@ -107,7 +97,37 @@ export default function ListOfTrot() {
         </strong >
     )
 
-    }
+    },
+
+    {
+      field: 'none',
+      type: 'actions',
+      headerName: 'Service',
+      width: 100,
+      getActions: (params) => [
+        <GridActionsCellItem
+          icon={<ElectricScooterIcon />}
+          onClick={() => {
+            HandleService(params.row.id)}
+          }
+        />,
+      ],
+    },
+    
+    {
+      field: 'actions',
+      type: 'actions',
+      width: 50,
+      getActions: (params) => [
+        <GridActionsCellItem
+          icon={<DeleteIcon />}
+          label="Delete"
+          onClick={() => {
+            DeleteScoot(params.row.id)}
+          }
+        />,
+      ],
+    },
 
   ]
 
@@ -118,6 +138,7 @@ export default function ListOfTrot() {
       if (response.data.data) {
         console.log(response.data.data)
         setInfos(response.data.data)
+        SendToFix(event)
       }
 
   };
@@ -128,6 +149,41 @@ export default function ListOfTrot() {
 
     if (response.data.data) {
       setInfos(response.data.data)
+      SendToMaintenance(event)
+    }
+
+  };
+
+  const DeleteScoot = async (event) => {
+
+    let response = await axios.get(`/api/dashboard/api/dashboard/api/scooters/delete/${event}`);
+
+    if (response.data.data) {
+      console.log(response.data.data)
+      setInfos(response.data.data)
+    }
+
+  };
+
+  
+  const AddScoot = async () => {
+
+    let response = await axios.get(`/api/dashboard/api/scooters/add`);
+
+    if (response.data.data) {
+      setInfos(response.data.data);
+      notify();
+    }
+
+  };
+
+  const HandleService = async (event) => {
+
+    let response = await axios.get(`/api/dashboard/api/scooters/service/newstatus/${event}`);
+
+    if (response.data.data) {
+      setInfos(response.data.data)
+      Service(event)
     }
 
   };
@@ -135,7 +191,7 @@ export default function ListOfTrot() {
 
   const retrieveInfos = async () => {
     try {
-      let response = await axios.get('/api/scooters/list', {
+      let response = await axios.get('/api/dashboard/scooters/list', {
         headers: {
           'Accept': 'application/json'
         }
@@ -158,7 +214,13 @@ export default function ListOfTrot() {
 
 
   return (
+    <>   
+
     <div style={{ height: 400, width: '100%', paddingBottom: 10 }}>
+
+    <Toaster/>
+
+
       <h3> Liste des trotinettes </h3>
       <DataGrid
         components={{
@@ -172,7 +234,15 @@ export default function ListOfTrot() {
         loading={!infos}
 
       />
+
+     <button onClick={AddScoot}
+      className="bg-orange-300 text-gray-800 font-semibold py-2 px-9 rounded shadow ml-4 mt-7"> Ajouter une trotinette
+     </button>
+
     </div>
+    
+    </>
+
   );
 
 }

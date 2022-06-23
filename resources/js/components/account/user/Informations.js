@@ -1,10 +1,9 @@
-import React, { useContext, useLayoutEffect, useState } from 'react';
+import React, { useContext, useLayoutEffect, useState } from "react";
 
 import { Grid } from "@mui/material";
 import Box from "@mui/material/Box";
 import TextField from "@mui/material/TextField";
 import Button from "@mui/material/Button";
-import NavAccount from './NavAccount';
 import { useNavigate } from "react-router";
 import { styled } from "@mui/material/styles";
 import { outlinedInputClasses } from "@mui/material/OutlinedInput";
@@ -94,17 +93,6 @@ const Informations = () => {
 
     return (
 
-        <Grid container spacing={2}>
-            {/* <Grid item xs={12}>
-                <Typography variant="h3">
-                    Modification d'information personnelles
-                </Typography>
-            </Grid> */}
-            <Grid container item xs={12}>
-                <Grid xs={4} className='text-[5]' alignItems="center" justifyContent="center">
-                    <NavAccount selLink='informations' />
-                </Grid>
-                <Grid item xs={8}>
                     <Box component="form" noValidate onSubmit={handleSubmit} sx={{ mt: 3 }}>
                         <Grid container spacing={2}>
                             <Grid item xs={12} sm={6}>
@@ -183,11 +171,6 @@ const Informations = () => {
                         </Button>
 
                     </Box>
-                </Grid>
-            </Grid>
-
-        </Grid>
-
     );
 };
 

@@ -158,8 +158,8 @@ export default function SignUpForm() {
 
     return (
         <section className="h-auto bg-black-trot">
-            <div class="min-h-auto flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8">
-                <div class="max-w-md w-full space-y-8">
+            <div className="min-h-auto flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8">
+                <div className="max-w-md w-full space-y-8">
                     <div>
                         <div className="text-center uppercase font-black no-underline pt-2 pl-5">
                             <NavLink
@@ -176,27 +176,27 @@ export default function SignUpForm() {
                                 Scooter
                             </NavLink>
                         </div>
-                        <h2 class="mt-6 text-center text-2xl font-extrabold text-white">
+                        <h2 className="mt-6 text-center text-2xl font-extrabold text-white">
                             Sign up to create an account
                         </h2>
                     </div>
-                    <Box class="mt-8 space-y-6" component="form" noValidate onSubmit={handleSubmit} sx={{ mt: 1 }}>
+                    <Box className="mt-8 space-y-6" component="form" noValidate onSubmit={handleSubmit} sx={{ mt: 1 }}>
                         <input type="hidden" name="remember" value="true" />
 
-                        <div class="flex items-center justify-center space-x-2">
-                            <span class="h-px w-16 bg-white"></span>
-                            <span class="text-white font-normal">Personnal Information</span>
-                            <span class="h-px w-16 bg-white"></span>
+                        <div className="flex items-center justify-center space-x-2">
+                            <span className="h-px w-16 bg-white"></span>
+                            <span className="text-white font-normal">Personnal Information</span>
+                            <span className="h-px w-16 bg-white"></span>
                         </div>
 
-                    <Grid container spacing={2}>
+                        <Grid container spacing={2}>
 
-                        <Grid item xs={12} sm={6}>
-                            <StyledTextField
-                                inputProps={{ style: { color: "red" } }}
-                                error={firstnameError.error}
-                                autoComplete="given-name"
-                                name="firstname"
+                            <Grid item xs={12} sm={6}>
+                                <StyledTextField
+                                    inputProps={{ style: { color: "red" } }}
+                                    error={firstnameError.error}
+                                    autoComplete="given-name"
+                                    name="firstname"
                                 required
                                 fullWidth
                                 id="firstname"
@@ -251,13 +251,13 @@ export default function SignUpForm() {
                             />
                         </Grid>
 
-                        <Grid item xs={12}>
-                        <div class="flex items-center justify-center space-x-2">
-                            <span class="h-px w-16 bg-white"></span>
-                            <span class="text-white font-normal">Security</span>
-                            <span class="h-px w-16 bg-white"></span>
-                        </div>
-                        </Grid>
+                            <Grid item xs={12}>
+                                <div className="flex items-center justify-center space-x-2">
+                                    <span className="h-px w-16 bg-white"></span>
+                                    <span className="text-white font-normal">Security</span>
+                                    <span className="h-px w-16 bg-white"></span>
+                                </div>
+                            </Grid>
 
                         <Grid item xs={12}>
                             <StyledTextField
@@ -283,29 +283,29 @@ export default function SignUpForm() {
                                 helperText={passwordError.helper}
                             />
                         </Grid>
-                    </Grid>
+                        </Grid>
 
-                        <div class="flex items-center justify-between">
-                            <div class="flex items-center">
+                        <div className="flex items-center justify-between">
+                            <div className="flex items-center">
                                 <input
                                     id="remember-me"
                                     name="remember-me"
                                     type="checkbox"
-                                    class="h-4 w-4 text-orange-300 focus:ring-orange-200 border-gray-300 rounded"
+                                    className="h-4 w-4 text-orange-300 focus:ring-orange-200 border-gray-300 rounded"
                                 />
                                 <label
                                     for="remember-me"
-                                    class="ml-2 block text-sm text-white"
+                                    className="ml-2 block text-sm text-white"
                                 >
                                     {" "}
                                     Remember me{" "}
                                 </label>
                             </div>
 
-                            <div class="text-sm">
+                            <div className="text-sm">
                                 <a
                                     href="#"
-                                    class="font-medium text-orange-300 hover:text-orange-300"
+                                    className="font-medium text-orange-300 hover:text-orange-300"
                                 >
                                     {" "}
                                     Forgot your password?{" "}
@@ -316,11 +316,11 @@ export default function SignUpForm() {
                         <div>
                             <button
                                 type="submit"
-                                class="group relative w-full flex justify-center py-2 px-4 text-sm font-medium rounded-md text-white bg-orange-300 hover:bg-orange-300"
+                                className="group relative w-full flex justify-center py-2 px-4 text-sm font-medium rounded-md text-white bg-orange-300 hover:bg-orange-300"
                             >
-                                <span class="absolute left-0 inset-y-0 flex items-center pl-3">
+                                <span className="absolute left-0 inset-y-0 flex items-center pl-3">
                                     <svg
-                                        class="h-5 w-5 text-black group-hover:text-black"
+                                        className="h-5 w-5 text-black group-hover:text-black"
                                         xmlns="http://www.w3.org/2000/svg"
                                         viewBox="0 0 20 20"
                                         fill="currentColor"
@@ -336,18 +336,19 @@ export default function SignUpForm() {
                                 Sign in
                             </button>
                         </div>
-                        <div class="flex items-center justify-center space-x-2">
-                            <span class="h-px w-16 bg-white"></span>
-                            <span class="text-white font-normal">OR</span>
-                            <span class="h-px w-16 bg-white"></span>
+                        <div className="flex items-center justify-center space-x-2">
+                            <span className="h-px w-16 bg-white"></span>
+                            <span className="text-white font-normal">OR</span>
+                            <span className="h-px w-16 bg-white"></span>
                         </div>
-                        <p class="flex flex-col items-center justify-center mt-10 text-center text-md text-white">
-				            <span>Do you have an account?</span>
+                        <p className="flex flex-col items-center justify-center mt-10 text-center text-md text-white">
+                            <span>Do you have an account?</span>
                             <Link to="/auth/login">
-				                <a class="text-orange-300 hover:text-black no-underline hover:underline cursor-pointer transition ease-in duration-300">Sign in</a>
+                                <a className="text-orange-300 hover:text-black no-underline hover:underline cursor-pointer transition ease-in duration-300">Sign
+                                    in</a>
                             </Link>
                         </p>
-                      </Box>
+                    </Box>
                 </div>
             </div>
         </section>
