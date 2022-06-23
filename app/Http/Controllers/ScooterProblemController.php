@@ -33,6 +33,8 @@ class ScooterProblemController extends Controller
         $scooter_id = $request->header('scooter_id');
         $reporter_email = $request->header('reporter_email');
 
+        return response()->json(array('data' => $scooter_id));
+
         $probleme = new ScooterProblem([
             'description' => $description,
             'scooter_id' => $scooter_id,
