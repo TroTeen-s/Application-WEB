@@ -2,12 +2,9 @@ import React, { useContext, useEffect, useState } from 'react';
 import { DataGrid, GridActionsCellItem } from '@mui/x-data-grid';
 import Button from "@mui/material/Button";
 import { LinearProgress } from '@mui/material';
-import Container from '@mui/material/Container';
 import DeleteIcon from '@mui/icons-material/Delete';
 
 import { AuthLoadingContext } from "../context/AuthContext";
-import { Navigate } from 'react-router';
-import { NotificationContainer, NotificationManager } from 'react-notifications';
 
 
 const Customers = () => {
@@ -25,7 +22,6 @@ const Customers = () => {
       width: 90
     },
     {
-<<<<<<< HEAD
       field: 'firstname',
       headerName: 'firstname',
       width: 110,
@@ -96,14 +92,16 @@ const Customers = () => {
 
         <div id={"is-active-" + params.row.id}>
           <Button variant="outlined"
-            color="primary"
-            size="small"
-            style={{ marginLeft: 16 }}
-            onClick={() => {
-              { params.row.role == 'admin' ? HandleUser(params.row.id) : HandleAdmin(params.row.id) }
-            }}
-            className={params.row.role == "admin" ? "m-0 text-primary" : "m-0 text-black"}>
-            {params.row.role == 'admin' ? "Admin" : "User"}
+                  color="primary"
+                  size="small"
+                  style={{ marginLeft: 16 }}
+                  onClick={() => {
+                      {
+                          params.row.role === "admin" ? HandleUser(params.row.id) : HandleAdmin(params.row.id);
+                      }
+                  }}
+                  className={params.row.role === "admin" ? "m-0 text-primary" : "m-0 text-black"}>
+              {params.row.role === "admin" ? "Admin" : "User"}
           </Button>
         </div >
       )
@@ -127,51 +125,6 @@ const Customers = () => {
 
 
   ];
-=======
-            field: "firstname",
-            headerName: "First name",
-            width: 150,
-            editable: false
-        },
-        {
-            field: "lastname",
-            headerName: "Last name",
-            width: 150,
-            editable: false
-        },
-        {
-            field: "email",
-            headerName: "email",
-            width: 150,
-            editable: false
-        },
-
-        {
-            field: "userLink",
-            headerName: "Show more",
-            width: 150,
-            editable: false,
-            renderCell: (params) => (
-
-                <strong>
-                    <Button
-                        variant="outlined"
-                        color="primary"
-                        size="small"
-                        style={{ marginLeft: 16 }}
-                        onClick={() => {
-                            showMore(params);
-                        }}
-                    >
-                        Open
-                    </Button>
-                </strong>
-            )
-
-        }
-
-    ];
->>>>>>> 14fa231b3a76adfbfce63fc9ea9c9569bb64f64d
 
   const HandleActive = async (event) => {
 
