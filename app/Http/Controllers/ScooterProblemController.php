@@ -29,11 +29,9 @@ class ScooterProblemController extends Controller
 
     public function add_scooter_problem(Request $request): JsonResponse
     {
-        $description = $request->header('description');
-        $scooter_id = $request->header('scooter_id');
-        $reporter_email = $request->header('reporter_email');
-
-        return response()->json(array('data' => $scooter_id, "request" => $request->input(), 'description' => $description));
+        $description = $request->input('description');
+        $scooter_id = $request->input('scooter_id');
+        $reporter_email = $request->input('reporter_email');
 
         $probleme = new ScooterProblem([
             'description' => $description,
