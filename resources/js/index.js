@@ -38,7 +38,6 @@ import Purchases from "./components/account/shop/Purchases";
 import Password from "./components/account/user/Password";
 import Purchase from "./components/account/shop/Purchase";
 import Account from "./components/account/Account";
-import WEBGL from './components/webgl/WEBGL'
 import "./i18n.js";
 import Refunds from "./components/dashboard/Refunds";
 import FidelityHistory from "./components/account/user/FidelityHistory";

@@ -6,8 +6,6 @@ import Container from '@mui/material/Container';
 import Grid from '@mui/material/Grid';
 import Paper from '@mui/material/Paper';
 import Link from '@mui/material/Link';
-import TrotMaintenance from './TrotMaintenance';
-import TrotReparation from './TrotReparation';
 import ListOfTrot from './ListOfTrot';
 
 const drawerWidth = 240;
