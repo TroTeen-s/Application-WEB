@@ -5,7 +5,6 @@ namespace App\Http\Controllers;
 use App\Models\Item;
 use App\Models\Product;
 use App\Traits\ApiResponse;
-use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 
@@ -13,6 +12,26 @@ class ProductController extends Controller
 {
 
     use ApiResponse;
+
+    public function update(Request $request, int $id): JsonResponse
+    {
+        if (empty($request->all())) {
+            return $this->fail("pas d'option envoyées");
+        }
+
+        $produit = Product::query()->find($id);
+
+        if (empty($produit)) {
+            return $this->fail("Objet pas trouvé");
+        }
+
+        $success = $produit->update($request->all());
+        if (!$success) {
+            return $this->fail("Erreur");
+        } else {
+            return $this->success("objet mis à jour avec succès", $success);
+        }
+    }
 
     function addProduct(Request $req): JsonResponse
     {
@@ -35,12 +54,15 @@ class ProductController extends Controller
             ]);
 
         }
+
+        $product->refresh();
+
         return $this->success("Produit ajouté avec succès", $product);
     }
 
-    function list(): Collection
+    function list(): JsonResponse
     {
 
-        return Product::all();
+        return $this->success("voici la liste des produits", Product::all());
     }
 }

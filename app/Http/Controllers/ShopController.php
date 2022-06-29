@@ -19,7 +19,9 @@ class ShopController extends Controller
 
     public function productList(): JsonResponse
     {
-        $products = Product::all();
+        $products = Product::query()->where([
+            'active' => true
+        ])->get();
 
         if ($products) {
             return $this->success("Liste des produits", $products);

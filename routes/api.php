@@ -130,7 +130,8 @@ Route::post('/dashboard/users/delete/{id}', [UserController::class , 'deleteUser
 // For Admin
 
 Route::post('/dashboard/addproduct', [ProductController::class , 'addProduct']);
-Route::get('/dashboard/list', [ProductController::class , 'list']);
+Route::patch('/dashboard/products/{id}', [ProductController::class , 'update'])->where('id', '[0-9]+');
+Route::get('/dashboard/products', [ProductController::class , 'list']);
 Route::get('/dashboard/api/weather/list', [WeatherController::class , 'list']);
 
 // problemes
