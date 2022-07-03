@@ -48,20 +48,6 @@ class PackageSeeder extends Seeder
         ]);
 
         $package = new Package([
-            'name' => 'minim',
-            'price' => '0.23',
-            'is_subscription' => false
-        ]);
-        $package->save();
-
-        $package = new Package([
-            'name' => 'medium',
-            'price' => '9.99',
-            'is_subscription' => true
-        ]);
-        $package->save();
-
-        $package = new Package([
             'id_stripe' => $basique->id,
             'name' => 'basique',
             'price' => '19.99',
