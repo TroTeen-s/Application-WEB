@@ -16,6 +16,8 @@ return new class extends Migration
         Schema::create('packages', function (Blueprint $table) {
             $table->id();
             $table->string('id_stripe')->nullable();
+            $table->boolean("active")->default(true);
+            $table->string("frequency")->default("monthly");
             $table->timestamps();
             $table->string("name", 70);
             $table->float("price", 5, 2)->nullable();

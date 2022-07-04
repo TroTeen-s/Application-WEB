@@ -6,19 +6,19 @@ import PeopleIcon from "@mui/icons-material/People";
 import BarChartIcon from "@mui/icons-material/BarChart";
 import CurrencyExchangeIcon from "@mui/icons-material/CurrencyExchange";
 import LocalGroceryStoreIcon from "@mui/icons-material/LocalGroceryStore";
-import ElectricScooterIcon from '@mui/icons-material/ElectricScooter';
-import MapIcon from '@mui/icons-material/Map';
-import BugReportIcon from '@mui/icons-material/BugReport';
+import ElectricScooterIcon from "@mui/icons-material/ElectricScooter";
+import MapIcon from "@mui/icons-material/Map";
+import BugReportIcon from "@mui/icons-material/BugReport";
 
 import { NavLink } from "react-router-dom";
 
 export const mainListItems = (
-  <React.Fragment>
-    <NavLink className="no-underline text-black-trot" to="trot">
-    <ListItemButton>
-      <ListItemIcon>
-        <ElectricScooterIcon />
-      </ListItemIcon>
+    <React.Fragment>
+        <NavLink className="no-underline text-black-trot" to="trot">
+            <ListItemButton>
+                <ListItemIcon>
+                    <ElectricScooterIcon />
+                </ListItemIcon>
         <ListItemText primary="Trotinettes" />
     </ListItemButton>
     </NavLink>
@@ -32,23 +32,32 @@ export const mainListItems = (
     </ListItemButton>
     </NavLink>
 
-    <NavLink className="no-underline text-black-trot" to="customers">
-    <ListItemButton>
-      <ListItemIcon>
-        <PeopleIcon />
-      </ListItemIcon>
-        <ListItemText primary="Customers" />
-    </ListItemButton>
-    </NavLink>
+        <NavLink className="no-underline text-black-trot" to="customers">
+            <ListItemButton>
+                <ListItemIcon>
+                    <PeopleIcon />
+                </ListItemIcon>
+                <ListItemText primary="Customers" />
+            </ListItemButton>
+        </NavLink>
 
-    <NavLink className="no-underline text-black-trot" to="api">
-    <ListItemButton>
-      <ListItemIcon>
-        <BarChartIcon />
-      </ListItemIcon>
-      <ListItemText primary="API" />
-    </ListItemButton>
-    </NavLink>
+        <NavLink className="no-underline text-black-trot" to="subscriptions">
+            <ListItemButton>
+                <ListItemIcon>
+                    <PeopleIcon />
+                </ListItemIcon>
+                <ListItemText primary="Abonnements" />
+            </ListItemButton>
+        </NavLink>
+
+        <NavLink className="no-underline text-black-trot" to="api">
+            <ListItemButton>
+                <ListItemIcon>
+                    <BarChartIcon />
+                </ListItemIcon>
+                <ListItemText primary="API" />
+            </ListItemButton>
+        </NavLink>
 
     <NavLink className="no-underline text-black-trot" to="ticket">
     <ListItemButton>

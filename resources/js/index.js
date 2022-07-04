@@ -41,6 +41,7 @@ import Account from "./components/account/Account";
 import "./i18n.js";
 import Refunds from "./components/dashboard/Refunds";
 import FidelityHistory from "./components/account/user/FidelityHistory";
+import SubscriptionsAdmin from "./components/dashboard/abonnements/SubscriptionsAdmin";
 
 ReactDOM.render(
     <React.StrictMode>
@@ -85,6 +86,7 @@ ReactDOM.render(
                         <Route path="following" element={<Following />} />
                         <Route path="customers" element={<Customers />} />
                         <Route path="shopAdmin" element={<ShopAdmin />} />
+                        <Route path="subscriptions" element={<SubscriptionsAdmin />} />
                         <Route path="ticket" element={<Ticket />} />
                         <Route path="api" element={<Api />} />
                         <Route path="refunds" element={<Refunds />} />
