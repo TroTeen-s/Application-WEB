@@ -186,10 +186,6 @@ export default function Following() {
              
           ))}
 
-
-
-
-
         </MapContainer>
 
         </Box>

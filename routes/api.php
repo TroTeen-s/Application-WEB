@@ -15,6 +15,7 @@ use App\Http\Controllers\MaintenanceController;
 use App\Http\Controllers\FixingController;
 
 use App\Http\Controllers\ProblemsController;
+use App\Http\Controllers\ScooterHistoryController;
 
 use App\Http\Controllers\MailController;
 
@@ -144,6 +145,11 @@ Route::post('/scooter_probleme/add', [ScooterProblemController::class , 'add_sco
 Route::get('/scooter_probleme', ScooterProblemController::class);
 
 
+
+Route::get('/dashboard/api/scooters/maintenance/list', [ScootersController::class , 'ListMaintenance']);
+Route::get('/dashboard/api/scooters/fixing/list', [ScootersController::class , 'ListFixing']);
+
+
 Route::get('/dashboard/api/scooters/maintenance/newstatus/{id}', [ScootersController::class , 'MaintenanceStatus']);
 Route::get('/dashboard/api/scooters/fixing/newstatus/{id}', [ScootersController::class , 'FixingStatus']);
 Route::get('/dashboard/api/scooters/service/newstatus/{id}', [ScootersController::class , 'ServiceStatus']);
@@ -152,7 +158,7 @@ Route::get('/dashboard/api/scooters/add', [ScootersController::class , 'addScoot
 
 Route::get('/dashboard/api/dashboard/api/scooters/delete/{id}', [ScootersController::class , 'deleteFromID'])->where('id', '[0-9]+');
 
-
+Route::patch('/dashboard/api/dashboard/api/scooters/history/maintenance/{id}',[ScooterHistoryController::class, 'HistoryMaintenance'])->where('id', '[0-9]+');
 
 Route::get('/product-list', [ShopController::class , 'productList']);
 Route::get('/products', [ShopController::class , 'getProductById']);

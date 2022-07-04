@@ -268,7 +268,44 @@ class ScootersController extends Controller
             }
     }
 
+    public function ListMaintenance(Request $request) : JsonResponse
+    {
+        try{
+            
+            $data = Scooters::whereIn('maintenance', [1])->get();
 
+            if (!$data) {
+                return response()->json(array('success' => 'false', 'message' => "Aucune trot trouvé"), 400);
+            }
+
+            return response()->json(array('success' => 'true', 'data' => $data));
+    
+
+        }catch(Exception $e){
+            return $this->fail('erreur', $e->getMessage());
+        }
+            
+
+    }
+
+    public function ListFixing(Request $request) : JsonResponse
+    {
+        try{
+
+            $data = Scooters::whereIn('fixing', [1])->get();
+
+            if (!$data) {
+                return response()->json(array('success' => 'false', 'message' => "Aucune trot trouvé"), 400);
+            }
+
+            return response()->json(array('success' => 'true', 'data' => $data));
+    
+
+        }catch(Exception $e){
+            return $this->fail('erreur', $e->getMessage());
+        }
+
+    }
 
     public function addScoot() : JsonResponse
     {

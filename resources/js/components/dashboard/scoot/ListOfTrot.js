@@ -5,7 +5,6 @@ import { LinearProgress } from '@mui/material';
 import { AuthLoadingContext } from '../../context/AuthContext';
 import DeleteIcon from '@mui/icons-material/Delete';
 import ElectricScooterIcon from '@mui/icons-material/ElectricScooter';
-
 import toast, { Toaster } from 'react-hot-toast';
 
 export default function ListOfTrot() {
@@ -204,6 +203,31 @@ export default function ListOfTrot() {
     } catch (e) {
     }
   }
+
+
+  const HandleListMaintenance = async (event) => {
+
+      let response = await axios.get(`/api/dashboard/api/scooters/maintenance/list`);
+
+      if (response.data.data) {
+        setInfos(response.data.data)
+        Service(event)
+      }
+
+    };
+
+    const HandleListFixing = async (event) => {
+
+      let response = await axios.get(`/api/dashboard/api/scooters/fixing/list`);
+
+      if (response.data.data) {
+        setInfos(response.data.data)
+        Service(event)
+      }
+
+    };
+
+
 
   useEffect(() => {
 
