@@ -43,6 +43,7 @@ Route::get('/sponsors', SponsorController::class);
 Route::get('/weather', [WeatherController::class , 'get_todays_date']);
 Route::get('/codes', SponsorCodeController::class);
 Route::get('/code/{id}', [SponsorCodeController::class , 'get_free_code'])->where('id', '[0-9]+');
+Route::post('/add_code', [SponsorCodeController::class , 'add_code']);
 
 Route::post('/auth/login', [AuthController::class , 'login']);
 
@@ -96,7 +97,7 @@ Route::group(['middleware' => ['auth:sanctum']], function () {
     ## ROUTES SCOOTERS
 
     ## SPONSOR
-    Route::get('/initCode/{id}', [SponsorCodeController::class, 'init_free_code'])->where('id', '[0-9]+');
+    Route::get('/initCode/{id}', [SponsorCodeController::class , 'init_free_code'])->where('id', '[0-9]+');
     Route::get('/codes', SponsorCodeController::class);
     Route::get('/code/{id}', [SponsorCodeController::class , 'get_free_code'])->where('id', '[0-9]+');
 
