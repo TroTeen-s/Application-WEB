@@ -3,6 +3,13 @@ import { DataGrid } from "@mui/x-data-grid";
 import { Chip, FormControl, FormControlLabel, FormLabel, Radio, RadioGroup } from "@mui/material";
 import toast, { Toaster } from "react-hot-toast";
 import { DateTime } from "luxon";
+import Button from "@mui/material/Button";
+import Dialog from "@mui/material/Dialog";
+import DialogTitle from "@mui/material/DialogTitle";
+import DialogContent from "@mui/material/DialogContent";
+import DialogContentText from "@mui/material/DialogContentText";
+import TextField from "@mui/material/TextField";
+import DialogActions from "@mui/material/DialogActions";
 
 const SubscriptionsAdmin = () => {
     const initialValues = {
@@ -12,11 +19,26 @@ const SubscriptionsAdmin = () => {
         price: ""
     };
 
+    const initialValuesDialog = {
+        nameDialog: "",
+        max_tripsDialog: "",
+        priceDialog: ""
+    };
+
+    const [id, setId] = useState("");
+
     const [state, setState] = useState(initialValues);
 
     const [data, setData] = useState([]);
 
+    const [dialogData, setDialogData] = useState(initialValuesDialog);
+
+    const [open, setOpen] = React.useState(false);
+
+
     const { name, frequency, max_trips, price } = state;
+
+    const { nameDialog, max_tripsDialog } = dialogData;
 
     const columns = [
         { field: "id", headerName: "ID", width: 70 },
@@ -36,6 +58,21 @@ const SubscriptionsAdmin = () => {
                         onClick={() => {
                             console.log("alors le " + cellValues.row.active ? 0 : 1);
                             changeActiveStatus(cellValues.row.id, !cellValues.row.active);
+                        }}
+                    />
+                );
+            }
+        },
+        {
+            field: "update", headerName: "modify", flex: 0, renderCell: (cellValues) => {
+                return (
+                    <Chip
+                        label="habibi"
+                        color="success"
+                        onClick={() => {
+                            setId(cellValues.row.id);
+                            console.log("alors le " + cellValues.row.active ? 0 : 1);
+                            handleClickOpen();
                         }}
                     />
                 );
@@ -69,6 +106,14 @@ const SubscriptionsAdmin = () => {
     ];
 
 
+    const handleClickOpen = () => {
+        setOpen(true);
+    };
+
+    const handleClose = () => {
+        setOpen(false);
+    };
+
     const handleChange = (e) => {
         const { name, value } = e.target;
         console.log("nom: " + name + " et valeur: " + value);
@@ -77,6 +122,25 @@ const SubscriptionsAdmin = () => {
 
         } else {
             setState({ ...state, [name]: value });
+        }
+    };
+
+    const handleCloseUpdate = async () => {
+        await updateSubscription(id);
+
+        setOpen(false);
+
+
+    };
+
+    const handleChangeDialog = (e) => {
+        const { name, value } = e.target;
+        console.log("nom: " + name + " et valeur: " + value);
+        if (name === "file") {
+            setDialogData({ ...dialogData, [name]: e.target.files[0] });
+
+        } else {
+            setDialogData({ ...dialogData, [name]: value });
         }
     };
 
@@ -141,6 +205,33 @@ const SubscriptionsAdmin = () => {
 
     };
 
+    const updateSubscription = async (subscriptionId) => {
+
+        const data = {
+            max_trips: max_tripsDialog,
+            name: nameDialog
+        };
+
+        console.log(data);
+
+        try {
+            let response = await axios.patch(`/api/dashboard/subscriptions/${subscriptionId}`, data);
+
+            if (response.data.success) {
+                let message = "Informations de l'abonnement mis à jour avec succès";
+                toast.success(`Abonnement ID : ${subscriptionId}, ${message} !`);
+            } else {
+                let message = "Erreur dans la mise à jour des informations de l'abonnement";
+                toast.error(`Abonnement ID : ${subscriptionId}, ${message} !`);
+            }
+        } catch (e) {
+            let message = "Erreur dans la mise à jour des informations de l'abonnement";
+            toast.error(`Abonnement ID : ${subscriptionId}, ${message} !`);
+        }
+        await retrieveSubscriptions();
+
+    };
+
     useEffect(async () => {
         await retrieveSubscriptions();
     }, []);
@@ -191,6 +282,46 @@ const SubscriptionsAdmin = () => {
                     pageSize={5}
                     rowsPerPageOptions={[5]}
                 />
+            </div>
+
+            <div>
+                <Button variant="outlined" onClick={handleClickOpen}>
+                    Open form dialog
+                </Button>
+                <Dialog open={open} onClose={handleClose}>
+                    <DialogTitle>Subscribe</DialogTitle>
+                    <DialogContent>
+                        <DialogContentText>
+                            Laisser vide si vous ne voulez pas changer.
+                        </DialogContentText>
+                        <TextField
+                            onChange={handleChangeDialog}
+                            autoFocus
+                            name="nameDialog"
+                            margin="dense"
+                            id="name"
+                            label="Nom de l'abonnement"
+                            type="text"
+                            fullWidth
+                            variant="filled"
+                        />
+                        <TextField
+                            name="max_tripsDialog"
+                            onChange={handleChangeDialog}
+                            autoFocus
+                            margin="dense"
+                            min={0}
+                            id="name"
+                            label="Nombre de trajets maximum"
+                            type="number"
+                            variant="filled"
+                        />
+                    </DialogContent>
+                    <DialogActions>
+                        <Button onClick={handleClose}>Annuler</Button>
+                        <Button onClick={handleCloseUpdate}>Mettre à jour</Button>
+                    </DialogActions>
+                </Dialog>
             </div>
         </div>
     );
