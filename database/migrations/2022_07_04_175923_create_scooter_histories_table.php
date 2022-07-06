@@ -19,7 +19,7 @@ return new class extends Migration
             $table->string("model_serie", 50);
             $table->string('history_status')->nullable();
             $table->string('history_problems')->nullable();
-            $table->date("last_revision");
+            $table->date("last_revision")->nullable();
 
             $table->unsignedBigInteger('scooter_id')->nullable();
             $table->foreign('scooter_id')->references('id')->on('scooters')->onDelete('cascade');;

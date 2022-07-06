@@ -150,19 +150,44 @@ Route::get('/dashboard/api/scooters/maintenance/list', [ScootersController::clas
 Route::get('/dashboard/api/scooters/fixing/list', [ScootersController::class , 'ListFixing']);
 
 
-Route::get('/dashboard/api/scooters/maintenance/newstatus/{id}', [ScootersController::class , 'MaintenanceStatus']);
-Route::get('/dashboard/api/scooters/fixing/newstatus/{id}', [ScootersController::class , 'FixingStatus']);
-Route::get('/dashboard/api/scooters/service/newstatus/{id}', [ScootersController::class , 'ServiceStatus']);
+Route::post('/dashboard/api/scooters/maintenance/newstatus', [ScootersController::class , 'MaintenanceStatus'])->where('id', '[0-9]+');
+Route::post('/dashboard/api/scooters/fixing/newstatus', [ScootersController::class , 'FixingStatus'])->where('id', '[0-9]+');;
+Route::post('/dashboard/api/scooters/service/newstatus', [ScootersController::class , 'ServiceStatus'])->where('id', '[0-9]+');;
 
 Route::get('/dashboard/api/scooters/add', [ScootersController::class , 'addScoot']);
 
 Route::get('/dashboard/api/dashboard/api/scooters/delete/{id}', [ScootersController::class , 'deleteFromID'])->where('id', '[0-9]+');
 
-Route::patch('/dashboard/api/dashboard/api/scooters/history/maintenance/{id}',[ScooterHistoryController::class, 'HistoryMaintenance'])->where('id', '[0-9]+');
+// History
+
+Route::post('/dashboard/api/dashboard/api/scooters/history/maintenance',[ScooterHistoryController::class, 'HistoryMaintenance'])->where('id', '[0-9]+');
+Route::post('/dashboard/api/dashboard/api/scooters/history/fixing',[ScooterHistoryController::class, 'HistoryFixing'])->where('id', '[0-9]+');
+Route::post('/dashboard/api/dashboard/api/scooters/history/service',[ScooterHistoryController::class, 'HistoryService'])->where('id', '[0-9]+');
+Route::post('/dashboard/api/dashboard/api/scooters/history/add',[ScooterHistoryController::class, 'HistoryAdd'])->where('id', '[0-9]+');
+Route::post('/dashboard/api/dashboard/api/scooters/history/delete',[ScooterHistoryController::class, 'HistoryDelete'])->where('id', '[0-9]+');
+
+
+Route::get('/dashboard/api/dashboard/api/scooters/history/list',[ScooterHistoryController::class, 'List']);
+
+
+
 
 Route::get('/product-list', [ShopController::class , 'productList']);
 Route::get('/products', [ShopController::class , 'getProductById']);
 Route::get('/product/{productID}', [ShopController::class , 'productInfo'])->where('productID', '[0-9]+');
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 //PACKAGES
 

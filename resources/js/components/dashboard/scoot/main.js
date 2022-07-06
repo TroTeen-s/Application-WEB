@@ -6,6 +6,7 @@ import Paper from '@mui/material/Paper';
 import Link from '@mui/material/Link';
 import ListOfTrot from './ListOfTrot';
 import {TrotListToolbar} from './partials/trots-list-toolbar';
+import {HistoricalListToolBar} from './partials/historical-list-toolbar';
 import {columns} from './partials/trots';
 
 import PerfectScrollbar from 'react-perfect-scrollbar';
@@ -65,75 +66,126 @@ export default function Main() {
         setInfos2] = useState();
     const [infos3,
         setInfos3] = useState();
+    const [status,
+        setStatus] = useState(undefined);
 
-    const [pressing, needToBePressing] = useState({ status: false });
 
+    const [ infosHistory,
+        setInfosHistory] = useState();
 
-    const [param,setParam] = useState();
-    const [paramFixing, setParamFixing ] = useState();
+    const [pressing,
+        needToBePressing] = useState({status: false});
 
-    const [commentary,setCommentary] = useState("")
-    const [commentary2,setCommentary2] = useState("")
-    let [commentaryError, setCommentaryError] = useState({ error: false, helper: '' });
+    const [param,
+        setParam] = useState();
+    const [paramFixing,
+        setParamFixing] = useState();
+
+    const [commentary,
+        setCommentary] = useState("")
+    const [commentary2,
+        setCommentary2] = useState("")
+    let [commentaryError,
+        setCommentaryError] = useState({error: false, helper: ''});
 
     let {loaded} = useContext(AuthLoadingContext)
 
-    const [openModalMaintenance, setOpenMaintenance] = React.useState(false);
+    const [openModalMaintenance,
+        setOpenMaintenance] = React.useState(false);
 
     const handleOpenMaintenanceModal = () => {
-      setOpenMaintenance(true);
+        setOpenMaintenance(true);
     };
 
     const handleCloseMaintenanceModal = () => {
-      setOpenMaintenance(false);
+        setOpenMaintenance(false);
     };
 
-    const [openModalFixing, setOpenFixing] = React.useState(false);
+    const [openModalFixing,
+        setOpenFixing] = React.useState(false);
 
     const handleOpenFixingModal = () => {
-      setOpenFixing(true);
+        setOpenFixing(true);
     };
 
     const handleCloseFixingModal = () => {
-      setOpenFixing(false);
+        setOpenFixing(false);
     };
-
 
     const handleSubmit = event => {
-      event.preventDefault();
-  
-      console.log('form submitted ✅');
+        event.preventDefault();
+
+        console.log('form submitted ✅');
     };
-
-    // if (commentary.trim() === '') {
-    //   setCommentaryError({ error: false, helper: 'Champs vide' });
-    // } else if (commentary.trim().length < 10) {
-    //   setCommentaryError({ error: false, helper: 'Message trop court' });
-    // }
-    // else {
-    //   setCommentaryError({ error: true, helper: '' });
-    // }
-
-
     const style = {
-      position: 'absolute',
-      top: '50%',
-      left: '50%',
-      transform: 'translate(-50%, -50%)',
-      width: 400,
-      bgcolor: 'background.paper',
-      border: '2px solid #000',
-      boxShadow: 24,
-      pt: 2,
-      px: 4,
-      pb: 3,
+        position: 'absolute',
+        top: '50%',
+        left: '50%',
+        transform: 'translate(-50%, -50%)',
+        width: 400,
+        bgcolor: 'background.paper',
+        border: '2px solid #000',
+        boxShadow: 24,
+        pt: 2,
+        px: 4,
+        pb: 3
     };
+
+    const columnsHistory = [
+        {
+            field: 'id',
+            headerName: 'ID',
+            width: 80,
+            headerAlign: 'center',
+            align: 'center'
+        }, {
+            field: 'model_serie',
+            headerName: 'Modele de Serie',
+            align: 'center',
+            width: 330,
+            editable: false,
+            headerAlign: 'center'
+        },
+        {
+            field: 'scooter_id',
+            headerName: 'ID trotinette',
+            align: 'center',
+            width: 150,
+            editable: false,
+            headerAlign: 'center'
+        },
+        {
+            field: 'created_at',
+            headerName: 'Date',
+            align: 'center',
+            headerAlign: 'center',
+            type: 'Time',
+            width: 200,
+            valueGetter: ({ value }) => value && new Date(value),
+        },
+        {
+            field: 'history_status',
+            headerName: 'History status',
+            align: 'center',
+            width: 300,
+            editable: false,
+            headerAlign: 'center'
+        },{
+            field: 'history_problems',
+            headerName: 'History problems',
+            align: 'center',
+            width: 300,
+            editable: false,
+            headerAlign: 'center'
+        },
+    ];
+
 
     const columns = [
         {
             field: 'id',
             headerName: 'ID',
-            width: 80,
+            width: 50,
             headerAlign: 'center',
             align: 'center'
         }, {
@@ -147,25 +199,36 @@ export default function Main() {
             field: 'mileage',
             headerName: 'Kilometrage',
             align: 'center',
-            width: 200,
+            width: 100,
+            editable: false,
+            headerAlign: 'center'
+        }, {
+            field: 'commentary',
+            headerName: 'Commentaire',
+            align: 'center',
+            width: 410,
             editable: false,
             headerAlign: 'center'
         }, {
             field: 'maintenance',
+            headerName: 'Maintenance',
+            headerClassName: 'hot',
             type: 'boolean',
-            width: 200
+            width: 130
         }, {
             field: 'MaintenanceLink',
-            headerName: 'Send to maintenance',
+            headerName: '<',
+            headerClassName: 'hot',
             headerAlign: 'center',
             align: 'center',
-            width: 200,
+            width: 150,
             editable: false,
             renderCell: (params) => (
 
                 <strong>
                     <Button
-                      disabled={params.row?.maintenance == 1 && true}
+                        disabled={params.row
+                        ?.maintenance == 1 && true}
                         variant="outlined"
                         color="primary"
                         size="small"
@@ -173,34 +236,40 @@ export default function Main() {
                         marginLeft: 16
                     }}
                         onClick={() => {
-                          setParam(params.row.id);
-                          handleOpenMaintenanceModal();                         
+                        setParam(params.row.id);
+                        handleOpenMaintenanceModal();
                     }}>
-                       {params.row?.maintenance === 1 ? 'ALREADY' : 'Envoyer'}
+                        {params.row
+                            ?.maintenance === 1
+                                ? 'ALREADY'
+                                : 'Envoyer'}
                     </Button>
                 </strong >
             )
 
         }, {
             field: 'fixing',
-            headerName: 'fixing',
+            headerName: 'Réparation',
+            headerClassName: 'cold',
             type: 'boolean',
-            width: 120,
+            width: 110,
             headerAlign: 'center',
             align: 'center'
         }, {
             field: 'FixingLink',
-            headerName: 'Send to fixing',
+            headerName: '<',
+            headerClassName: 'cold',
             align: 'center',
             headerAlign: 'center',
             align: 'center',
-            width: 200,
+            width: 150,
             editable: false,
             renderCell: (params) => (
 
                 <strong>
                     <Button
-                        disabled={params.row?.fixing == 1 && true}
+                        disabled={params.row
+                        ?.fixing == 1 && true}
                         variant="outlined"
                         color="primary"
                         size="small"
@@ -208,38 +277,36 @@ export default function Main() {
                         marginLeft: 16
                     }}
                         onClick={() => {
-                          setParamFixing(params.row.id);
-                          handleOpenFixingModal();
+                        setParamFixing(params.row.id);
+                        handleOpenFixingModal();
                     }}>
-                        {params.row?.fixing === 1 ? 'ALREADY' : 'Envoyer'}
+                        {params.row
+                            ?.fixing === 1
+                                ? 'ALREADY'
+                                : 'Envoyer'}
                     </Button>
                 </strong >
             )
 
-        }, 
-        {
+        }, {
             field: 'none',
             type: 'actions',
             headerName: 'Service',
             width: 100,
             headerAlign: 'center',
-            align: 'center',   
-            
+            align: 'center',
+
             renderCell: (params) => (
-              <strong>
-                <Button>
-                  < GridActionsCellItem icon = { < ElectricScooterIcon />
-                }
-                onClick = {
-                    () => {
-                      params.row?.maintenance === 0 && params.row?.fixing === 0 ? null : HandleService(params.row.id)
-                    }
-                } />
-                 </Button>
-              </strong >
+                <strong>
+                    <Button>
+                        <GridActionsCellItem
+                            icon={< ElectricScooterIcon />}
+                            onClick=
+                            { () => { params.row?.maintenance === 0 && params.row?.fixing === 0 ? null : HandleService(params.row.id) } }/>
+                    </Button>
+                </strong >
             )
-        }, 
-        {
+        }, {
             field: 'actions',
             type: 'actions',
             headerAlign: 'center',
@@ -257,12 +324,18 @@ export default function Main() {
 
     const HandleFixing = async(event) => {
 
-        let response = await axios.get(`/api/dashboard/api/scooters/fixing/newstatus/${event}`);
-
-        if (response.data.data) {
-            setInfos(response.data.data)
-            SendToFix(event)
-        }
+        await axios
+            .post(`/api/dashboard/api/scooters/fixing/newstatus`, {
+                id: "" + event + "",
+                commentary: commentary2
+        })
+            .then(response => {
+                console.log(response.data.data)
+                setInfos(response.data.data)
+                SendToFix(event)
+                setStatus({type: 'success'});
+            })
+            .catch(error => console.log(error));
 
         let response2 = await axios.get(`/api/dashboard/api/scooters/maintenance/list`);
 
@@ -276,43 +349,51 @@ export default function Main() {
 
         if (response3.data.data) {
             listLengthTrotFixing = response3.data.data.length;
-            setInfos3(response3.data.data)
+
         }
 
+
         handleCloseFixingModal()
+
+        await axios
+        .post(`/api/dashboard/api/dashboard/api/scooters/history/fixing`, {
+        id: "" + event + "",
+    })
+        .then(response => {
+
+            console.log(response.data.data)
+            setInfosHistory(response.data.data)
+            console.log("test")
+            setStatus({type: 'success'});
+
+        })
+        .catch(error => console.log(error));
 
     };
 
     const HandleMaintenance = async(event) => {
 
-    // const formData = new FormData();
-    // formData.append('commentary',commentary);
+        await axios
+            .post(`/api/dashboard/api/scooters/maintenance/newstatus`, {
+            id: "" + event + "",
+            commentary: commentary
+        })
+            .then(response => {
 
-    //       if (commentary.trim() === '') {
-    //       setCommentaryError({ error: false, helper: 'Champs vide' });
-    //     } else if (commentary.trim().length < 10) {
-    //       setCommentaryError({ error: false, helper: 'Message trop court' });
-    //     }
-    //     else {
-    //       setCommentaryError({ error: true, helper: '' });
-    //     }
+                console.log(response.data.data)
+                setInfos(response.data.data)
+                SendToMaintenance(event)
+                setStatus({type: 'success'});
 
-    //     needToBePressing({status : true});
-
-      // if (commentaryError?.error === true) {
-
-        let response = await axios.get(`/api/dashboard/api/scooters/maintenance/newstatus/${event}`);
-
-        if (response.data.data) {
-            setInfos(response.data.data)
-            SendToMaintenance(event)
-        }
+            })
+            .catch(error => console.log(error));
 
         let response2 = await axios.get(`/api/dashboard/api/scooters/maintenance/list`);
 
         if (response2.data.data) {
             listLengthTrotMaintenance = response2.data.data.length;
             setInfos2(response2.data.data)
+            console.log(response2.data.data)
 
         }
 
@@ -325,9 +406,89 @@ export default function Main() {
 
         handleCloseMaintenanceModal()
 
+
+        await axios
+            .post(`/api/dashboard/api/dashboard/api/scooters/history/maintenance`, {
+            id: "" + event + "",
+        })
+            .then(response => {
+
+                console.log(response.data.data)
+                setInfosHistory(response.data.data)
+                console.log("test")
+                setStatus({type: 'success'});
+
+            })
+            .catch(error => console.log(error));
+
+    };
+
+    const HandleService = async(event) => {
+
+        await axios.post(`/api/dashboard/api/scooters/service/newstatus/`, {
+            id: "" + event + "",
+            commentary: commentary
+        })
+        .then(response => {
+
+            console.log(response.data.data)
+            setInfos(response.data.data)
+            Service(event)
+            setStatus({type: 'success'});
+
+        })
+        .catch(error => console.log(error));
+
+        let response2 = await axios.get(`/api/dashboard/api/scooters/maintenance/list`);
+
+        if (response2.data.data) {
+            listLengthTrotMaintenance = response2.data.data.length;
+            setInfos2(response2.data.data)
+
+        }
+
+        let response3 = await axios.get(`/api/dashboard/api/scooters/fixing/list`);
+
+        if (response3.data.data) {
+            listLengthTrotFixing = response3.data.data.length;
+            setInfos3(response3.data.data)
+        }
+
+        await axios
+        .post(`/api/dashboard/api/dashboard/api/scooters/history/service`, {
+        id: "" + event + "",
+    })
+        .then(response => {
+
+            console.log(response.data.data)
+            setInfosHistory(response.data.data)
+            console.log("test")
+            setStatus({type: 'success'});
+
+        })
+        .catch(error => console.log(error));
+
     };
 
     const DeleteScoot = async(event) => {
+
+        await axios
+        .post(`/api/dashboard/api/dashboard/api/scooters/history/delete`, {
+        id: "" + event + "",
+    })
+        .then(response => {
+
+            console.log(response.data.data)
+            setInfosHistory(response.data.data)
+            console.log("test")
+            setStatus({type: 'success'});
+
+        })
+        .catch(error => console.log(error));
+
+
+
+
 
         let response = await axios.get(`/api/dashboard/api/dashboard/api/scooters/delete/${event}`);
 
@@ -346,33 +507,43 @@ export default function Main() {
             notify();
         }
 
+        await axios
+        .post(`/api/dashboard/api/dashboard/api/scooters/history/add`)
+        .then(response => {
+
+            console.log(response.data.data)
+            setInfosHistory(response.data.data)
+            console.log("test")
+            setStatus({type: 'success'});
+
+        })
+        .catch(error => console.log(error));
+
+
+    
     };
 
-    const HandleService = async(event) => {
+    const RetrieveInfosHistory = async() => {
+        try {
 
-        let response = await axios.get(`/api/dashboard/api/scooters/service/newstatus/${event}`);
+            await axios.get('/api/dashboard/api/dashboard/api/scooters/history/list', {
+                headers: {
+                    'Accept': 'application/json'
+                }
+            }).then(response => {
 
-        if (response.data.data) {
-            setInfos(response.data.data)
-            Service(event)
+                setInfosHistory(response.data.data)
+                setStatus({type: 'success'});
+    
+            })
+            .catch(error => console.log(error));
+    
+
+        }catch(error) { 
+            console.log(error) 
         }
 
-        let response2 = await axios.get(`/api/dashboard/api/scooters/maintenance/list`);
-
-        if (response2.data.data) {
-            listLengthTrotMaintenance = response2.data.data.length;
-            setInfos2(response2.data.data)
-
-        }
-
-        let response3 = await axios.get(`/api/dashboard/api/scooters/fixing/list`);
-
-        if (response3.data.data) {
-            listLengthTrotFixing = response3.data.data.length;
-            setInfos3(response3.data.data)
-        }
-
-    };
+    }
 
     const retrieveInfos = async() => {
         try {
@@ -409,6 +580,7 @@ export default function Main() {
 
         if (loaded) {
             retrieveInfos()
+            RetrieveInfosHistory()
         }
     }, [loaded])
 
@@ -423,67 +595,80 @@ export default function Main() {
             height: '200vh'
         }}>
 
-           <Modal
-           aria-labelledby="spring-modal-title"
-           aria-describedby="spring-modal-description"
-           open={openModalMaintenance}
-           onClose={handleCloseMaintenanceModal}
-           closeAfterTransition
-           BackdropComponent={Backdrop}
-           BackdropProps={{
-             timeout: 500,
-           }}
-          >
-            <Box sx={{ ...style, width: 400 }}>
-              <form action="" className="mx-auto max-w-xl space-y-4" onSubmit={handleSubmit}>
-                <h2 id="child-modal-title"> { "ID : " + param + " - Commentaires" } </h2>
-                <textarea  type="text" id="commentary"
-                        className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                        placeholder="This one got a broken wheel">
-                </textarea>
+            <Modal
+                aria-labelledby="spring-modal-title"
+                aria-describedby="spring-modal-description"
+                open={openModalMaintenance}
+                onClose={handleCloseMaintenanceModal}
+                closeAfterTransition
+                BackdropComponent={Backdrop}
+                BackdropProps={{
+                timeout: 500
+            }}>
+                <Box
+                    sx={{
+                    ...style,
+                    width: 400
+                }}>
+                    <form
+                        action="POST"
+                        className="mx-auto max-w-xl space-y-4"
+                        onSubmit={handleSubmit}>
+                        <h2 id="child-modal-title">
+                            {"ID : " + param + " - Commentaires"}
+                        </h2>
+                        <textarea
+                            onChange={(e) => setCommentary(e.target.value)}
+                            type="text"
+                            id="commentary"
+                            className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                            placeholder="This one got a broken wheel"></textarea>
 
-                {/* {pressing?.status === true && commentaryError?.error === false && (
-                    <div
-                        className="p-4 mb-4 text-sm text-yellow-700 bg-yellow-100 rounded-lg dark:bg-yellow-200 dark:text-yellow-800"
-                        role="alert">
-                        <span className="font-medium">Attention ! </span> {commentaryError.helper}
-                    </div>
-                )} */}
+                        <button
+                            onClick={() => {
+                            HandleMaintenance(param)
+                        }}
+                            className="py-2 px-6 rounded bg-orange-300 text-base text-white font-semibold uppercase">ENVOYER EN MAINTENANCE</button>
+                    </form>
+                </Box>
+            </Modal>
 
-                <button onClick={() => {
-                        HandleMaintenance(param)                       
-                    }}
-                  className="py-2 px-6 rounded bg-orange-300 text-base text-white font-semibold uppercase">ENVOYER EN MAINTENANCE</button>
-              </form>
-            </Box>
-          </Modal>
+            <Modal
+                aria-labelledby="spring-modal-title"
+                aria-describedby="spring-modal-description"
+                open={openModalFixing}
+                onClose={handleCloseFixingModal}
+                closeAfterTransition
+                BackdropComponent={Backdrop}
+                BackdropProps={{
+                timeout: 500
+            }}>
+                <Box
+                    sx={{
+                    ...style,
+                    width: 400
+                }}>
+                    <form
+                        action="POST"
+                        className="mx-auto max-w-xl space-y-4"
+                        onSubmit={handleSubmit}>
+                        <h2 id="child-modal-title">{"ID : " + paramFixing + " - Commentaires"}</h2>
+                        <textarea
+                            onChange={(e) => setCommentary2(e.target.value)}
+                            type="text"
+                            id="commentary"
+                            className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full  p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                            placeholder="This one got a broken wheel"></textarea>
 
-          <Modal
-           aria-labelledby="spring-modal-title"
-           aria-describedby="spring-modal-description"
-           open={openModalFixing}
-           onClose={handleCloseFixingModal}
-           closeAfterTransition
-           BackdropComponent={Backdrop}
-           BackdropProps={{
-             timeout: 500,
-           }}
-          >
-            <Box sx={{ ...style, width: 400 }}>
-              <form action="" className="mx-auto max-w-xl space-y-4" onSubmit={handleSubmit}>
-                <h2 id="child-modal-title">{ "ID : " + paramFixing + " - Commentaires" }</h2>
-                <textarea  onChange={(e) => setCommentary(e.target.value)} type="text" id="commentary"
-                        className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full  p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                        placeholder="This one got a broken wheel">
-                </textarea>
-                  
-                <button onClick={() => {
-                        HandleFixing(paramFixing)                       
-                    }}
-                  className="py-2 px-6 rounded bg-orange-300 text-base text-white font-semibold uppercase">ENVOYER EN REPARATION</button>
-              </form>
-            </Box>
-          </Modal>
+                        <button
+                            type="button"
+                            onClick={() => {
+                            HandleFixing(paramFixing)
+                        }}
+                            className="py-2 px-6 rounded bg-orange-300 text-base text-white font-semibold uppercase">ENVOYER EN REPARATION</button>
+                    </form>
+                </Box>
+            </Modal>
 
             <Toolbar/>
             <Container
@@ -492,7 +677,35 @@ export default function Main() {
                 sx={{
                 mb: 1
             }}>
-                <TrotListToolbar/>
+                 <Box>
+                    <Box
+                    sx={{
+                        alignItems: 'center',
+                        display: 'flex',
+                        justifyContent: 'space-between',
+                        flexWrap: 'wrap',
+                        m: -1
+                    }}
+                    >
+                    <Typography
+                        sx={{ m: 1 }}
+                        variant="h4"
+                    >
+                        Trotinettes
+                    </Typography>
+                    <Box sx={{ m: 1 }}>
+                        <Button
+                        className="bg-color-300"
+                        variant="contained"
+                        onClick={() => {
+                            AddScoot();
+                        }}
+                        >
+                        Ajouter des trotinettes
+                        </Button>
+                    </Box>
+                    </Box>
+                </Box>
 
                 <Grid className="mt-2" container spacing={3}>
                     <Grid item xl={4} lg={4} sm={4} xs={4}>
@@ -599,13 +812,21 @@ export default function Main() {
                     <Grid item xl={12} lg={12} sm={12} xs={12}>
 
                         <Box sx={{
-                            mt: 3
+                            mt: 3,
+                            '& .cold': {
+                                backgroundColor: '#D6E0FC',
+                                // color: '#1a3e72',
+                              },
+                              '& .hot': {
+                                backgroundColor: '#FFF3F3',
+                                // color: '#000000',
+                              },
                         }}>
 
                             <Card>
                                 <div
                                     style={{
-                                    height: 400,
+                                    height: 450,
                                     width: '100%',
                                     paddingBottom: 10
                                 }}>
@@ -618,36 +839,72 @@ export default function Main() {
                                     }}
                                         rows={infos}
                                         columns={columns}
-                                        pageSize={5}
-                                        rowsPerPageOptions={[5]}
+                                        pageSize={6}
+                                        rowsPerPageOptions={[6]}
                                         disableSelectionOnClick
-                                        loading={!infos}/>
+                                        loading={!infos}
+                                        getCellClassName={(params) => {
+                                            if (params.field === 'maintenance' || params.field == 'MaintenanceLink') {
+                                                return 'hot';
+                                            }
+                                            if (params.field === 'fixing' || params.field == 'FixingLink') {
+                                                return 'cold';
+                                            }
+                                          }}
+                                          />
 
                                 </div>
                             </Card>
                         </Box>
 
-                    </Grid>
                 </Grid>
 
-                <Box
-                    sx={{
-                    pt: 4,
-                    alignItems: 'center',
-                    display: 'flex',
-                    justifyContent: 'space-between',
-                    flexWrap: 'wrap',
-                    m: -1
-                }}>
-                    <Typography
-                        sx={{
-                        m: 1
-                    }}
-                        variant="h4">
-                        Historique
-                    </Typography>
+                <Grid item xl={4} lg={4} sm={4} xs={4}>
+                        
+                    <HistoricalListToolBar sx={{
+                            mt: 3
+                        }} />
 
-                </Box>
+                </Grid>
+
+                <Grid item xl={12} lg={12} sm={12} xs={12}>
+
+                    <Box sx={{
+                            mt: 3
+                        }}>
+
+                        <Card>
+                                    <div
+                                        style={{
+                                        height: 800,
+                                        width: '100%',
+                                        paddingBottom: 10
+                                    }}>
+
+                                        <Toaster/>
+
+                                        <DataGrid
+                                            components={{
+                                            LoadingOverlay: LinearProgress
+                                        }}
+                                            initialState={{
+                                                sorting: {
+                                                sortModel: [{ field: 'id', sort: 'desc' }],
+                                                },
+                                            }}
+                                            rows={infosHistory}
+                                            columns={columnsHistory}
+                                            pageSize={10}
+                                            rowsPerPageOptions={[10]}
+                                            disableSelectionOnClick
+                                            loading={!infosHistory}/>
+
+                                    </div>
+                                </Card>
+
+                    </Box>
+                </Grid>
+                </Grid>
 
             </Container>
         </Box>

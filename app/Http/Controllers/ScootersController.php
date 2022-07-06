@@ -165,10 +165,10 @@ class ScootersController extends Controller
     public function MaintenanceStatus(Request $request) : JsonResponse
     {
         try{
-    
+
             $MaintenanceList = MaintenanceCenter::all();
 
-            $data = Scooters::where('id',$request["id"]);
+            $data = Scooters::where('id',$request->input('id'));
                     
                 $array = json_decode($MaintenanceList, true);
                 $one_item = $array[rand(0, count($array) - 1)];
@@ -177,7 +177,8 @@ class ScootersController extends Controller
                     'fixing' => 0,
                     'maintenance' => 1,
                     'maintenance_center_id' => $one_item["id"],
-                    'fixing_center_id' => null
+                    'fixing_center_id' => null,
+                    'commentary'=>$request->input('commentary')
                     ]);
     
             if (!$data) {
@@ -196,12 +197,11 @@ class ScootersController extends Controller
     public function FixingStatus(Request $request) : JsonResponse
     {
 
-        
         try{
 
         $FixingList = FixingCenter::all();
 
-        $data = Scooters::where('id',$request["id"]);
+        $data = Scooters::where('id',$request->input('id'));
                 
             $array = json_decode($FixingList, true);
             $one_item = $array[rand(0, count($array) - 1)];
@@ -210,7 +210,8 @@ class ScootersController extends Controller
                 'fixing' => 1,
                 'maintenance' => 0,
                 'fixing_center_id' => $one_item["id"],
-                'maintenance_center_id' => null
+                'maintenance_center_id' => null,
+                'commentary'=>$request->input('commentary')
                 ]);
 
         if (!$data) {
@@ -224,6 +225,7 @@ class ScootersController extends Controller
             }catch(Exception $e){
                 return $this->fail('erreur', $e->getMessage());
             }
+
     }
 
     public function ServiceStatus(Request $request) : JsonResponse
@@ -250,7 +252,8 @@ class ScootersController extends Controller
                 'maintenance_center_id' => null,
                 'mileage' => 0,
                 'last_position_lat' => $cLong,
-                'last_position_long' => $cLat
+                'last_position_long' => $cLat,
+                'commentary'=> null
             ]);
             }
 

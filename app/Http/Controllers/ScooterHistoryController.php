@@ -7,31 +7,197 @@ use App\Http\Requests\StoreScooterHistoryRequest;
 use App\Http\Requests\UpdateScooterHistoryRequest;
 use App\Models\Scooters;
 use Illuminate\Http\Request;
+use Exception;
+use Illuminate\Support\Str;
+use App\Traits\ApiResponse;
+use Illuminate\Http\JsonResponse;
+use Illuminate\Support\Facades\DB;
 
 class ScooterHistoryController extends Controller
 {
+
+    use ApiResponse;
+
     /**
-     * Display a listing of the resource.
+     * Handle the incoming request.
      *
+     * @param  \Illuminate\Http\Request
      * @return \Illuminate\Http\Response
      */
-    public function index()
-    {
-        //
-    }
 
-    public function HistoryMaintenance(Request $request)
+    public function HistoryMaintenance(Request $request) : JsonResponse
     {
+        
+        try{
 
-        $data = Scooters::where('id',$request["id"]);
+        $scooter = Scooters::where('id',$request->input('id'))->get();
+
+        $location = json_decode($scooter);
+        $model_serie = $location[0]->model_serie;
 
         $dataUpdate = new ScooterHistory([
-            'scooter_id' => $request["id"],
-            'model_serie' => $data->model_serie,
-            'history_status' => 'Envoie en maintenance'
-    
+            'scooter_id' => $request->input('id'),
+            'model_serie' => $model_serie,
+            'history_status' => 'Envoyé en maintenance'
         ]);
+        $dataUpdate->save();
+
+        if (!$dataUpdate) {
+            return response()->json(array('success' => 'false', 'message' => "Erreur pour l'historique de maintenance'"), 400);
+        }
+
+        $dateFetch = ScooterHistory::all();
+
+        return response()->json(array('success' => 'true', 'data' =>  $dateFetch));
+          
+        }catch(Exception $e){
+            return $this->fail('erreur', $e->getMessage());
+        }
     }
+
+    public function HistoryFixing(Request $request) : JsonResponse
+    {
+        
+        try{
+
+        $scooter = Scooters::where('id',$request->input('id'))->get();
+
+        $location = json_decode($scooter);
+        $model_serie = $location[0]->model_serie;
+
+        $dataUpdate = new ScooterHistory([
+            'scooter_id' => $request->input('id'),
+            'model_serie' => $model_serie,
+            'history_status' => 'Envoyé en réparation'
+        ]);
+        $dataUpdate->save();
+
+        if (!$dataUpdate) {
+            return response()->json(array('success' => 'false', 'message' => "Erreur pour l'historique de réparation'"), 400);
+        }
+
+        $dateFetch = ScooterHistory::all();
+
+        return response()->json(array('success' => 'true', 'data' =>  $dateFetch));
+          
+        }catch(Exception $e){
+            return $this->fail('erreur', $e->getMessage());
+        }
+    }
+
+
+    public function HistoryService(Request $request) : JsonResponse
+    {
+        
+        try{
+
+        $scooter = Scooters::where('id',$request->input('id'))->get();
+
+        $location = json_decode($scooter);
+        $model_serie = $location[0]->model_serie;
+
+        $dataUpdate = new ScooterHistory([
+            'scooter_id' => $request->input('id'),
+            'model_serie' => $model_serie,
+            'history_status' => 'Remis en Service'
+        ]);
+        $dataUpdate->save();
+
+        if (!$dataUpdate) {
+            return response()->json(array('success' => 'false', 'message' => "Erreur pour l'historique de réparation'"), 400);
+        }
+
+        $dateFetch = ScooterHistory::all();
+
+        return response()->json(array('success' => 'true', 'data' =>  $dateFetch));
+          
+        }catch(Exception $e){
+            return $this->fail('erreur', $e->getMessage());
+        }
+    }
+
+    public function HistoryAdd(Request $request) : JsonResponse
+    {
+        
+        try{
+
+        $id = DB::table('scooters')->orderBy('id', 'DESC')->first();
+
+        $data= json_decode( json_encode($id), true);
+
+        $scooter = Scooters::where('id',$data)->get();
+
+        $location = json_decode($scooter);
+        $id_serie = $location[0]->id;
+        $model_serie = $location[0]->model_serie;
+
+
+        $dataUpdate = new ScooterHistory([
+            'model_serie' => $model_serie,
+            'history_status' => 'Trotinette ajouté',
+            'scooter_id' => $id_serie
+        ]);
+        $dataUpdate->save();
+
+        if (!$dataUpdate) {
+            return response()->json(array('success' => 'false', 'message' => "Erreur pour l'historique de réparation'"), 400);
+        }
+
+        $dateFetch = ScooterHistory::all();
+
+        return response()->json(array('success' => 'true', 'data' =>  $dateFetch));
+          
+        }catch(Exception $e){
+            return $this->fail('erreur', $e->getMessage());
+        }
+    }
+
+    public function HistoryDelete(Request $request) : JsonResponse
+    {
+        
+        try{
+
+            $scooter = Scooters::where('id',$request->input('id'))->get();
+
+            $location = json_decode($scooter);
+            $model_serie = $location[0]->model_serie;
+    
+            $dataUpdate = new ScooterHistory([
+                'scooter_id' => $request->input('id'),
+                'model_serie' => $model_serie,
+                'history_status' => "Trotinette " .$request->input('id') . " supprimé"
+            ]);
+            $dataUpdate->save();
+    
+            if (!$dataUpdate) {
+                return response()->json(array('success' => 'false', 'message' => "Erreur pour l'historique de réparation'"), 400);
+            }
+    
+            $dateFetch = ScooterHistory::all();
+    
+            return response()->json(array('success' => 'true', 'data' =>  $dateFetch));
+              
+            }catch(Exception $e){
+                return $this->fail('erreur', $e->getMessage());
+            }
+    }
+
+    public function List()
+    {
+        
+        try{
+
+        $dateFetch = ScooterHistory::all();
+
+        return response()->json(array('success' => 'true', 'data' =>  $dateFetch));
+          
+        }catch(Exception $e){
+            return $this->fail('erreur', $e->getMessage());
+        }
+    }
+
+
+
 
     /**
      * Show the form for creating a new resource.

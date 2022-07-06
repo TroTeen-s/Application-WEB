@@ -24,6 +24,7 @@ return new class extends Migration
             $table->decimal("last_position_lat",15, 10);
             $table->boolean("maintenance");
             $table->boolean("fixing");
+            $table->string("commentary",200)->nullable();
         });
 
         
