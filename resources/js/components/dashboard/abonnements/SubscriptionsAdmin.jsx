@@ -10,6 +10,7 @@ import DialogContent from "@mui/material/DialogContent";
 import DialogContentText from "@mui/material/DialogContentText";
 import TextField from "@mui/material/TextField";
 import DialogActions from "@mui/material/DialogActions";
+import { Typography } from "@mui/material";
 
 const SubscriptionsAdmin = () => {
     const initialValues = {
@@ -240,6 +241,12 @@ const SubscriptionsAdmin = () => {
     return (
         <div className="col-sm-8 mr-2 ml-1 offset-sm-1">
             <Toaster />
+            <Typography
+                        sx={{ mt: 4 }}
+                        variant="h4"
+                    >
+                        Abonnements
+                    </Typography>
             <div className="">
                 <br />
                 <FormControl>
@@ -268,7 +275,7 @@ const SubscriptionsAdmin = () => {
                        placeholder="Nombre de trajet" min={0} /> <br />
                 <button onClick={addsubscription}
                         className="bg-orange-300 text-gray-800 font-semibold py-2 px-4 rounded shadow"> Ajouter un
-                    produit
+                    abonnement
                 </button>
 
             </div>

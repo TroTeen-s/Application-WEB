@@ -38,8 +38,6 @@ Route::post('/auth/update_password', [AuthController::class , 'update_password']
 
 Route::post('/auth/delete', [AuthController::class , 'delete']);
 
-
-Route::get('/sponsors', SponsorController::class);
 Route::get('/weather', [WeatherController::class , 'get_todays_date']);
 Route::get('/codes', SponsorCodeController::class);
 Route::get('/code/{id}', [SponsorCodeController::class , 'get_free_code'])->where('id', '[0-9]+');
@@ -101,7 +99,6 @@ Route::group(['middleware' => ['auth:sanctum']], function () {
     Route::get('/codes', SponsorCodeController::class);
     Route::get('/code/{id}', [SponsorCodeController::class , 'get_free_code'])->where('id', '[0-9]+');
 
-
     ## ROUTES SHOP
     Route::get('/shop/buy-cart', [ShopController::class , 'buyCart']);
     Route::get('/shop/test', [SubscriptionController::class , 'test']);
@@ -112,6 +109,7 @@ Route::group(['middleware' => ['auth:sanctum']], function () {
 
 });
 
+Route::get('/sponsors', SponsorController::class);
 
 Route::get('/dashboard/scooters/list', ScootersController::class);
 Route::post('/scooter/create', [ScootersController::class, 'create']);

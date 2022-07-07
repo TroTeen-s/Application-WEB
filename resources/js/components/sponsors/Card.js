@@ -99,10 +99,10 @@ const Card = ({ id, brand, description, end }) => {
             <div aria-hidden="true"
                 className="absolute top-0 w-full h-full rounded-2xl bg-white shadow-xl transition duration-500 group-hover:scale-105 lg:group-hover:scale-110"></div>
             <div className="relative p-6 space-y-6">
-                <h3 className="text-3xl text-gray-700 font-semibold text-center">{brand}</h3>
+                <h3 className="text-2xl text-gray-700 font-semibold text-center">{brand}</h3>
 
 
-                <div role="list" className="w-max space-y-4 pb-6 m-auto text-gray-600">
+                <div role="list" className="text-sm w-max space-y-3 pb-6 m-auto text-gray-600">
                     <p>{description}</p>
                 </div>
                 <div onClick={getCode}

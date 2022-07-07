@@ -32,25 +32,6 @@ export const mainListItems = (
       </ListItemButton>
     </NavLink>
 
-<<<<<<< HEAD
-    <NavLink className="no-underline text-black-trot" to="customers">
-      <ListItemButton>
-        <ListItemIcon>
-          <PeopleIcon />
-        </ListItemIcon>
-        <ListItemText primary="Customers" />
-      </ListItemButton>
-    </NavLink>
-
-    <NavLink className="no-underline text-black-trot" to="api">
-      <ListItemButton>
-        <ListItemIcon>
-          <BarChartIcon />
-        </ListItemIcon>
-        <ListItemText primary="API" />
-      </ListItemButton>
-    </NavLink>
-=======
         <NavLink className="no-underline text-black-trot" to="customers">
             <ListItemButton>
                 <ListItemIcon>
@@ -77,7 +58,6 @@ export const mainListItems = (
                 <ListItemText primary="API" />
             </ListItemButton>
         </NavLink>
->>>>>>> origin
 
     <NavLink className="no-underline text-black-trot" to="ticket">
       <ListItemButton>

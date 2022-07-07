@@ -48,10 +48,10 @@ const Sponsors = () => {
                     Pour remercier les utilisateurs d'EasyScooter nous offrons des codes de fidélité.
                 </h3>
             </div>
-  
-            <div className="mt-20 container bg-white-background">
-  
-            <div className="mt-12 grid grid-cols-3 items-center gap-6 md:grid-cols-2 lg:flex lg:space-x-8">
+
+            <div className="mt-20 mx-1 bg-white-background">
+
+            <div className="mt-12 grid grid-cols-4 items-center gap-2 md:grid-cols-4 lg:flex lg:space-x-8">
                         {infos.map(({ id, brand, description, end }) => (
                             <Card
                                 id={id}
@@ -76,9 +76,9 @@ const Sponsors = () => {
                     Pour remercier les utilisateurs d'EasyScooter nous offrons des codes de fidélité.
                 </h3>
             </div>
-  
+
             <div className="mt-20 container bg-white-background">
-  
+
             <div className='h-screen flex items-center justify-center'>
                 <h2> Chargement ... </h2>
                 <div className='ml-2 h-4 w-4 rounded-full border-2 border-black bg-white'></div>
@@ -88,7 +88,7 @@ const Sponsors = () => {
             </div>
         </section>
 
-        
+
         );
     }
 }

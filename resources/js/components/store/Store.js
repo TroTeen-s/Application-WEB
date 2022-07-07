@@ -1,11 +1,46 @@
-import React from "react";
 import {useTranslation} from 'react-i18next';
-
+import React, { useContext, useEffect, useState } from 'react';
 
 function Store() {
 
     const {t, i18n} = useTranslation();
 
+    const [infos, setInfos] = useState();
+
+    const Bis = [{
+        "id": 1,
+        "id_stripe": "price_1LIq2OJJwOhdLy1NAMxTyNZT",
+        "active": 1,
+        "frequency": "monthly",
+        "created_at": "2022-07-07T08:26:17.000000Z",
+        "updated_at": "2022-07-07T08:26:17.000000Z",
+        "name": "basique",
+        "price": 19.99,
+        "max_trips": 8,
+        "is_subscription": 1
+    }, {
+        "id": 2,
+        "id_stripe": "price_1LIq2PJJwOhdLy1NcQ9bX7va",
+        "active": 1,
+        "frequency": "monthly",
+        "created_at": "2022-07-07T08:26:17.000000Z",
+        "updated_at": "2022-07-07T08:26:17.000000Z",
+        "name": "deluxe",
+        "price": 44.99,
+        "max_trips": 25,
+        "is_subscription": 1
+    }, {
+        "id": 3,
+        "id_stripe": "price_1LIq2PJJwOhdLy1NWnoQIO2k",
+        "active": 1,
+        "frequency": "monthly",
+        "created_at": "2022-07-07T08:26:17.000000Z",
+        "updated_at": "2022-07-07T08:26:17.000000Z",
+        "name": "premium",
+        "price": 79.99,
+        "max_trips": 50,
+        "is_subscription": 1
+    }]
 
     const packages = [
         {
@@ -31,6 +66,26 @@ function Store() {
         }
     ]
 
+    const retrieveInfos = async () => {
+        try {
+          let response = await axios.get('/api/packages', {
+            headers: {
+              'Accept': 'application/json'
+            }
+          })
+
+          if (response.data.data) {
+            console.log("test")
+            console.log(response.data.data)
+            setInfos(response.data.data)
+          }
+        } catch (e) {
+          console.log(e)
+        }
+      }
+
+
+
     const handleClick = async (name) => {
         try {
             let response = await axios.post('/api/checkout-sub', {name});
@@ -51,6 +106,11 @@ function Store() {
                 }
             }
         }
+
+        useEffect(() => {
+            retrieveInfos();
+        }, [])
+
         return (
             <section className="full_responsive mt-10">
                 <div className="container m-auto px-6 py-20 md:px-12 lg:px-20">
@@ -62,7 +122,7 @@ function Store() {
                         </h3>
                     </div>
                     <div className="mt-24 grid items-center gap-6 md:grid-cols-2 lg:flex lg:space-x-8">
-                        {packages.map(({ id, price, student_offer, cycle, name }) => (
+                        {infos && infos.map(({ id, price,  frequency, name, max_trips }) => (
                             <div key={id} className="relative md:col-span-1 group lg:w-[32%]">
                                 <div aria-hidden="true"
                                      className="absolute top-0 w-full h-full rounded-2xl bg-white shadow-xl transition duration-500 group-hover:scale-105 lg:group-hover:scale-110"></div>
@@ -75,24 +135,17 @@ function Store() {
                                             <span className="text-5xl text-gray-800 font-bold leading-0">{price}</span>
                                         </div>
                                         <span
-                                            className="absolute right-12 bottom-2 text-xl text-orange-300 font-bold">/{cycle}</span>
+                                            className="absolute right-12 bottom-2 text-sm text-orange-300 font-bold">/{frequency}</span>
                                     </div>
-                                    <span
-                                        className="block uppercase text-xs text-orange-300 text-center pb-1">{student_offer ? "Offre étudiante" : ""}</span>
+                                    {/* <span
+                                        className="block uppercase text-xs text-orange-300 text-center pb-1">{student_offer ? "Offre étudiante" : ""}</span> */}
 
-                                    <ul role="list" className="w-max space-y-4 pb-6 m-auto text-gray-600">
+                                    <ul role="list" className="w-max space-y-4 mt-4 pb-6 m-auto text-gray-600">
                                         <li className="space-x-2">
                                             <span className="text-orange-300 font-semibold">-</span>
-                                            <span>First premium advantage</span>
+                                            <span>Nombre de voyage maximum : {max_trips} </span>
                                         </li>
-                                        <li className="space-x-2">
-                                            <span className="text-orange-300 font-semibold">-</span>
-                                            <span>Second premium advantage</span>
-                                        </li>
-                                        <li className="space-x-2">
-                                            <span className="text-orange-300 font-semibold">-</span>
-                                            <span>Third advantage</span>
-                                        </li>
+
                                     </ul>
                                     <button onClick={() => {
                                         handleClick(name);

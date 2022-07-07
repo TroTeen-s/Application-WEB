@@ -4,6 +4,7 @@ import Container from "@mui/material/Container";
 import { DateTime } from "luxon";
 import { Chip } from "@mui/material";
 import { useNavigate } from "react-router";
+import { Typography } from "@mui/material";
 
 const Subscriptions = () => {
 
@@ -138,7 +139,7 @@ const Subscriptions = () => {
     return (
         <>
             <Container>
-                {/* <h1>Voici la liste de vos abonnements : </h1> */}
+        
                 <div style={{ height: 400, width: "100%" }}>
                     <DataGrid
                         rows={data}
