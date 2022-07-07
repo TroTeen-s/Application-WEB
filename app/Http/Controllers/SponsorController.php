@@ -14,7 +14,10 @@ class SponsorController extends Controller
     {
         $sponsors = Sponsors::all();
 
+        if (!$sponsors) {
+            return response()->json(array('success' => 'false', 'message' => "Aucun sponsors trouvé"));
+        }
 
-        return response()->json(array('data' => $sponsors));
+        return response()->json(array('success' => 'true', 'message' => "Voici les sponsors", 'data' => $sponsors));
     }
 }

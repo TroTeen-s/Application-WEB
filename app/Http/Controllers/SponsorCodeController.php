@@ -24,15 +24,15 @@ class SponsorCodeController extends Controller
 
 
         if (!$code) {
-            
+
             return response()->json(array('success' => 'false', 'message' => "Aucun code trouvé"));
 
         }
 
         $user_id = auth()->user()->id;
-            SponsorCodes::where('sponsor_id', $id)->where('user_id', null)->update([
-                'user_id' => $user_id
-            ]);
+        SponsorCodes::where('sponsor_id', $id)->where('user_id', null)->update([
+            'user_id' => $user_id
+        ]);
 
         return response()->json(array('success' => 'true', 'data' => ['code' => $code, 'id' => $id]));
 
@@ -50,6 +50,26 @@ class SponsorCodeController extends Controller
         }
 
         return response()->json(array('success' => 'true', 'message' => "Voici le code", 'data' => ['code' => $code, 'id' => $id]));
+
+    }
+
+    public function add_code(Request $request): JsonResponse
+    {
+        $body = json_decode($request->getContent());
+        $id = $body->{ "id"};
+        $codes = $body->{ "codes"};
+
+        foreach ($codes as &$value) {
+
+            $sponsors_code = new SponsorCodes(['sponsor_id' => $id, 'code' => $value]);
+            $sponsors_code->save();
+        }
+
+        if (1) {
+            return response()->json(array('success' => 'false', 'message' => $id));
+        }
+
+    // return response()->json(array('success' => 'true', 'message' => "Voici le code", 'data' => ['code' => $code, 'id' => $id]));
 
     }
 }
