@@ -21,7 +21,9 @@ class Package extends Model
         'id_stripe',
         'price',
         'max_trips',
-        'is_subscription'
+        'is_subscription',
+        'frequency',
+        "active"
     ];
 
     /**

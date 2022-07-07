@@ -18,11 +18,76 @@ use Illuminate\Support\Facades\Log;
 use Stripe;
 use Stripe\BillingPortal\Session;
 use Stripe\Event;
+use Stripe\Exception\ApiErrorException;
 use Stripe\StripeClient;
 
 class SubscriptionController extends Controller
 {
     use ApiResponse;
+
+    /**
+     * Ajoute un abonnement, utilisé depuis le dashboard
+     * @param Request $req
+     * @return JsonResponse
+     */
+    function addSubscription(Request $req): JsonResponse
+    {
+
+        $subscription = new Package();
+        $subscription->name = $req->input('name');
+        $subscription->price = $req->input('price');
+        $subscription->max_trips = $req->input('max_trips');
+        $subscription->frequency = $req->input('frequency');
+        $subscription->is_subscription = true;
+
+
+        try {
+            $stripe = new StripeClient(getenv('STRIPE_PRIVATE'));
+
+            $stripeSubscriptions = $stripe->products->create([
+                'name' => 'Abonnements Troteen\'s ' . $subscription->name,
+            ]);
+
+            $subscriptionPrice = $stripe->prices->create([
+                'unit_amount' => $subscription->price * 100,
+                'currency' => 'eur',
+                'recurring' => ['interval' => $subscription->frequency],
+                'product' => $stripeSubscriptions->id,
+                'nickname' => $subscription->name
+            ]);
+
+            $subscription->id_stripe = $subscriptionPrice->id;
+
+            $subscription->save();
+
+        } catch (ApiErrorException $e) {
+            return $this->fail("erreur API Stripe", $e->getMessage());
+        }
+
+        $subscription->refresh();
+
+        return $this->success("Produit ajouté avec succès", $subscription);
+    }
+
+    public function update(Request $request, int $id): JsonResponse
+    {
+        if (empty($request->all())) {
+            return $this->fail("pas d'option envoyées");
+        }
+
+        $abonnement = Package::query()->find($id);
+
+        if (empty($abonnement)) {
+            return $this->fail("Abonnement pas trouvé");
+        }
+
+        $success = $abonnement->update($request->all());
+        if (!$success) {
+            return $this->fail("Erreur");
+        } else {
+            return $this->success("abonnement mis à jour avec succès", $request->all());
+        }
+    }
 
     public function subscribe(Request $request): JsonResponse
     {
@@ -80,7 +145,7 @@ class SubscriptionController extends Controller
                 ]));
 
                 return $this->success('redirection', ['redirect' => $checkout_session->url]);
-            } catch (Stripe\Exception\ApiErrorException $e) {
+            } catch (ApiErrorException $e) {
                 return $this->fail('erreur', $e->getMessage());
             }
         } else {
@@ -98,6 +163,20 @@ class SubscriptionController extends Controller
         $subscriptions->each(function ($order) {
             $order->setAppends(['package_name', 'last_payment']);
         });
+
+        return $this->success("voici vos abonnements", $subscriptions);
+    }
+
+    public function getAllSubscriptionsForShop(): JsonResponse
+    {
+        $subscriptions = Package::query()->where("active", true)->get();
+
+        return $this->success("voici vos abonnements", $subscriptions);
+    }
+
+    public function getAllSubscriptionsForDashboard(): JsonResponse
+    {
+        $subscriptions = Package::all();
 
         return $this->success("voici vos abonnements", $subscriptions);
     }
@@ -284,7 +363,7 @@ class SubscriptionController extends Controller
                 'customer' => $user->id_stripe,
                 'return_url' => getenv("APP_URL") . '/account/subscriptions',
             ]);
-        } catch (Stripe\Exception\ApiErrorException $e) {
+        } catch (ApiErrorException $e) {
             return $this->fail('erreur stripe : ' . $e->getMessage());
         }
 
