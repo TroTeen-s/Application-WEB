@@ -1,33 +1,32 @@
 <?php
 
-use App\Http\Controllers\ShopController;
-use App\Http\Controllers\SubscriptionController;
-use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
-use App\Http\Controllers\UserController;
-use App\Http\Controllers\PackageController;
-use App\Http\Controllers\ScootersController;
-use App\Http\Controllers\ProductController;
-use App\Http\Controllers\SponsorController;
-use App\Http\Controllers\SponsorCodeController;
-use App\Http\Controllers\WeatherController;
-use App\Http\Controllers\MaintenanceController;
 use App\Http\Controllers\FixingController;
 
 use App\Http\Controllers\ProblemsController;
 use App\Http\Controllers\ScooterHistoryController;
 
 use App\Http\Controllers\MailController;
-
+use App\Http\Controllers\MaintenanceController;
 use App\Http\Controllers\NeedHelpController;
+use App\Http\Controllers\PackageController;
+use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ScooterProblemController;
+use App\Http\Controllers\ScootersController;
+use App\Http\Controllers\ShopController;
+use App\Http\Controllers\SponsorCodeController;
+use App\Http\Controllers\SponsorController;
+use App\Http\Controllers\SubscriptionController;
+use App\Http\Controllers\UserController;
+use App\Http\Controllers\WeatherController;
+use Illuminate\Support\Facades\Route;
 
 
 /* |-------------------------------------------------------------------------- | API Routes |-------------------------------------------------------------------------- | | Here is where you can register API routes for your application. These | routes are loaded by the RouteServiceProvider within a group which | is assigned the "api" middleware group. Enjoy building your API! | */
 
 // Route avec une seule action (fonction __invoke(), voir https://laravel.com/docs/9.x/controllers#single-action-controllers)
 
-Route::post('/auth/register', [AuthController::class , 'register']);
+Route::post('/auth/register', [AuthController::class, 'register']);
 
 Route::post('/support/need', [NeedHelpController::class , 'send']);
 Route::get('/support/list', [NeedHelpController::class , 'list']);
@@ -115,25 +114,27 @@ Route::group(['middleware' => ['auth:sanctum']], function () {
 
 
 Route::get('/dashboard/scooters/list', ScootersController::class);
-Route::post('/scooter/create', [ScootersController::class , 'create']);
+Route::post('/scooter/create', [ScootersController::class, 'create']);
 Route::get('/scooters', ScootersController::class);
-Route::post('/scooter/create', [ScootersController::class , 'create']);
+Route::post('/scooter/create', [ScootersController::class, 'create']);
 
 Route::get('/dashboard/MaintenanceCenter/list', MaintenanceController::class);
 Route::get('/dashboard/FixingCenter/list', FixingController::class);
 
 
+Route::get('/dashboard/subscriptions', [SubscriptionController::class, "getAllSubscriptionsForDashboard"]);
+Route::post('/dashboard/subscriptions', [SubscriptionController::class, "addSubscription"]);
+Route::patch('/dashboard/subscriptions/{id}', [SubscriptionController::class, "update"])->where('id', '[0-9]+');
 
 
-Route::post('/dashboard/users/delete/{id}', [UserController::class , 'deleteUser'])->where('id', '[0-9]+');
-;
+Route::post('/dashboard/users/delete/{id}', [UserController::class, 'deleteUser'])->where('id', '[0-9]+');
 
 
 // For Admin
 
-Route::post('/dashboard/addproduct', [ProductController::class , 'addProduct']);
-Route::patch('/dashboard/products/{id}', [ProductController::class , 'update'])->where('id', '[0-9]+');
-Route::get('/dashboard/products', [ProductController::class , 'list']);
+Route::post('/dashboard/addproduct', [ProductController::class, 'addProduct']);
+Route::patch('/dashboard/products/{id}', [ProductController::class, 'update'])->where('id', '[0-9]+');
+Route::get('/dashboard/products', [ProductController::class, 'list']);
 Route::get('/dashboard/api/weather/list', [WeatherController::class , 'list']);
 
 // problemes
