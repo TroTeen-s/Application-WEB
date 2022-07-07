@@ -520,7 +520,7 @@ export default function Main() {
         .catch(error => console.log(error));
 
 
-    
+
     };
 
     const RetrieveInfosHistory = async() => {
@@ -534,13 +534,13 @@ export default function Main() {
 
                 setInfosHistory(response.data.data)
                 setStatus({type: 'success'});
-    
+
             })
             .catch(error => console.log(error));
-    
 
-        }catch(error) { 
-            console.log(error) 
+
+        }catch(error) {
+            console.log(error)
         }
 
     }
@@ -752,7 +752,7 @@ export default function Main() {
                                 }}>
                                     <Grid item>
                                         <Typography color="textSecondary" gutterBottom variant="overline">
-                                            TOTAL TROTINETTES MAINTENANCE
+                                            TROTINETTES EN MAINTENANCE
                                         </Typography>
                                         <Typography color="textPrimary" variant="h4">
                                             {listLengthTrotMaintenance}
@@ -786,7 +786,7 @@ export default function Main() {
                                 }}>
                                     <Grid item>
                                         <Typography color="textSecondary" gutterBottom variant="overline">
-                                            TOTAL TROTINETTES REPARATION
+                                        TROTINETTES EN REPARATION
                                         </Typography>
                                         <Typography color="textPrimary" variant="h4">
                                             {listLengthTrotFixing}
@@ -860,7 +860,7 @@ export default function Main() {
                 </Grid>
 
                 <Grid item xl={4} lg={4} sm={4} xs={4}>
-                        
+
                     <HistoricalListToolBar sx={{
                             mt: 3
                         }} />
