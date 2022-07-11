@@ -4,6 +4,7 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\FixingController;
 
 use App\Http\Controllers\ProblemsController;
+use App\Http\Controllers\PushNotificationsController;
 use App\Http\Controllers\ScooterHistoryController;
 
 use App\Http\Controllers\MailController;
@@ -97,15 +98,17 @@ Route::group(['middleware' => ['auth:sanctum']], function () {
     ## SPONSOR
     Route::get('/initCode/{id}', [SponsorCodeController::class , 'init_free_code'])->where('id', '[0-9]+');
     Route::get('/codes', SponsorCodeController::class);
-    Route::get('/code/{id}', [SponsorCodeController::class , 'get_free_code'])->where('id', '[0-9]+');
+    Route::get('/code/{id}', [SponsorCodeController::class, 'get_free_code'])->where('id', '[0-9]+');
 
     ## ROUTES SHOP
-    Route::get('/shop/buy-cart', [ShopController::class , 'buyCart']);
-    Route::get('/shop/test', [SubscriptionController::class , 'test']);
-    Route::get('/carts', [ShopController::class , 'getAllCartsInfo']);
-    Route::get('/cart/{id}', [ShopController::class , 'getCartInfo'])->where('id', '[0-9]+');
-    Route::get('/my-fidelity', [UserController::class , 'myFidelity']);
+    Route::get('/shop/buy-cart', [ShopController::class, 'buyCart']);
+    Route::get('/shop/test', [SubscriptionController::class, 'test']);
+    Route::get('/carts', [ShopController::class, 'getAllCartsInfo']);
+    Route::get('/cart/{id}', [ShopController::class, 'getCartInfo'])->where('id', '[0-9]+');
+    Route::get('/my-fidelity', [UserController::class, 'myFidelity']);
 
+    ## ROUTES NOTIFICATIONS PUSH
+    Route::get("/notifs/all", [PushNotificationsController::class, "sendNotificationsToAllSubscribedUsers"]);
 
 });
 
