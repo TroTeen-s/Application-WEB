@@ -224,7 +224,6 @@ class SubscriptionController extends Controller
                 break;
 
             case 'payment_intent.succeeded':
-                Log::channel('errors')->info('on est là heyyyyy');
                 $this->createPayment($event);
                 break;
 
@@ -371,6 +370,9 @@ class SubscriptionController extends Controller
 
     }
 
+    /**
+     * @throws Exception
+     */
     public function finishCart(Event $event): JsonResponse
     {
         $cart = Cart::query()->firstWhere('checkout_id', $event->data->object->id);
@@ -406,6 +408,14 @@ class SubscriptionController extends Controller
         $user->save();
 
         $fidelityHistory->save();
+
+        try {
+            PushNotificationsController::sendNotification("Achat terminé !", "Votre achat a bien été complété :)", $user->id);
+            Log::error("requête réussie");
+        } catch (Exception $e) {
+            Log::error("requête pas réussie" . $e->getMessage());
+
+        }
 
         return $this->success('test', $cart->items);
     }
