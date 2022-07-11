@@ -19,6 +19,7 @@ use App\Http\Controllers\SponsorController;
 use App\Http\Controllers\SubscriptionController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\WeatherController;
+use App\Http\Controllers\PDFViewController;
 use Illuminate\Support\Facades\Route;
 
 
@@ -105,9 +106,9 @@ Route::group(['middleware' => ['auth:sanctum']], function () {
     Route::get('/carts', [ShopController::class , 'getAllCartsInfo']);
     Route::get('/cart/{id}', [ShopController::class , 'getCartInfo'])->where('id', '[0-9]+');
     Route::get('/my-fidelity', [UserController::class , 'myFidelity']);
-
-
 });
+
+Route::get('/documents/pdf/{id}', [ShopController::class , 'initDocument'])->where('id', '[0-9]+');
 
 Route::get('/sponsors', SponsorController::class);
 

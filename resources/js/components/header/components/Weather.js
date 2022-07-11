@@ -13,8 +13,6 @@ import { IosShare } from '@mui/icons-material';
 
 const Weather = () => {
 
-
-    const description = "nuageux"
     const [infos, setInfos] = useState();
 
     let { loaded } = useContext(AuthLoadingContext)
@@ -30,8 +28,8 @@ const Weather = () => {
 
 
             if (response.data.success) {
-
-                setInfos(response.data)
+                
+                setInfos(response.data.data)
 
             }
         } catch (e) {
@@ -46,8 +44,9 @@ const Weather = () => {
         }
     }, [loaded])
 
+    if(infos != null){
 
-    switch (description) {
+    switch (infos.description) {
         case "nuageux":
             return (
                 <Cloudy />
@@ -92,6 +91,11 @@ const Weather = () => {
         default:
             return (<>{description} </>)
     }
+
+            
+}else{
+    return (<> </>)
+}
 
 
 };

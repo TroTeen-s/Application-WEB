@@ -4,6 +4,7 @@ import Container from "@mui/material/Container";
 import { DateTime } from "luxon";
 import { Chip } from "@mui/material";
 import { useNavigate } from "react-router";
+import Button from "@mui/material/Button";
 
 const Purchases = () => {
 
@@ -21,6 +22,24 @@ const Purchases = () => {
             setLoading(false);
         }
     };
+
+    const HandlePDF = async (id) => {
+
+        try {
+
+            let response = await axios.get(`/api/documents/pdf/${id}`);
+      
+            if (response.data.data) {
+              console.log(response.data.data)
+              setInfos(response.data.data)
+            }
+      
+      
+          } catch (error) {
+            console.log(error)
+          }
+      
+    }
 
     const currentPeriod = (cellValues) => {
         let { row } = cellValues;
@@ -42,7 +61,7 @@ const Purchases = () => {
     }, []);
 
     const columns = [
-        { field: "id", headerName: "ID", width: 90 },
+        { field: "id", headerName: "ID", width: 50 },
         {
             field: "payment_date",
             headerName: "Date de Paiment",
@@ -69,6 +88,7 @@ const Purchases = () => {
         {
             field: "informations",
             headerName: "Informations",
+            headerAlign: 'center',
             description: "This column has a value getter and is not sortable.",
             sortable: false,
             width: 160,
@@ -84,7 +104,29 @@ const Purchases = () => {
                     />
                 );
             }
-        }
+        },
+        {
+            field: "",
+            headerName: "PDF Facture",
+            sortable: false,
+            headerAlign: 'center',
+            align: 'center',
+            width: 160,
+            renderCell: (params) => (
+
+                <strong>
+                    <Button className="text-black" color="secondary" variant="contained" size="small"
+                        style={{ marginLeft: 16 }}
+                        onClick={() => {
+                          HandlePDF(params.row.id);
+                        }}
+                     
+                    >
+                        Télécharger
+                    </Button>
+                </strong >
+        )
+    }
 
     ];
 

@@ -6,11 +6,15 @@
     "license": "MIT",
     "require": {
         "php": "^8.0.2",
+        "ext-gd": "*",
+        "barryvdh/laravel-dompdf": "^1.0",
+        "codedge/laravel-fpdf": "^1.8",
         "guzzlehttp/guzzle": "^7.2",
         "laravel/framework": "^9.2",
         "laravel/sanctum": "^2.15",
         "laravel/tinker": "^2.7",
         "laravel/ui": "^3.4",
+        "laraveldaily/laravel-invoices": "3.0",
         "sendinblue/api-v3-sdk": "^8.2",
         "stripe/stripe-php": "^8.2"
     },

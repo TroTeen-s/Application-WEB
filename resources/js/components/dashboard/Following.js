@@ -9,6 +9,8 @@ import { LinearProgress } from '@mui/material';
 import './style.css'
 import { AuthLoadingContext } from '../context/AuthContext';
 
+import Routing from "./Routing";
+
 import tt from '@tomtom-international/web-sdk-maps';
 
 export default function Following() {
@@ -18,6 +20,8 @@ export default function Following() {
   const [infos, setInfos] = useState();
   const [infosBis, setInfosBis] = useState();
   const [infosTris, setInfosTris] = useState();
+
+  var today = new Date();
 
   const LeafIcon = L.Icon.extend({
     options: {}
@@ -109,7 +113,10 @@ export default function Following() {
     }
   }
 
-
+  let stockLat = 0;
+  let stockLong = 0;
+  const LongitudeMaintenanceCenterForTrotinettes = 45.76;
+  const LatitudeMaintenanceCenterForTrotinettes = 4.90;
 
 
   useEffect(() => {
@@ -124,6 +131,7 @@ export default function Following() {
   if (infos) {
 
   return (
+
         <Box className="bg-primary"
           component="main"
           sx={{
@@ -139,12 +147,48 @@ export default function Following() {
             url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
           />
           
-          {infos.filter(obj => obj.fixing !== 1 && obj.maintenance !== 1).map(({ id, last_position_long, last_position_lat, model_serie }) => (  
-          
+          {infos.filter(obj => obj.fixing !== 1 && obj.maintenance !== 1).map(({ id, last_position_long, last_position_lat, model_serie },index, {length}) => (  
+
           <Marker position={[last_position_long, last_position_lat]} icon={OrangeIcon}>
               <Popup>
                 ID : {[id]} <br /> {[model_serie]}
               </Popup>
+
+
+              {index === 0 && <Routing {...{
+                SourceLong:LongitudeMaintenanceCenterForTrotinettes, 
+                SourceLat:LatitudeMaintenanceCenterForTrotinettes,
+                longD:last_position_long, 
+                latD:last_position_lat,
+                variable:1,
+                indexVariable:index
+              }}/> 
+              }
+{/* 
+              {index+1 === length && <Routing {...{
+                SourceLong:stockLong, 
+                SourceLat:stockLat,
+                longD:last_position_long, 
+                latD:last_position_lat,
+                variable:0,
+                indexVariable:index
+              }}/> 
+              }
+
+              
+            {index+1 !== length && <Routing {...{
+                 SourceLong:stockLong, 
+                 SourceLat:stockLat,
+                longD:last_position_long, 
+                latD:last_position_lat,
+                variable:0,
+                indexVariable:index
+              }}/> 
+              } */}
+            
+              {stockLat = last_position_lat}
+              {stockLong = last_position_long}
+
             </Marker>
              
           ))}
@@ -185,6 +229,7 @@ export default function Following() {
             </Marker>
              
           ))}
+          
 
         </MapContainer>
 

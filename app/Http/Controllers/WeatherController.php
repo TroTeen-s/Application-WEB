@@ -22,11 +22,10 @@ class WeatherController extends Controller
     }
 
     public function get_todays_date(Request $request): JsonResponse
+    
     {
-        $weather = Weather::where('DateTime', date_create('today'))->first();
-
-
-        return response()->json(array('success'=> true, 'data' => $weather));
+        $last_dateTime = Weather::orderBy('DateTime', 'desc')->first();
+          return response()->json(array('success'=> true, 'data' => $last_dateTime ));
     }
 
     function list(){

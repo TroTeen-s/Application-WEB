@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\PDFViewController;
 
 /*
 |--------------------------------------------------------------------------
@@ -20,3 +21,5 @@ Route::view('{path}', 'welcome')->where('path', '([A-z\d\-\/_.]+)?');
 
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+// Route::get('generate-pdf-from-view', [PDFViewController::class, 'index']);
+// Route::get('/cart/pdf', [PDFViewController::class, 'createPDF']);
