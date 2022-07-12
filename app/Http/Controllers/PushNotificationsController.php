@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\notification;
 use App\Traits\ApiResponse;
 use Exception;
 use Illuminate\Http\JsonResponse;
@@ -12,6 +13,11 @@ class PushNotificationsController extends Controller
 {
     use ApiResponse;
 
+
+    public function getAllNotifications(): JsonResponse
+    {
+        return $this->success("toutes les notifications", notification::all());
+    }
 
     /**
      * @throws Exception
@@ -32,6 +38,8 @@ class PushNotificationsController extends Controller
         }
 
         if ($result) {
+            $notification = new notification(["title" => $title, "content" => $message]);
+            $notification->save();
             return $this->success("Envoi de la notification avec succès");
         } else {
             return $this->fail("Erreur dans l'envoi de la notification");

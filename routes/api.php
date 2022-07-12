@@ -2,16 +2,13 @@
 
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\FixingController;
-
-use App\Http\Controllers\ProblemsController;
-use App\Http\Controllers\PushNotificationsController;
-use App\Http\Controllers\ScooterHistoryController;
-
-use App\Http\Controllers\MailController;
 use App\Http\Controllers\MaintenanceController;
 use App\Http\Controllers\NeedHelpController;
 use App\Http\Controllers\PackageController;
+use App\Http\Controllers\ProblemsController;
 use App\Http\Controllers\ProductController;
+use App\Http\Controllers\PushNotificationsController;
+use App\Http\Controllers\ScooterHistoryController;
 use App\Http\Controllers\ScooterProblemController;
 use App\Http\Controllers\ScootersController;
 use App\Http\Controllers\ShopController;
@@ -108,7 +105,8 @@ Route::group(['middleware' => ['auth:sanctum']], function () {
     Route::get('/my-fidelity', [UserController::class, 'myFidelity']);
 
     ## ROUTES NOTIFICATIONS PUSH
-    Route::get("/notifs/all", [PushNotificationsController::class, "sendNotificationsToAllSubscribedUsers"]);
+    Route::post("/notifs/all", [PushNotificationsController::class, "sendNotificationsToAllSubscribedUsers"]);
+    Route::get("/notifs/all", [PushNotificationsController::class, "getAllNotifications"]);
 
 });
 

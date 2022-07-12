@@ -23,23 +23,32 @@ export const mainListItems = (
       </ListItemButton>
     </NavLink>
 
-    <NavLink className="no-underline text-black-trot" to="following">
-      <ListItemButton>
-        <ListItemIcon>
-          <MapIcon />
-        </ListItemIcon>
-        <ListItemText primary="Suivi des Trotinettes" />
-      </ListItemButton>
-    </NavLink>
+      <NavLink className="no-underline text-black-trot" to="following">
+          <ListItemButton>
+              <ListItemIcon>
+                  <MapIcon />
+              </ListItemIcon>
+              <ListItemText primary="Suivi des Trotinettes" />
+          </ListItemButton>
+      </NavLink>
 
-        <NavLink className="no-underline text-black-trot" to="customers">
-            <ListItemButton>
-                <ListItemIcon>
-                    <PeopleIcon />
-                </ListItemIcon>
-                <ListItemText primary="Customers" />
-            </ListItemButton>
-        </NavLink>
+      <NavLink className="no-underline text-black-trot" to="notifications">
+          <ListItemButton>
+              <ListItemIcon>
+                  <MapIcon />
+              </ListItemIcon>
+              <ListItemText primary="Notifications Push" />
+          </ListItemButton>
+      </NavLink>
+
+      <NavLink className="no-underline text-black-trot" to="customers">
+          <ListItemButton>
+              <ListItemIcon>
+                  <PeopleIcon />
+              </ListItemIcon>
+              <ListItemText primary="Customers" />
+          </ListItemButton>
+      </NavLink>
 
         <NavLink className="no-underline text-black-trot" to="subscriptions">
             <ListItemButton>
