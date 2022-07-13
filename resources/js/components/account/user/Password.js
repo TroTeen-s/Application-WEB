@@ -9,6 +9,7 @@ import { styled } from "@mui/material/styles";
 import { outlinedInputClasses } from "@mui/material/OutlinedInput";
 import { inputLabelClasses } from "@mui/material/InputLabel";
 import { AuthContext } from "../../context/AuthContext";
+import {useTranslation} from 'react-i18next';
 
 const StyledTextField = styled(TextField)({
     [`& .${outlinedInputClasses.root} .${outlinedInputClasses.notchedOutline}`]: {
@@ -46,6 +47,7 @@ const Password = () => {
     let error_new_password = false
     let error_confirm_new_password = false
 
+    const {t, i18n} = useTranslation();
 
     const [infos, setInfos] = useState([]);
     let { auth } = useContext(AuthContext)
