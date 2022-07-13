@@ -28,7 +28,7 @@ use Illuminate\Support\Facades\Route;
 
 // Route avec une seule action (fonction __invoke(), voir https://laravel.com/docs/9.x/controllers#single-action-controllers)
 
-Route::post('/auth/register', [AuthController::class, 'register']);
+Route::post('/auth/register', [AuthController::class , 'register']);
 
 Route::post('/support/need', [NeedHelpController::class , 'send']);
 Route::get('/support/list', [NeedHelpController::class , 'list']);
@@ -44,6 +44,8 @@ Route::get('/weather', [WeatherController::class , 'get_todays_date']);
 Route::get('/codes', SponsorCodeController::class);
 Route::get('/code/{id}', [SponsorCodeController::class , 'get_free_code'])->where('id', '[0-9]+');
 Route::post('/add_code', [SponsorCodeController::class , 'add_code']);
+
+Route::post('/add_sponsor', [SponsorController::class , 'add_sponsor']);
 
 Route::post('/auth/login', [AuthController::class , 'login']);
 
@@ -113,28 +115,29 @@ Route::get('/documents/pdf/{id}', [ShopController::class , 'initDocument'])->whe
 
 Route::get('/sponsors', SponsorController::class);
 
+
 Route::get('/dashboard/scooters/list', ScootersController::class);
-Route::post('/scooter/create', [ScootersController::class, 'create']);
+Route::post('/scooter/create', [ScootersController::class , 'create']);
 Route::get('/scooters', ScootersController::class);
-Route::post('/scooter/create', [ScootersController::class, 'create']);
+Route::post('/scooter/create', [ScootersController::class , 'create']);
 
 Route::get('/dashboard/MaintenanceCenter/list', MaintenanceController::class);
 Route::get('/dashboard/FixingCenter/list', FixingController::class);
 
 
-Route::get('/dashboard/subscriptions', [SubscriptionController::class, "getAllSubscriptionsForDashboard"]);
-Route::post('/dashboard/subscriptions', [SubscriptionController::class, "addSubscription"]);
-Route::patch('/dashboard/subscriptions/{id}', [SubscriptionController::class, "update"])->where('id', '[0-9]+');
+Route::get('/dashboard/subscriptions', [SubscriptionController::class , "getAllSubscriptionsForDashboard"]);
+Route::post('/dashboard/subscriptions', [SubscriptionController::class , "addSubscription"]);
+Route::patch('/dashboard/subscriptions/{id}', [SubscriptionController::class , "update"])->where('id', '[0-9]+');
 
 
-Route::post('/dashboard/users/delete/{id}', [UserController::class, 'deleteUser'])->where('id', '[0-9]+');
+Route::post('/dashboard/users/delete/{id}', [UserController::class , 'deleteUser'])->where('id', '[0-9]+');
 
 
 // For Admin
 
-Route::post('/dashboard/addproduct', [ProductController::class, 'addProduct']);
-Route::patch('/dashboard/products/{id}', [ProductController::class, 'update'])->where('id', '[0-9]+');
-Route::get('/dashboard/products', [ProductController::class, 'list']);
+Route::post('/dashboard/addproduct', [ProductController::class , 'addProduct']);
+Route::patch('/dashboard/products/{id}', [ProductController::class , 'update'])->where('id', '[0-9]+');
+Route::get('/dashboard/products', [ProductController::class , 'list']);
 Route::get('/dashboard/api/weather/list', [WeatherController::class , 'list']);
 Route::get('/dashboard/purchases/list', [PaymentController::class , 'list']);
 // problemes
@@ -154,8 +157,10 @@ Route::get('/dashboard/api/scooters/fixing/list', [ScootersController::class , '
 
 
 Route::post('/dashboard/api/scooters/maintenance/newstatus', [ScootersController::class , 'MaintenanceStatus'])->where('id', '[0-9]+');
-Route::post('/dashboard/api/scooters/fixing/newstatus', [ScootersController::class , 'FixingStatus'])->where('id', '[0-9]+');;
-Route::post('/dashboard/api/scooters/service/newstatus', [ScootersController::class , 'ServiceStatus'])->where('id', '[0-9]+');;
+Route::post('/dashboard/api/scooters/fixing/newstatus', [ScootersController::class , 'FixingStatus'])->where('id', '[0-9]+');
+;
+Route::post('/dashboard/api/scooters/service/newstatus', [ScootersController::class , 'ServiceStatus'])->where('id', '[0-9]+');
+;
 
 Route::get('/dashboard/api/scooters/add', [ScootersController::class , 'addScoot']);
 
@@ -163,14 +168,14 @@ Route::get('/dashboard/api/dashboard/api/scooters/delete/{id}', [ScootersControl
 
 // History
 
-Route::post('/dashboard/api/dashboard/api/scooters/history/maintenance',[ScooterHistoryController::class, 'HistoryMaintenance'])->where('id', '[0-9]+');
-Route::post('/dashboard/api/dashboard/api/scooters/history/fixing',[ScooterHistoryController::class, 'HistoryFixing'])->where('id', '[0-9]+');
-Route::post('/dashboard/api/dashboard/api/scooters/history/service',[ScooterHistoryController::class, 'HistoryService'])->where('id', '[0-9]+');
-Route::post('/dashboard/api/dashboard/api/scooters/history/add',[ScooterHistoryController::class, 'HistoryAdd'])->where('id', '[0-9]+');
-Route::post('/dashboard/api/dashboard/api/scooters/history/delete',[ScooterHistoryController::class, 'HistoryDelete'])->where('id', '[0-9]+');
+Route::post('/dashboard/api/dashboard/api/scooters/history/maintenance', [ScooterHistoryController::class , 'HistoryMaintenance'])->where('id', '[0-9]+');
+Route::post('/dashboard/api/dashboard/api/scooters/history/fixing', [ScooterHistoryController::class , 'HistoryFixing'])->where('id', '[0-9]+');
+Route::post('/dashboard/api/dashboard/api/scooters/history/service', [ScooterHistoryController::class , 'HistoryService'])->where('id', '[0-9]+');
+Route::post('/dashboard/api/dashboard/api/scooters/history/add', [ScooterHistoryController::class , 'HistoryAdd'])->where('id', '[0-9]+');
+Route::post('/dashboard/api/dashboard/api/scooters/history/delete', [ScooterHistoryController::class , 'HistoryDelete'])->where('id', '[0-9]+');
 
 
-Route::get('/dashboard/api/dashboard/api/scooters/history/list',[ScooterHistoryController::class, 'List']);
+Route::get('/dashboard/api/dashboard/api/scooters/history/list', [ScooterHistoryController::class , 'List']);
 
 
 

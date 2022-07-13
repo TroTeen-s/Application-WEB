@@ -486,14 +486,36 @@ export default function fMain() {
         })
         .catch(error => console.log(error));
 
-
-
-
-
         let response = await axios.get(`/api/dashboard/api/dashboard/api/scooters/delete/${event}`);
 
         if (response.data.data) {
             setInfos(response.data.data)
+        }
+
+        let response4 = await axios.get('/api/dashboard/scooters/list', {
+            headers: {
+                'Accept': 'application/json'
+            }
+        })
+
+        if (response4.data.data) {
+            listLengthTrot = response4.data.data.length;
+            setInfos(response4.data.data)
+        }
+
+        let response2 = await axios.get(`/api/dashboard/api/scooters/maintenance/list`);
+
+        if (response2.data.data) {
+            listLengthTrotMaintenance = response2.data.data.length;
+            setInfos2(response2.data.data)
+
+        }
+
+        let response3 = await axios.get(`/api/dashboard/api/scooters/fixing/list`);
+
+        if (response3.data.data) {
+            listLengthTrotFixing = response3.data.data.length;
+            setInfos3(response3.data.data)
         }
 
     };
@@ -518,6 +540,32 @@ export default function fMain() {
 
         })
         .catch(error => console.log(error));
+
+        let response4 = await axios.get('/api/dashboard/scooters/list', {
+            headers: {
+                'Accept': 'application/json'
+            }
+        })
+
+        if (response4.data.data) {
+            listLengthTrot = response4.data.data.length;
+            setInfos(response4.data.data)
+        }
+
+        let response2 = await axios.get(`/api/dashboard/api/scooters/maintenance/list`);
+
+        if (response2.data.data) {
+            listLengthTrotMaintenance = response2.data.data.length;
+            setInfos2(response2.data.data)
+
+        }
+
+        let response3 = await axios.get(`/api/dashboard/api/scooters/fixing/list`);
+
+        if (response3.data.data) {
+            listLengthTrotFixing = response3.data.data.length;
+            setInfos3(response3.data.data)
+        }
 
 
 
