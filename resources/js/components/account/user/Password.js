@@ -100,7 +100,7 @@ const Password = () => {
                         required
                         fullWidth
                         name="password"
-                        label="Nouveau mot de passe"
+                        label={t('New password')}
                         type="password"
                         id="password"
                     />
@@ -111,7 +111,7 @@ const Password = () => {
                         required
                         fullWidth
                         name="password_confirmation"
-                        label="Confirmation du nouveau mot de passe"
+                        label={t('Confirm new password')}
                         type="password"
                         id="password"
                     />
@@ -140,7 +140,7 @@ const Password = () => {
                 variant="outlined"
                 sx={{ mt: 3, mb: 2 }}
             >
-                Changer de mot de passe
+                {t('Change password')}
             </Button>
 
         </Box>

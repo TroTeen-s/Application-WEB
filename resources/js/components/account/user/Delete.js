@@ -11,6 +11,7 @@ import DialogContentText from '@mui/material/DialogContentText';
 import DialogTitle from '@mui/material/DialogTitle';
 import Slide from "@mui/material/Slide";
 import { AuthContext } from "../../context/AuthContext";
+import {useTranslation} from 'react-i18next';
 
 const Transition = React.forwardRef(function Transition(props, ref) {
     return <Slide direction="up" ref={ref} {...props} />;
@@ -18,6 +19,8 @@ const Transition = React.forwardRef(function Transition(props, ref) {
 
 
 const Delete = () => {
+
+    const {t, i18n} = useTranslation();
 
     const [open, setOpen] = React.useState(false);
 
@@ -79,9 +82,8 @@ const Delete = () => {
 
                 <Grid item xs={24} sm={12}>
                     <div className="text-lg">
-                        <p>En selectionnant ce bouton vous supprimerez votre compte Easy Scooter</p>
-                        <p>Cette action est définitive vous serez alors déconnecter et ne pourrez plus
-                            vous connecter avec vos identifiant actuel </p>
+                        <p>{t('By selecting this button you delete your Easy Scooter account')}</p>
+                        <p>{t('This action is final, you will then be disconnected and will no longer be able to connect with your current credentials.')} </p>
                     </div>
 
                 </Grid>
@@ -96,7 +98,7 @@ const Delete = () => {
                 onClick={handleClickOpen}
                 sx={{ mt: 3, mb: 2 }}
             >
-                Supprimer votre compte
+                {t('Delete your account')}
             </Button>
 
             <Dialog
@@ -107,15 +109,15 @@ const Delete = () => {
                 aria-describedby="alert-dialog-slide-description"
             >
 
-                <DialogTitle>{"Supprimer votre compte ?"}</DialogTitle>
+                <DialogTitle>{t('Delete your account?')}</DialogTitle>
                 <DialogContent>
                     <DialogContentText id="alert-dialog-slide-description">
-                        Êtes vous sur de vouloir supprimer votre compte ?
+                    {t('Are you sure you want to delete your account?')}
                     </DialogContentText>
                 </DialogContent>
                 <DialogActions>
-                    <Button onClick={handleClose}>Ne pas Supprimer</Button>
-                    <Button color="error" variant="contained" onClick={handleSubmit}>Supprimer</Button>
+                    <Button onClick={handleClose}>{t('Do not delete')}</Button>
+                    <Button color="error" variant="contained" onClick={handleSubmit}>{t('Delete')}</Button>
                 </DialogActions>
 
             </Dialog>

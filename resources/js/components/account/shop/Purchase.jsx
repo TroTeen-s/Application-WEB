@@ -4,6 +4,7 @@ import Container from "@mui/material/Container";
 import Grid from "@mui/material/Grid";
 import Typography from "@mui/material/Typography";
 import { DateTime } from "luxon";
+import styled from "styled-components";
 import {
     Card,
     CardActions,
@@ -11,6 +12,7 @@ import {
     CardMedia,
     Checkbox,
     Dialog,
+    Paper,
     DialogActions,
     DialogContent,
     DialogContentText,
@@ -21,6 +23,12 @@ import { useNavigate } from "react-router";
 
 import './style.css'
 
+const Image = styled.img`
+    width: 150px;
+    object-fit: cover;
+    padding-left: 50px;
+    padding-top: 10px;
+`;
 
 const Purchase = () => {
 
@@ -84,20 +92,20 @@ const Purchase = () => {
     return (
         <Container>
             <div>
-                <Grid container spacing={2}>
-                    <Grid item alignItems={"center"} sx={{ m: 2 }}>
-                        <Typography variant="h3"
-                                    component={"span"}>{"Les informations de votre achat n°" + purchaseID}</Typography>
+                <Grid>
+                    <Grid item alignItems={"center"} sx={{ mb: 4 }}>
+                        <Typography variant="h4"
+                                    component={"span"} className="text-black-trot" >{"Les informations de votre achat n°" + purchaseID}</Typography>
                     </Grid>
 
-                    <Grid container item xs={12} rowSpacing={1} columnSpacing={{ xs: 1, sm: 2, md: 3 }}>
-                        <Grid item xs={12} md={3}>
+                    <Grid container item xs={12} rowSpacing={1}>
+                        <Grid item xs={12} md={12}>
                             <div>Nombre d'articles achetés: {purchaseInfo?.itemNumber}</div>
                         </Grid>
-                        <Grid item xs={12} md={3}>
+                        <Grid item xs={12} md={12}>
                             <div>Montant payé : {purchaseInfo?.payment[0].amount.toFixed(2)}€</div>
                         </Grid>
-                        <Grid item xs={12} md={3}>
+                        <Grid item xs={12} md={12}>
                             <div>
                                 Date de paiment
                                 : {DateTime.fromSQL(purchaseInfo?.payment[0].payment_date).setLocale("fr-FR").toLocaleString({
@@ -109,34 +117,33 @@ const Purchase = () => {
                             })}
                             </div>
                         </Grid>
-                        <Grid item xs={12} md={3}>
+                        <Grid item xs={12} md={12}>
                             <div>Points cumulés sur l'abonnement : 674</div>
                         </Grid>
-                        <Grid item xs={12} md={3}>
-                            <div>
+                        <Grid item xs={12} md={12}>
+                            <div className="bg-white-background pt-2">
                                 <Button variant="outlined" onClick={handleClickOpen}>
                                     Retourner des articles
                                 </Button>
                                 <Dialog open={open} onClose={handleClose}>
-                                    <DialogTitle>Subscribe</DialogTitle>
-                                    <DialogContent>
-                                        <DialogContentText>Sélectionnez les articels que vous voulez
-                                            renvoyer</DialogContentText>
-                                        {purchaseInfo?.items ? <Container className="h-full bg-white-background">
-                                            {purchaseInfo.items.map((item) => (
-                                                <Container style={{ color: "black" }}>
-                                                    <Typography
-                                                        variant="h5">{item["product"].name + ", " + item.pivot.item_price + "€"}</Typography>
-                                                    <Checkbox
-                                                        color="primary"
+                                    <DialogTitle className="bg-white-background text-black-trot">Selectionnez les articles à retourner</DialogTitle>
+                                    <DialogContent className="bg-white-background">
+                                    {purchaseInfo?.items ? purchaseInfo.items.map((item) => (
+                                                 <div className="bg-white-background mt-2 flex" container spacing={0}>
+                                                     <Checkbox
+                                                        style ={{
+                                                            color: "#FF9900",
+                                                        }}
                                                         name={item.id.toString()}
                                                         onChange={handleChecbox}
                                                     />
-                                                </Container>
-                                            ))}
-                                        </Container> : null}
+                                                    <Typography className="pt-1"
+                                                        variant="h6">{item["product"].name + ", " + item.pivot.item_price + "€"}</Typography>
+ 
+                                                </div>
+                                            )) : null}
                                     </DialogContent>
-                                    <DialogActions>
+                                    <DialogActions className="bg-white-background">
                                         <Button onClick={handleClose}>Annuler</Button>
                                         <Button onClick={handleSubmit}>Retournez les articles</Button>
                                     </DialogActions>
@@ -145,16 +152,16 @@ const Purchase = () => {
                         </Grid>
                     </Grid>
 
-                    <Grid container item xs={12}>
-                        <h1>Liste des produits achetés : </h1>
-                        <Grid container direction="row">
-                            {purchaseInfo?.items ? <Container className="h-full bg-white-background">
-                                {purchaseInfo.items.map((item) => (
-                                    <Grid item><ProductCard infos={item} /></Grid>
-                                ))}
-                            </Container> : null}
 
-                        </Grid>
+                    <h1 className="text-black-trot mt-5">Liste des produits achetés : </h1>
+
+                    <Grid className="bg-white-background mt-2" container spacing={3}>
+
+                            {purchaseInfo?.items ? purchaseInfo.items.map((item) => (
+                                    <Grid  className="bg-white-background" item xl={4} lg={4} sm={4} xs={4}><ProductCard  className="bg-white-background" infos={item} /></Grid>
+                                )  )
+                                : null}
+
                     </Grid>
                 </Grid>
             </div>
@@ -170,18 +177,16 @@ const ProductCard = (props) => {
     const { product, pivot } = infos;
 
     return (
-        <Card sx={{ maxWidth: 200 }}>
-            <CardMedia
-                component="img"
-                height="50"
-                image={"/" + product?.image_path}
+        <Paper elevation={3} sx={{ maxWidth: 250, backgroundColor:"white"}} className="bg-white-background">
+            <Image
+                src={"/" + product?.image_path}
                 alt="green iguana"
             />
             <CardContent>
-                <Typography gutterBottom variant="h5" component="div">
+                <Typography gutterBottom variant="h5" className="text-black-trot" component="div">
                     {product?.name}
                 </Typography>
-                <Typography variant="body2" color="text.secondary">
+                <Typography variant="body2" className="black-trot">
                     Prix acheté : {pivot?.item_price}
                 </Typography>
             </CardContent>
@@ -189,6 +194,6 @@ const ProductCard = (props) => {
                 <Button size="small" onClick={() => navigate(`/products/${product.id}`)}>Racheter</Button>
                 <Button size="small">Retourner</Button>
             </CardActions>
-        </Card>
+        </Paper>
     );
 };

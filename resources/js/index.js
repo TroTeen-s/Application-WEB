@@ -43,6 +43,7 @@ import Refunds from "./components/dashboard/Refunds";
 import FidelityHistory from "./components/account/user/FidelityHistory";
 import Partenaires from "./components/dashboard/partenaires/Partenaires";
 import SubscriptionsAdmin from "./components/dashboard/abonnements/SubscriptionsAdmin";
+import Achats from './components/dashboard/achats/purchases';
 
 ReactDOM.render(
     <React.StrictMode>
@@ -92,6 +93,7 @@ ReactDOM.render(
                         <Route path="api" element={<Api />} />
                         <Route path="refunds" element={<Refunds />} />
                         <Route path='partenaireAdmin' element={<Partenaires />} />
+                        <Route path="achats" element={<Achats />} />
                     </Route>
 
                     <Route path="/admin" element={<Admin />} />

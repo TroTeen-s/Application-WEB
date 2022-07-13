@@ -24,7 +24,6 @@ class Payment extends Model
         'id_invoice_stripe',
         'user_id',
         'bought',
-        'id'
     ];
 
 

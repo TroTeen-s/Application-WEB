@@ -10,6 +10,7 @@ use App\Http\Controllers\MailController;
 use App\Http\Controllers\MaintenanceController;
 use App\Http\Controllers\NeedHelpController;
 use App\Http\Controllers\PackageController;
+use App\Http\Controllers\PaymentController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ScooterProblemController;
 use App\Http\Controllers\ScootersController;
@@ -135,7 +136,7 @@ Route::post('/dashboard/addproduct', [ProductController::class, 'addProduct']);
 Route::patch('/dashboard/products/{id}', [ProductController::class, 'update'])->where('id', '[0-9]+');
 Route::get('/dashboard/products', [ProductController::class, 'list']);
 Route::get('/dashboard/api/weather/list', [WeatherController::class , 'list']);
-
+Route::get('/dashboard/purchases/list', [PaymentController::class , 'list']);
 // problemes
 
 Route::get('/problems/list', ProblemsController::class);

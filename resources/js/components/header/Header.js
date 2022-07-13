@@ -376,7 +376,7 @@ function Header() {
                     className="no-underline px-3 py-2 flex items-center text-s uppercase font-bold leading-snug text-white"
                     to="/shop">
                     <i className="fab fa-facebook-square text-s leading-lg text-white opacity-75"></i>
-                    <span className="ml-2">{t('Shop')}</span>
+                    <span className="ml-2">{t('Our Shop')}</span>
                   </NavLink>
 
 
@@ -393,7 +393,7 @@ function Header() {
                     className="no-underline px-3 py-2 flex items-center text-s uppercase font-bold leading-snug text-white"
                     to="/sponsors">
                     <i className="fab fa-facebook-square text-s leading-lg text-white opacity-75"></i>
-                    <span className="ml-2">{t('Partners')}</span>
+                    <span className="ml-2">{t('Our Partners')}</span>
                   </NavLink>
 
                   <NavLink

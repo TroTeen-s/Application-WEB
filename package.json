@@ -43,6 +43,7 @@
         "i18next-browser-languagedetector": "^6.1.4",
         "i18next-http-backend": "^1.4.1",
         "leaflet": "^1.8.0",
+        "leaflet-routing-machine": "^3.2.12",
         "luxon": "^2.4.0",
         "prettier": "^2.6.2",
         "prop-types": "^15.8.1",

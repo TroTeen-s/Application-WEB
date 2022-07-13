@@ -1,8 +1,14 @@
 import * as React from "react";
 // import { Container, createTheme, ThemeProvider, Grid, Item } from "@mui/material";
 import "./styles.css";
+import {useTranslation} from 'react-i18next';
+
 
 function Main() {
+
+    const {t, i18n} = useTranslation();
+
+    
     return (
         <>
             <div className="relative contain">
@@ -21,16 +27,13 @@ function Main() {
                                 {/* <span className="w-20 h-2 bg-gray-800 dark:bg-white mb-12">
                                  </span> */}
                                 <h1 className="font-bebas-neue uppercase text-4xl sm:text-6xl font-black flex flex-col leading-none text-white">
-                                    Deplacez vous
+                                {t('Move with')}
                                     <span className="text-5xl sm:text-7xl text-orange-300">
-                                        Sans limite
+                                    {t('no limits')}
                                     </span>
                                 </h1>
                                 <p className="text-sm sm:text-base xs:hidden text-white lg:text-white dark:text-white">
-                                    Dimension of reality that makes change
-                                    possible and understandable. An indefinite
-                                    and homogeneous environment in which natural
-                                    events and human existence take place.
+                                {t('Since 2012, Easy Scooter is the first company to offer the rental of electric scooters to Lyon with diversified offers, able to meet all kinds of requests!')}
                                 </p>
                                 <div className="flex mt-8">
                                     <a
@@ -38,14 +41,14 @@ function Main() {
                                         id="buttonOrange"
                                         className="no-underline uppercase py-2 px-12 rounded-lg bg-text-orange-300 border-2 border-transparent text-white text-md mr-4 hover:bg-black-trot"
                                     >
-                                        To be free
+                                         {t('To be free')}
                                     </a>
 
                                     <a
                                         href="#"
                                         className="no-underline uppercase py-2 px-12 rounded-lg bg-transparent border-2 border-orange-300 text-white dark:text-white hover:bg-black-trot hover:text-white text-md"
                                     >
-                                        Get Android Application
+                                       {t('GET ANDROID APPLICATION')}
                                     </a>
                                 </div>
                             </div>
@@ -60,7 +63,7 @@ function Main() {
                         <div className="max-w-xl mb-10 md:mx-auto sm:text-center lg:max-w-2xl md:mb-12">
                             <div>
                                 <p className="inline-block px-3 py-px mb-4 text-xs font-semibold tracking-wider text-teal-900 uppercase rounded-full bg-teal-accent-400">
-                                    Actualités
+                                {t('NEWS')}
                                 </p>
                             </div>
                             <h2 className="max-w-lg mb-6 font-sans text-3xl font-bold leading-none tracking-tight text-gray-900 sm:text-4xl md:mx-auto">
@@ -76,12 +79,12 @@ function Main() {
                                 <rect fill="url(#679d5905-e08c-4b91-a66c-84aefbb9d2f5)" width="52" height="24"></rect>
                                 </svg>
                                 <span className="relative">
-                                Nous déposons nos clés à la ville de Lyon
+                                {t('WE GIVE OUR KEYS TO THE CITY OF LYON')}
                                 </span>
                             </span>
                             </h2>
                             <p className="text-base text-gray-700 md:text-lg">
-                                Le premier déploiement d'EasyScooter a lieu à Lyon, ville de naissances des créateurs de l'application
+                            {t('The first deployment of EasyScooter takes place in Lyon, birthplace of the creators of the application')}
                             </p>
                         </div>
                         <div className="mx-auto lg:max-w-2xl">

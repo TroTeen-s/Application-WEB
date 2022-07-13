@@ -51,7 +51,7 @@ const getInitials = (name = '') => name
     .map((v) => v && v[0].toUpperCase())
     .join('');
 
-export default function Main() {
+export default function fMain() {
 
     const notify = () => toast.success('+1 Trotinette ajouté');
     const SendToFix = (event) => toast(`Trotinette ID : ${event} envoyé en réparation !`, {icon: '💤'});

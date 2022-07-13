@@ -17,6 +17,9 @@ import { outlinedInputClasses } from "@mui/material/OutlinedInput";
 import { inputLabelClasses } from "@mui/material/InputLabel";
 import { styled } from "@mui/material/styles";
 
+import {useTranslation} from 'react-i18next';
+
+
 const StyledTextField = styled(TextField)({
     [`& .${outlinedInputClasses.root} .${outlinedInputClasses.notchedOutline}`]: {
       borderColor: "white"
@@ -51,6 +54,10 @@ const StyledTextField = styled(TextField)({
 
 
 export default function SignUpForm() {
+    
+
+    const {t, i18n} = useTranslation();
+
     let [firstnameError, setFirstnameError] = useState({ error: false, helper: '' });
     let [lastnameError, setLastnameError] = useState({ error: false, helper: '' });
     let [usernameError, setUsernameError] = useState({ error: false, helper: '' });
@@ -157,7 +164,7 @@ export default function SignUpForm() {
 
 
     return (
-        <section className="h-auto bg-black-trot">
+        <section className="h-full bg-black-trot pt-10">
             <div className="min-h-auto flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8">
                 <div className="max-w-md w-full space-y-8">
                     <div>
@@ -177,7 +184,7 @@ export default function SignUpForm() {
                             </NavLink>
                         </div>
                         <h2 className="mt-6 text-center text-2xl font-extrabold text-white">
-                            Sign up to create an account
+                            {t('Sign up to create an account')}
                         </h2>
                     </div>
                     <Box className="mt-8 space-y-6" component="form" noValidate onSubmit={handleSubmit} sx={{ mt: 1 }}>
@@ -185,7 +192,7 @@ export default function SignUpForm() {
 
                         <div className="flex items-center justify-center space-x-2">
                             <span className="h-px w-16 bg-white"></span>
-                            <span className="text-white font-normal">Personnal Information</span>
+                            <span className="text-white font-normal"> {t('Personnal Information')}</span>
                             <span className="h-px w-16 bg-white"></span>
                         </div>
 
@@ -200,7 +207,7 @@ export default function SignUpForm() {
                                 required
                                 fullWidth
                                 id="firstname"
-                                label="Prénom"
+                                label={t('First name')}
                                 helperText={firstnameError.helper}
                                 autoFocus
                             />
@@ -211,7 +218,7 @@ export default function SignUpForm() {
                                 required
                                 fullWidth
                                 id="lastname"
-                                label="Nom de famille"
+                                label={t('Second name')}
                                 name="lastname"
                                 helperText={lastnameError.helper}
                             />
@@ -222,7 +229,7 @@ export default function SignUpForm() {
                                 required
                                 fullWidth
                                 id="username"
-                                label="Pseudonyme"
+                                label="Pseudo"
                                 name="username"
                                 helperText={usernameError.helper}
                             />
@@ -233,7 +240,7 @@ export default function SignUpForm() {
                                 required
                                 fullWidth
                                 id="phone_number"
-                                label="Numéro de téléphone"
+                                label={t('Phone number')}
                                 name="phone_number"
                                 helperText={phoneNumberError.helper}
                             />
@@ -245,7 +252,7 @@ export default function SignUpForm() {
                                 required
                                 fullWidth
                                 id="email"
-                                label="Adresse email"
+                                label={t('Email adress')}
                                 name="email"
                                 helperText={emailError.helper}
                             />
@@ -254,7 +261,7 @@ export default function SignUpForm() {
                             <Grid item xs={12}>
                                 <div className="flex items-center justify-center space-x-2">
                                     <span className="h-px w-16 bg-white"></span>
-                                    <span className="text-white font-normal">Security</span>
+                                    <span className="text-white font-normal">{t('Security')}</span>
                                     <span className="h-px w-16 bg-white"></span>
                                 </div>
                             </Grid>
@@ -265,7 +272,7 @@ export default function SignUpForm() {
                                 required
                                 fullWidth
                                 name="password"
-                                label="Mot de passe"
+                                label={t('Password')}
                                 type="password"
                                 id="password"
                                 helperText={passwordError.helper}
@@ -277,7 +284,7 @@ export default function SignUpForm() {
                                 required
                                 fullWidth
                                 name="password_confirmation"
-                                label="Confirmation Mot de passe"
+                                label={t('Confirm Password')}
                                 type="password"
                                 id="password"
                                 helperText={passwordError.helper}
@@ -285,33 +292,7 @@ export default function SignUpForm() {
                         </Grid>
                         </Grid>
 
-                        <div className="flex items-center justify-between">
-                            <div className="flex items-center">
-                                <input
-                                    id="remember-me"
-                                    name="remember-me"
-                                    type="checkbox"
-                                    className="h-4 w-4 text-orange-300 focus:ring-orange-200 border-gray-300 rounded"
-                                />
-                                <label
-                                    for="remember-me"
-                                    className="ml-2 block text-sm text-white"
-                                >
-                                    {" "}
-                                    Remember me{" "}
-                                </label>
-                            </div>
-
-                            <div className="text-sm">
-                                <a
-                                    href="#"
-                                    className="font-medium text-orange-300 hover:text-orange-300"
-                                >
-                                    {" "}
-                                    Forgot your password?{" "}
-                                </a>
-                            </div>
-                        </div>
+                    
 
                         <div>
                             <button
@@ -333,19 +314,18 @@ export default function SignUpForm() {
                                         />
                                     </svg>
                                 </span>
-                                Sign in
+                                {t('Sign up')}
                             </button>
                         </div>
                         <div className="flex items-center justify-center space-x-2">
                             <span className="h-px w-16 bg-white"></span>
-                            <span className="text-white font-normal">OR</span>
+                            <span className="text-white font-normal">{t('Or')}</span>
                             <span className="h-px w-16 bg-white"></span>
                         </div>
                         <p className="flex flex-col items-center justify-center mt-10 text-center text-md text-white">
-                            <span>Do you have an account?</span>
+                            <span>{t('Do you have an account?')}</span>
                             <Link to="/auth/login">
-                                <a className="text-orange-300 hover:text-black no-underline hover:underline cursor-pointer transition ease-in duration-300">Sign
-                                    in</a>
+                                <a className="text-orange-300 hover:text-black no-underline hover:underline cursor-pointer transition ease-in duration-300">{t('Sign in')}</a>
                             </Link>
                         </p>
                     </Box>

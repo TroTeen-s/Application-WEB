@@ -1,12 +1,14 @@
 import React, { useState } from "react";
 import { MapContainer, TileLayer, Marker, Popup } from "react-leaflet";
 import "./style.css";
+import {useTranslation} from 'react-i18next';
 
 
 function NeedHelp() {
 
     const [status, setStatus] = useState(undefined);
     const [pressing, needToBePressing] = useState({ status: false });
+    const {t, i18n} = useTranslation();
 
     const [firstname, setFirstname] = useState("");
     const [lastname,setLastname] = useState("")
@@ -34,7 +36,7 @@ function NeedHelp() {
         needToBePressing({status : true});
 
         if (firstname.trim() === '') {
-            setFirstnameError({ error: false, helper: 'Champs vide' });
+            setFirstnameError({ error: false, helper: t('empty fields') });
         } else if (firstname.trim().length < 2 || firstname.trim().length > 50) {
             setFirstnameError({ error: false, helper: 'Prénom trop court / trop long' });
         } else {
@@ -42,9 +44,9 @@ function NeedHelp() {
         }
         //lastname
         if (lastname.trim() === '') {
-            setLastnameError({ error: false, helper: 'Champs vide' });
+            setLastnameError({ error: false, helper: t('empty fields') });
         } else if (lastname.trim().length < 4 || lastname.trim().length > 50) {
-            setLastnameError({ error: false, helper: 'Nom trop court / trop long' });
+            setLastnameError({ error: false, helper: t('First name too short / too long') });
         }
         else {
             setLastnameError({ error: true, helper: '' });
@@ -53,18 +55,18 @@ function NeedHelp() {
 
          //email
         if (email.trim() === '') {
-            setEmailError({ error: false, helper: 'Champs vide' });
+            setEmailError({ error: false, helper: t('empty fields') });
         } else if (!validateEmail(email.trim())) {
-            setEmailError({ error: false, helper: 'format email demandé (exemple@mail.fr)' });
+            setEmailError({ error: false, helper: t('requested email format (example@mail.fr)') });
         }
         else {
             setEmailError({ error: true, helper: '' });
         }
 
         if (message.trim() === '') {
-            setMessageError({ error: false, helper: 'Champs vide' });
+            setMessageError({ error: false, helper: t('empty fields') });
         } else if (message.trim().length < 20) {
-            setMessageError({ error: false, helper: 'Message trop court' });
+            setMessageError({ error: false, helper: t('Message too short') });
         }
         else {
             setMessageError({ error: true, helper: '' });
@@ -96,14 +98,14 @@ function NeedHelp() {
             <div className="container">
                 <div className="flex flex-wrap -mx-4">
                     <div className="m-auto text-center md:w-8/12">
-                        <h2 className="text-2xl text-black-trot font-bold md:text-4xl"> Besoin <span className="text-orange-300"> d'aide </span> </h2>
-                        <h3 className="text-xl font-medium mb-10 pt-4"> Vous avez une question ou un problème ? Contactez-nous  </h3>
+                        <h2 className="text-2xl text-black-trot font-bold md:text-4xl">{t('Need')} <span className="text-orange-300">{t('help')} </span> </h2>
+                        <h3 className="text-xl font-medium mb-10 pt-4">{t('Do you have a question or a problem ? contact us')}</h3>
                     </div>
                 </div>
 
     <div className="mt-12 grid gap-6 md:grid-cols-2 lg:flex lg:space-x-8">
         <div className="relative md:col-span-1 group lg:w-[32%]">
-           <div aria-hidden="true" className="absolute top-0 w-full h-full rounded-2xl p-4 bg-white shadow-xl transition duration-500 group-hover:scale-105 lg:group-hover:scale-110"></div>
+           <div aria-hidden="true" className="absolute top-0 w-full h-full rounded-2xl p-4 bg-white transition duration-500 group-hover:scale-105 lg:group-hover:scale-110"></div>
               <div className="relative p-6 space-y-6">
                 <div className="relative">
                     <div class=" w-[70px] h-[70px] flex items-center justify-center bg-orange-300 rounded-2xl mb-2">
@@ -112,16 +114,15 @@ function NeedHelp() {
                         </svg>
                     </div>
                 </div>
-                <h2 className="text-2xl text-orange-300 font-semibold">Fiabilité </h2>
+                <h2 className="text-2xl text-orange-300 font-semibold">{t('Reliability')} </h2>
                     <p class="text-body-color">
-                    We dejoy working with discerning clients, people for whom
-                    qualuty, service, integrity & aesthetics.
+                    {t('Our workforce is based on solid knowledge in the field of electric scooters.')}
                     </p>
 
             </div>
          </div>
          <div className="relative md:col-span-1 group lg:w-[32%]">
-           <div aria-hidden="true" className="absolute top-0 w-full h-full rounded-2xl p-4 bg-white shadow-xl transition duration-500 group-hover:scale-105 lg:group-hover:scale-110"></div>
+           <div aria-hidden="true" className="absolute top-0 w-full h-full rounded-2xl p-4 bg-white  transition duration-500 group-hover:scale-105 lg:group-hover:scale-110"></div>
               <div className="relative p-6 space-y-6">
                 <div className="relative">
                     <div class=" w-[70px] h-[70px] flex items-center justify-center bg-orange-300 rounded-2xl mb-2">
@@ -136,16 +137,15 @@ function NeedHelp() {
                         />                        </svg>
                     </div>
                 </div>
-                <h2 className="text-2xl text-orange-300 font-semibold">Efficacité</h2>
+                <h2 className="text-2xl text-orange-300 font-semibold">{t('Efficiency')} </h2>
                     <p class="text-body-color">
-                    We dejoy working with discerning clients, people for whom
-                    qualuty, service, integrity & aesthetics.
+                    {t('Easycooter has a very good rating for its customer service.')}
                     </p>
 
             </div>
          </div>
          <div className="relative md:col-span-1 group lg:w-[32%]">
-           <div aria-hidden="true" className="absolute top-0 w-full h-full rounded-2xl p-4 bg-white shadow-xl transition duration-500 group-hover:scale-105 lg:group-hover:scale-110"></div>
+           <div aria-hidden="true" className="absolute top-0 w-full h-full rounded-2xl p-4 bg-white  transition duration-500 group-hover:scale-105 lg:group-hover:scale-110"></div>
               <div className="relative p-6 space-y-6">
                 <div className="relative">
                     <div class=" w-[70px] h-[70px] flex items-center justify-center bg-orange-300 rounded-2xl mb-2">
@@ -168,10 +168,9 @@ function NeedHelp() {
                         />                        </svg>
                     </div>
                 </div>
-                <h2 className="text-2xl text-orange-300 font-semibold">Rapidité</h2>
+                <h2 className="text-2xl text-orange-300 font-semibold">{t('Quickness')}</h2>
                     <p class="text-body-color">
-                    We dejoy working with discerning clients, people for whom
-                    qualuty, service, integrity & aesthetics.
+                    {t('We promise you fast service and a response before 12 noon.')}
                     </p>
 
             </div>
@@ -192,7 +191,7 @@ function NeedHelp() {
 
                     <Marker position={[45.764043, 4.835659]} >
                         <Popup>
-                        ID : 1 <br /> Easily customizable.
+                            Hey ;)
                         </Popup>
                     </Marker>
 
@@ -207,13 +206,13 @@ function NeedHelp() {
                     <input onChange={(e) => setLastname(e.target.value)} disabled={status?.type === "success" && true}
                            type="text" id="nom"
                            className="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500"
-                           placeholder="Nom" />
+                           placeholder={t('Second name')} />
                 </div>
                 <div className="">
                     <input onChange={(e) => setFirstname(e.target.value)} disabled={status?.type === "success" && true}
                            type="text" required id="prenom"
                            className="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 "
-                           placeholder="Prénom" />
+                           placeholder={t('First name')} />
                 </div>
                 <div className="relative">
                     <div className="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
@@ -226,17 +225,17 @@ function NeedHelp() {
                     <input onChange={(e) => setEmail(e.target.value)} disabled={status?.type === "success" && true}
                            type="text" required id="email"
                            className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full pl-10 p-2.5 "
-                           placeholder="name@gmail.com" />
+                           placeholder="Mail@gmail.com" />
                 </div>
 
                 <textarea onChange={(e) => setMessage(e.target.value)} disabled={status?.type === "success" && true}
                           id="message" required rows="4"
                           className="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 "
-                          placeholder="Leave a comment... ( 20 characters min ) "></textarea>
+                          placeholder={t('Leave a comment (min 20 characters)..')}></textarea>
 
                 <div>
                     <button onClick={SendTicket} type="button" disabled={status?.type === "success" && true}
-                            className="py-2 px-6 rounded bg-orange-300 text-base text-white font-semibold uppercase">{status?.type === "success" ? "TICKET ENVOYE" : "Send Message"}</button>
+                            className="py-2 px-6 rounded bg-orange-300 text-base text-white font-semibold uppercase">{status?.type === "success" ? t('Ticket sent!') : t('Send Ticket')}</button>
                 </div>
             </form>
 
@@ -249,8 +248,8 @@ function NeedHelp() {
         <div className="order-2 md:order-3 col-span-full md:col-span-1 py-5 md:py-10 px-6">
 
           <div className="mx-auto max-w-xl flex flex-col space-y-5">
-            <h2 className="text-4xl font-oswald uppercase">Contactez-nous</h2>
-            <p className="text-sm text-gray-500">Lorem ipsum dolor sit amet consectetur adipisicing elit. Facilis unde, voluptatibus nemo molestiae iure, repudiandae quaerat ipsam, labore sed dolorem nisi odit at esse ullam suscipit quidem necessitatibus aut modi.</p>
+            <h2 className="text-4xl font-oswald uppercase"> {t('Contact us')}</h2>
+            <p className="text-sm text-gray-500"> {t('Do not hesitate to contact us if you have any question or problem. Wait a minimum of 12 hours before each ticket. Any non-serious ticket will not be taken into account.')}  </p>
             <a href="#mail" className="inline-flex items-center text-sm text-blue-400 font-semibold hover:text-blue-500">
               easyscooter@gmail.com
             </a>
@@ -282,16 +281,14 @@ function NeedHelp() {
                 {status?.type === "success" && <div
                     className="p-4 mb-4 text-sm text-green-700 bg-green-100 rounded-lg dark:bg-green-200 dark:text-green-800"
                     role="alert">
-                    <span className="font-medium">Ticket envoyé !</span> Une réponse du support vous sera addressé par
-                    mail le plus vite possible :)
+                    <span className="font-medium">{t('Ticket sent!')}</span> {t('A response from support will be sent to you by email as soon as possible :)')}
                 </div>}
 
                 {status?.type === "error" && (
                     <div
                         className="p-4 mb-4 text-sm text-red-700 bg-red-100 rounded-lg dark:bg-red-200 dark:text-red-800"
                         role="alert">
-                        <span className="font-medium">Erreur dans l'envoi du ticket !</span> L'équipe de maintenance
-                        s'en charge !
+                        <span className="font-medium">{t('Error sending ticket!')}</span> {t('The maintenance team takes care of it!')}
                     </div>
                 )}
 
@@ -300,7 +297,7 @@ function NeedHelp() {
                     <div
                         className="p-4 mb-4 text-sm text-yellow-700 bg-yellow-100 rounded-lg dark:bg-yellow-200 dark:text-yellow-800"
                         role="alert">
-                        <span className="font-medium">Attention ! </span> {firstnameError.helper}
+                        <span className="font-medium">{t('Look out !')} </span> {firstnameError.helper}
                     </div>
                 )}
 
@@ -308,7 +305,7 @@ function NeedHelp() {
                     <div
                         className="p-4 mb-4 text-sm text-yellow-700 bg-yellow-100 rounded-lg dark:bg-yellow-200 dark:text-yellow-800"
                         role="alert">
-                        <span className="font-medium">Attention ! </span> {lastnameError.helper}
+                        <span className="font-medium">{t('Look out !')} </span> {lastnameError.helper}
                     </div>
                 )}
 
@@ -316,7 +313,7 @@ function NeedHelp() {
                     <div
                         className="p-4 mb-4 text-sm text-yellow-700 bg-yellow-100 rounded-lg dark:bg-yellow-200 dark:text-yellow-800"
                         role="alert">
-                        <span className="font-medium">Attention ! </span> {emailError.helper}
+                        <span className="font-medium">{t('Look out !')} </span> {emailError.helper}
                     </div>
                 )}
 
@@ -324,7 +321,7 @@ function NeedHelp() {
                     <div
                         className="p-4 mb-4 text-sm text-yellow-700 bg-yellow-100 rounded-lg dark:bg-yellow-200 dark:text-yellow-800"
                         role="alert">
-                        <span className="font-medium">Attention ! </span> {messageError.helper}
+                        <span className="font-medium">{t('Look out !')} </span> {messageError.helper}
                     </div>
                 )}
 

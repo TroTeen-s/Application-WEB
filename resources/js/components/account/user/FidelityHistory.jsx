@@ -5,8 +5,11 @@ import Container from "@mui/material/Container";
 import { DateTime } from "luxon";
 import { DataGrid } from "@mui/x-data-grid";
 import './style.css';
+import {useTranslation} from 'react-i18next';
 
 const FidelityHistory = () => {
+
+    const {t, i18n} = useTranslation();
 
     const [userInfos, setUserInfoss] = useState();
 
@@ -60,22 +63,22 @@ const FidelityHistory = () => {
         <Container>
             <div>
                 <Grid container spacing={2}>
-                    <Grid item alignItems={"center"} sx={{ m: 2 }}>
-                        <Typography variant="h3"
-                                    component={"span"}>Historique de votre compte fidélité</Typography>
+                    <Grid item alignItems={"center"} sx={{ mb: 2 }}>
+                        <Typography variant="h5"
+                                    component={"span"} className="black-trot">{t('Your loyalty balance')}</Typography>
                     </Grid>
 
                     <Grid container item xs={12} rowSpacing={1} columnSpacing={{ xs: 1, sm: 2, md: 3 }}>
                         <Grid item xs={12} md={3}>
-                            <div>Point actuels: {userInfos?.fidelity_points}</div>
+                            <div>{t('Current points:')} {userInfos?.fidelity_points}</div>
                         </Grid>
                         <Grid item xs={12} md={3}>
-                            <div>Points gagnés en tout: {userInfos?.fidelityTotal}</div>
+                            <div>{t('Points generated in total:')} {userInfos?.fidelityTotal}</div>
                         </Grid>
                     </Grid>
 
                     <Grid container item xs={12}>
-                        <h1>Historique de votre balance fidélité: </h1>
+                        <h2 className="black-trot mt-4">{t('History of your loyalty balance:')}</h2>
                         <div style={{ height: 400, width: "100%" }}>
                             <DataGrid
                                 rows={userInfos ? userInfos.fidelity : []}

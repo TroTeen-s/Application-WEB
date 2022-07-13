@@ -24,6 +24,7 @@ return new class extends Migration {
             $table->string('id_invoice_stripe')->nullable();
             $table->unsignedBigInteger('user_id')->nullable();
             $table->foreign('user_id')->references('id')->on('users');
+            $table->string('facture')->nullable();
         });
     }
 

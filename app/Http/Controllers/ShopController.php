@@ -151,6 +151,9 @@ class ShopController extends Controller
 
     }
 
+  
+
+
     public function getCartInfo($id): JsonResponse
     {
         $cart = Cart::query()->firstWhere('id', $id);
@@ -167,7 +170,7 @@ class ShopController extends Controller
     {
     
     $data = Payment::query()
-    ->where(['user_id' => $id])
+    ->where(['id' => $id])
     ->get();
 
 
@@ -346,7 +349,7 @@ class ShopController extends Controller
         // **************************
         $pdf->SetLineWidth(0.1); $pdf->Rect(5, 260, 200, 6, "D");
         $pdf->SetXY( 1, 260 ); $pdf->SetFont('Arial','',7);
-        $pdf->Cell( $pdf->GetPageWidth(), 7, "Clause de réserve de propriété (loi 80.335 du 12 mai 1980) : Les marchandises vendues demeurent notre propriété jusqu'au paiement intégral de celles-ci.", 0, 0, 'C');
+        $pdf->Cell( $pdf->GetPageWidth(), 7, "Clause de reserve de propriete (loi 80.335 du 12 mai 1980) : Les marchandises vendues demeurent notre propriete jusqu'au paiement integral de celles-ci.", 0, 0, 'C');
         
         // $y1 = 270;
         // //Positionnement en bas et tout centrer
@@ -372,8 +375,12 @@ class ShopController extends Controller
     
         $rand = rand(1, 100000);
 
+  
+
+    $pdf->Output($nom_file,'F', true);
     $pdf->Output("I", $nom_file);
     exit;
+
     }
 
 

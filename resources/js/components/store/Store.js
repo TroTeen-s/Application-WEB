@@ -116,9 +116,9 @@ function Store() {
                 <div className="container m-auto px-6 py-20 md:px-12 lg:px-20">
                     <div className="m-auto text-center lg:w-7/12 mb-10">
                         <h2 className="text-2xl text-black-trot font-bold md:text-4xl">{t('Our')} <span
-                            className="text-orange-300">Abonnements</span></h2>
+                            className="text-orange-300">{t('Subscriptions')}</span></h2>
                         <h3 className="text-xl font-medium pb-15 mt-5">
-                            Fidélisez-vous à EasyScooter pour profiter d'offres plus avantageuses
+                        {t('Rely on EasyScooter to take advantage of more advantageous offers')}
                         </h3>
                     </div>
                     <div className="mt-24 grid items-center gap-6 md:grid-cols-2 lg:flex lg:space-x-8">
@@ -143,7 +143,7 @@ function Store() {
                                     <ul role="list" className="w-max space-y-4 mt-4 pb-6 m-auto text-gray-600">
                                         <li className="space-x-2">
                                             <span className="text-orange-300 font-semibold">-</span>
-                                            <span>Nombre de voyage maximum : {max_trips} </span>
+                                            <span> {t('Maximum number of trips')} {max_trips} </span>
                                         </li>
 
                                     </ul>
