@@ -51,7 +51,6 @@ class User extends Authenticatable
         'email_configured',
         'email_verified_at',
         'id_stripe',
-        'role',
         'fidelity_history'
     ];
 

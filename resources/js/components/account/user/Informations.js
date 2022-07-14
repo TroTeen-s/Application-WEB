@@ -9,6 +9,7 @@ import { styled } from "@mui/material/styles";
 import { outlinedInputClasses } from "@mui/material/OutlinedInput";
 import { inputLabelClasses } from "@mui/material/InputLabel";
 import { AuthContext } from "../../context/AuthContext";
+import {useTranslation} from 'react-i18next';
 
 const StyledTextField = styled(TextField)({
     [`& .${outlinedInputClasses.root} .${outlinedInputClasses.notchedOutline}`]: {
@@ -43,6 +44,8 @@ const StyledTextField = styled(TextField)({
 
 
 const Informations = () => {
+
+    const {t, i18n} = useTranslation();
 
     const [infos, setInfos] = useState([])
     let { auth } = useContext(AuthContext)
@@ -102,7 +105,7 @@ const Informations = () => {
                                     required
                                     fullWidth
                                     id="firstname"
-                                    label="Prénom"
+                                    label={t('Firstname')}
                                     autoFocus
                                     value={infos.firstname}
                                     onChange={handleChange}
@@ -114,7 +117,7 @@ const Informations = () => {
                                     required
                                     fullWidth
                                     id="lastname"
-                                    label="Nom de famille"
+                                    label={t('Second name')}
                                     name="lastname"
                                     value={infos.lastname}
                                     onChange={handleChange}
@@ -126,7 +129,7 @@ const Informations = () => {
                                     required
                                     fullWidth
                                     id="username"
-                                    label="Pseudonyme"
+                                    label="Pseudo"
                                     name="username"
                                     value={infos.username}
                                     onChange={handleChange}
@@ -138,7 +141,7 @@ const Informations = () => {
                                     required
                                     fullWidth
                                     id="phone_number"
-                                    label="Numéro de téléphone"
+                                    label={t('Phone Number')}
                                     name="phone_number"
                                     value={infos.phone_number}
                                     onChange={handleChange}
@@ -167,7 +170,7 @@ const Informations = () => {
                             variant="outlined"
                             sx={{ mt: 3, mb: 2 }}
                         >
-                            Changer mes informations personnelles
+                            {t('Change my personal information')}
                         </Button>
 
                     </Box>

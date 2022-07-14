@@ -3,17 +3,32 @@ import ListItemButton from "@mui/material/ListItemButton";
 import ListItemIcon from "@mui/material/ListItemIcon";
 import ListItemText from "@mui/material/ListItemText";
 import PeopleIcon from "@mui/icons-material/People";
-import BarChartIcon from "@mui/icons-material/BarChart";
 import CurrencyExchangeIcon from "@mui/icons-material/CurrencyExchange";
 import LocalGroceryStoreIcon from "@mui/icons-material/LocalGroceryStore";
 import ElectricScooterIcon from "@mui/icons-material/ElectricScooter";
 import MapIcon from "@mui/icons-material/Map";
 import BugReportIcon from "@mui/icons-material/BugReport";
+import DescriptionIcon from "@mui/icons-material/Description";
+import SubscriptionsIcon from "@mui/icons-material/Subscriptions";
+import WbSunnyIcon from "@mui/icons-material/WbSunny";
+import HandshakeIcon from "@mui/icons-material/Handshake";
 
 import { NavLink } from "react-router-dom";
 
 export const mainListItems = (
-  <React.Fragment>
+
+    <React.Fragment>
+
+        <NavLink className="no-underline text-black-trot" to="achats">
+            <ListItemButton>
+                <ListItemIcon>
+          <DescriptionIcon />
+        </ListItemIcon>
+        <ListItemText primary="Achats" />
+      </ListItemButton>
+    </NavLink>
+
+
     <NavLink className="no-underline text-black-trot" to="trot">
       <ListItemButton>
         <ListItemIcon>
@@ -23,28 +38,36 @@ export const mainListItems = (
       </ListItemButton>
     </NavLink>
 
-    <NavLink className="no-underline text-black-trot" to="following">
-      <ListItemButton>
-        <ListItemIcon>
-          <MapIcon />
-        </ListItemIcon>
-        <ListItemText primary="Suivi des Trotinettes" />
-      </ListItemButton>
-    </NavLink>
+      <NavLink className="no-underline text-black-trot" to="following">
+          <ListItemButton>
+              <ListItemIcon>
+                  <MapIcon />
+              </ListItemIcon>
+              <ListItemText primary="Suivi des Trotinettes" />
+          </ListItemButton>
+      </NavLink>
 
         <NavLink className="no-underline text-black-trot" to="customers">
             <ListItemButton>
                 <ListItemIcon>
                     <PeopleIcon />
                 </ListItemIcon>
-                <ListItemText primary="Customers" />
+                <ListItemText primary="Utilisateurs" />
             </ListItemButton>
         </NavLink>
+      <NavLink className="no-underline text-black-trot" to="notifications">
+          <ListItemButton>
+              <ListItemIcon>
+                  <MapIcon />
+              </ListItemIcon>
+              <ListItemText primary="Notifications Push" />
+          </ListItemButton>
+      </NavLink>
 
         <NavLink className="no-underline text-black-trot" to="subscriptions">
             <ListItemButton>
                 <ListItemIcon>
-                    <PeopleIcon />
+                    <SubscriptionsIcon />
                 </ListItemIcon>
                 <ListItemText primary="Abonnements" />
             </ListItemButton>
@@ -53,9 +76,9 @@ export const mainListItems = (
         <NavLink className="no-underline text-black-trot" to="api">
             <ListItemButton>
                 <ListItemIcon>
-                    <BarChartIcon />
+                    <WbSunnyIcon />
                 </ListItemIcon>
-                <ListItemText primary="API" />
+                <ListItemText primary="Météo" />
             </ListItemButton>
         </NavLink>
 
@@ -71,7 +94,7 @@ export const mainListItems = (
     <NavLink className="no-underline text-black-trot" to="partenaireAdmin">
       <ListItemButton>
         <ListItemIcon>
-          <PeopleIcon />
+          <HandshakeIcon />
         </ListItemIcon>
         <ListItemText primary="Partenaires" />
       </ListItemButton>

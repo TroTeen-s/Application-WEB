@@ -38,6 +38,12 @@ import {LinearProgress} from '@mui/material';
 import Button from "@mui/material/Button";
 import Modal from '@mui/material/Modal';
 import Backdrop from '@mui/material/Backdrop';
+import Dialog from '@mui/material/Dialog';
+import DialogActions from '@mui/material/DialogActions';
+import DialogContent from '@mui/material/DialogContent';
+import DialogContentText from '@mui/material/DialogContentText';
+import DialogTitle from '@mui/material/DialogTitle';
+import TextField from '@mui/material/TextField';
 
 const drawerWidth = 240;
 let listLengthTrot = 0;
@@ -51,9 +57,19 @@ const getInitials = (name = '') => name
     .map((v) => v && v[0].toUpperCase())
     .join('');
 
-export default function Main() {
+export default function fMain() {
+
+    const [openNew, setOpenNew] = React.useState(false);
+
+    const [formValuesNew, setFormValuesNew] = useState(defaultValuesNew);
+    const defaultValuesNew = {
+        brand: "",
+        description: "",
+        end: React.useState(new Date('2022-08-18T21:11:54'))[0],
+    };
 
     const notify = () => toast.success('+1 Trotinette ajouté');
+    const notifyWrong = () => toast.error('La trotinette en question existe déjà');
     const SendToFix = (event) => toast(`Trotinette ID : ${event} envoyé en réparation !`, {icon: '💤'});
 
     const SendToMaintenance = (event) => toast(`Trotinette ID : ${event} envoyé en maintenance !`, {icon: '💬'});
@@ -108,9 +124,32 @@ export default function Main() {
         setOpenFixing(true);
     };
 
+    const handleInputChangeNew = (e) => {
+        const { name, value } = e.target;
+        console.log(name)
+        console.log(value)
+        setFormValuesNew({
+            ...formValuesNew,
+            [name]: value,
+        });
+        console.log(formValuesNew);
+    };
+
+    const handleClickOpenNew = () => {
+        setOpenNew(true);
+    };
+
+
+
+    const handleCloseNew = () => {
+        setOpenNew(false);
+    };
+
     const handleCloseFixingModal = () => {
         setOpenFixing(false);
     };
+
+
 
     const handleSubmit = event => {
         event.preventDefault();
@@ -185,7 +224,7 @@ export default function Main() {
         {
             field: 'id',
             headerName: 'ID',
-            width: 50,
+            width: 60,
             headerAlign: 'center',
             align: 'center'
         }, {
@@ -206,7 +245,7 @@ export default function Main() {
             field: 'commentary',
             headerName: 'Commentaire',
             align: 'center',
-            width: 410,
+            width: 400,
             editable: false,
             headerAlign: 'center'
         }, {
@@ -486,25 +525,69 @@ export default function Main() {
         })
         .catch(error => console.log(error));
 
-
-
-
-
         let response = await axios.get(`/api/dashboard/api/dashboard/api/scooters/delete/${event}`);
 
         if (response.data.data) {
             setInfos(response.data.data)
         }
 
+        let response4 = await axios.get('/api/dashboard/scooters/list', {
+            headers: {
+                'Accept': 'application/json'
+            }
+        })
+
+        if (response4.data.data) {
+            listLengthTrot = response4.data.data.length;
+            setInfos(response4.data.data)
+        }
+
+        let response2 = await axios.get(`/api/dashboard/api/scooters/maintenance/list`);
+
+        if (response2.data.data) {
+            listLengthTrotMaintenance = response2.data.data.length;
+            setInfos2(response2.data.data)
+
+        }
+
+        let response3 = await axios.get(`/api/dashboard/api/scooters/fixing/list`);
+
+        if (response3.data.data) {
+            listLengthTrotFixing = response3.data.data.length;
+            setInfos3(response3.data.data)
+        }
+
     };
 
-    const AddScoot = async() => {
+    const AddScoot = async(event) => {
+        
+        event.preventDefault();
 
-        let response = await axios.get(`/api/dashboard/api/scooters/add`);
+        let verif = await axios.get('/api/dashboard/scooters/list', {
+            headers: {
+                'Accept': 'application/json'
+            }
+        })
+
+        if (verif.data.data) {
+            for (let i = 0; i < verif.data.data.length; i++) {
+                if (verif.data.data[i].model_serie === formValuesNew.serie) {
+                    setStatus({type: 'error', message: 'This scooter is already in the database'});
+                    notifyWrong();
+                    setOpenNew(false);
+                    return;
+                }
+            }
+        }
+
+
+
+        let response = await axios.post(`/api/dashboard/api/scooters/add`, { "serie": formValuesNew.serie});
 
         if (response.data.data) {
             setInfos(response.data.data);
             notify();
+            setOpenNew(false);
         }
 
         await axios
@@ -518,6 +601,32 @@ export default function Main() {
 
         })
         .catch(error => console.log(error));
+
+        let response4 = await axios.get('/api/dashboard/scooters/list', {
+            headers: {
+                'Accept': 'application/json'
+            }
+        })
+
+        if (response4.data.data) {
+            listLengthTrot = response4.data.data.length;
+            setInfos(response4.data.data)
+        }
+
+        let response2 = await axios.get(`/api/dashboard/api/scooters/maintenance/list`);
+
+        if (response2.data.data) {
+            listLengthTrotMaintenance = response2.data.data.length;
+            setInfos2(response2.data.data)
+
+        }
+
+        let response3 = await axios.get(`/api/dashboard/api/scooters/fixing/list`);
+
+        if (response3.data.data) {
+            listLengthTrotFixing = response3.data.data.length;
+            setInfos3(response3.data.data)
+        }
 
 
 
@@ -698,7 +807,7 @@ export default function Main() {
                         className="bg-color-300"
                         variant="contained"
                         onClick={() => {
-                            AddScoot();
+                            handleClickOpenNew();
                         }}
                         >
                         Ajouter des trotinettes
@@ -905,6 +1014,38 @@ export default function Main() {
                     </Box>
                 </Grid>
                 </Grid>
+
+                
+                <Dialog open={openNew} onClose={handleCloseNew}>
+                    <form action="" onSubmit={AddScoot}>
+                        <div className="flex flex-col space-y-4">
+                            <DialogTitle>Ajouter une Trotinette</DialogTitle>
+                            <DialogContent>
+                                <div className="flex flex-col space-y-4">
+                                    <DialogContentText>
+                                        Veuillez renseigner les information afin d'ajouter une trotinette:<br />
+                                        XXXX-XXX-XXXX <br />
+                                    </DialogContentText>
+
+                                    <TextField
+                                        id="serie"
+                                        label="Model de Serie"
+                                        name="serie"
+                                        defaultValue={defaultValuesNew.brand}
+                                        onChange={handleInputChangeNew}
+                                    />
+                                    
+                                </div>
+
+
+                            </DialogContent>
+                        </div>
+                        <DialogActions>
+                            <Button onClick={handleCloseNew}>Annuler</Button>
+                            <Button type="submit">Ajouter</Button>
+                        </DialogActions>
+                    </form>
+                </Dialog>
 
             </Container>
         </Box>

@@ -5,10 +5,14 @@ import { Outlet } from "react-router";
 import verifyAuth from "../auth/verifyAuth";
 import "./style.css";
 import { NavLink } from "react-router-dom";
+import {useTranslation} from 'react-i18next';
+
 
 const Account = () => {
     let { auth } = useContext(AuthContext);
     verifyAuth();
+
+    const {t, i18n} = useTranslation();
 
     const selected = (link) => {
         return window.location.pathname.indexOf("account/" + link) >= 0 ?
@@ -21,11 +25,12 @@ const Account = () => {
 
         <section id="sectionAccount">
             <div className="m-auto text-center md:w-8/12">
-                <h2 className="text-2xl text-black-trot font-bold md:text-4xl">Voici <span
-                    className="text-orange-300">mon compte</span>
+                <h2 className="text-2xl text-black-trot font-bold md:text-4xl">{t('Here is')} <span
+                    className="text-orange-300">{t('my account')}</span>
                 </h2>
                 <h3 className="text-xl font-medium mb-10 pt-4">
-                    Modification d'information personnelles
+                    {t('Modification of personal information')}
+
                 </h3>
             </div>
 
@@ -40,37 +45,37 @@ const Account = () => {
                                     className={selected("informations")}
                                     to="/account/informations">
                                     <i className="fab fa-facebook-square text-s leading-lg text-black-trot opacity-75"></i>
-                                    <span className="duration-200 hover:text-black-trot">Mes informations</span>
+                                    <span className="duration-200 hover:text-black-trot">{t('Personnal information')}</span>
                                 </NavLink>
                                 <NavLink
                                     className={selected("password")}
                                     to="/account/password">
                                     <i className="fab fa-facebook-square text-s leading-lg text-black-trot opacity-75"></i>
-                                    <span className="duration-200 hover:text-black-trot">Mon mot de passe</span>
+                                    <span className="duration-200 hover:text-black-trot">{t('My password')}</span>
                                 </NavLink>
                                 <NavLink
                                     className={selected("subscriptions")}
                                     to="/account/subscriptions">
                                     <i className="fab fa-facebook-square text-s leading-lg text-black-trot opacity-75"></i>
-                                    <span className="duration-200 hover:text-black-trot">Mes abonnements</span>
+                                    <span className="duration-200 hover:text-black-trot">{t('My subscriptions')}</span>
                                 </NavLink>
                                 <NavLink
                                     className={selected("purchases")}
                                     to="/account/purchases">
                                     <i className="fab fa-facebook-square text-s leading-lg text-white opacity-75"></i>
-                                    <span className="duration-200 hover:text-orange-300">Mes achats</span>
+                                    <span className="duration-200 hover:text-orange-300">{t('My purchases')}</span>
                                 </NavLink>
                                 <NavLink
                                     className={selected("my-fidelity")}
                                     to="/account/my-fidelity">
                                     <i className="fab fa-facebook-square text-s leading-lg text-black-trot opacity-75"></i>
-                                    <span className="duration-200 hover:text-black-trot">Ma fidélité</span>
+                                    <span className="duration-200 hover:text-black-trot">{t('My loyalty')}</span>
                                 </NavLink>
                                 <NavLink
                                     className={selected("delete")}
                                     to="/account/delete">
                                     <i className="fab fa-facebook-square text-s leading-lg text-black-trot opacity-75"></i>
-                                    <span className="duration-200 hover:text-black-trot">Supprimer</span>
+                                    <span className="duration-200 hover:text-black-trot">{t('Delete')}</span>
                                 </NavLink>
                             </div>
                         </Grid>

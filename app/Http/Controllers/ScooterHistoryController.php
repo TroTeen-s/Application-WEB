@@ -2,15 +2,14 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\ScooterHistory;
 use App\Http\Requests\StoreScooterHistoryRequest;
 use App\Http\Requests\UpdateScooterHistoryRequest;
+use App\Models\ScooterHistory;
 use App\Models\Scooters;
-use Illuminate\Http\Request;
-use Exception;
-use Illuminate\Support\Str;
 use App\Traits\ApiResponse;
+use Exception;
 use Illuminate\Http\JsonResponse;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
 class ScooterHistoryController extends Controller
@@ -27,16 +26,20 @@ class ScooterHistoryController extends Controller
 
     public function HistoryMaintenance(Request $request) : JsonResponse
     {
-        
-        try{
+        if (auth()->user()->role !== "admin") {
+            return $this->fail("Non authorisé.");
+        }
 
-        $scooter = Scooters::where('id',$request->input('id'))->get();
 
-        $location = json_decode($scooter);
-        $model_serie = $location[0]->model_serie;
+        try {
 
-        $dataUpdate = new ScooterHistory([
-            'scooter_id' => $request->input('id'),
+            $scooter = Scooters::where('id', $request->input('id'))->get();
+
+            $location = json_decode($scooter);
+            $model_serie = $location[0]->model_serie;
+
+            $dataUpdate = new ScooterHistory([
+                'scooter_id' => $request->input('id'),
             'model_serie' => $model_serie,
             'history_status' => 'Envoyé en maintenance'
         ]);
@@ -49,7 +52,7 @@ class ScooterHistoryController extends Controller
         $dateFetch = ScooterHistory::all();
 
         return response()->json(array('success' => 'true', 'data' =>  $dateFetch));
-          
+
         }catch(Exception $e){
             return $this->fail('erreur', $e->getMessage());
         }
@@ -57,16 +60,19 @@ class ScooterHistoryController extends Controller
 
     public function HistoryFixing(Request $request) : JsonResponse
     {
-        
-        try{
+        if (auth()->user()->role !== "admin") {
+            return $this->fail("Non authorisé.");
+        }
 
-        $scooter = Scooters::where('id',$request->input('id'))->get();
+        try {
 
-        $location = json_decode($scooter);
-        $model_serie = $location[0]->model_serie;
+            $scooter = Scooters::where('id', $request->input('id'))->get();
 
-        $dataUpdate = new ScooterHistory([
-            'scooter_id' => $request->input('id'),
+            $location = json_decode($scooter);
+            $model_serie = $location[0]->model_serie;
+
+            $dataUpdate = new ScooterHistory([
+                'scooter_id' => $request->input('id'),
             'model_serie' => $model_serie,
             'history_status' => 'Envoyé en réparation'
         ]);
@@ -79,7 +85,7 @@ class ScooterHistoryController extends Controller
         $dateFetch = ScooterHistory::all();
 
         return response()->json(array('success' => 'true', 'data' =>  $dateFetch));
-          
+
         }catch(Exception $e){
             return $this->fail('erreur', $e->getMessage());
         }
@@ -88,16 +94,19 @@ class ScooterHistoryController extends Controller
 
     public function HistoryService(Request $request) : JsonResponse
     {
-        
-        try{
+        if (auth()->user()->role !== "admin") {
+            return $this->fail("Non authorisé.");
+        }
 
-        $scooter = Scooters::where('id',$request->input('id'))->get();
+        try {
 
-        $location = json_decode($scooter);
-        $model_serie = $location[0]->model_serie;
+            $scooter = Scooters::where('id', $request->input('id'))->get();
 
-        $dataUpdate = new ScooterHistory([
-            'scooter_id' => $request->input('id'),
+            $location = json_decode($scooter);
+            $model_serie = $location[0]->model_serie;
+
+            $dataUpdate = new ScooterHistory([
+                'scooter_id' => $request->input('id'),
             'model_serie' => $model_serie,
             'history_status' => 'Remis en Service'
         ]);
@@ -110,7 +119,7 @@ class ScooterHistoryController extends Controller
         $dateFetch = ScooterHistory::all();
 
         return response()->json(array('success' => 'true', 'data' =>  $dateFetch));
-          
+
         }catch(Exception $e){
             return $this->fail('erreur', $e->getMessage());
         }
@@ -118,16 +127,20 @@ class ScooterHistoryController extends Controller
 
     public function HistoryAdd(Request $request) : JsonResponse
     {
-        
-        try{
+        if (auth()->user()->role !== "admin") {
+            return $this->fail("Non authorisé.");
+        }
 
-        $id = DB::table('scooters')->orderBy('id', 'DESC')->first();
 
-        $data= json_decode( json_encode($id), true);
+        try {
 
-        $scooter = Scooters::where('id',$data)->get();
+            $id = DB::table('scooters')->orderBy('id', 'DESC')->first();
 
-        $location = json_decode($scooter);
+            $data = json_decode(json_encode($id), true);
+
+            $scooter = Scooters::where('id', $data)->get();
+
+            $location = json_decode($scooter);
         $id_serie = $location[0]->id;
         $model_serie = $location[0]->model_serie;
 
@@ -146,7 +159,7 @@ class ScooterHistoryController extends Controller
         $dateFetch = ScooterHistory::all();
 
         return response()->json(array('success' => 'true', 'data' =>  $dateFetch));
-          
+
         }catch(Exception $e){
             return $this->fail('erreur', $e->getMessage());
         }
@@ -154,44 +167,52 @@ class ScooterHistoryController extends Controller
 
     public function HistoryDelete(Request $request) : JsonResponse
     {
-        
-        try{
+        if (auth()->user()->role !== "admin") {
+            return $this->fail("Non authorisé.");
+        }
 
-            $scooter = Scooters::where('id',$request->input('id'))->get();
+
+        try {
+
+            $scooter = Scooters::where('id', $request->input('id'))->get();
 
             $location = json_decode($scooter);
             $model_serie = $location[0]->model_serie;
-    
+
             $dataUpdate = new ScooterHistory([
                 'scooter_id' => $request->input('id'),
                 'model_serie' => $model_serie,
                 'history_status' => "Trotinette " .$request->input('id') . " supprimé"
             ]);
             $dataUpdate->save();
-    
+
             if (!$dataUpdate) {
                 return response()->json(array('success' => 'false', 'message' => "Erreur pour l'historique de réparation'"), 400);
             }
-    
+
             $dateFetch = ScooterHistory::all();
-    
+
             return response()->json(array('success' => 'true', 'data' =>  $dateFetch));
-              
-            }catch(Exception $e){
+
+        }catch(Exception $e){
                 return $this->fail('erreur', $e->getMessage());
             }
     }
 
     public function List()
     {
-        
-        try{
+        if (auth()->user()->role !== "admin") {
+            return $this->fail("Non authorisé.");
+        }
 
-        $dateFetch = ScooterHistory::all();
 
-        return response()->json(array('success' => 'true', 'data' =>  $dateFetch));
-          
-        }catch(Exception $e){
+        try {
+
+            $dateFetch = ScooterHistory::all();
+
+            return response()->json(array('success' => 'true', 'data' => $dateFetch));
+
+        } catch (Exception $e) {
             return $this->fail('erreur', $e->getMessage());
         }
     }

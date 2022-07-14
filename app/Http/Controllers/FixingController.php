@@ -3,14 +3,8 @@
 namespace App\Http\Controllers;
 
 
-use Illuminate\Http\Request;
-use App\Traits\ApiResponse;
-use Illuminate\Http\JsonResponse;
 use App\Models\FixingCenter;
-use Illuminate\Support\Facades\DB;
-use Exception;
-use Illuminate\Support\Str;
-use Carbon\Carbon;
+use Illuminate\Http\Request;
 
 
 class FixingController extends Controller
@@ -23,6 +17,10 @@ class FixingController extends Controller
      */
     public function __invoke(Request $request)
     {
+        if (auth()->user()->role !== "admin") {
+            return $this->fail("Non authorisé.");
+        }
+
         $FC = FixingCenter::all();
 
         return response()->json(array('data' => $FC));

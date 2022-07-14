@@ -9,6 +9,7 @@ import { styled } from "@mui/material/styles";
 import { outlinedInputClasses } from "@mui/material/OutlinedInput";
 import { inputLabelClasses } from "@mui/material/InputLabel";
 import { AuthContext } from "../../context/AuthContext";
+import {useTranslation} from 'react-i18next';
 
 const StyledTextField = styled(TextField)({
     [`& .${outlinedInputClasses.root} .${outlinedInputClasses.notchedOutline}`]: {
@@ -46,6 +47,7 @@ const Password = () => {
     let error_new_password = false
     let error_confirm_new_password = false
 
+    const {t, i18n} = useTranslation();
 
     const [infos, setInfos] = useState([]);
     let { auth } = useContext(AuthContext)
@@ -100,7 +102,7 @@ const Password = () => {
                         required
                         fullWidth
                         name="password"
-                        label="Nouveau mot de passe"
+                        label={t('New password')}
                         type="password"
                         id="password"
                     />
@@ -111,7 +113,7 @@ const Password = () => {
                         required
                         fullWidth
                         name="password_confirmation"
-                        label="Confirmation du nouveau mot de passe"
+                        label={t('Confirm new password')}
                         type="password"
                         id="password"
                     />
@@ -140,7 +142,7 @@ const Password = () => {
                 variant="outlined"
                 sx={{ mt: 3, mb: 2 }}
             >
-                Changer de mot de passe
+                {t('Change password')}
             </Button>
 
         </Box>

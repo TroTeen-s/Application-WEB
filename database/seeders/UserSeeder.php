@@ -3,9 +3,9 @@
 namespace Database\Seeders;
 
 use App\Models\User;
-use Illuminate\Support\Str;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Str;
 use Stripe\Exception\ApiErrorException;
 use Stripe\StripeClient;
 
@@ -21,6 +21,7 @@ class UserSeeder extends Seeder
     {
         $loli = new User([
             'firstname' => 'lola',
+            'role' => 'admin',
             'username' => 'lola',
             'lastname' => 'lola',
             'phone_number' => Str::random(10),

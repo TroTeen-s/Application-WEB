@@ -4,11 +4,10 @@ namespace App\Http\Controllers;
 
 use App\Models\User;
 use App\Traits\ApiResponse;
-use Illuminate\{Http\JsonResponse, Support\Facades\Log, Http\Request, Support\Facades\Auth};
+use Illuminate\{Http\JsonResponse, Http\Request, Support\Facades\Auth, Support\Facades\Log};
 use Stripe\Exception\ApiErrorException;
 use Stripe\StripeClient;
 use Throwable;
-use App\Http\Controllers\MailController;
 
 class AuthController extends Controller
 {
@@ -177,7 +176,12 @@ class AuthController extends Controller
     {
         if (auth()->user()) {
             // The user is logged in...
-            return $this->success("VOus êtes connecté", ['username' => auth()->user()->username]);
+            $data = ['username' => auth()->user()->username];
+            if (auth()->user()->role === "admin") {
+                $data['role'] = "admin";
+            }
+
+            return $this->success("VOus êtes connecté", $data);
         }
         else {
             return $this->fail("VOus n'êtes pas connecté");

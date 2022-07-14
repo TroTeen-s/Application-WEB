@@ -4,7 +4,6 @@ import Container from "@mui/material/Container";
 import { DateTime } from "luxon";
 import { Chip } from "@mui/material";
 import { useNavigate } from "react-router";
-import { Typography } from "@mui/material";
 
 const Subscriptions = () => {
 
@@ -46,7 +45,7 @@ const Subscriptions = () => {
         let { row } = cellValues;
 
         if (!row.active) {
-            return <div className="center-text w-full">N/D</div>;
+            return <div className="center-text w-full">Abonnement pas actif</div>;
         }
 
         let start = DateTime.fromSQL(row.current_period_start).setLocale("fr-FR").toLocaleString();
@@ -64,15 +63,24 @@ const Subscriptions = () => {
     }, []);
 
     const columns = [
-        { field: "id", headerName: "ID", width: 90 },
+        {
+            field: "id",
+            headerName: "ID",
+            width: 50,
+            headerAlign: "center",
+            align: "center"
+        },
         {
             field: "last_payment",
             headerName: "Dernier paiment",
             editable: false,
+            headerAlign: "center",
+            align: "center",
+            width: 80,
             flex: 2,
             renderCell: ({ row }) => {
                 if (row.last_payment === "paid") {
-                    return "paid";
+                    return "Payé";
                 } else {
                     return (
                         <Chip
@@ -87,22 +95,28 @@ const Subscriptions = () => {
         {
             field: "active",
             headerName: "Actif",
-            width: 150,
+            headerAlign: "center",
+            align: "center",
+            width: 120,
             editable: false,
-            flex: 1
+            flex: 1,
+            renderCell: ({ row }) => row.active ? "Actif" : "Terminé"
         },
         {
             field: "current_period",
             headerName: "Période actuelle",
-            width: 150,
+            width: 250,
             editable: false,
-            flex: 2,
+            headerAlign: 'center',
+            align: "center",
             renderCell: currentPeriod
         },
         {
             field: "package_name",
-            headerName: "Abonnement",
+            headerName: "Type",
             width: 150,
+            headerAlign: 'center',
+            align: "center",
             editable: false,
             flex: 1
         },
@@ -110,6 +124,8 @@ const Subscriptions = () => {
             field: "trip_number",
             headerName: "Nombre de trajets",
             type: "number",
+            headerAlign: 'center',
+            align: "center",
             editable: false,
             flex: 2
         },
@@ -118,7 +134,8 @@ const Subscriptions = () => {
             headerName: "Informations",
             description: "This column has a value getter and is not sortable.",
             sortable: false,
-            width: 160,
+            headerAlign: 'center',
+            width: 120,
             align: "center",
             renderCell: (cellValues) => {
                 return (
@@ -139,7 +156,7 @@ const Subscriptions = () => {
     return (
         <>
             <Container>
-        
+
                 <div style={{ height: 400, width: "100%" }}>
                     <DataGrid
                         rows={data}

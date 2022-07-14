@@ -1,13 +1,10 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
-import '../css/app.css';
-import {
-    BrowserRouter as Router,
-    Route
-} from "react-router-dom";
-import Store from "./components/store/Store"
-import NeedHelp from "./components/needHelp/NeedHelp"
-import NotFound from "./components/notFound/NotFound"
+import React from "react";
+import ReactDOM from "react-dom";
+import "../css/app.css";
+import { BrowserRouter as Router, Route } from "react-router-dom";
+import Store from "./components/store/Store";
+import NeedHelp from "./components/needHelp/NeedHelp";
+import NotFound from "./components/notFound/NotFound";
 // import SignInPage from "./components/auth/SignInPage";
 import MainApp from "./components/MainApp";
 import { Navigate, Routes } from "react-router";
@@ -43,6 +40,8 @@ import Refunds from "./components/dashboard/Refunds";
 import FidelityHistory from "./components/account/user/FidelityHistory";
 import Partenaires from "./components/dashboard/partenaires/Partenaires";
 import SubscriptionsAdmin from "./components/dashboard/abonnements/SubscriptionsAdmin";
+import Notifications from "./components/dashboard/Notifications";
+import Achats from './components/dashboard/achats/purchases';
 
 ReactDOM.render(
     <React.StrictMode>
@@ -92,6 +91,9 @@ ReactDOM.render(
                         <Route path="api" element={<Api />} />
                         <Route path="refunds" element={<Refunds />} />
                         <Route path='partenaireAdmin' element={<Partenaires />} />
+                        <Route path="achats" element={<Achats />} />
+                        <Route path="partenaireAdmin" element={<Partenaires />} />
+                        <Route path="notifications" element={<Notifications />} />
                     </Route>
 
                     <Route path="/admin" element={<Admin />} />

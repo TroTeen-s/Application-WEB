@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { DataGrid } from "@mui/x-data-grid";
-import { Chip, FormControl, FormControlLabel, FormLabel, Radio, RadioGroup } from "@mui/material";
+import { Chip, FormControl, FormControlLabel, FormLabel, Radio, RadioGroup, Typography } from "@mui/material";
 import toast, { Toaster } from "react-hot-toast";
 import { DateTime } from "luxon";
 import Button from "@mui/material/Button";
@@ -10,7 +10,6 @@ import DialogContent from "@mui/material/DialogContent";
 import DialogContentText from "@mui/material/DialogContentText";
 import TextField from "@mui/material/TextField";
 import DialogActions from "@mui/material/DialogActions";
-import { Typography } from "@mui/material";
 
 const SubscriptionsAdmin = () => {
     const initialValues = {
@@ -282,7 +281,7 @@ const SubscriptionsAdmin = () => {
 
 
             <div className="mt-5 mb-5" style={{ height: 370, width: "100%" }}>
-                <h3> Liste des produits </h3>
+                <h3> Liste des abonnements </h3>
                 <DataGrid
                     rows={data}
                     columns={columns}
@@ -292,9 +291,6 @@ const SubscriptionsAdmin = () => {
             </div>
 
             <div>
-                <Button variant="outlined" onClick={handleClickOpen}>
-                    Open form dialog
-                </Button>
                 <Dialog open={open} onClose={handleClose}>
                     <DialogTitle>Subscribe</DialogTitle>
                     <DialogContent>

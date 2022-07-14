@@ -3,14 +3,9 @@
 namespace App\Http\Controllers;
 
 
-use Illuminate\Http\Request;
+use App\Models\MaintenanceCenter;
 use App\Traits\ApiResponse;
 use Illuminate\Http\JsonResponse;
-use App\Models\MaintenanceCenter;
-use Illuminate\Support\Facades\DB;
-use Exception;
-use Illuminate\Support\Str;
-use Carbon\Carbon;
 
 
 class MaintenanceController extends Controller
@@ -28,6 +23,10 @@ class MaintenanceController extends Controller
 
     public function __invoke(): JsonResponse
     {
+        if (auth()->user()->role !== "admin") {
+            return $this->fail("Non authorisé.");
+        }
+
         $MC = MaintenanceCenter::all();
 
         return response()->json(array('data' => $MC));

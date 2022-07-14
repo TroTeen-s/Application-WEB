@@ -1,39 +1,34 @@
 import "../../../css/app.css";
-import React, {useContext, useEffect, useState} from "react";
+import React, { useContext, useEffect, useState } from "react";
 import "./style.css";
 
 
-import Box from '@mui/material/Box';
-import Drawer from '@mui/material/Drawer';
-import List from '@mui/material/List';
-import ListItem from '@mui/material/ListItem';
-import ListItemText from '@mui/material/ListItemText';
+import Box from "@mui/material/Box";
+import Drawer from "@mui/material/Drawer";
+import List from "@mui/material/List";
+import ListItem from "@mui/material/ListItem";
+import ListItemText from "@mui/material/ListItemText";
 import IconButton from "@mui/material/IconButton";
 import Menu from "@mui/material/Menu";
 import MenuItem from "@mui/material/MenuItem";
 import Typography from "@mui/material/Typography";
-import {AuthContext, LanguageContext} from "../context/AuthContext";
+import { AdminContext, AuthContext, LanguageContext } from "../context/AuthContext";
 import Flag from "./components/Flag";
 
-import {NavLink} from "react-router-dom";
-import {ACTIONS, CartContext} from "../context/CartContext";
-import {useNavigate} from "react-router";
+import { NavLink } from "react-router-dom";
+import { ACTIONS, CartContext } from "../context/CartContext";
+import { useNavigate } from "react-router";
 import Weather from "./components/Weather";
-import Button from "@mui/material/Button";
 
 
-import {useTranslation} from 'react-i18next';
+import { useTranslation } from "react-i18next";
 
 
 function Header() {
 
-    let {language, setLanguage} = useContext(LanguageContext);
+    let { language, setLanguage } = useContext(LanguageContext);
 
-    const {t, i18n} = useTranslation();
-
-
-
-
+    const { t, i18n } = useTranslation();
 
 
     let navigate = useNavigate();
@@ -220,11 +215,11 @@ function Header() {
                     <a href="#" className="flex items-center justify-center rounded-md border border-transparent bg-orange-300 px-6 py-3 text-base font-medium text-white shadow-sm hover:bg-orange-400">{auth ? "Acheter" : "Se connecter pour acheter"}</a>
                   </div>
 
-                  
+
                   {/* <div className="mt-6">
                     <a href="#" className="flex items-center justify-center rounded-md border border-transparent bg-orange-300 px-6 py-3 text-base font-medium text-white shadow-sm hover:bg-orange-400">Acheter</a>
                   </div> */}
-          
+
                   </div>
                   <div className="mt-6 flex justify-center text-center text-sm text-gray-500">
                       <p>
@@ -247,27 +242,28 @@ function Header() {
 
            <ListItemText primary={text} />
 
-              </ListItem>
-            ))}
-          </List>
-          <Divider />
-          <List>
-            {['All mail', 'Trash', 'Spam'].map((text, index) => (
-              <ListItem key={text} disablePadding>
-                <ListItemButton>
-                  <ListItemIcon>
-                    {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
-                  </ListItemIcon>
-                  <ListItemText primary={text} />
-                </ListItemButton>
-              </ListItem>
-            ))}
-          </List> */}
-        </Box>
-      );
+           </ListItem>
+           ))}
+           </List>
+           <Divider />
+           <List>
+           {['All mail', 'Trash', 'Spam'].map((text, index) => (
+           <ListItem key={text} disablePadding>
+           <ListItemButton>
+           <ListItemIcon>
+           {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
+           </ListItemIcon>
+           <ListItemText primary={text} />
+           </ListItemButton>
+           </ListItem>
+           ))}
+           </List> */}
+  </Box>
+    );
 
 
-    let { auth, setAuth } = useContext(AuthContext)
+    let { auth, setAuth } = useContext(AuthContext);
+    let { admin, setAdmin } = useContext(AdminContext);
 
     let doLogout = async () => {
         try {
@@ -276,7 +272,7 @@ function Header() {
                 setAuth(false);
             }
         } catch (e) {
-            console.log('logout error');
+            console.log("logout error");
         }
     };
 
@@ -287,7 +283,7 @@ function Header() {
       to="/auth/login">
       <MenuItem className="mr-5">
         <i className="fab fa-facebook-square text-s leading-lg text-white opacity-75"></i>
-        <Typography className="ml-2">{t('log in')}</Typography>
+        <Typography className="ml-2">{t('Log in')}</Typography>
       </MenuItem>
     </NavLink>
 
@@ -305,45 +301,50 @@ function Header() {
 
     let loggedIn = <>
 
-    <NavLink
-      className="no-underline px-3 py-2 flex items-center text-s uppercase font-bold leading-snug text-white" to="/Dashboard">
-      <MenuItem>
-        <i className="fab fa-facebook-square text-s leading-lg text-white opacity-75"></i>
-        <Typography
-          className="ml-2">
-          {t('Dashboard')}
-        </Typography>
-      </MenuItem>
-    </NavLink>
+        {
+            admin ?
+                <NavLink
+                    className="no-underline px-3 py-2 flex items-center text-s uppercase font-bold leading-snug text-white"
+                    to="/Dashboard">
+                    <MenuItem>
+                        <i className="fab fa-facebook-square text-s leading-lg text-white opacity-75"></i>
+                        <Typography
+                            className="ml-2">
+                            {t("Dashboard")}
+                        </Typography>
+                    </MenuItem>
+                </NavLink>
+                :
+                null
+        }
 
-    <NavLink
-      className="no-underline px-3 py-2 flex items-center text-s uppercase font-bold leading-snug text-white"
-      to="/account">
-      <MenuItem>
-        <i className="fab fa-facebook-square text-s leading-lg text-white opacity-75"></i>
-        <Typography
-          className="ml-2">
-          {t('My account')}
-        </Typography>
-      </MenuItem>
-    </NavLink>
+        <NavLink
+            className="no-underline px-3 py-2 flex items-center text-s uppercase font-bold leading-snug text-white"
+            to="/account">
+            <MenuItem>
+                <i className="fab fa-facebook-square text-s leading-lg text-white opacity-75"></i>
+                <Typography
+                    className="ml-2">
+                    {t("My account")}
+                </Typography>
+            </MenuItem>
+        </NavLink>
 
-    <NavLink
-      className="no-underline px-3 py-2 flex items-center text-s uppercase font-bold leading-snug text-white"
-      to="#">
-      <MenuItem>
-        <i className="fab fa-facebook-square text-s leading-lg text-white opacity-75"></i>
-        <Typography
-          className="ml-2"
-          onClick={doLogout}>
-          {t('Log out')}
-        </Typography>
-      </MenuItem>
-    </NavLink>
+        <NavLink
+            className="no-underline px-3 py-2 flex items-center text-s uppercase font-bold leading-snug text-white"
+            to="#">
+            <MenuItem>
+                <i className="fab fa-facebook-square text-s leading-lg text-white opacity-75"></i>
+                <Typography
+                    className="ml-2"
+                    onClick={doLogout}>
+                    {t("Log out")}
+                </Typography>
+            </MenuItem>
+        </NavLink>
 
 
-
-  </>
+    </>
 
     return (
         <>
@@ -376,7 +377,7 @@ function Header() {
                     className="no-underline px-3 py-2 flex items-center text-s uppercase font-bold leading-snug text-white"
                     to="/shop">
                     <i className="fab fa-facebook-square text-s leading-lg text-white opacity-75"></i>
-                    <span className="ml-2">{t('Shop')}</span>
+                    <span className="ml-2">{t('Our Shop')}</span>
                   </NavLink>
 
 
@@ -393,7 +394,7 @@ function Header() {
                     className="no-underline px-3 py-2 flex items-center text-s uppercase font-bold leading-snug text-white"
                     to="/sponsors">
                     <i className="fab fa-facebook-square text-s leading-lg text-white opacity-75"></i>
-                    <span className="ml-2">{t('Partners')}</span>
+                    <span className="ml-2">{t('Our Partners')}</span>
                   </NavLink>
 
                   <NavLink

@@ -1,6 +1,7 @@
 import React, { useContext, useEffect, useState } from 'react';
 import { AuthLoadingContext } from '../../context/AuthContext';
 import { DataGrid, GridActionsCellItem } from '@mui/x-data-grid';
+import Container from '@mui/material/Container';
 import { LinearProgress } from '@mui/material';
 import toast, { Toaster } from 'react-hot-toast';
 import Button from '@mui/material/Button';
@@ -14,6 +15,7 @@ import { Box, Typography } from '@mui/material';
 import { DesktopDatePicker } from '@mui/x-date-pickers/DesktopDatePicker';
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import { AdapterDateFns } from '@mui/x-date-pickers/AdapterDateFns';
+import Paper from "@mui/material/Paper";
 
 
 const Partenaires = () => {
@@ -241,9 +243,19 @@ const Partenaires = () => {
 
 
     return (
-        <>
+        <Box
+            component="main"
+            sx={{
+                backgroundColor: (theme) =>
+                    theme.palette.mode === "light"
+                        ? theme.palette.grey[100]
+                        : theme.palette.grey[900],
+                flexGrow: 1,
+                height: "100vh"
+            }}
+        >
 
-            <div style={{ height: 400, width: '100%', paddingBottom: 10 }}>
+    <Container className="overflow-hidden" sx={{ mt: 1, mb: 1 }}>
 
                 <Toaster />
 
@@ -253,11 +265,10 @@ const Partenaires = () => {
                         display: 'flex',
                         justifyContent: 'space-between',
                         flexWrap: 'wrap',
-                        m: -1
+                        my: 3
                     }}
                 >
                     <Typography
-                        sx={{ m: 1 }}
                         variant="h4"
                     >
                         Partenaires
@@ -275,27 +286,24 @@ const Partenaires = () => {
                     </Box>
                 </Box>
 
-                <DataGrid
-                    components={{
-                        LoadingOverlay: LinearProgress,
-                    }}
-                    rows={infos}
-                    columns={columns}
-                    pageSize={5}
-                    rowsPerPageOptions={[5]}
-                    disableSelectionOnClick
-                    loading={!infos}
+                <Paper sx={{ p: 3, display: "flex", flexDirection: "column", paddingBottom: 5 }}>
 
-                />
+                <div style={{ height: 400, width: "100%" }}>
+                    <DataGrid
+                        components={{
+                            LoadingOverlay: LinearProgress,
+                        }}
+                        rows={infos}
+                        columns={columns}
+                        pageSize={5}
+                        rowsPerPageOptions={[5]}
+                        disableSelectionOnClick
+                        loading={!infos}
 
+                    />
+                 </div>
+                  </Paper>
 
-
-
-            </div>
-
-
-
-            <div>
 
                 <Dialog open={open} onClose={handleClose}>
                     <form action="" onSubmit={handleSubmit}>
@@ -376,9 +384,8 @@ const Partenaires = () => {
                         </DialogActions>
                     </form>
                 </Dialog>
-            </div>
-
-        </>
+            </Container>
+  </Box>
 
     );
 
