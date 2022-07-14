@@ -1,15 +1,12 @@
-import React, { useContext, useEffect, useState } from 'react';
-import { AuthLoadingContext } from '../../context/AuthContext';
+import React, { useContext, useEffect, useState } from "react";
+import { AuthLoadingContext } from "../../context/AuthContext";
 import Cloudy_day from "../../../../data/weather/Cloudy_day";
-import Cloudy_night from "../../../../data/weather/Cloudy_night";
 import Cloudy from "../../../../data/weather/Cloudy";
 import Sunny from "../../../../data/weather/Sunny";
-import Night from "../../../../data/weather/Night";
 import Rainy_day from "../../../../data/weather/Rainy_day";
 import Rainy from "../../../../data/weather/Rainy";
 import Snowy from "../../../../data/weather/Snowy";
 import Thunder from "../../../../data/weather/thunder";
-import { IosShare } from '@mui/icons-material';
 
 const Weather = () => {
 
@@ -28,7 +25,7 @@ const Weather = () => {
 
 
             if (response.data.success) {
-                
+
                 setInfos(response.data.data)
 
             }
@@ -46,17 +43,17 @@ const Weather = () => {
 
     if(infos != null){
 
-    switch (infos.description) {
-        case "nuageux":
-            return (
-                <Cloudy />
-            );
+        switch (infos?.description) {
+            case "nuageux":
+                return (
+                    <Cloudy />
+                );
 
 
-        case 'partiellement nuageux':
-            return (
-                <Cloudy_day />
-            );
+            case "partiellement nuageux":
+                return (
+                    <Cloudy_day />
+                );
 
         case 'peu nuageux':
             return (
@@ -89,11 +86,11 @@ const Weather = () => {
             );
 
         default:
-            return (<>{description} </>)
+            return (<>{infos?.description} </>);
     }
 
-            
-}else{
+
+    }else{
     return (<> </>)
 }
 
