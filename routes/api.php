@@ -138,7 +138,6 @@ Route::group(['middleware' => ['auth:sanctum']], function () {
     Route::post('/dashboard/addproduct', [ProductController::class, 'addProduct']);
     Route::patch('/dashboard/products/{id}', [ProductController::class, 'update'])->where('id', '[0-9]+');
     Route::get('/dashboard/products', [ProductController::class, 'list']);
-    Route::get('/dashboard/api/weather/list', [WeatherController::class, 'list']);
     Route::get('/dashboard/purchases/list', [PaymentController::class, 'list']);
 
     Route::get('/dashboard/api/scooters/maintenance/list', [ScootersController::class, 'ListMaintenance']);
@@ -155,8 +154,11 @@ Route::group(['middleware' => ['auth:sanctum']], function () {
     Route::get('/dashboard/api/dashboard/api/scooters/history/list', [ScooterHistoryController::class, 'List']);
 });
 
-Route::get('/documents/pdf/{id}', [ShopController::class , 'initDocument'])->where('id', '[0-9]+');
-Route::get('/documents/subscribe/pdf/{id}',[SubscriptionController::class, 'initDocument'])->where('id', '[0-9]+');
+Route::get('/dashboard/api/weather/list', [WeatherController::class, 'list']);
+
+
+Route::get('/documents/pdf/{id}', [ShopController::class, 'initDocument'])->where('id', '[0-9]+');
+Route::get('/documents/subscribe/pdf/{id}', [SubscriptionController::class, 'initDocument'])->where('id', '[0-9]+');
 
 Route::get('/sponsors', SponsorController::class);
 
