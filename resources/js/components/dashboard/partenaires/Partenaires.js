@@ -131,6 +131,21 @@ const Partenaires = () => {
         }
     }
 
+    const deletePartenaire = async (id) => {
+
+        try {
+            let response = await axios.post('/api/delete_sponsor', { "id": id })
+
+            if (response.data.success) {
+
+                let spons = response.data.data.sponsor
+                setInfos(spons);
+            }
+        } catch (e) {
+            console.log(e)
+        }
+    }
+
 
 
     let { loaded } = useContext(AuthLoadingContext)
@@ -165,6 +180,31 @@ const Partenaires = () => {
                         }}
                     >
                         Ajouter
+                    </Button>
+                </strong >
+            )
+
+
+
+        },
+        {
+            field: 'MaintenanceLink2',
+            headerName: 'Supprimer la marque',
+            width: 150,
+            editable: false,
+            renderCell: (params) => (
+
+                <strong>
+                    <Button
+                        variant="outlined"
+                        color="primary"
+                        size="small"
+                        style={{ marginLeft: 16 }}
+                        onClick={() => {
+                            deletePartenaire(params.row.id);
+                        }}
+                    >
+                        Supprimer
                     </Button>
                 </strong >
             )

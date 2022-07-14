@@ -44,4 +44,24 @@ class SponsorController extends Controller
         return response()->json(array('success' => 'true', 'message' => "Voici le code", 'data' => ['sponsor' => $sponsors]));
 
     }
+
+    public function delete_sponsor(Request $request): JsonResponse
+    {
+        $body = json_decode($request->getContent());
+        $id = $body->{ "id"};
+
+
+        $sponsors = Sponsors::findOrFail($id);
+        $sponsors->delete();
+
+
+        if (!$sponsors) {
+            return response()->json(array('success' => 'false', 'message' => 'Erreur de valeur'));
+        }
+
+        $sponsors = Sponsors::all();
+
+        return response()->json(array('success' => 'true', 'message' => "Voici le code", 'data' => ['sponsor' => $sponsors]));
+
+    }
 }
