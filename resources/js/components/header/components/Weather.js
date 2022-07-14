@@ -78,6 +78,11 @@ const Weather = () => {
                         <Sunny />
                     );
 
+                case "ciel dégagé":
+                    return (
+                        <Sunny />
+                    );
+
                 case "orageux":
                     return (
                         <Thunder />
