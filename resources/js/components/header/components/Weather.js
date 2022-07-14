@@ -43,51 +43,55 @@ const Weather = () => {
 
     if(infos != null){
 
-        switch (infos?.description) {
-            case "nuageux":
-                return (
-                    <Cloudy />
-                );
+        if (infos.description) {
 
 
-            case "partiellement nuageux":
-                return (
-                    <Cloudy_day />
-                );
+            switch (infos?.description) {
+                case "nuageux":
+                    return (
+                        <Cloudy />
+                    );
 
-        case 'peu nuageux':
-            return (
-                <Cloudy_day />
-            );
 
-        case 'pluie légere':
-            return (
-                <Rainy_day />
-            );
+                case "partiellement nuageux":
+                    return (
+                        <Cloudy_day />
+                    );
 
-        case 'pluie':
-            return (
-                <Rainy />
-            );
+                case "peu nuageux":
+                    return (
+                        <Cloudy_day />
+                    );
 
-        case 'soleil':
-            return (
-                <Sunny />
-            );
+                case "pluie légere":
+                    return (
+                        <Rainy_day />
+                    );
 
-        case 'orageux':
-            return (
-                <Thunder />
-            );
+                case "pluie":
+                    return (
+                        <Rainy />
+                    );
 
-        case 'neigeux':
-            return (
-                <Snowy />
-            );
+                case "soleil":
+                    return (
+                        <Sunny />
+                    );
 
-        default:
-            return (<></>);
-    }
+                case "orageux":
+                    return (
+                        <Thunder />
+                    );
+
+                case "neigeux":
+                    return (
+                        <Snowy />
+                    );
+
+                default:
+                    return (<></>);
+            }
+        }
 
 
     }else{
