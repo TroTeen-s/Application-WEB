@@ -103,14 +103,14 @@ const shop = () => {
 
             if (response.data.success) {
                 let message = "Stock du produit mis à jour avec succès";
-                toast.success(`Trotinette ID : ${productId}, ${message} !`);
+                toast.success(`${message} !`);
             } else {
                 let message = "Erreur dans la mise à jour du statut du produit";
-                toast.error(`Trotinette ID : ${productId}, ${message} !`);
+                toast.error(`${message} !`);
             }
         } catch (e) {
             let message = "Erreur dans la mise à jour du statut du produit";
-            toast.error(`Trotinette ID : ${productId}, ${message} !`);
+            toast.error(`${message} !`);
         }
         await retrieveProducts();
 
