@@ -67,7 +67,7 @@ const Subscriptions = () => {
         { 
           field: "id", 
           headerName: "ID", 
-          width: 70,      
+          width: 50,      
           headerAlign: 'center',
           align: "center"
         },
@@ -77,6 +77,7 @@ const Subscriptions = () => {
             editable: false,
             headerAlign: 'center',
             align: "center",
+            width: 80,     
             flex: 2,
             renderCell: ({ row }) => {
                 if (row.last_payment === "paid") {
@@ -136,7 +137,7 @@ const Subscriptions = () => {
             sortable: false,
             headerAlign: 'center',
             align: "center",
-            width: 160,
+            width: 130,
             align: "center",
             renderCell: (cellValues) => {
                 return (

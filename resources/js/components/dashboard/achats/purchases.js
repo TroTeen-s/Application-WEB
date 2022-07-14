@@ -268,11 +268,11 @@ export default function purchases() {
         } catch (e) {}
     }
 
-    useEffect(() => {
+    useEffect(async() => {
 
         if (loaded) {
-            retrieveInfos()
-            RetrieveInfosHistory()
+            await retrieveInfos()
+            await RetrieveInfosHistory()
         }
     }, [loaded])
 
