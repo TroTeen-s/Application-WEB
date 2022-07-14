@@ -172,9 +172,6 @@ class ShopController extends Controller
         $cart = Cart::query()->firstWhere('payment_id', $data[0]->id_stripe);
         $items = $cart->items;
 
-        // return $this->success('informations sur le pdf', $items);
-
-        // exit;
 
         $v = 0;
 
