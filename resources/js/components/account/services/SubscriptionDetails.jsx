@@ -4,8 +4,9 @@ import Typography from "@mui/material/Typography";
 import { useParams } from "react-router-dom";
 import Container from "@mui/material/Container";
 import { DateTime } from "luxon";
-import { Chip } from "@mui/material";
+import { Button, Chip } from "@mui/material";
 import { DataGrid } from "@mui/x-data-grid";
+import toast, { Toaster } from "react-hot-toast";
 
 const SubscriptionDetails = () => {
 
@@ -22,22 +23,31 @@ const SubscriptionDetails = () => {
         }
     };
 
+    const cancelSubscription = async () => {
+        let response = await axios.patch(`/api/subscription/${subscriptionID}`);
+
+        if (response.data.success) {
+            toast.success(response.data.message);
+            await retrieveData();
+        }
+    };
+
     const HandlePDF = async (id) => {
 
         try {
 
-           await axios.get(`/api/documents/subscribe/pdf/${id}`)
-           .then(function (response) {
-            console.log(response);
-            console.log("Successfully Logged in ");
-            window.open(`/api/documents/subscribe/pdf/${id}`, `_blank`);
-      
+            await axios.get(`/api/documents/subscribe/pdf/${id}`)
+                .then(function(response) {
+                    console.log(response);
+                    console.log("Successfully Logged in ");
+                    window.open(`/api/documents/subscribe/pdf/${id}`, `_blank`);
+
            })
-      
+
           } catch (error) {
             console.log(error)
           }
-      
+
     }
 
 
@@ -94,7 +104,6 @@ const SubscriptionDetails = () => {
             headerAlign: 'center',
             align: "center",
             width: 160,
-            align: "center",
             renderCell: (params) => {
                 return (
                     <Chip
@@ -117,6 +126,7 @@ const SubscriptionDetails = () => {
 
     return (
         <Container>
+            <Toaster />
             <div>
                 <Grid>
                     <Grid item alignItems={"center"} sx={{ mb: 4 }}>
@@ -124,7 +134,7 @@ const SubscriptionDetails = () => {
                                     component={"span"}>{"Les informations de votre abonnement n°" + subscriptionID}</Typography>
                     </Grid>
 
-                    <Grid container item xs={12} rowSpacing={1} >
+                    <Grid container item xs={12} rowSpacing={1}>
                         <Grid item xs={12} md={12}>
                             <div>Type de l'abonnement: {subscriptionInfo?.package_name}</div>
                         </Grid>
@@ -148,6 +158,14 @@ const SubscriptionDetails = () => {
                         <Grid item xs={12} md={12}>
                             <div>Points cumulés sur l'abonnement : 674</div>
                         </Grid>
+                        {subscriptionInfo?.active ?
+
+                            <Grid item xs={12} md={12}>
+                                <Button onClick={cancelSubscription}>Se désabonner</Button>
+                            </Grid>
+                            :
+                            null
+                        }
                     </Grid>
 
                     <Grid item xs={12} md={12}>
