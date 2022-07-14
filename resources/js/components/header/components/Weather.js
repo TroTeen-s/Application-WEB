@@ -94,7 +94,7 @@ const Weather = () => {
                     );
 
                 default:
-                    return (<></>);
+                    return (<>{infos.description}</>);
             }
         }
 
