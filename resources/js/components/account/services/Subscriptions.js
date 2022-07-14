@@ -64,11 +64,19 @@ const Subscriptions = () => {
     }, []);
 
     const columns = [
-        { field: "id", headerName: "ID", width: 90 },
+        { 
+          field: "id", 
+          headerName: "ID", 
+          width: 70,      
+          headerAlign: 'center',
+          align: "center"
+        },
         {
             field: "last_payment",
             headerName: "Dernier paiment",
             editable: false,
+            headerAlign: 'center',
+            align: "center",
             flex: 2,
             renderCell: ({ row }) => {
                 if (row.last_payment === "paid") {
@@ -87,6 +95,8 @@ const Subscriptions = () => {
         {
             field: "active",
             headerName: "Actif",
+            headerAlign: 'center',
+            align: "center",
             width: 150,
             editable: false,
             flex: 1
@@ -96,13 +106,17 @@ const Subscriptions = () => {
             headerName: "Période actuelle",
             width: 150,
             editable: false,
+            headerAlign: 'center',
+            align: "center",
             flex: 2,
             renderCell: currentPeriod
         },
         {
             field: "package_name",
-            headerName: "Abonnement",
+            headerName: "Type",
             width: 150,
+            headerAlign: 'center',
+            align: "center",
             editable: false,
             flex: 1
         },
@@ -110,6 +124,8 @@ const Subscriptions = () => {
             field: "trip_number",
             headerName: "Nombre de trajets",
             type: "number",
+            headerAlign: 'center',
+            align: "center",
             editable: false,
             flex: 2
         },
@@ -118,6 +134,8 @@ const Subscriptions = () => {
             headerName: "Informations",
             description: "This column has a value getter and is not sortable.",
             sortable: false,
+            headerAlign: 'center',
+            align: "center",
             width: 160,
             align: "center",
             renderCell: (cellValues) => {

@@ -223,104 +223,6 @@ export default function purchases() {
       
     }
 
-    const HandleFixing = async(event) => {
-
-        await axios
-            .post(`/api/dashboard/api/scooters/fixing/newstatus`, {
-            id: "" + event + "",
-            commentary: commentary2
-        })
-            .then(response => {
-                console.log(response.data.data)
-                setInfos(response.data.data)
-                SendToFix(event)
-                setStatus({type: 'success'});
-            })
-            .catch(error => console.log(error));
-
-        let response2 = await axios.get(`/api/dashboard/api/scooters/maintenance/list`);
-
-        if (response2.data.data) {
-            listPurchasesMaintenance = response2.data.data.length;
-            setInfos2(response2.data.data)
-
-        }
-
-        let response3 = await axios.get(`/api/dashboard/api/scooters/fixing/list`);
-
-        if (response3.data.data) {
-            listPurchasesSold = response3.data.data.length;
-
-        }
-
-        handleCloseFixingModal()
-
-        await axios
-            .post(`/api/dashboard/api/dashboard/api/scooters/history/fixing`, {
-            id: "" + event + ""
-        })
-            .then(response => {
-
-                console.log(response.data.data)
-                setInfosHistory(response.data.data)
-                console.log("test")
-                setStatus({type: 'success'});
-
-            })
-            .catch(error => console.log(error));
-
-    };
-
-    const HandleMaintenance = async(event) => {
-
-        await axios
-            .post(`/api/dashboard/api/scooters/maintenance/newstatus`, {
-            id: "" + event + "",
-            commentary: commentary
-        })
-            .then(response => {
-
-                console.log(response.data.data)
-                setInfos(response.data.data)
-                SendToMaintenance(event)
-                setStatus({type: 'success'});
-
-            })
-            .catch(error => console.log(error));
-
-        let response2 = await axios.get(`/api/dashboard/api/scooters/maintenance/list`);
-
-        if (response2.data.data) {
-            listPurchasesMaintenance = response2.data.data.length;
-            setInfos2(response2.data.data)
-            console.log(response2.data.data)
-
-        }
-
-        let response3 = await axios.get(`/api/dashboard/api/scooters/fixing/list`);
-
-        if (response3.data.data) {
-            listPurchasesSold = response3.data.data.length;
-            setInfos3(response3.data.data)
-        }
-
-        handleCloseMaintenanceModal()
-
-        await axios
-            .post(`/api/dashboard/api/dashboard/api/scooters/history/maintenance`, {
-            id: "" + event + ""
-        })
-            .then(response => {
-
-                console.log(response.data.data)
-                setInfosHistory(response.data.data)
-                console.log("test")
-                setStatus({type: 'success'});
-
-            })
-            .catch(error => console.log(error));
-
-    };
 
     const RetrieveInfosHistory = async() => {
         try {
@@ -354,15 +256,14 @@ export default function purchases() {
                 headers: {
                     'Accept': 'application/json'
                 }
-            })
-
-            if (response.data.data) {
+            }).then(response => {
                 listPurchases = response.data.data.length;
                 for (let i = 0; i < listPurchases; i++) {
                     listPurchasesSold += response.data.data[i].amount
                 }
                 setInfos(response.data.data)
-            }
+            })
+            .catch(error => console.log(error));
 
         } catch (e) {}
     }
@@ -386,81 +287,7 @@ export default function purchases() {
             height: '200vh'
         }}>
 
-            <Modal
-                aria-labelledby="spring-modal-title"
-                aria-describedby="spring-modal-description"
-                open={openModalMaintenance}
-                onClose={handleCloseMaintenanceModal}
-                closeAfterTransition
-                BackdropComponent={Backdrop}
-                BackdropProps={{
-                timeout: 500
-            }}>
-                <Box
-                    sx={{
-                    ...style,
-                    width: 400
-                }}>
-                    <form
-                        action="POST"
-                        className="mx-auto max-w-xl space-y-4"
-                        onSubmit={handleSubmit}>
-                        <h2 id="child-modal-title">
-                            {"ID : " + param + " - Commentaires"}
-                        </h2>
-                        <textarea
-                            onChange={(e) => setCommentary(e.target.value)}
-                            type="text"
-                            id="commentary"
-                            className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                            placeholder="This one got a broken wheel"></textarea>
-
-                        <button
-                            onClick={() => {
-                            HandleMaintenance(param)
-                        }}
-                            className="py-2 px-6 rounded bg-orange-300 text-base text-white font-semibold uppercase">ENVOYER EN MAINTENANCE</button>
-                    </form>
-                </Box>
-            </Modal>
-
-            <Modal
-                aria-labelledby="spring-modal-title"
-                aria-describedby="spring-modal-description"
-                open={openModalFixing}
-                onClose={handleCloseFixingModal}
-                closeAfterTransition
-                BackdropComponent={Backdrop}
-                BackdropProps={{
-                timeout: 500
-            }}>
-                <Box
-                    sx={{
-                    ...style,
-                    width: 400
-                }}>
-                    <form
-                        action="POST"
-                        className="mx-auto max-w-xl space-y-4"
-                        onSubmit={handleSubmit}>
-                        <h2 id="child-modal-title">{"ID : " + paramFixing + " - Commentaires"}</h2>
-                        <textarea
-                            onChange={(e) => setCommentary2(e.target.value)}
-                            type="text"
-                            id="commentary"
-                            className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full  p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                            placeholder="This one got a broken wheel"></textarea>
-
-                        <button
-                            type="button"
-                            onClick={() => {
-                            HandleFixing(paramFixing)
-                        }}
-                            className="py-2 px-6 rounded bg-orange-300 text-base text-white font-semibold uppercase">ENVOYER EN REPARATION</button>
-                    </form>
-                </Box>
-            </Modal>
-
+            
             <Toolbar/>
             <Container
                 maxWidth={false}

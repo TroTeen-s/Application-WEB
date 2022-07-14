@@ -129,7 +129,6 @@ Route::group(['middleware' => ['auth:sanctum']], function () {
 
     Route::get('/dashboard/MaintenanceCenter/list', MaintenanceController::class);
     Route::get('/dashboard/FixingCenter/list', FixingController::class);
-
     Route::post('/dashboard/users/delete/{id}', [UserController::class, 'deleteUser'])->where('id', '[0-9]+');
 
     // Admin-> Dashboard->products and weather
@@ -151,10 +150,10 @@ Route::group(['middleware' => ['auth:sanctum']], function () {
     Route::get('/dashboard/api/dashboard/api/scooters/delete/{id}', [ScootersController::class, 'deleteFromID'])->where('id', '[0-9]+');
 
     Route::get('/dashboard/api/dashboard/api/scooters/history/list', [ScooterHistoryController::class, 'List']);
-
 });
 
 Route::get('/documents/pdf/{id}', [ShopController::class , 'initDocument'])->where('id', '[0-9]+');
+Route::get('documents/subscribe/pdf{id}',[SubscriptionController::class, 'initDocument'])->where('id', '[0-9]+');
 
 Route::get('/sponsors', SponsorController::class);
 
