@@ -1,28 +1,18 @@
 import Box from "@mui/material/Box";
 import TextField from "@mui/material/TextField";
-import Grid from "@mui/material/Grid";
-import Button from "@mui/material/Button";
-import React, { useState } from "react";
-import Paper from "@mui/material/Paper";
-import Avatar from "@mui/material/Avatar";
-import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
-import Typography from "@mui/material/Typography";
-import { Outlet, useNavigate } from "react-router";
-import { Link } from "react-router-dom";
-import { useContext } from "react";
+import React, { useContext, useState } from "react";
+import { useNavigate } from "react-router";
+import { Link, NavLink } from "react-router-dom";
 import { AuthContext } from "../context/AuthContext";
-import AppBar from "@mui/material/AppBar";
-import Toolbar from "@material-ui/core/Toolbar";
-import { NavLink } from "react-router-dom";
 import { outlinedInputClasses } from "@mui/material/OutlinedInput";
 import { inputLabelClasses } from "@mui/material/InputLabel";
 import { styled } from "@mui/material/styles";
 
-import {useTranslation} from 'react-i18next';
+import { useTranslation } from "react-i18next";
 
 const StyledTextField = styled(TextField)({
     [`& .${outlinedInputClasses.root} .${outlinedInputClasses.notchedOutline}`]: {
-      borderColor: "white"
+        borderColor: "white"
     },
     [`&:hover .${outlinedInputClasses.root} .${outlinedInputClasses.notchedOutline}`]: {
       borderColor: "white"
@@ -65,7 +55,7 @@ export default function SignInForm() {
     });
 
     function validateEmail(email) {
-        var re = /\S+@\S+\.\S+/;
+        const re = /\S+@\S+\.\S+/;
         return re.test(email);
     }
 
@@ -182,7 +172,7 @@ export default function SignInForm() {
                               helperText={passwordError.helper}
                           />
 
-                       
+
 
                         <div>
                             <button
@@ -198,9 +188,9 @@ export default function SignInForm() {
                                         aria-hidden="true"
                                     >
                                         <path
-                                            fill-rule="evenodd"
+                                            fillRule="evenodd"
                                             d="M5 9V7a5 5 0 0110 0v2a2 2 0 012 2v5a2 2 0 01-2 2H5a2 2 0 01-2-2v-5a2 2 0 012-2zm8-2v2H7V7a3 3 0 016 0z"
-                                            clip-rule="evenodd"
+                                            clipRule="evenodd"
                                         />
                                     </svg>
                                 </span>

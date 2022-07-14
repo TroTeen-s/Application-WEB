@@ -1,23 +1,17 @@
 import Box from "@mui/material/Box";
 import TextField from "@mui/material/TextField";
-import Grid from '@mui/material/Grid';
-import Button from "@mui/material/Button";
+import Grid from "@mui/material/Grid";
 import * as React from "react";
-import Avatar from "@mui/material/Avatar";
-import Typography from "@mui/material/Typography";
-import Paper from "@mui/material/Paper";
-import { Link } from "react-router-dom";
 import { useContext, useState } from "react";
+import { Link, NavLink } from "react-router-dom";
 import { AuthContext } from "../context/AuthContext";
 import { useNavigate } from "react-router";
-import LockOpenIcon from '@mui/icons-material/LockOpen';
-import { NavLink } from "react-router-dom";
 
 import { outlinedInputClasses } from "@mui/material/OutlinedInput";
 import { inputLabelClasses } from "@mui/material/InputLabel";
 import { styled } from "@mui/material/styles";
 
-import {useTranslation} from 'react-i18next';
+import { useTranslation } from "react-i18next";
 
 
 const StyledTextField = styled(TextField)({
@@ -54,7 +48,7 @@ const StyledTextField = styled(TextField)({
 
 
 export default function SignUpForm() {
-    
+
 
     const {t, i18n} = useTranslation();
 
@@ -68,7 +62,7 @@ export default function SignUpForm() {
     let { setAuth } = useContext(AuthContext)
 
     function validateEmail(email) {
-        var re = /\S+@\S+\.\S+/;
+        const re = /\S+@\S+\.\S+/;
         return re.test(email);
     }
 
@@ -111,31 +105,28 @@ export default function SignUpForm() {
             setLastnameError({ error: false, helper: '' });
         }
         //username
-        if (username.trim() === '') {
-            setUsernameError({ error: true, helper: 'Champs vide' });
+        if (username.trim() === "") {
+            setUsernameError({ error: true, helper: "Champs vide" });
         } else if (username.trim().length < 2 || username.trim().length > 50) {
-            setUsernameError({ error: true, helper: 'trop court / trop long' });
-        }
-        else {
-            setUsernameError({ error: false, helper: '' });
+            setUsernameError({ error: true, helper: "trop court / trop long" });
+        } else {
+            setUsernameError({ error: false, helper: "" });
         }
         //phone_number
-        if (phone_number.trim() === '') {
-            setPhoneNumberError({ error: true, helper: 'Champs vide' });
-        } else if (phone_number.trim().length != 10) {
-            setPhoneNumberError({ error: true, helper: '10 chiffres demandés' });
-        }
-        else {
-            setPhoneNumberError({ error: false, helper: '' });
+        if (phone_number.trim() === "") {
+            setPhoneNumberError({ error: true, helper: "Champs vide" });
+        } else if (phone_number.trim().length !== 10) {
+            setPhoneNumberError({ error: true, helper: "10 chiffres demandés" });
+        } else {
+            setPhoneNumberError({ error: false, helper: "" });
         }
         //email
-        if (email.trim() === '') {
-            setEmailError({ error: true, helper: 'Champs vide' });
+        if (email.trim() === "") {
+            setEmailError({ error: true, helper: "Champs vide" });
         } else if (!validateEmail(email.trim())) {
-            setEmailError({ error: true, helper: 'format email demandé (exemple@mail.fr)' });
-        }
-        else {
-            setEmailError({ error: false, helper: '' });
+            setEmailError({ error: true, helper: "format email demandé (exemple@mail.fr)" });
+        } else {
+            setEmailError({ error: false, helper: "" });
         }
 
         //password
@@ -154,9 +145,10 @@ export default function SignUpForm() {
         try {
             let response = await axios.post('/api/auth/register', coucou);
             if (response.data.success) {
-                localStorage.setItem('apiBearerToken', response.data.data.token);
-                axios.defaults.headers.common['Authorization'] = `Bearer ${response.data.data.token}`;
-                setAuth(true)
+                localStorage.setItem("apiBearerToken", response.data.data.token);
+                axios.defaults.headers.common["Authorization"] = `Bearer ${response.data.data.token}`;
+                setAuth(true);
+                navigate("/" + location.search);
             }
         } catch (e) {
         }
@@ -292,7 +284,6 @@ export default function SignUpForm() {
                         </Grid>
                         </Grid>
 
-                    
 
                         <div>
                             <button
@@ -308,9 +299,9 @@ export default function SignUpForm() {
                                         aria-hidden="true"
                                     >
                                         <path
-                                            fill-rule="evenodd"
+                                            fillRule="evenodd"
                                             d="M5 9V7a5 5 0 0110 0v2a2 2 0 012 2v5a2 2 0 01-2 2H5a2 2 0 01-2-2v-5a2 2 0 012-2zm8-2v2H7V7a3 3 0 016 0z"
-                                            clip-rule="evenodd"
+                                            clipRule="evenodd"
                                         />
                                     </svg>
                                 </span>
