@@ -339,7 +339,7 @@ class ScootersController extends Controller
 
     }
 
-    public function addScoot() : JsonResponse
+    public function addScoot(Request $request) : JsonResponse
     {
         if (auth()->user()->role !== "admin") {
             return $this->fail("Non authorisé.");
@@ -353,13 +353,20 @@ class ScootersController extends Controller
         $cLong = "$lastlong$randomNumberAfter";
         $cLat = "$lastlat$randomNumberAfter";
 
+        $body = json_decode($request->getContent());
+        $serie = $body->{"serie"};
+
+        // return response()->json(array('success' => 'true', 'data' => $serie));
+        // exit;
+
+        
 
         try{
 
             $scooter =
                 new Scooters([
                 'acquired_at' => date_create('now'),
-                'model_serie' => Str::random(20),
+                'model_serie' => $serie,
                 'last_revision' => date_create('now'),
                 'mileage' => 0.0,
                 'last_position_lat' => $cLong,

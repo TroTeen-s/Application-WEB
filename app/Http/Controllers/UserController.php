@@ -31,8 +31,6 @@ class UserController extends Controller
         'role' => null,
     ]);
 
-
-
     if (!$user) {
         return response()->json(array('success' => 'false', 'message' => "Aucun utilisateur trouvé"), 400);
     }
@@ -40,7 +38,11 @@ class UserController extends Controller
     $users = User::all();
 
     return response()->json(array('success' => 'true', 'data' => $users));
+
     }
+
+
+
 
     public function putAdmin(Request $request, $id): JsonResponse
     {

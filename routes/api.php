@@ -146,7 +146,7 @@ Route::group(['middleware' => ['auth:sanctum']], function () {
     Route::post('/dashboard/api/scooters/fixing/newstatus', [ScootersController::class, 'FixingStatus'])->where('id', '[0-9]+');
     Route::post('/dashboard/api/scooters/service/newstatus', [ScootersController::class, 'ServiceStatus'])->where('id', '[0-9]+');
 
-    Route::get('/dashboard/api/scooters/add', [ScootersController::class, 'addScoot']);
+    Route::post('/dashboard/api/scooters/add', [ScootersController::class, 'addScoot']);
 
     Route::get('/dashboard/api/dashboard/api/scooters/delete/{id}', [ScootersController::class, 'deleteFromID'])->where('id', '[0-9]+');
 

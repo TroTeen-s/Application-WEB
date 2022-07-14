@@ -19,40 +19,49 @@ const Customers = () => {
         {
             field: "id",
             headerName: "ID",
-            width: 40
+            width: 40,
+            headerAlign: 'center',
+            align: 'center'
         }, {
             field: 'firstname',
             headerName: 'firstname',
             width: 110,
-            editable: false
+            editable: false,
+            headerAlign: 'center',
+            align: 'center'
         }, {
             field: 'lastname',
             headerName: 'lastname',
             width: 150,
-            editable: false
+            editable: false,
+            headerAlign: 'center',
+            align: 'center'
         }, {
             field: 'username',
             headerName: 'username',
             width: 110,
-            editable: false
+            editable: false,
+            headerAlign: 'center',
+            align: 'center'
         }, {
             field: 'email',
             headerName: 'email',
             width: 200,
-            editable: false
-        }, {
-            field: 'admin',
-            headerName: 'admin',
-            type: 'boolean',
-            width: 70
+            editable: false,
+            headerAlign: 'center',
+            align: 'center'
         }, {
             field: 'fidelity_points',
             headerName: 'fidelity_points',
             width: 110,
-            editable: false
+            editable: false,
+            headerAlign: 'center',
+            align: 'center'
         }, {
             field: 'active',
             headerName: 'active',
+            headerAlign: 'center',
+            align: 'center',
             width: 150,
             editable: false,
             renderCell: (params) => (
@@ -84,8 +93,10 @@ const Customers = () => {
 
         }, {
             field: 'role',
-            headerName: 'admin',
+            headerName: 'changement',
             width: 80,
+            headerAlign: 'center',
+            align: 'center',
             editable: false,
             renderCell: (params) => (
 
