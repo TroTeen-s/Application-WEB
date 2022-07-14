@@ -116,7 +116,7 @@ class SubscriptionController extends Controller
         $user = auth()->user();
 
         if ($user->subscribed) {
-            return $this->fail("already subscribed");
+            return $this->fail("Vous êtes déjà abonné");
         }
 
         if (isset($params['name'])) {

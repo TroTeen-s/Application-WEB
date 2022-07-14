@@ -77,18 +77,17 @@
     "New password":"Nouveau mot de passe",
     "Confirm new password": "Confirmer le nouveau mot de passe",
     "Change password":"Changer de mot de passe",
-    "Your loyalty balance":"Votre solde fidélité",
-    "Current points:":"Points actuels :",
-    "Points generated in total:":"Points générés en total :",
-    "History of your loyalty balance:":"Historique de votre solde fidélité :",
-    "By selecting this button you delete your Easy Scooter account":"En cliquant sur ce bouton, vous supprimez votre compte Easy Scooter",
-    "This action is final, you will then be disconnected and will no longer be able to connect with your current credentials.":"Cette action est définitive, vous serez déconnecté et ne pourrez plus vous connecter avec vos identifiants actuels.",
-    "Delete your account":"Supprimer votre compte",
-    "Delete your account?":"Supprimer votre compte?",
-    "Are you sure you want to delete your account?":"Êtes-vous sûr de vouloir supprimer votre compte ?",
-    "Do not delete":"Ne pas supprimer",
-    "Delete":"Supprimer"
-    
-
-
+    "Your loyalty balance": "Votre solde fidélité",
+    "Current points:": "Points actuels :",
+    "Points generated in total:": "Points générés en total :",
+    "History of your loyalty balance:": "Historique de votre solde fidélité :",
+    "By selecting this button you delete your Easy Scooter account": "En cliquant sur ce bouton, vous supprimez votre compte Easy Scooter",
+    "This action is final, you will then be disconnected and will no longer be able to connect with your current credentials.": "Cette action est définitive, vous serez déconnecté et ne pourrez plus vous connecter avec vos identifiants actuels.",
+    "Delete your account": "Supprimer votre compte",
+    "Delete your account?": "Supprimer votre compte?",
+    "Are you sure you want to delete your account?": "Êtes-vous sûr de vouloir supprimer votre compte ?",
+    "Do not delete": "Ne pas supprimer",
+    "Delete": "Supprimer",
+    "Start plan": "S'abonner",
+    "montly": "mensuel"
 }

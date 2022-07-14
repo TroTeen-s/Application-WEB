@@ -1,9 +1,10 @@
-import {useTranslation} from 'react-i18next';
-import React, { useContext, useEffect, useState } from 'react';
+import { useTranslation } from "react-i18next";
+import React, { useEffect, useState } from "react";
+import toast, { Toaster } from "react-hot-toast";
 
 function Store() {
 
-    const {t, i18n} = useTranslation();
+    const { t, i18n } = useTranslation();
 
     const [infos, setInfos] = useState();
 
@@ -96,15 +97,12 @@ function Store() {
                 }
             }
         } catch
-            (e)
-            {
-                if (e.request) {
-                    console.log(e.request)
-                }
-                if (e.message) {
-                    console.log(e.message)
-                }
+            (e) {
+            let response = JSON.parse(e.request.responseText);
+            if (response.message) {
+                toast.error(response.message);
             }
+        }
         }
 
         useEffect(() => {
@@ -113,16 +111,17 @@ function Store() {
 
         return (
             <section className="full_responsive mt-10">
+                <Toaster />
                 <div className="container m-auto px-6 py-20 md:px-12 lg:px-20">
                     <div className="m-auto text-center lg:w-7/12 mb-10">
-                        <h2 className="text-2xl text-black-trot font-bold md:text-4xl">{t('Our')} <span
-                            className="text-orange-300">{t('Subscriptions')}</span></h2>
+                        <h2 className="text-2xl text-black-trot font-bold md:text-4xl">{t("Our")} <span
+                            className="text-orange-300">{t("Subscriptions")}</span></h2>
                         <h3 className="text-xl font-medium pb-15 mt-5">
-                        {t('Rely on EasyScooter to take advantage of more advantageous offers')}
+                            {t("Rely on EasyScooter to take advantage of more advantageous offers")}
                         </h3>
                     </div>
                     <div className="mt-24 grid items-center gap-6 md:grid-cols-2 lg:flex lg:space-x-8">
-                        {infos && infos.map(({ id, price,  frequency, name, max_trips }) => (
+                        {infos && infos.map(({ id, price, frequency, name, max_trips }) => (
                             <div key={id} className="relative md:col-span-1 group lg:w-[32%]">
                                 <div aria-hidden="true"
                                      className="absolute top-0 w-full h-full rounded-2xl bg-white shadow-xl transition duration-500 group-hover:scale-105 lg:group-hover:scale-110"></div>
@@ -152,7 +151,7 @@ function Store() {
                                     }} type="submit" title="Submit"
                                             className="block w-full py-3 px-6 text-center rounded-xl transition bg-orange-300 hover:bg-orange-600 active:bg-orange-700 focus:bg-orange-500">
                         <span className="text-white font-semibold">
-                            Start plan
+                            {t("Start plan")}
                         </span>
                                     </button>
                                 </div>
