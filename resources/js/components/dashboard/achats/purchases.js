@@ -150,8 +150,9 @@ export default function purchases() {
 
         try {
             let response = await axios.get("/api/dashboard/purchases/list");
+            setTimeout(() => {}, 1000);
 
-            if (response.data.data.length) {
+            if (response.data.data) {
                 listPurchases = response.data.data.length;
                 for (let i = 0; i < listPurchases; i++) {
                     listPurchasesSold += response.data.data[i].amount;
