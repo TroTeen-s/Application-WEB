@@ -86,7 +86,7 @@ const Weather = () => {
             );
 
         default:
-            return (<>{infos?.description} </>);
+            return (<></>);
     }
 
 
