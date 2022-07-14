@@ -153,7 +153,7 @@ Route::group(['middleware' => ['auth:sanctum']], function () {
 });
 
 Route::get('/documents/pdf/{id}', [ShopController::class , 'initDocument'])->where('id', '[0-9]+');
-Route::get('documents/subscribe/pdf{id}',[SubscriptionController::class, 'initDocument'])->where('id', '[0-9]+');
+Route::get('/documents/subscribe/pdf/{id}',[SubscriptionController::class, 'initDocument'])->where('id', '[0-9]+');
 
 Route::get('/sponsors', SponsorController::class);
 

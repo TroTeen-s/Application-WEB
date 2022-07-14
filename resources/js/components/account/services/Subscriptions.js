@@ -98,18 +98,17 @@ const Subscriptions = () => {
             headerName: "Actif",
             headerAlign: 'center',
             align: "center",
-            width: 150,
+            width: 120,
             editable: false,
             flex: 1
         },
         {
             field: "current_period",
             headerName: "Période actuelle",
-            width: 150,
+            width: 250,
             editable: false,
             headerAlign: 'center',
             align: "center",
-            flex: 2,
             renderCell: currentPeriod
         },
         {
@@ -137,7 +136,7 @@ const Subscriptions = () => {
             sortable: false,
             headerAlign: 'center',
             align: "center",
-            width: 130,
+            width: 120,
             align: "center",
             renderCell: (cellValues) => {
                 return (

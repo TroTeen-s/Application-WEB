@@ -30,7 +30,7 @@ const SubscriptionDetails = () => {
            .then(function (response) {
             console.log(response);
             console.log("Successfully Logged in ");
-            window.open(`/api/documents/pdf/${id}`, `_blank`);
+            window.open(`/api/documents/subscribe/pdf/${id}`, `_blank`);
       
            })
       
@@ -50,7 +50,8 @@ const SubscriptionDetails = () => {
     };
 
     const columns = [
-        // { field: "id", headerName: "ID", width: 90 },
+        { field: "id", headerName: "ID", width: 90, headerAlign: 'center',
+        align: "center" },
         {
             field: "total_price",
             headerName: "Total",
@@ -94,7 +95,7 @@ const SubscriptionDetails = () => {
             align: "center",
             width: 160,
             align: "center",
-            renderCell: (cellValues) => {
+            renderCell: (params) => {
                 return (
                     <Chip
                         label="Télécharger"
