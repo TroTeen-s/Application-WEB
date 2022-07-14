@@ -614,10 +614,12 @@ class SubscriptionController extends Controller
                 $fidelityHistory->save();
                 $user->fidelity_points += $paymentObject->amount / 100 * 0.3;
                 $user->save();
-            }
-            try {
-                PushNotificationsController::sendNotification("Paiement pour votre abonnement Ez_Scooter !", "Paiement effectué pour votre abonnement Ez_Scooter ! :)", $user->id);
-            } catch (Exception $e) {
+
+                try {
+                    PushNotificationsController::sendNotification("Paiement pour votre abonnement Ez_Scooter !", "Paiement effectué pour votre abonnement Ez_Scooter ! :)", $user->id);
+                } catch (Exception $e) {
+
+                }
 
             }
 

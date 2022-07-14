@@ -4,11 +4,13 @@ namespace App\Http\Controllers;
 
 use App\Models\Cart;
 use App\Models\CartItem;
+use App\Models\Fidelity;
 use App\Models\ItemRefund;
 use App\Models\Payment;
 use App\Models\Product;
 use App\Models\Refund;
 use App\Traits\ApiResponse;
+use Carbon\Carbon;
 use Codedge\Fpdf\Fpdf\Fpdf;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
@@ -80,6 +82,21 @@ class ShopController extends Controller
         $price = 0;
         $cart = new Cart(['user_id' => $user->id]);
         $cart->save();
+
+        if ($user->fidelity_points > 50) {
+            $price -= 10;
+            $fidelityUse = new Fidelity([
+                'amount' => -50,
+                'reason' => "Utilisation des points de fidélité",
+                'date' => Carbon::now(),
+                'payment_id' => "null",
+                'user_id' => $user->id,
+            ]);
+            $fidelityUse->save();
+            $user->fidelity_points -= 50;
+            $user->save();
+
+        }
 
         foreach ($products as $product) {
             $item = $product->getOneAvailableForPurchase();
