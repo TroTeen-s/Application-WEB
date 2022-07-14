@@ -1,16 +1,16 @@
-import React, {useEffect, useState} from 'react';
-import {DataGrid} from '@mui/x-data-grid';
-import {Chip} from "@mui/material";
-import toast, {Toaster} from "react-hot-toast";
+import React, { useEffect, useState } from "react";
+import { DataGrid } from "@mui/x-data-grid";
+import { Chip } from "@mui/material";
+import toast, { Toaster } from "react-hot-toast";
 
 const shop = () => {
     const initialValues = {
-        name: '',
-        quantity: '',
-        file: '',
-        price: '',
-        description: '',
-        data: '',
+        name: "",
+        quantity: "",
+        file: "",
+        price: "",
+        description: "",
+        data: ""
     };
 
     const [state, setState] = useState(initialValues);
@@ -80,7 +80,7 @@ const shop = () => {
         formData.append('description', description);
 
         try {
-            let response = await axios.post("http://localhost:8000/api/dashboard/addproduct", formData);
+            let response = await axios.post("api/dashboard/addproduct", formData);
 
             if (response.data.success) {
                 setData(data => [...data, response.data.data]);

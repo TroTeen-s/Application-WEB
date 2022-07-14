@@ -1,24 +1,24 @@
-import React, { useEffect } from 'react'
-import { useState } from 'react'
-import { DataGrid } from '@mui/x-data-grid';
+import React, { useEffect, useState } from "react";
+import { DataGrid } from "@mui/x-data-grid";
 
 export default function shop() {
 
-  const [name,setName] = useState("")
-  const [file,setFile] = useState("")
-  const [price,setPrice] = useState("")
-  const [description,setDescription] = useState("")
+    const [name, setName] = useState("");
+    const [file, setFile] = useState("");
+    const [price, setPrice] = useState("");
+    const [description, setDescription] = useState("");
 
 
-  const [data,setData] = useState([]);
+    const [data, setData] = useState([]);
   useEffect( async()=>{
-      try{
+      try {
 
-    let result = await fetch("http://localhost:8000/api/dashboard/api/weather/list");
-    result = await result.json();
-    setData(result)
+          let result = await axios.get("api/dashboard/api/weather/list");
+          if (result.data) {
+              setData(result.data);
+          }
 
-    }catch(error){
+      }catch(error){
         console.log(error)
     }
   },[])

@@ -73,7 +73,7 @@ function NeedHelp() {
 
         if (firstnameError?.error === true && lastnameError?.error === true && emailError?.error === true && messageError?.error === true) {
 
-            let result = await axios.post("http://localhost:8000/api/support/need", formData);
+            let result = await axios.post("api/support/need", formData);
             if (result.data.success) {
                 setStatus({ type: "success" });
                 toast.success(result.data.message);
