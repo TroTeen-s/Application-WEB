@@ -3,21 +3,20 @@
 namespace App\Http\Controllers;
 
 use App\Models\FixingCenter;
-use Illuminate\Http\Request;
-use App\Traits\ApiResponse;
-use Illuminate\Http\JsonResponse;
-use App\Models\Scooters;
 use App\Models\MaintenanceCenter;
-use Illuminate\Support\Facades\DB;
+use App\Models\Scooters;
+use App\Traits\ApiResponse;
 use Exception;
+use Illuminate\Http\JsonResponse;
+use Illuminate\Http\Request;
 use Illuminate\Support\Str;
-use Carbon\Carbon;
+
 class ScootersController extends Controller
 {
 
     use ApiResponse;
 
- /**
+    /**
      * Handle the incoming request.
      *
      * @param  \Illuminate\Http\Request
@@ -26,6 +25,7 @@ class ScootersController extends Controller
 
     public function __invoke(): JsonResponse
     {
+
         try{
 
             $MaintenanceList = MaintenanceCenter::all();
@@ -33,7 +33,7 @@ class ScootersController extends Controller
             $scooters = Scooters::where('mileage', '>', 150)->where('fixing', '!==', 1)->get();
 
             $arrayGet = array();
-                
+
             foreach($scooters as $arrayGet){
 
                 $array = json_decode($MaintenanceList, true);
@@ -54,10 +54,14 @@ class ScootersController extends Controller
                 return $this->fail('erreur', $e->getMessage());
             }
 
-    } 
+    }
 
     public function create(Request $request): JsonResponse
     {
+        if (auth()->user()->role !== "admin") {
+            return $this->fail("Non authorisé.");
+        }
+
 
         $attr = $request->validate([
             'model-serie' => 'required|string|min:6'
@@ -65,8 +69,8 @@ class ScootersController extends Controller
 
         $scooter =
             new Scooters([
-            'acquired_at' => date_create('now'),
-            'model_serie' => $attr['model-serie'],
+                'acquired_at' => date_create('now'),
+                'model_serie' => $attr['model-serie'],
             'last_revision' => date_create('now'),
             'mileage' => 0.0,
             'last_position_long' => 0.0,
@@ -144,10 +148,14 @@ class ScootersController extends Controller
 
     public function deleteFromID(Request $id) : JsonResponse
     {
+        if (auth()->user()->role !== "admin") {
+            return $this->fail("Non authorisé.");
+        }
 
-        try{
 
-            $data = Scooters::where('id',$id["id"])->delete();
+        try {
+
+            $data = Scooters::where('id', $id["id"])->delete();
 
             if (!$data) {
                 return response()->json(array('success' => 'false', 'message' => "Aucun utilisateur trouvé"), 400);
@@ -156,7 +164,7 @@ class ScootersController extends Controller
             $scooter = Scooters::all();
 
             return response()->json(array('success' => 'true', 'data' => $scooter));
-    
+
         }catch(Exception $e){
             return $this->fail('erreur', $e->getMessage());
         }
@@ -164,15 +172,19 @@ class ScootersController extends Controller
 
     public function MaintenanceStatus(Request $request) : JsonResponse
     {
-        try{
+        if (auth()->user()->role !== "admin") {
+            return $this->fail("Non authorisé.");
+        }
+
+        try {
 
             $MaintenanceList = MaintenanceCenter::all();
 
-            $data = Scooters::where('id',$request->input('id'));
-                    
-                $array = json_decode($MaintenanceList, true);
-                $one_item = $array[rand(0, count($array) - 1)];
-    
+            $data = Scooters::where('id', $request->input('id'));
+
+            $array = json_decode($MaintenanceList, true);
+            $one_item = $array[rand(0, count($array) - 1)];
+
                 $data->update([
                     'fixing' => 0,
                     'maintenance' => 1,
@@ -180,29 +192,33 @@ class ScootersController extends Controller
                     'fixing_center_id' => null,
                     'commentary'=>$request->input('commentary')
                     ]);
-    
+
             if (!$data) {
                 return response()->json(array('success' => 'false', 'message' => "Erreur pour la mise en maintenance"), 400);
             }
-    
+
             $scooter = Scooters::all();
-    
+
             return response()->json(array('success' => 'true', 'data' =>  $scooter));
-    
-            }catch(Exception $e){
+
+        }catch(Exception $e){
                 return $this->fail('erreur', $e->getMessage());
             }
     }
 
     public function FixingStatus(Request $request) : JsonResponse
     {
+        if (auth()->user()->role !== "admin") {
+            return $this->fail("Non authorisé.");
+        }
 
-        try{
 
-        $FixingList = FixingCenter::all();
+        try {
 
-        $data = Scooters::where('id',$request->input('id'));
-                
+            $FixingList = FixingCenter::all();
+
+            $data = Scooters::where('id', $request->input('id'));
+
             $array = json_decode($FixingList, true);
             $one_item = $array[rand(0, count($array) - 1)];
 
@@ -230,17 +246,22 @@ class ScootersController extends Controller
 
     public function ServiceStatus(Request $request) : JsonResponse
     {
-        try{
+        if (auth()->user()->role !== "admin") {
+            return $this->fail("Non authorisé.");
+        }
+
+
+        try {
 
             $scooters = Scooters::all();
 
             $arrayGet = array();
 
-            foreach($scooters as $arrayGet){
+            foreach ($scooters as $arrayGet) {
 
-                $lastlong = rand(4.787*100,4.870*100)/100;
+                $lastlong = rand(4.787 * 100, 4.870 * 100) / 100;
                 $lastlat = rand(45.725*100,45.781*100)/100;
-    
+
                 $randomNumberAfter = rand(0,1000000);
                 $cLong = "$lastlong$randomNumberAfter";
                 $cLat = "$lastlat$randomNumberAfter";
@@ -265,16 +286,20 @@ class ScootersController extends Controller
             $scooter = Scooters::all();
 
             return response()->json(array('success' => 'true', 'data' => $scooter));
-    
-            }catch(Exception $e){
+
+        }catch(Exception $e){
                 return $this->fail('erreur', $e->getMessage());
             }
     }
 
     public function ListMaintenance(Request $request) : JsonResponse
     {
-        try{
-            
+        if (auth()->user()->role !== "admin") {
+            return $this->fail("Non authorisé.");
+        }
+
+        try {
+
             $data = Scooters::whereIn('maintenance', [1])->get();
 
             if (!$data) {
@@ -282,18 +307,22 @@ class ScootersController extends Controller
             }
 
             return response()->json(array('success' => 'true', 'data' => $data));
-    
+
 
         }catch(Exception $e){
             return $this->fail('erreur', $e->getMessage());
         }
-            
+
 
     }
 
     public function ListFixing(Request $request) : JsonResponse
     {
-        try{
+        if (auth()->user()->role !== "admin") {
+            return $this->fail("Non authorisé.");
+        }
+
+        try {
 
             $data = Scooters::whereIn('fixing', [1])->get();
 
@@ -302,7 +331,7 @@ class ScootersController extends Controller
             }
 
             return response()->json(array('success' => 'true', 'data' => $data));
-    
+
 
         }catch(Exception $e){
             return $this->fail('erreur', $e->getMessage());
@@ -312,18 +341,21 @@ class ScootersController extends Controller
 
     public function addScoot() : JsonResponse
     {
+        if (auth()->user()->role !== "admin") {
+            return $this->fail("Non authorisé.");
+        }
 
-        
-        $lastlong = rand(4.787*100,4.870*100)/100;
-        $lastlat = rand(45.725*100,45.781*100)/100;
 
-        $randomNumberAfter = rand(0,1000000);
+        $lastlong = rand(4.787 * 100, 4.870 * 100) / 100;
+        $lastlat = rand(45.725 * 100, 45.781 * 100) / 100;
+
+        $randomNumberAfter = rand(0, 1000000);
         $cLong = "$lastlong$randomNumberAfter";
         $cLat = "$lastlat$randomNumberAfter";
 
 
         try{
-    
+
             $scooter =
                 new Scooters([
                 'acquired_at' => date_create('now'),
