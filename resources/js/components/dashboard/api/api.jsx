@@ -13,14 +13,13 @@ export default function shop() {
   useEffect( async()=>{
       try {
 
-          let result = await axios.get("api/dashboard/api/weather/list");
-          if (result.data) {
-              setData(result.data.data);
-          }
+          let result = await fetch("api/dashboard/api/weather/list");
+          result = await result.json();
+          setData(result);
 
-      }catch(error){
-        console.log(error)
-    }
+      } catch (error) {
+          console.log(error);
+      }
   },[])
 
 
