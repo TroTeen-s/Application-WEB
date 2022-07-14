@@ -3,26 +3,25 @@ import ListItemButton from "@mui/material/ListItemButton";
 import ListItemIcon from "@mui/material/ListItemIcon";
 import ListItemText from "@mui/material/ListItemText";
 import PeopleIcon from "@mui/icons-material/People";
-import BarChartIcon from "@mui/icons-material/BarChart";
 import CurrencyExchangeIcon from "@mui/icons-material/CurrencyExchange";
 import LocalGroceryStoreIcon from "@mui/icons-material/LocalGroceryStore";
 import ElectricScooterIcon from "@mui/icons-material/ElectricScooter";
 import MapIcon from "@mui/icons-material/Map";
 import BugReportIcon from "@mui/icons-material/BugReport";
-import DescriptionIcon from '@mui/icons-material/Description';
-import SubscriptionsIcon from '@mui/icons-material/Subscriptions';
-import WbSunnyIcon from '@mui/icons-material/WbSunny';
-import HandshakeIcon from '@mui/icons-material/Handshake';
+import DescriptionIcon from "@mui/icons-material/Description";
+import SubscriptionsIcon from "@mui/icons-material/Subscriptions";
+import WbSunnyIcon from "@mui/icons-material/WbSunny";
+import HandshakeIcon from "@mui/icons-material/Handshake";
 
 import { NavLink } from "react-router-dom";
 
 export const mainListItems = (
 
-  <React.Fragment>
+    <React.Fragment>
 
-    <NavLink className="no-underline text-black-trot" to="achats">
-      <ListItemButton>
-        <ListItemIcon>
+        <NavLink className="no-underline text-black-trot" to="achats">
+            <ListItemButton>
+                <ListItemIcon>
           <DescriptionIcon />
         </ListItemIcon>
         <ListItemText primary="Achats" />

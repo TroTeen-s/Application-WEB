@@ -40,7 +40,7 @@ class PushNotificationsController extends Controller
         if ($result) {
             $notification = new notification(["title" => $title, "content" => $message]);
             $notification->save();
-            return $this->success("Envoi de la notification avec succès");
+            return $this->success("Envoi de la notification avec succès", $notification);
         } else {
             return $this->fail("Erreur dans l'envoi de la notification");
         }

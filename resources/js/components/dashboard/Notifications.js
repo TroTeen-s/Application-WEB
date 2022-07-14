@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import toast, { Toaster } from "react-hot-toast";
 import { Typography } from "@mui/material";
 import { DataGrid } from "@mui/x-data-grid";
@@ -67,6 +67,26 @@ const Notifications = () => {
 
     };
 
+    const retrieveNotifications = async () => {
+        try {
+            let response = await axios.get("/api/notifs/all");
+
+            if (response.data.data) {
+                console.log(response);
+                setData(response.data.data);
+
+            } else {
+                toast();
+            }
+        } catch (e) {
+            console.log(e);
+        }
+    };
+
+    useEffect(async () => {
+        await retrieveNotifications();
+    }, []);
+
 
     return (
         <div className="col-sm-8 mr-2 ml-1 offset-sm-1">
@@ -75,7 +95,7 @@ const Notifications = () => {
                 sx={{ mt: 4 }}
                 variant="h4"
             >
-                Abonnements
+                Ajouter une notification
             </Typography>
 
             <div className="">
@@ -98,7 +118,7 @@ const Notifications = () => {
             </div>
 
             <div className="mt-5 mb-5" style={{ height: 370, width: "100%" }}>
-                <h3> Liste des produits </h3>
+                <h3> Liste des notifications envoyées à tous </h3>
                 <DataGrid
                     rows={data}
                     columns={columns}
