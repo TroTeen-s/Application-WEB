@@ -15,7 +15,7 @@ export default function shop() {
 
           let result = await axios.get("api/dashboard/api/weather/list");
           if (result.data) {
-              setData(result.data);
+              setData(result.data.data);
           }
 
       }catch(error){
