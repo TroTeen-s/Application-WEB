@@ -43,7 +43,7 @@ const Weather = () => {
 
     if(infos != null){
 
-        if (infos.description) {
+        if (infos.description !== undefined) {
 
 
             switch (infos?.description) {
