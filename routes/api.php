@@ -55,25 +55,27 @@ Route::prefix('stripe')->group(function () {
 Route::group(['middleware' => ['auth:sanctum']], function () {
     Route::get('/me', [UserController::class , 'me']);
 
-    Route::post('subscribe', [SubscriptionController::class , 'subscribe']);
+    Route::post('subscribe', [SubscriptionController::class, 'subscribe']);
 
-    Route::post('checkout-sub', [SubscriptionController::class , 'createSubscriptionCheckout']);
+    Route::post('checkout-sub', [SubscriptionController::class, 'createSubscriptionCheckout']);
 
-    Route::get('subscription', [SubscriptionController::class , 'getAllSubscriptionsByUser']);
+    Route::get('subscription', [SubscriptionController::class, 'getAllSubscriptionsByUser']);
 
-    Route::get('subscription/{id}/invoices', [SubscriptionController::class , 'getInvoicesFromSubscription'])->where('id', '[0-9]+');
+    Route::get('subscription/{id}/invoices', [SubscriptionController::class, 'getInvoicesFromSubscription'])->where('id', '[0-9]+');
 
-    Route::get('subscription/{id}', [SubscriptionController::class , 'getSubscriptionsInfos'])->where('id', '[0-9]+');
+    Route::get('subscription/{id}', [SubscriptionController::class, 'getSubscriptionsInfos'])->where('id', '[0-9]+');
 
-    Route::get('/is-auth', [AuthController::class , 'isAuth']); // localhost:8000/api/users/
+    Route::patch('subscription/{id}', [SubscriptionController::class, 'cancelSubscription'])->where('id', '[0-9]+');
 
-    Route::get('/users/{id}', [UserController::class , 'firstOne'])->where('id', '[0-9]+'); // ex :localhost:8000/api/users/?id=1
-    Route::get('/user/active/{id}', [UserController::class , 'active'])->where('id', '[0-9]+'); // ex :localhost:8000/api/user/?id=1
-    Route::post('/user/putadmin/{id}', [UserController::class , 'putAdmin'])->where('id', '[0-9]+');
-    Route::post('/user/putuser/{id}', [UserController::class , 'putUser'])->where('id', '[0-9]+');
+    Route::get('/is-auth', [AuthController::class, 'isAuth']); // localhost:8000/api/users/
+
+    Route::get('/users/{id}', [UserController::class, 'firstOne'])->where('id', '[0-9]+');     // ex :localhost:8000/api/users/?id=1
+    Route::get('/user/active/{id}', [UserController::class, 'active'])->where('id', '[0-9]+'); // ex :localhost:8000/api/user/?id=1
+    Route::post('/user/putadmin/{id}', [UserController::class, 'putAdmin'])->where('id', '[0-9]+');
+    Route::post('/user/putuser/{id}', [UserController::class, 'putUser'])->where('id', '[0-9]+');
 
 
-    Route::get('/user/desactive/{id}', [UserController::class , 'desactive'])->where('id', '[0-9]+'); // ex :localhost:8000/api/user/?id=1
+    Route::get('/user/desactive/{id}', [UserController::class, 'desactive'])->where('id', '[0-9]+'); // ex :localhost:8000/api/user/?id=1
 
     Route::get('/users', UserController::class); // localhost:8000/api/users/
 

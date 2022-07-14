@@ -11,6 +11,7 @@ use App\Models\Payment;
 use App\Models\User;
 use App\Traits\ApiResponse;
 use Carbon\Carbon;
+use Codedge\Fpdf\Fpdf\Fpdf;
 use Exception;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
@@ -20,7 +21,7 @@ use Stripe\BillingPortal\Session;
 use Stripe\Event;
 use Stripe\Exception\ApiErrorException;
 use Stripe\StripeClient;
-use Codedge\Fpdf\Fpdf\Fpdf;
+use Stripe\Subscription;
 
 class SubscriptionController extends Controller
 {
@@ -231,7 +232,7 @@ class SubscriptionController extends Controller
         // $sql .= ' LIMIT ' . $limit_inf . ',' . $limit_sup;
         // $res = mysqli_query($mysqli, $sql)  or die ('Erreur SQL : ' .$sql .mysqli_connect_error() );
 
-       
+
             // libelle
             $pdf->SetXY( 7, $y+9 ); $pdf->Cell( 140, 5, "Abonnement : ".$package->name . "                         " .$subscriptions->current_period_start."  -  ".$subscriptions->current_period_end  , 0, 0, 'L');
             // // qte
@@ -250,7 +251,6 @@ class SubscriptionController extends Controller
             $v += 1;
             $y += 6;
 
-     
 
         // mysqli_free_result($res);
 
@@ -447,6 +447,31 @@ class SubscriptionController extends Controller
         return $this->success("voici les informations de cet abonnements", $subscription);
     }
 
+    /**
+     * @throws ApiErrorException
+     */
+    public function cancelSubscription(int $subscription_id): JsonResponse
+    {
+        $subscription = PackageUser::query()->firstWhere('id', $subscription_id);
+
+        try {
+            Stripe\Stripe::setApiKey(getenv("STRIPE_PRIVATE"));
+
+            $subscriptionStripe = Subscription::retrieve($subscription->id_stripe);
+            $subscriptionStripe->cancel();
+
+            $subscription->active = false;
+            $subscription->canceled_at = Carbon::now();
+            $subscription->save();
+        } catch (ApiErrorException $e) {
+            Log::error($e->getMessage());
+            return $this->fail("problème, veuillez réessayer");
+        }
+
+
+        return $this->success("Abonnement canceled", $subscription);
+    }
+
     public function checkoutWebhook(Request $request)
     {
         $params = $request->all();
@@ -587,8 +612,13 @@ class SubscriptionController extends Controller
                     'user_id' => $user->id,
                 ]);
                 $fidelityHistory->save();
-                $user->fidelity_points += $paymentObject->amount / 100;
+                $user->fidelity_points += $paymentObject->amount / 100 * 0.3;
                 $user->save();
+            }
+            try {
+                PushNotificationsController::sendNotification("Paiement pour votre abonnement Ez_Scooter !", "Paiement effectué pour votre abonnement Ez_Scooter ! :)", $user->id);
+            } catch (Exception $e) {
+
             }
 
 
