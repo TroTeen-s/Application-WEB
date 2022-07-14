@@ -95,7 +95,9 @@ function NeedHelp() {
     return (
 
         <section className="pt-20 lg:pt-[120px]">
+
             <div className="container">
+                
                 <div className="flex flex-wrap -mx-4">
                     <div className="m-auto text-center md:w-8/12">
                         <h2 className="text-2xl text-black-trot font-bold md:text-4xl">{t('Need')} <span className="text-orange-300">{t('help')} </span> </h2>
