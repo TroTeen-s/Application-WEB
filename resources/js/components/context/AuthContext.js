@@ -1,4 +1,4 @@
-import {createContext, useEffect, useState} from "react";
+import { createContext, useEffect, useState } from "react";
 
 export const BearerContext = createContext({
     token: "",
@@ -12,10 +12,17 @@ export const AuthContext = createContext({
     }
 });
 
+export const AdminContext = createContext({
+    admin: false,
+    setAdmin: () => {
+    }
+});
+
 export const LanguageContext = createContext({
-    language: '',
-    setLanguage: () => { }
-})
+    language: "",
+    setLanguage: () => {
+    }
+});
 
 
 /**
@@ -29,6 +36,7 @@ export const AuthLoadingContext = createContext({
 
 const AuthProvider = ({children}) => {
     let [auth, setAuth] = useState(false);
+    let [admin, setAdmin] = useState(false);
     let [token, setToken] = useState();
     let [loaded, setLoaded] = useState(false);
     let [language, setLanguage] = useState();
@@ -47,6 +55,10 @@ const AuthProvider = ({children}) => {
                 let response = await axios.get("/api/is-auth", {headers: {Accept: 'application/json'}});
                 if (response.data.success) {
                     setAuth(true);
+                    if (response.data.data.role && response.data.data.role === "admin") {
+                        console.log("il est admin");
+                        setAdmin(true);
+                    }
                 } else {
                     setAuth(false);
                 }
@@ -64,13 +76,15 @@ const AuthProvider = ({children}) => {
     return (
         <>
             <AuthContext.Provider value={{ auth, setAuth }}>
-                <AuthLoadingContext.Provider value={{ loaded, setLoaded }}>
-                    <BearerContext.Provider value={{ token, setToken }}>
-                        <LanguageContext.Provider value={{ language, setLanguage }}>
-                            {children}
-                        </LanguageContext.Provider>
-                    </BearerContext.Provider>
-                </AuthLoadingContext.Provider>
+                <AdminContext.Provider value={{ admin, setAdmin }}>
+                    <AuthLoadingContext.Provider value={{ loaded, setLoaded }}>
+                        <BearerContext.Provider value={{ token, setToken }}>
+                            <LanguageContext.Provider value={{ language, setLanguage }}>
+                                {children}
+                            </LanguageContext.Provider>
+                        </BearerContext.Provider>
+                    </AuthLoadingContext.Provider>
+                </AdminContext.Provider>
             </AuthContext.Provider>
         </>
     );

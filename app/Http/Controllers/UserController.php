@@ -6,9 +6,9 @@ namespace App\Http\Controllers;
 
 use App\Models\User;
 use App\Traits\ApiResponse;
+use Exception;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
-use Exception;
 
 
 class UserController extends Controller
@@ -156,14 +156,19 @@ class UserController extends Controller
     public function deleteUser($id) : JsonResponse
     {
 
-        try{
+        if (auth()->user()->role !== "admin") {
+            return $this->fail("Non authorisé.");
+        }
+
+
+        try {
 
             $users = User::findOrFail($id);
-            $users -> delete();
+            $users->delete();
 
-        if (!$users) {
-            return response()->json(array('success' => 'false', 'message' => "Aucun utilisateur supprimé"), 400);
-        }
+            if (!$users) {
+                return response()->json(array('success' => 'false', 'message' => "Aucun utilisateur supprimé"), 400);
+            }
 
         $user = User::all();
 

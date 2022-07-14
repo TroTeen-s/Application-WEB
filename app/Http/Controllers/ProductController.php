@@ -15,6 +15,10 @@ class ProductController extends Controller
 
     public function update(Request $request, int $id): JsonResponse
     {
+        if (auth()->user()->role !== "admin") {
+            return $this->fail("Non authorisé.");
+        }
+
         if (empty($request->all())) {
             return $this->fail("pas d'option envoyées");
         }
@@ -35,6 +39,10 @@ class ProductController extends Controller
 
     function addProduct(Request $req): JsonResponse
     {
+        if (auth()->user()->role !== "admin") {
+            return $this->fail("Non authorisé.");
+        }
+
 
         $product = new Product;
         $product->name = $req->input('name');
@@ -62,6 +70,10 @@ class ProductController extends Controller
 
     function list(): JsonResponse
     {
+        if (auth()->user()->role !== "admin") {
+            return $this->fail("Non authorisé.");
+        }
+
 
         return $this->success("voici la liste des produits", Product::all());
     }

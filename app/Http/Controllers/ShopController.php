@@ -151,9 +151,6 @@ class ShopController extends Controller
 
     }
 
-  
-
-
     public function getCartInfo($id): JsonResponse
     {
         $cart = Cart::query()->firstWhere('id', $id);
@@ -168,11 +165,15 @@ class ShopController extends Controller
 
     public function initDocument($id)
     {
-    
-    $data = Payment::query()
-    ->where(['id' => $id])
-    ->get();
+        $data = Payment::query()
+        ->where(['id' => $id])
+        ->get();
 
+        $cart = Cart::query()->firstWhere('payment_id', $data[0]->id_stripe);
+        $items = $cart->items;
+
+
+        $v = 0;
 
     $pdf = new FPDF( 'P', 'mm', 'A4' );
     // on sup les 2 cm en bas
@@ -204,8 +205,8 @@ class ShopController extends Controller
         // date facture
         // $champ_date = date_create($row[0]); $date_fact = date_format($champ_date, 'd/m/Y');
         $pdf->SetFont('Arial','',11); $pdf->SetXY( 122, 30 );
-        $pdf->Cell( 60, 8, $data[0]["billing_address_city"] . ", " . $data[0]["billing_address_line"] . ", " . $data[0]["billing_address_postal_code"], 0, 0, '');
-       
+        $pdf->Cell( 60, 8, $data[0]["billing_address_city"] . ", " . $data[0]["billing_address_line"], 0, 0, '');
+        $pdf->SetXY( 60, 15 ); $pdf->SetFont( "Arial", "B", 10 ); $pdf->Cell( 135, 50, $data[0]["billing_address_postal_code"], 0, 0, 'C');
         
         // si derniere page alors afficher total
         if ($num_page == 1)
@@ -267,24 +268,27 @@ class ShopController extends Controller
         // $sql .= ' LIMIT ' . $limit_inf . ',' . $limit_sup;
         // $res = mysqli_query($mysqli, $sql)  or die ('Erreur SQL : ' .$sql .mysqli_connect_error() );
 
-       
+        while(count($items) > $v){
             // libelle
-            // $pdf->SetXY( 7, $y+9 ); $pdf->Cell( 140, 5, $data[0]["amount"], 0, 0, 'L');
+            $pdf->SetXY( 7, $y+9 ); $pdf->Cell( 140, 5, $items[$v]->product->name, 0, 0, 'L');
             // // qte
-            // $pdf->SetXY( 145, $y+9 ); $pdf->SetXY( 7, $y+9 ); $pdf->Cell( 140, 5, $data->amount, 0, 0, 'L');
+            $pdf->SetXY( 150, $y+9 ); $pdf->Cell( 140, 5, "1", 0, 0, 'L');
             // // PU
             // $nombre_format_francais = number_format($data['pu'], 2, ',', ' ');
-            // $pdf->SetXY( 158, $y+9 ); $pdf->Cell( 18, 5, $nombre_format_francais, 0, 0, 'R');
+            // $pdf->SetXY( 158, $y+9 ); $pdf->Cell( 18, 5, "1", 0, 0, 'R');
             // // Taux
             // $nombre_format_francais = number_format($data['taux_tva'], 2, ',', ' ');
             // $pdf->SetXY( 177, $y+9 ); $pdf->Cell( 10, 5, $nombre_format_francais, 0, 0, 'R');
             // total
-            $nombre_format_francais = number_format($data[0]["amount"], 2, ',', ' ');
+            $nombre_format_francais = number_format($items[$v]->product->price, 2, ',', ' ');
             $pdf->SetXY( 187, $y+9 ); $pdf->Cell( 18, 5, $nombre_format_francais, 0, 0, 'R');
             
             $pdf->Line(5, $y+14, 205, $y+14);
             
+            $v += 1;
             $y += 6;
+
+        }
     
         // mysqli_free_result($res);
 

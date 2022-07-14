@@ -32,6 +32,9 @@ class SubscriptionController extends Controller
      */
     function addSubscription(Request $req): JsonResponse
     {
+        if (auth()->user()->role !== "admin") {
+            return $this->fail("Non authorisé.");
+        }
 
         $subscription = new Package();
         $subscription->name = $req->input('name');
@@ -71,6 +74,10 @@ class SubscriptionController extends Controller
 
     public function update(Request $request, int $id): JsonResponse
     {
+        if (auth()->user()->role !== "admin") {
+            return $this->fail("Non authorisé.");
+        }
+
         if (empty($request->all())) {
             return $this->fail("pas d'option envoyées");
         }
@@ -116,7 +123,7 @@ class SubscriptionController extends Controller
         $user = auth()->user();
 
         if ($user->subscribed) {
-            return $this->fail("already subscribed");
+            return $this->fail("Vous êtes déjà abonné");
         }
 
         if (isset($params['name'])) {
@@ -176,6 +183,10 @@ class SubscriptionController extends Controller
 
     public function getAllSubscriptionsForDashboard(): JsonResponse
     {
+        if (auth()->user()->role !== "admin") {
+            return $this->fail("Non authorisé.");
+        }
+
         $subscriptions = Package::all();
 
         return $this->success("voici vos abonnements", $subscriptions);
@@ -332,7 +343,7 @@ class SubscriptionController extends Controller
 
             if (stripos($paymentObject->description, "subscription") !== false) {
                 $fidelityHistory = new Fidelity([
-                    'amount' => $paymentObject->amount / 100,
+                    'amount' => $paymentObject->amount / 100 * 0.3,
                     'reason' => stripos($paymentObject->description, "subscription") !== false ? "Paiment pour l'abonnement" : "Paiment sur le site Troteen's",
                     'date' => Carbon::now(),
                     'payment_id' => $paymentObject->id,
@@ -392,7 +403,11 @@ class SubscriptionController extends Controller
             $total += $item->pivot->item_price;
         }
 
-        $total = floor($total);
+        // Rajout de 1 points par centaines d'euros dépensés.
+        $centaines = floor($total / 100);
+
+        // Formule pour récupérer les points de fidélité, 1€ = 0.3 points et 1 point par centaines d'euros
+        $total = 0.3 * $total + $centaines;
 
         $fidelityHistory = new Fidelity([
             'amount' => $total,

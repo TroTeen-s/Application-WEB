@@ -110,71 +110,58 @@ Route::group(['middleware' => ['auth:sanctum']], function () {
     ## ROUTES NOTIFICATIONS PUSH
     Route::post("/notifs/all", [PushNotificationsController::class, "sendNotificationsToAllSubscribedUsers"]);
     Route::get("/notifs/all", [PushNotificationsController::class, "getAllNotifications"]);
+
+    // Routes dashboard -> abonnements
+    Route::get('/dashboard/subscriptions', [SubscriptionController::class, "getAllSubscriptionsForDashboard"]);
+    Route::post('/dashboard/subscriptions', [SubscriptionController::class, "addSubscription"]);
+    Route::patch('/dashboard/subscriptions/{id}', [SubscriptionController::class, "update"])->where('id', '[0-9]+');
+
+    // Routes dashboard-> ScooterHistory
+    Route::post('/dashboard/api/dashboard/api/scooters/history/maintenance', [ScooterHistoryController::class, 'HistoryMaintenance'])->where('id', '[0-9]+');
+    Route::post('/dashboard/api/dashboard/api/scooters/history/fixing', [ScooterHistoryController::class, 'HistoryFixing'])->where('id', '[0-9]+');
+    Route::post('/dashboard/api/dashboard/api/scooters/history/service', [ScooterHistoryController::class, 'HistoryService'])->where('id', '[0-9]+');
+    Route::post('/dashboard/api/dashboard/api/scooters/history/add', [ScooterHistoryController::class, 'HistoryAdd'])->where('id', '[0-9]+');
+    Route::post('/dashboard/api/dashboard/api/scooters/history/delete', [ScooterHistoryController::class, 'HistoryDelete'])->where('id', '[0-9]+');
+
+    Route::get('/dashboard/scooters/list', ScootersController::class);
+    Route::post('/scooter/create', [ScootersController::class, 'create']);
+    Route::get('/scooters', ScootersController::class);
+
+    Route::get('/dashboard/MaintenanceCenter/list', MaintenanceController::class);
+    Route::get('/dashboard/FixingCenter/list', FixingController::class);
+
+    Route::post('/dashboard/users/delete/{id}', [UserController::class, 'deleteUser'])->where('id', '[0-9]+');
+
+    // Admin-> Dashboard->products and weather
+    Route::post('/dashboard/addproduct', [ProductController::class, 'addProduct']);
+    Route::patch('/dashboard/products/{id}', [ProductController::class, 'update'])->where('id', '[0-9]+');
+    Route::get('/dashboard/products', [ProductController::class, 'list']);
+    Route::get('/dashboard/api/weather/list', [WeatherController::class, 'list']);
+    Route::get('/dashboard/purchases/list', [PaymentController::class, 'list']);
+
+    Route::get('/dashboard/api/scooters/maintenance/list', [ScootersController::class, 'ListMaintenance']);
+    Route::get('/dashboard/api/scooters/fixing/list', [ScootersController::class, 'ListFixing']);
+
+    Route::post('/dashboard/api/scooters/maintenance/newstatus', [ScootersController::class, 'MaintenanceStatus'])->where('id', '[0-9]+');
+    Route::post('/dashboard/api/scooters/fixing/newstatus', [ScootersController::class, 'FixingStatus'])->where('id', '[0-9]+');
+    Route::post('/dashboard/api/scooters/service/newstatus', [ScootersController::class, 'ServiceStatus'])->where('id', '[0-9]+');
+
+    Route::get('/dashboard/api/scooters/add', [ScootersController::class, 'addScoot']);
+
+    Route::get('/dashboard/api/dashboard/api/scooters/delete/{id}', [ScootersController::class, 'deleteFromID'])->where('id', '[0-9]+');
+
+    Route::get('/dashboard/api/dashboard/api/scooters/history/list', [ScooterHistoryController::class, 'List']);
+
 });
 
 Route::get('/documents/pdf/{id}', [ShopController::class , 'initDocument'])->where('id', '[0-9]+');
 
 Route::get('/sponsors', SponsorController::class);
 
-
-Route::get('/dashboard/scooters/list', ScootersController::class);
-Route::post('/scooter/create', [ScootersController::class, 'create']);
-Route::get('/scooters', ScootersController::class);
-Route::post('/scooter/create', [ScootersController::class, 'create']);
-
-Route::get('/dashboard/MaintenanceCenter/list', MaintenanceController::class);
-Route::get('/dashboard/FixingCenter/list', FixingController::class);
-
-
-Route::get('/dashboard/subscriptions', [SubscriptionController::class, "getAllSubscriptionsForDashboard"]);
-Route::post('/dashboard/subscriptions', [SubscriptionController::class, "addSubscription"]);
-Route::patch('/dashboard/subscriptions/{id}', [SubscriptionController::class, "update"])->where('id', '[0-9]+');
-
-
-Route::post('/dashboard/users/delete/{id}', [UserController::class, 'deleteUser'])->where('id', '[0-9]+');
-
-
-// For Admin
-
-Route::post('/dashboard/addproduct', [ProductController::class, 'addProduct']);
-Route::patch('/dashboard/products/{id}', [ProductController::class, 'update'])->where('id', '[0-9]+');
-Route::get('/dashboard/products', [ProductController::class, 'list']);
-Route::get('/dashboard/api/weather/list', [WeatherController::class , 'list']);
-Route::get('/dashboard/purchases/list', [PaymentController::class , 'list']);
-// problemes
-
 Route::get('/problems/list', ProblemsController::class);
-
-Route::get('/dashboard/api/scooters/maintenance/list', [ScootersController::class, 'get_maintenance_scoot']);
-Route::get('/dashboard/api/scooters/fixing/list', [ScootersController::class, 'get_fixing_scoot']);
 
 Route::post('/scooter_probleme/add', [ScooterProblemController::class, 'add_scooter_problem']);
 Route::get('/scooter_probleme', ScooterProblemController::class);
-
-
-Route::get('/dashboard/api/scooters/maintenance/list', [ScootersController::class, 'ListMaintenance']);
-Route::get('/dashboard/api/scooters/fixing/list', [ScootersController::class, 'ListFixing']);
-
-
-Route::post('/dashboard/api/scooters/maintenance/newstatus', [ScootersController::class, 'MaintenanceStatus'])->where('id', '[0-9]+');
-Route::post('/dashboard/api/scooters/fixing/newstatus', [ScootersController::class, 'FixingStatus'])->where('id', '[0-9]+');
-Route::post('/dashboard/api/scooters/service/newstatus', [ScootersController::class, 'ServiceStatus'])->where('id', '[0-9]+');
-
-Route::get('/dashboard/api/scooters/add', [ScootersController::class, 'addScoot']);
-
-Route::get('/dashboard/api/dashboard/api/scooters/delete/{id}', [ScootersController::class, 'deleteFromID'])->where('id', '[0-9]+');
-
-// History
-
-Route::post('/dashboard/api/dashboard/api/scooters/history/maintenance', [ScooterHistoryController::class, 'HistoryMaintenance'])->where('id', '[0-9]+');
-Route::post('/dashboard/api/dashboard/api/scooters/history/fixing', [ScooterHistoryController::class, 'HistoryFixing'])->where('id', '[0-9]+');
-Route::post('/dashboard/api/dashboard/api/scooters/history/service', [ScooterHistoryController::class, 'HistoryService'])->where('id', '[0-9]+');
-Route::post('/dashboard/api/dashboard/api/scooters/history/add', [ScooterHistoryController::class, 'HistoryAdd'])->where('id', '[0-9]+');
-Route::post('/dashboard/api/dashboard/api/scooters/history/delete', [ScooterHistoryController::class, 'HistoryDelete'])->where('id', '[0-9]+');
-
-
-Route::get('/dashboard/api/dashboard/api/scooters/history/list', [ScooterHistoryController::class, 'List']);
-
 
 Route::get('/product-list', [ShopController::class, 'productList']);
 Route::get('/products', [ShopController::class , 'getProductById']);
