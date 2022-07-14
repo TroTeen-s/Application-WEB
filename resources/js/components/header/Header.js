@@ -283,7 +283,7 @@ function Header() {
       to="/auth/login">
       <MenuItem className="mr-5">
         <i className="fab fa-facebook-square text-s leading-lg text-white opacity-75"></i>
-        <Typography className="ml-2">{t('log in')}</Typography>
+        <Typography className="ml-2">{t('Log in')}</Typography>
       </MenuItem>
     </NavLink>
 
