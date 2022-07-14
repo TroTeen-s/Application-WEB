@@ -43,6 +43,7 @@ Route::get('/code/{id}', [SponsorCodeController::class , 'get_free_code'])->wher
 Route::post('/add_code', [SponsorCodeController::class , 'add_code']);
 
 Route::post('/add_sponsor', [SponsorController::class , 'add_sponsor']);
+Route::post('/delete_sponsor', [SponsorController::class , 'delete_sponsor']);
 
 Route::post('/auth/login', [AuthController::class , 'login']);
 

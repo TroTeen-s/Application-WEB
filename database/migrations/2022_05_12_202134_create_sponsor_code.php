@@ -24,7 +24,7 @@ return new class extends Migration
             $table->unsignedBigInteger('sponsor_id');
 
             $table->foreign('user_id')->references('id')->on('users');
-            $table->foreign('sponsor_id')->references('id')->on('sponsors');
+            $table->foreign('sponsor_id')->references('id')->on('sponsors')->onDelete('cascade');
 
         });
     }
