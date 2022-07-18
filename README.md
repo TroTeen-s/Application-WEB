@@ -28,6 +28,7 @@ WEB application that offers electronic scooter management services in Lyon with 
 #### Create a copy of your .env file
 
 REQUIRED : Stripe KEY : STRIPE_PRIVATE
+
 REQUIRED : Config localhost database
 
 ```javascript
