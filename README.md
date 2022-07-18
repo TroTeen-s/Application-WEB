@@ -5,35 +5,35 @@ WEB application that offers electronic scooter management services in Lyon with 
 
 ## Retrieve the project
 
-```http
+```javascript
   git clone <project>
 ```
 
-```http
+```javascript
   cd <projectname>
 ```
 
 #### Install the project dependencies from composer
 
-```http
+```javascript
   composer install
 ```
 
 #### Install NPM dependencies
 
-```http
+```javascript
   npm i
 ```
 
 #### Create a copy of your .env file
 
-```http
+```javascript
   cp .env.example .env
 ```
 
 #### Create a copy of your .env file
 
-```http
+```javascript
   php artisan key:generate
 ```
 
@@ -45,7 +45,14 @@ php artisan optimize
 
 #### Add the tables and contents of your database with migrations or in SQL
 
-```javascript
 Config .env with access of your database. Then
+```javascript
 php artisan migrate:fresh --seed
+```
+
+#### Start the project, open 2 terminals
+
+```sh
+php artisan serve
+npm run watch
 ```
